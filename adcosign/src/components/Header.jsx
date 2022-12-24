@@ -72,8 +72,8 @@ const Header = () => {
                         })}
                     </select>
 
-                    <div className='ml-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded cursor-pointer'>Log in</div>
-                    <div>
+                    <div className='ml-5 my-1 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded cursor-pointer'>Log in</div>
+                  <div>
                         <div class="group inline-block">
                             <button
                                 class="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32"
@@ -94,10 +94,10 @@ const Header = () => {
 
                                 <li class={menuitemCommoncss}>For Influencer</li>
                                 </NavLink>
-                                {/* <li class={menuitemCommoncss}>About Us</li> */}
+                                
                             </ul>
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
 

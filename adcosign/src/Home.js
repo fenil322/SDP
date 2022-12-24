@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Header from './components/Header'
 import homepage from './homepage.jpg'
 // import dropDown from './components/dropDown'
-
+import homegif from './Images/homegif.gif'
 const Home = () => {
 
 let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
@@ -16,25 +16,29 @@ let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
 
 
       {/*                                             first intro banner                                    */}
-      <div className='w-5/6 m-auto mt-20 '>
+      <div className='w-5/6 m-auto mt-10 '>
 
         <div className=' flex  mx-auto items-center'>
           <div className='text-left'>
             <div className='text-6xl font-medium'>
               Adcosign generates sales to brands via micro-influencers
             </div>
-            <div className='text-3xl pt-8'>
+            <div className='text-3xl py-10'>
               Generate sales, attract customers and increase brand awareness. <b className='font-semibold'>Pay only for results.</b>
 
             </div>
 
             <div className='flex pt-8 text-lg'>
+              <NavLink to='/BrandIntro'>
               <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '  >I'm a Brand</div>
+              </NavLink>
+              <NavLink to='/InfluencerIntro'>
               <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>I'm a Creater </div>
+              </NavLink>
 
             </div>
           </div>
-          <img src={homepage} className='w-1/2   ml-auto ' />
+          <img src={homegif} className='w-1/2   ml-auto ' />
 
         </div>
 
@@ -70,7 +74,7 @@ let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
           </span>
 
         </div>
-        <div className='text-3xl pt-8 max-w-4xl'>
+        <div className='text-3xl py-10 max-w-4xl'>
           With our 25k+ micro-influencers you can choose from a variety of payment models and control the ROI on your campaigns
         </div>
         <div className='flex'>
