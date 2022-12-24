@@ -1,7 +1,12 @@
-import React from 'react'
+import React,{Component} from 'react'
+
 import Header from './components/Header'
 import homepage from './homepage.jpg'
+// import dropDown from './components/dropDown'
+
 const Home = () => {
+
+let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
 
   return (
 
@@ -23,7 +28,7 @@ const Home = () => {
             </div>
 
             <div className='flex pt-8 text-lg'>
-              <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>I'm a Brand</div>
+              <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '  >I'm a Brand</div>
               <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>I'm a Creater </div>
 
             </div>
@@ -129,7 +134,7 @@ const Home = () => {
         </div>
         <div className='flex  justify-between'>
           
-            <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>25k+</div><div className=''>influencers on the platform</div></div>
+            <div className={commonClass}><div className='text-blue-700 text-3xl'>25k+</div><div className=''>influencers on the platform</div></div>
             <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>12M+</div><div className=''>Minimum number of followers to work with  </div></div>
             <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>4</div><div className=''>Max earnings in a single month by a single influencer so far</div></div>
             <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>120+</div><div className=''>Micro-influencers on the platform</div></div>
