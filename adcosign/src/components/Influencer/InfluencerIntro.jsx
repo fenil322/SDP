@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import Header from '../Header'
 
 const InfluencerIntro = () => {
@@ -10,7 +11,7 @@ const InfluencerIntro = () => {
 
             <div className='w-5/6 m-auto text-left mt-20'>
                 <div className='text-2xl'>
-                    FOR INFLUENCERS
+                    For Influencer...
 
                 </div>
                 <div className='text-6xl font-medium mt-10'>
@@ -30,13 +31,13 @@ const InfluencerIntro = () => {
                 <div className='text-4xl font-medium mt-10 max-w-3xl'>
                     <div className=''>Platform for influencers to join
                     </div>
-
-
                 </div>
                 <div className='text-3xl pt-8 max-w-4xl'>
                     More than 200+ brands world-wide cooperate with DRIM influencers. No matter how many followers you have - you can earn with us </div>
                 <div className='flex'>
+                    <NavLink to='/InfluencerSignUp'>
                     <div className='my-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>Get Started-it's free   </div>
+                    </NavLink>
                 </div>
 
             </div>

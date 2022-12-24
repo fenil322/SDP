@@ -1,4 +1,5 @@
 import React,{Component} from 'react'
+import { NavLink } from 'react-router-dom';
 
 import Header from './components/Header'
 import homepage from './homepage.jpg'
@@ -73,7 +74,10 @@ let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
           With our 25k+ micro-influencers you can choose from a variety of payment models and control the ROI on your campaigns
         </div>
         <div className='flex'>
+          <NavLink to='BrandSignUp'>
+
         <div className='my-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>Get Started-it's free   </div>
+          </NavLink>
         </div>
 
       </div>
@@ -124,7 +128,10 @@ let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
         <div className='text-3xl pt-8 max-w-4xl'>
         More than 200+ brands world-wide cooperate with DRIM influencers. No matter how many followers you have - you can earn with us </div>
         <div className='flex'>
+          <NavLink to='InfluencerSignUp'>
+
         <div className='my-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>Get Started-it's free   </div>
+          </NavLink>
         </div>
 
       </div>
