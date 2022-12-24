@@ -36,6 +36,7 @@ const InfluencerIntro = () => {
                     More than 200+ brands world-wide cooperate with DRIM influencers. No matter how many followers you have - you can earn with us </div>
                 <div className='flex'>
                     <NavLink to='/InfluencerSignUp'>
+
                     <div className='my-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>Get Started-it's free   </div>
                     </NavLink>
                 </div>
