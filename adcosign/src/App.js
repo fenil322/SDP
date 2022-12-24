@@ -5,6 +5,7 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import BrandIntro from './components/Brand/BrandIntro';
 import InfluencerIntro from './components/Influencer/InfluencerIntro';
 import BrandSignUp from './components/Brand/BrandSignUp';
+import InfluencerSignUp from './components/Influencer/InfluencerSignUp';
 
 
 const App=()=> {
@@ -15,6 +16,7 @@ const App=()=> {
         <Route path="/BrandIntro" element={<BrandIntro/>}/>
         <Route path="/InfluencerIntro" element={<InfluencerIntro/>}/>
         <Route path='/BrandSignUp' element={BrandSignUp}/>
+        <Route path='/InfluencerSignUp' element={InfluencerSignUp}/>
       </Routes>
     </BrowserRouter>
   );
