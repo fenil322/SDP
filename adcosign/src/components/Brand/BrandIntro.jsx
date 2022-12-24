@@ -8,7 +8,8 @@ const BrandIntro = () => {
             <Header />
             {/*                                brand intro abnner                                    */}
 
-            <div className='brandintrobody pt-20 '>
+            <div className='brandintrobody pt-20'>
+
 
             <div className='w-5/6 m-auto text-left'>
                 <div className='text-2xl'>

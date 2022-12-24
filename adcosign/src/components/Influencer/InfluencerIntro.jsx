@@ -11,7 +11,7 @@ const InfluencerIntro = () => {
 
             <div className='w-5/6 m-auto text-left mt-20'>
                 <div className='text-2xl'>
-                    FOR INFLUENCERS
+                    For Influencer...
 
                 </div>
                 <div className='text-6xl font-medium mt-10'>
@@ -31,8 +31,6 @@ const InfluencerIntro = () => {
                 <div className='text-4xl font-medium mt-10 max-w-3xl'>
                     <div className=''>Platform for influencers to join
                     </div>
-
-
                 </div>
                 <div className='text-3xl pt-8 max-w-4xl'>
                     More than 200+ brands world-wide cooperate with DRIM influencers. No matter how many followers you have - you can earn with us </div>
