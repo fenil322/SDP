@@ -18,8 +18,8 @@ const Home = () => {
       <Header />
 
 
-      {/*                                             first intro banner                                    */}
-      <div className='w-5/6 m-auto mt-10 '>
+      {/*                                             Hero section banner                                    */}
+      <div className='Hero-Section w-5/6 m-auto mt-10 '>
 
         <div className=' flex  mx-auto items-center'>
           <div className='text-left'>
