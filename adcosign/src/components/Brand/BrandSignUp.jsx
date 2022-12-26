@@ -5,7 +5,7 @@ const BrandSignUp = () => {
   return (
     <div>
       <BrandLogin />
-      brandlogin
+      
     </div>
   )
 }
