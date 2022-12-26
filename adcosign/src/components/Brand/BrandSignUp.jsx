@@ -1,8 +1,10 @@
 import React from 'react'
-
+import BrandHome from './BrandHome'
 const BrandSignUp = () => {
   return (
-    <div>BrandSignUp</div>
+    <div>
+      <BrandHome />
+    </div>
   )
 }
 

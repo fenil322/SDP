@@ -1,13 +1,14 @@
 import React from 'react'
 import InfluencerHeader from './InfluencerHeader'
 
-const InfluencerHome = () => {
+
+const InfluencerCurrentConsignments = () => {
   return (
     <div>
 <InfluencerHeader />
-influhome
+        hello
     </div>
   )
 }
 
-export default InfluencerHome
+export default InfluencerCurrentConsignments

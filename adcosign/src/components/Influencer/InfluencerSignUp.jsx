@@ -1,8 +1,10 @@
 import React from 'react'
-
+import InfluencerHome from './InfluencerHome'
 const InfluencerSignUp = () => {
   return (
-    <div>InfluencerSignUp</div>
+    <div>
+      <InfluencerHome />
+    </div>
   )
 }
 

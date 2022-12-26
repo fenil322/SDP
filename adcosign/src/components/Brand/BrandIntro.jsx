@@ -2,10 +2,11 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import Header from '../Header';
 import card from '../../../src/Images/profilecard.gif'
-
+// import BrandSignUp from './BrandSignUp';
 const BrandIntro = () => {
     return (
         <div className=''>
+            
             <Header />
             {/*                                brand intro abnner                                    */}
 

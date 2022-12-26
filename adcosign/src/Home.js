@@ -1,9 +1,5 @@
-
-
 import React, { Component } from 'react'
-
 import { NavLink } from 'react-router-dom';
-
 import Header from './components/Header'
 import homepage from './homepage.jpg'
 // import dropDown from './components/dropDown'

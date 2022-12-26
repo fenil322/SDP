@@ -2,15 +2,15 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import logo from '../../logo192.png'
 
-const BrandHeader = () => {
+const InfluencerHeader = () => {
     let menuitemCommoncss = "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer"
    
   return (
-    
+    <div>
     <div className=' h-20 justify-center flex font-black '>
     <div className='header-new w-5/6 bg-white-50 flex'>
         <div className='logo' >
-            <NavLink to="/BrandHome">
+            <NavLink to="/InfluencerHome">
                 <img src={logo} className='h-20 pr-10'></img>
             </NavLink>
 
@@ -19,16 +19,17 @@ const BrandHeader = () => {
             <ul className='menu flex items-center text-lg '>
                 <li className='menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300 ' >
 
-                    <NavLink to="/BrandHome">Home</NavLink>
+                    <NavLink to="/InfluencerHome">Home</NavLink>
+                </li>
+                
+                <li className='menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300' >
+                    <NavLink to="/InfluencerConsignments">Consignments</NavLink>
                 </li>
                 <li className='menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300' >
-                    <NavLink to="/BrandPendingRequest">Pending Requests</NavLink>
+                    <NavLink to="/InfluencerCurrentConsignments">Current Consignment</NavLink>
                 </li>
                 <li className='menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300' >
-                    <NavLink to="/BrandConsignments">Consignments</NavLink>
-                </li>
-                <li className='menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300' >
-                    <NavLink to="/BrandCurrentConsignment">Current Consignment</NavLink>
+                    <NavLink to="/InfluencerProfile">My Profile</NavLink>
                 </li>
                 <li className='menu-item py-3 px-4  ease-in duration-300' >
 
@@ -54,7 +55,11 @@ const BrandHeader = () => {
                             <ul
                                 className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32"
                             >
-                                <NavLink to='/BrandHistory'>
+                                <NavLink to='/InfluencerProfileEdit'>
+
+                                <li className={menuitemCommoncss}>Edit Profile</li>
+                                </NavLink>
+                                <NavLink to='/InfluencerHistory'>
 
                                 <li className={menuitemCommoncss}>History</li>
                                 </NavLink>
@@ -72,8 +77,8 @@ const BrandHeader = () => {
     </div>
 
 
-</div>
+</div></div>
   )
 }
 
-export default BrandHeader
+export default InfluencerHeader
