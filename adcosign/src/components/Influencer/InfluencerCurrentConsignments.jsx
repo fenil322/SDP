@@ -6,7 +6,7 @@ const InfluencerCurrentConsignments = () => {
   return (
     <div>
 <InfluencerHeader />
-        hello
+        
     </div>
   )
 }

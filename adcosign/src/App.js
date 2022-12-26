@@ -15,6 +15,7 @@ import BrandPendingRequest from './components/Brand/BrandPendingRequest'
 import BrandConsignments from './components/Brand/BrandConsignments';
 import BrandCurrentConsignment from './components/Brand/BrandCurrentConsignment';
 import BrandHistory from './components/Brand/BrandHistory';
+import BrandLogin from './components/Brand/BrandLogin';
 
 import InfluencerHome from './components/Influencer/InfluencerHome';
 import InfluencerProfile from './components/Influencer/InfluencerProfile';
@@ -22,7 +23,6 @@ import InfluencerProfileEdit from './components/Influencer/InfluencerProfileEdit
 import InfluencerConsignments from './components/Influencer/InfluencerConsignments';
 import InfluencerCurrentConsignments from './components/Influencer/InfluencerCurrentConsignments';
 import InfluencerHistory from './components/Influencer/InfluencerHistory';
-import BrandLogin from './components/Brand/BrandLogin';
 import InfluencerLogin from './components/Influencer/InfluencerLogin';
 
 const App = () => {

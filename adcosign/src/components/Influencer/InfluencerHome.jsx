@@ -5,7 +5,7 @@ const InfluencerHome = () => {
   return (
     <div>
 <InfluencerHeader />
-influhome
+
     </div>
   )
 }

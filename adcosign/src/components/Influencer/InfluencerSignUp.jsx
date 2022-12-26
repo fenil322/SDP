@@ -5,7 +5,6 @@ const InfluencerSignUp = () => {
   return (
     <div>
       <InfluencerLogin />
-      influendcer login
     </div>
   )
 }
