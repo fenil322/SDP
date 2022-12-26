@@ -1,9 +1,11 @@
 import React from 'react'
-import InfluencerHome from './InfluencerHome'
+// import InfluencerHome from './InfluencerHome'
+import InfluencerLogin from './InfluencerLogin'
 const InfluencerSignUp = () => {
   return (
     <div>
-      <InfluencerHome />
+      <InfluencerLogin />
+      influendcer login
     </div>
   )
 }

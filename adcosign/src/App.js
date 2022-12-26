@@ -22,6 +22,8 @@ import InfluencerProfileEdit from './components/Influencer/InfluencerProfileEdit
 import InfluencerConsignments from './components/Influencer/InfluencerConsignments';
 import InfluencerCurrentConsignments from './components/Influencer/InfluencerCurrentConsignments';
 import InfluencerHistory from './components/Influencer/InfluencerHistory';
+import BrandLogin from './components/Brand/BrandLogin';
+import InfluencerLogin from './components/Influencer/InfluencerLogin';
 
 const App = () => {
   return (
@@ -34,6 +36,8 @@ const App = () => {
         <Route path="/BrandSignUp" element={<BrandSignUp />} />
         <Route path="/InfluencerSignUp" element={<InfluencerSignUp />} />
         <Route path="/ManagerSignUp" element={<ManagerSignUp />} />
+        <Route path='/BrandLogin' element={<BrandLogin/>}/>
+        <Route path='/InfluencerLogin' element={<InfluencerLogin/>}/>
 
         <Route path="/BrandHome" element={<BrandHome />} />
         <Route path="/BrandPendingRequest" element={<BrandPendingRequest />} />

@@ -85,11 +85,11 @@ const Header = () => {
                             <ul
                                 class="ml-5 bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-30 ease-in-out origin-top min-w-32"
                             >
-                                <NavLink to='/BrandSignUp'>
+                                <NavLink to='/BrandLogin'>
 
                                     <li class={menuitemCommoncss}>For Brand</li>
                                 </NavLink>
-                                <NavLink to='/InfluencerSignUp'>
+                                <NavLink to='/InfluencerLogin'>
 
                                     <li class={menuitemCommoncss}>For Influencer</li>
                                 </NavLink>
