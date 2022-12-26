@@ -11,7 +11,7 @@ import homegif from './Images/homegif.gif'
 const Home = () => {
 
   let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
-
+// from ss
   return (
 
     <div className=''>
