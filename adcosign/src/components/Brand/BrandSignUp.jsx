@@ -1,8 +1,12 @@
 import React from 'react'
-
+// import BrandHome from './BrandHome'
+import BrandLogin from './BrandLogin'
 const BrandSignUp = () => {
   return (
-    <div>BrandSignUp</div>
+    <div>
+      <BrandLogin />
+      brandlogin
+    </div>
   )
 }
 
