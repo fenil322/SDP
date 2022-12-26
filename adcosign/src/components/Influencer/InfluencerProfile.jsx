@@ -1,7 +1,7 @@
 import React from 'react'
 import InfluencerHeader from './InfluencerHeader'
 
-const InfluencerHome = () => {
+const InfluencerProfile = () => {
   return (
     <div>
 <InfluencerHeader />
@@ -10,4 +10,4 @@ const InfluencerHome = () => {
   )
 }
 
-export default InfluencerHome
+export default InfluencerProfile
