@@ -1,7 +1,7 @@
 const express= require('express')
 const router=express.Router();
 
-const ManagerController=require('../controllers/ManagerController');
+const ManagerController=require('../controllers/managerController');
 
 
 

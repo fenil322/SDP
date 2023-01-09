@@ -1,7 +1,7 @@
 const express= require('express')
 const router=express.Router();
 
-const InfluecerController=require('../controllers/InfluencrController');
+const InfluecerController=require('../controllers/influencrController');
 
 
 

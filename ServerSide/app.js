@@ -5,11 +5,11 @@ const app=express();
 
 const errorController=require('./controllers/error');
 
-const adminRoutes = require('./routes/Admin.js');
-const BrandRoutes = require('./routes/Brand.js');
-const ConsignmentRoutes = require('./routes/Consignments');
-const InfluenceRoutes = require('./routes/Influecer');
-const ManagerRoutes = require('./routes/Manager');
+const adminRoutes = require('./routes/admin.js');
+const brandRoutes = require('./routes/brand.js');
+const consignmentRoutes = require('./routes/consignments');
+const influenceRoutes = require('./routes/influecer');
+const managerRoutes = require('./routes/manager');
 
 
 
@@ -19,10 +19,10 @@ app.use(bodyparser.json())
 
 //importing all routers.....
 app.use('/admin',adminRoutes)
-app.use('/brand',BrandRoutes)
-app.use('/consignment',ConsignmentRoutes)
-app.use('/influence',InfluenceRoutes)
-app.use('/manager',ManagerRoutes)
+app.use('/brand',brandRoutes)
+app.use('/consignment',consignmentRoutes)
+app.use('/influence',influenceRoutes)
+app.use('/manager',managerRoutes)
 
 
 app.use(errorController.error404);
