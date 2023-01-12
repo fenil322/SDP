@@ -1,38 +1,42 @@
 const mongoose = require("mongoose");
 
 const influencerSchema = {
-  name: {
+  fname: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  lname: {
+    type: String,
+    // required: true,
   },
   email: {
     type: String,
-    required: true,
+    // required: true,
     unique: true,
   },
   password: {
     type: String,
-    required: true,
+    // required: true,
   },
   phone: {
     type: String,
-    required: true,
+    // required: true,
   },
   age: {
     type: String,
-    required: true,
+    // required: true,
   },
   city: {
     type: String,
-    required: true,
+    // required: true,
   },
   state: {
     type: String,
-    required: true,
+    // required: true,
   },
   country: {
     type: String,
-    required: true,
+    // required: true,
   },
   photo: {
     type: String,
@@ -40,35 +44,35 @@ const influencerSchema = {
   },
   instagram: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramURL: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramFollowers: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramEngagementRate: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebook: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebookURL: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebookFollowers: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebookEngagementRate: {
     type: String,
-    required: true,
+    // required: true,
   },
   twitter: String,
   twitterURL: String,

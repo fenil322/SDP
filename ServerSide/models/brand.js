@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const shopSchema = {
-  name: {
+  uname: {
     type: String,
     required: true,
   },
@@ -22,7 +22,23 @@ const shopSchema = {
     type: String,
     required: true,
   },
+  brandType: {
+    type: String,
+    required: true,
+  },
   address: {
+    type: String,
+    required: true,
+  },
+  city: {
+    type: String,
+    required: true,
+  },
+  state: {
+    type: String,
+    required: true,
+  },
+  country: {
     type: String,
     required: true,
   },
