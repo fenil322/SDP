@@ -8,7 +8,7 @@ import BrandSignUp from './components/Brand/BrandSignUp';
 import InfluencerSignUp from './components/Influencer/InfluencerSignUp';
 import ManagerSignUp from './components/manager/ManagerSignUp';
 
-
+//demo for merging......
 
 import BrandHome from './components/Brand/BrandHome';
 import BrandPendingRequest from './components/Brand/BrandPendingRequest'
