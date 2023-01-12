@@ -7,5 +7,4 @@ router.get('/',adminController.dummy);
 
 router.get('/user',adminController.get_user);
 
-
 module.exports=router;
