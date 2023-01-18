@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, redirect } from 'react-router-dom'
 
 const BrandSignUp = () => {
 
@@ -25,7 +25,7 @@ const BrandSignUp = () => {
     const { uname, shopName, brandType, phone, email, city, state, country,
       address, location, password } = userdata;
 
-    const res = await fetch("/brand/brandsignup", {
+    const res = await fetch("/brand/signup", {
       method: 'POST',
       headers: {
         "Content-Type": "application/json",
@@ -34,9 +34,12 @@ const BrandSignUp = () => {
         uname, shopName, brandType, phone, email, city, state, country,
         address, location, password
       }),
-    })
-    if (res.json().status != 404) {
-      // history.push("/InfluencerLogin")
+    }).then(res => res.json())
+      .catch(err => console.log(err));
+
+      if (res.json().status != 404) {
+        // redirect('/BrandLogin')
+        // history.push("/InfluencerLogin")
     }
 
   }
@@ -154,7 +157,7 @@ const BrandSignUp = () => {
 
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">location Url</label>
-                    <input type="text" placeholder="Age" name="location"
+                    <input type="text" placeholder="location" name="location"
                       value={userdata.location}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>

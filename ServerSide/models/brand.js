@@ -46,6 +46,10 @@ const shopSchema = {
     type:String,
     required: true,
   },
+  valid:{
+    type:Number,
+    default:0,
+  },
   photo1: {
     type: String,
     default:"https://bootdey.com/img/Content/avatar/avatar7.png"

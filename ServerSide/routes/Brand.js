@@ -9,7 +9,12 @@ router.get('/',(req,res,next)=>{
 
 });
  
-router.post('/brandsignup',BrandController.brandSignUpData);
+//==>>saving signup data POST
+router.post('/signup',BrandController.brandSignUpData);
+
+//==>> displaying all brands
+router.get('/getAllbrand',BrandController.getAllBrands)
+
 
 
 module.exports=router;

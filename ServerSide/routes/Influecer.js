@@ -3,11 +3,23 @@ const router = express.Router();
 
 const InfluecerController = require('../controllers/influencrController');
 
-router.get("/influencersignup", (req, res) => {
+//==> signup GET
+router.get("/signup", (req, res) => {
     res.send("hello world");
-    // console.log(req.body);
 });
-router.post("/influencersignup", InfluecerController.influencerSignupdata);
+
+//==> signup POST
+router.post("/signup", InfluecerController.influencerSignupdata);
+
+//==> getting influencer data GET
+router.get("/getAllInfluencer",InfluecerController.getAllInfluencer);
+
+//=>updating influencer data GET
+router.get("/editprofiledisplay",InfluecerController.editProfiledisplay);
+
+//=>updating influencer data PUT
+router.put("/updateprofile",InfluecerController.updateProfile);
+
 
 
 

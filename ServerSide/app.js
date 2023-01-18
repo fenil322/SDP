@@ -12,14 +12,17 @@ const consignmentRoutes = require('./routes/consignments');
 const influencerRoutes = require('./routes/influecer');
 const managerRoutes = require('./routes/manager');
 
+//models
+//  const Influencer=require('./models/influencers')
 
 
-//parser for parding data in body...
+//parser for parsing data in body...
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
 
 app.get('/', (req, res, next) => {
     res.send("hello from root")
+
     next();
 });
 

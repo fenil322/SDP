@@ -25,6 +25,13 @@ import InfluencerCurrentConsignments from './components/Influencer/InfluencerCur
 import InfluencerHistory from './components/Influencer/InfluencerHistory';
 import InfluencerLogin from './components/Influencer/InfluencerLogin';
 
+import ManagerHome from './components/manager/ManagerHome';
+import ManagerLogin from './components/manager/ManagerLogin';
+import ManagerHeader from './components/manager/ManagerHeader';
+import AddNewInfluencer from './components/manager/AddNewInfluencer';
+import AddNewBrand from './components/manager/AddNewBrand';
+
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -52,7 +59,11 @@ const App = () => {
         <Route path="/InfluencerCurrentConsignments" element={<InfluencerCurrentConsignments />} />
         <Route path="/InfluencerHistory" element={<InfluencerHistory />} />
 
-
+        <Route path="/ManagerHome" element={<ManagerHome />} />
+        <Route path="/ManagerLogin" element={<ManagerLogin />} />
+        <Route path="/ManagerHeader" element={<ManagerHeader />} />
+        <Route path="/AddNewInfluencer" element={<AddNewInfluencer/>}/>
+        <Route path="/AddNewBrand" element={<AddNewBrand/>}/>
 
       </Routes>
     </BrowserRouter>
