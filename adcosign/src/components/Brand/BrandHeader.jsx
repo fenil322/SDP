@@ -8,7 +8,7 @@ const BrandHeader = () => {
   return (
     
     <div className=' h-20 justify-center flex font-black '>
-    <div className='header-new w-5/6 bg-white-50 flex'>
+    <div className='header-new w-full bg-white-50 flex'>
         <div className='logo' >
             <NavLink to="/BrandHome">
                 <img src={logo} className='h-20 pr-10'></img>
