@@ -13,6 +13,10 @@ router.get('/getunverifiendInfluencer',ManagerController.getunverifiendInfluence
 router.put('/validatebrand',ManagerController.validatebrand);
 router.put('/validateinfluencer',ManagerController.validateinfluencer);
 
+//=>String new manager POST
+router.post('/managersignup',ManagerController.managersignup);
 
+//=>loginmanager POST
+router.post('/managerlogin',ManagerController.managerlogin);
 
 module.exports=router;

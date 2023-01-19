@@ -1,17 +1,71 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { NavLink,useNavigate } from 'react-router-dom'
 import BrandHome from './BrandHome'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BrandLogin = () => {
+  const navigate = useNavigate();
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
 
+  const [userdata,setUserdata]=useState({
+    email:"",
+    password:""
+  });
+  
+  let name, value;
+  const handleInput = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e.target.value)
+    setUserdata({ ...userdata, [name]: value });
+  }
+  const postdata= async (e)=>{
+    e.preventDefault();
+    
+    const{email,password}=userdata;
+    if (
+      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
+      toast.error("Invalid Email");
+      return;
+    }
+  const res= await fetch("/brand/brandlogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+        email,
+      }),
+    })
+    
+    const data = await res.json();
+    console.log(data)
+    if(res.status==200){
+      toast.success(data.message);
+      await sleep(1000)
+      navigate("/BrandHome");
+    }else{
+      toast.error(data.error);
+    }
+
+
+
+  }
   return (
     <div className=''>
       <div>
-        <div class="bg-white dark:bg-gray-900">
+        <div class="bg-white  dark:bg-gray-900">
           <div class="flex justify-center h-screen">
             {/* <img src="https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"> */}
+            <div class=" bg-cover block lg:w-2/3 bg-[url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)]">
 
             <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
               <div>
@@ -20,10 +74,10 @@ const BrandLogin = () => {
                 <p class="max-w-xl mt-3 text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. In autem ipsa, nulla laboriosam dolores, repellendus perferendis libero suscipit nam temporibus molestiae</p>
               </div>
             </div>
-            {/* </img> */}
-            {/* </div> */}
+           
+            </div>
 
-            <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+            <div class="flex items-center w-full max-w-md  mx-auto lg:w-2/6">
               <div class="flex-1">
                 <div class="text-center item-center ">
                   <p class="pb-5 text-gray-500 dark:text-gray-300">Sign in to access your account  as</p>
@@ -72,7 +126,10 @@ const BrandLogin = () => {
                   <form>
                     <div>
                       <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                      <input type="email" name="email" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                      <input type="email" name="email" id="email" placeholder="example@example.com" 
+                      onChange={handleInput}
+                      value={userdata.email}
+                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
 
                     <div class="mt-6">
@@ -81,17 +138,23 @@ const BrandLogin = () => {
                         <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                       </div>
 
-                      <input type="password" name="password" id="password" placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                      <input type="password" name="password" id="password" placeholder="Your Password" 
+                      onChange={handleInput}
+                      value={userdata.password}
+                      
+                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
 
                     <div class="mt-6">
-                      <NavLink to='/BrandHome'>
+                  
 
                         <button
-                          class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                          class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                         onClick={postdata} 
+                          >
                           Sign in
                         </button>
-                      </NavLink>
+
                     </div>
 
                   </form>
@@ -103,6 +166,7 @@ const BrandLogin = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={500}/>
     </div>
   )
 }

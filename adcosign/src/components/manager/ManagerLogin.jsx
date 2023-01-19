@@ -1,10 +1,66 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
+import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ManagerLogin = () => {
+  const navigate = useNavigate();
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
 
+  
+  const [userdata,setUserdata]=useState({
+    email:"",
+    password:""
+  });
+  
+  let name, value;
+  const handleInput = (e) => {
+    name = e.target.name;
+    value = e.target.value;
+    console.log(e.target.value)
+    setUserdata({ ...userdata, [name]: value });
+  }
+
+  const postdata =async (e) => {
+    e.preventDefault();
+    
+    const{email,password}=userdata;
+    if (
+      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        email
+      )
+    ) {
+      toast.error("Invalid Email");
+      return;
+    }
+  const res= await fetch("/manager/managerlogin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password,
+        email,
+      }),
+    })
+    
+    const data = await res.json();
+    console.log(data)
+    if(res.status==200){
+      toast.success(data.message);
+      await sleep(1000)
+      navigate("/ManagerHome");
+    }else{
+      toast.error(data.error);
+    }
+
+
+  }
   return (
     <div>
       <div>
@@ -73,7 +129,10 @@ const ManagerLogin = () => {
                   <form>
                     <div>
                       <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                      <input type="email" name="email" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                      <input type="email" name="email" id="email"
+                      value={userdata.email}
+                      onChange={handleInput}
+                      placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
 
                     <div class="mt-6">
@@ -82,17 +141,21 @@ const ManagerLogin = () => {
                         <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                       </div>
 
-                      <input type="password" name="password" id="password" placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                      <input type="password" name="password" id="password" 
+                      value={userdata.password}
+                      onChange={handleInput}
+                      placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
 
                     <div class="mt-6">
-                      <NavLink to='/ManagerHome'>
+                     
 
                         <button
+                          onClick={postdata}
                           class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                           Sign in
                         </button>
-                      </NavLink>
+                     
                     </div>
 
                   </form>
@@ -104,6 +167,7 @@ const ManagerLogin = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={500}/>
     </div>
   )
 }

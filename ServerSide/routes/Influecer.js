@@ -20,6 +20,8 @@ router.get("/editprofiledisplay",InfluecerController.editProfiledisplay);
 //=>updating influencer data PUT
 router.put("/updateprofile",InfluecerController.updateProfile);
 
+//=>influencer login POST
+router.post("/influencerlogin",InfluecerController.influencerlogin);
 
 
 

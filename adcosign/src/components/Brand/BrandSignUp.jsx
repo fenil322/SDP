@@ -1,12 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
-import { NavLink, redirect } from 'react-router-dom'
+import {  NavLink, redirect, useNavigate } from 'react-router-dom'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const BrandSignUp = () => {
+  const navigate = useNavigate();
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
 
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = 'flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
-
+  
   const [userdata, setuserdata] = useState({
     uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
     address: "", location: "", password: ""
@@ -34,14 +41,19 @@ const BrandSignUp = () => {
         uname, shopName, brandType, phone, email, city, state, country,
         address, location, password
       }),
-    }).then(res => res.json())
-      .catch(err => console.log(err));
-
-      if (res.json().status != 404) {
-        // redirect('/BrandLogin')
-        // history.push("/InfluencerLogin")
+    })
+    const data = await res.json();
+    console.log(data)
+    if(res.status==200){
+      toast.success(data.message);
+      await sleep(2200)
+      navigate("/BrandLogin");
+    }else{
+      toast.error(data.error);
     }
-
+    // .then(res => res.json())
+    //   .then(navigate("/BrnadLogin"))
+    //   .catch(err => console.log(err));
   }
 
   return (
@@ -49,10 +61,7 @@ const BrandSignUp = () => {
 
       <div className=''>
         <section className="bg-white dark:bg-gray-900">
-          <div className="flex justify-center min-h-screen">
-            {/* <div className="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80')">
-            </div> */}
-
+          <div className="flex justify-center min-h-screen">  
             <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
               <div className="w-full">
                 <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
@@ -69,9 +78,9 @@ const BrandSignUp = () => {
                   <div className="mt-3 md:flex md:items-center md:-mx-2">
                     <NavLink to='/BrandSignUp'>
                       <button class={activebtn}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        {/* <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
+                        </svg> */}
 
                         <span className="mx-2">
                           Brand
@@ -195,6 +204,7 @@ const BrandSignUp = () => {
         </section>
 
       </div>
+      <ToastContainer autoClose={1500}/> 
     </div>
   )
 }

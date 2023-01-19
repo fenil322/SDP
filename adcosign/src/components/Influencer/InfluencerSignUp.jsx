@@ -4,12 +4,15 @@ import InfluencerLogin from './InfluencerLogin'
 import { useState } from 'react';
 // import { BsFillPersonFill } from 'react-icons/bs'
 import axios from 'axios'
-import { NavLink } from 'react-router-dom';
-// import { useHistory } from "react-router-dom"
+import { Navigate, NavLink } from 'react-router-dom';
+import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const InfluencerSignUp = () => {
-  // const history = useHistory();
+  const navigate = useNavigate();
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   const [userdata, setuserdata] = useState({
     fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
@@ -25,8 +28,9 @@ const InfluencerSignUp = () => {
     console.log(e.target.value)
     setuserdata({ ...userdata, [name]: value });
   }
+ 
 
-  const postData = async (e) => {
+  const postdata = async (e) => {
     e.preventDefault();
     const { fname, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
 
@@ -38,11 +42,16 @@ const InfluencerSignUp = () => {
       body: JSON.stringify({
         fname, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate
       }),
-    }).then(res => console.log(res.json()))
-      .catch(err => console.log(err));
+    })
 
-    if (res.json().status != 404) {
-      // history.push("/InfluencerLogin")
+    const data = await res.json();
+    console.log(data)
+    if(res.status==200){
+      toast.success(data.message);
+      await sleep(2200)
+      navigate("/InfluencerLogin");
+    }else{
+      toast.error(data.error);
     }
 
   }
@@ -242,7 +251,7 @@ const InfluencerSignUp = () => {
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
                   <button
-                    onClick={postData}
+                    onClick={postdata}
                     className="flex items-center justify-between w-1/2 px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                     <span >Sign Up </span>
 
@@ -258,7 +267,7 @@ const InfluencerSignUp = () => {
           </div>
         </section>
       </div>
-
+      <ToastContainer autoClose={1500}/> 
 
     </div>
   )

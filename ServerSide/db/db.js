@@ -7,7 +7,7 @@ module.exports = () => {
     }
 
     try {
-        mongoose.connect("mongodb://localhost:27017/SDP", connectionParams);
+        mongoose.connect("mongodb+srv://fenilsavani:fenilsavani@cluster0.rfpjn37.mongodb.net/?retryWrites=true&w=majority", connectionParams);
         console.log("Connected to DB Sucessfully");
     } catch (error) {
         console.log(error);

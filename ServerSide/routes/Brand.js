@@ -15,6 +15,7 @@ router.post('/signup',BrandController.brandSignUpData);
 //==>> displaying all brands
 router.get('/getAllbrand',BrandController.getAllBrands)
 
-
+//=>brand login POST
+router.post('/brandlogin',BrandController.brandLogin)
 
 module.exports=router;

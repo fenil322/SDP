@@ -20,6 +20,10 @@ const sitemanagerSchema = {
   },
   resetToken: String,
   expireToken: Date,
+  valid: {
+    type: Number,
+    default: 0
+  }
 };
 
 const sitemanager = mongoose.model("sitemanager", sitemanagerSchema);
