@@ -5,9 +5,12 @@ module.exports = () => {
         useUnifiedTopology: true,
         //strictQuery: false
     }
+var compassUrl=process.env.COMPASS_URL;
+compassUrl="mongodb://127.0.0.1:27017/SDP"
+const atlasUrl=process.env.ATLAS_URL;
 
     try {
-        mongoose.connect("mongodb+srv://fenilsavani:fenilsavani@cluster0.rfpjn37.mongodb.net/?retryWrites=true&w=majority", connectionParams);
+        mongoose.connect(compassUrl, connectionParams);
         console.log("Connected to DB Sucessfully");
     } catch (error) {
         console.log(error);

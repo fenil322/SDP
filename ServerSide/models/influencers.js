@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const jwt=require("jsonwebtoken");
-const influencerSchema = {
+const influencerSchema =new mongoose.Schema ({
   fname: {
     type: String,
     required: true,
@@ -94,28 +94,32 @@ const influencerSchema = {
     type: Number,
     default: 0,
   },
-  tokens: {
+  tokens: [{
+
     token: {
       type: String,
       required: true
-
+      
     }
-  },
+  }
+  ],
   resetToken: String,
   expireToken: Date,
-};
+});
 
-influencerSchema.mehtods.generateAuthToken =   ()=> {
-  try {
-    let token =  jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
-    this.tokens = this.token.concat({ token: token });
-     this.save();
-    return token;
+// influencerSchema.methods.generateAuthToken = async  function () {
+//   try {
+//     const token =  jwt.sign({ _id: this._id }, "mynameisFenilsavaniandthisisoursdpproject");
+//     this.tokens = this.token.concat({ token: token });
+//     await this.save();
 
-  } catch (err) {
-    console.log(err);
-  }
-}
+//     return token;
+
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 const influencer = mongoose.model("influencer", influencerSchema);
 
 module.exports = influencer;

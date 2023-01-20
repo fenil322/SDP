@@ -81,10 +81,14 @@ exports.influencerlogin = async (req, res) => {
                 .json({ error: "Verification under process, You can't proceed.", success: false });
         }
         else {
-            const token = await userLogin.generateAuthToken();
-            console.log(token)
-            return res.status(200).json({ success: true, message: "You are logged in" });
 
+            // const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
+            // const { fname } = userLogin;
+            // console.log(token)
+            return res.status(200).json({
+                success: true, message: "You are logged in",
+                //token, user: { fname }, type: "Influencer"
+            });
         }
         // bcrypt
         // .compare(password, user.password)
@@ -96,5 +100,7 @@ exports.influencerlogin = async (req, res) => {
 
     }
 
-
+}
+exports.influencerhome=(req,res)=>{
+    
 }
