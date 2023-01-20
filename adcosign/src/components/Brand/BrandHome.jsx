@@ -244,10 +244,10 @@ const BrandHome = () => {
                         id="cars"
                         className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
                       >
-                        <option value="18-20">UK,Londen</option>
-                        <option value="saab">California,USA</option>
-                        <option value="opel">Montrial,Canada</option>
-                        <option value="audi">Bavaria,Germany</option>
+                        <option value="">UK,Londen</option>
+                        <option value="">California,USA</option>
+                        <option value="">Montrial,Canada</option>
+                        <option value="">Bavaria,Germany</option>
                       </select>
                     </div>
                   </div>
@@ -256,34 +256,41 @@ const BrandHome = () => {
                   <div>
                     <div className="mt-2 mb-2">
                       <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
-                        By Location
+                        Followers
                       </h2>
                     </div>
                     <div className="mt-2 mb-6">
                       <select
-                        name="cars"
-                        id="cars"
+                        name="followers"
+                        id="followers"
                         className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
                       >
-                        <option value="18-20">UK,Londen</option>
-                        <option value="saab">California,USA</option>
-                        <option value="opel">Montrial,Canada</option>
-                        <option value="audi">Bavaria,Germany</option>
+                        <option value="">1K-2K</option>
+                        <option value="">3K-4K</option>
+                        <option value="">5K-6K</option>
+                        <option value="">7K-8K</option>
                       </select>
                     </div>
                   </div>
                 </li>
                 <li>
-                  <select
-                    name="cars"
-                    id="cars"
-                    className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
-                  >
-                    <option value="18-20">UK,Londen</option>
-                    <option value="saab">California,USA</option>
-                    <option value="opel">Montrial,Canada</option>
-                    <option value="audi">Bavaria,Germany</option>
-                  </select>
+                  <div>
+                    <div className="mt-2 mb-2">
+                      <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
+                        Catagories
+                      </h2>
+                    </div>
+                    <select
+                      name=""
+                      id=""
+                      className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
+                    >
+                      <option value="">Drama</option>
+                      <option value="">Dance</option>
+                      <option value="">Singing</option>
+                      <option value="">Speaking</option>
+                    </select>
+                  </div>
                 </li>
                 <li></li>
               </ul>
