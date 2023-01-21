@@ -4,20 +4,28 @@ import InfluencerHome from './InfluencerHome'
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 
 const InfluencerLogin = () => {
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-  
+
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
-
-  const [userdata,setUserdata]=useState({
-    email:"",
-    password:""
+  const [passwordType, setPasswordType] = useState("password");
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text")
+      //return;
+    }
+    else setPasswordType("password")
+  }
+  const [userdata, setUserdata] = useState({
+    email: "",
+    password: ""
   });
-  
+
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
@@ -26,10 +34,10 @@ const InfluencerLogin = () => {
     setUserdata({ ...userdata, [name]: value });
   }
 
-  const postdata =async (e) => {
+  const postdata = async (e) => {
     e.preventDefault();
-    
-    const{email,password}=userdata;
+
+    const { email, password } = userdata;
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
@@ -38,7 +46,7 @@ const InfluencerLogin = () => {
       toast.error("Invalid Email");
       return;
     }
-  const res= await fetch("/influencer/influencerlogin", {
+    const res = await fetch("/influencer/influencerlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,22 +56,22 @@ const InfluencerLogin = () => {
         email,
       }),
     })
-    
+
     const data = await res.json();
     console.log(data)
-    if(res.status==200){
+    if (res.status == 200) {
       toast.success(data.message);
       await sleep(1000)
       navigate("/InfluencerHome");
-    }else{
+    } else {
       toast.error(data.error);
     }
 
- 
-      //     // localStorage.setItem("jwt", data.token);
-      //     // localStorage.setItem("user", JSON.stringify(data.user));
-      //     // localStorage.setItem("type", JSON.stringify(data.type));
-     
+
+    //     // localStorage.setItem("jwt", data.token);
+    //     // localStorage.setItem("user", JSON.stringify(data.user));
+    //     // localStorage.setItem("type", JSON.stringify(data.type));
+
 
   }
   return (
@@ -136,10 +144,10 @@ const InfluencerLogin = () => {
                   <form method='POST'>
                     <div>
                       <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                      <input type="email" name="email" id="email" placeholder="example@example.com" 
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" 
-                      value={userdata.email}
-                      onChange={handleInput}
+                      <input type="email" name="email" id="email" placeholder="example@example.com"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                        value={userdata.email}
+                        onChange={handleInput}
                       />
                     </div>
 
@@ -148,11 +156,28 @@ const InfluencerLogin = () => {
                         <label for="password" class="text-sm text-gray-600 dark:text-gray-200">Password</label>
                         <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                       </div>
+                      {/* <div className="input-group my-4 mx-4">
+                    <input type={passwordType} onChange={handlePasswordChange} value={passwordInput} name="password" class="form-control" placeholder="Password" />
+                    <div className="input-group-btn">
+                     <button className="btn btn-outline-primary" onClick={togglePassword}>
+                     { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
+                     </button>
+                    </div>
+                </div> */}
+                      <div className=''>
 
-                      <input type="password" name="password" id="password" placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" 
-                      value={userdata.password}
-                      onChange={handleInput}
-                      />
+                        <input type={passwordType} name="password" id="password" placeholder="Your Password"
+                          class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                          value={userdata.password}
+                          onChange={handleInput}
+                        />
+
+                        <div className='cursor-pointer absolute -mt-8 right-12' onClick={togglePassword}>
+
+                          {passwordType === "password" ? <AiFillEye className='dark:text-white ' size={25} /> : <AiFillEyeInvisible size={25} className='dark:text-white ' />}
+                        </div>
+
+                      </div>
                     </div>
 
                     <div class="mt-6">
@@ -176,7 +201,7 @@ const InfluencerLogin = () => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={500}/>
+      <ToastContainer autoClose={500} />
     </div>
   )
 }

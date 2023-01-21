@@ -22,7 +22,7 @@ router.get("/getAllInfluencer", getAllInfluencer);
 router.get("/editprofiledisplay",influencerIsAuth.isAuth,  editProfiledisplay);
 
 //=>updating influencer data PUT
-router.put("/updateprofile",influencerIsAuth.isAuth,  updateProfile);
+router.put("/updateprofile",  updateProfile);
 
 //=>influencer home GET
 router.get("/influencerhome",  influencerhome);

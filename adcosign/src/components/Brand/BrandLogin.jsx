@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { NavLink,useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import BrandHome from './BrandHome'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const BrandLogin = () => {
   const navigate = useNavigate();
@@ -10,12 +11,19 @@ const BrandLogin = () => {
 
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
-
-  const [userdata,setUserdata]=useState({
-    email:"",
-    password:""
+  const [passwordType, setPasswordType] = useState("password");
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text")
+      //return;
+    }
+    else setPasswordType("password")
+  }
+  const [userdata, setUserdata] = useState({
+    email: "",
+    password: ""
   });
-  
+
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
@@ -23,10 +31,10 @@ const BrandLogin = () => {
     console.log(e.target.value)
     setUserdata({ ...userdata, [name]: value });
   }
-  const postdata= async (e)=>{
+  const postdata = async (e) => {
     e.preventDefault();
-    
-    const{email,password}=userdata;
+
+    const { email, password } = userdata;
     if (
       !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
         email
@@ -35,7 +43,7 @@ const BrandLogin = () => {
       toast.error("Invalid Email");
       return;
     }
-  const res= await fetch("/brand/brandlogin", {
+    const res = await fetch("/brand/brandlogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,14 +53,14 @@ const BrandLogin = () => {
         email,
       }),
     })
-    
+
     const data = await res.json();
     console.log(data)
-    if(res.status==200){
+    if (res.status == 200) {
       toast.success(data.message);
       await sleep(1000)
       navigate("/BrandHome");
-    }else{
+    } else {
       toast.error(data.error);
     }
 
@@ -67,14 +75,14 @@ const BrandLogin = () => {
             {/* <img src="https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"> */}
             <div class=" bg-cover block lg:w-2/3 bg-[url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)]">
 
-            <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
-              <div>
-                <h2 class="text-4xl font-bold text-white">Brand</h2>
+              <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+                <div>
+                  <h2 class="text-4xl font-bold text-white">Brand</h2>
 
-                <p class="max-w-xl mt-3 text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. In autem ipsa, nulla laboriosam dolores, repellendus perferendis libero suscipit nam temporibus molestiae</p>
+                  <p class="max-w-xl mt-3 text-gray-300">Lorem ipsum dolor sit, amet consectetur adipisicing elit. In autem ipsa, nulla laboriosam dolores, repellendus perferendis libero suscipit nam temporibus molestiae</p>
+                </div>
               </div>
-            </div>
-           
+
             </div>
 
             <div class="flex items-center w-full max-w-md  mx-auto lg:w-2/6">
@@ -126,10 +134,10 @@ const BrandLogin = () => {
                   <form>
                     <div>
                       <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                      <input type="email" name="email" id="email" placeholder="example@example.com" 
-                      onChange={handleInput}
-                      value={userdata.email}
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                      <input type="email" name="email" id="email" placeholder="example@example.com"
+                        onChange={handleInput}
+                        value={userdata.email}
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                     </div>
 
                     <div class="mt-6">
@@ -137,23 +145,31 @@ const BrandLogin = () => {
                         <label for="password" class="text-sm text-gray-600 dark:text-gray-200">Password</label>
                         <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                       </div>
+                      <div className=''>
 
-                      <input type="password" name="password" id="password" placeholder="Your Password" 
-                      onChange={handleInput}
-                      value={userdata.password}
-                      
-                      class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                        <input type={passwordType} name="password" id="password" placeholder="Your Password"
+                          class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                          value={userdata.password}
+                          onChange={handleInput}
+                        />
+
+                        <div className='cursor-pointer absolute -mt-8 right-12' onClick={togglePassword}>
+
+                          {passwordType === "password" ? <AiFillEye className='dark:text-white ' size={25} /> : <AiFillEyeInvisible size={25} className='dark:text-white ' />}
+                        </div>
+
+                      </div>
                     </div>
 
                     <div class="mt-6">
-                  
 
-                        <button
-                          class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                         onClick={postdata} 
-                          >
-                          Sign in
-                        </button>
+
+                      <button
+                        class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                        onClick={postdata}
+                      >
+                        Sign in
+                      </button>
 
                     </div>
 
@@ -166,7 +182,7 @@ const BrandLogin = () => {
           </div>
         </div>
       </div>
-      <ToastContainer autoClose={500}/>
+      <ToastContainer autoClose={500} />
     </div>
   )
 }
