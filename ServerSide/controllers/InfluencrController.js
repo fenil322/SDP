@@ -82,14 +82,20 @@ exports.influencerlogin = async (req, res) => {
         }
         else {
 
-            // const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
-            // const { fname } = userLogin;
-            // console.log(token)
-            return res.status(200).json({
-                success: true, message: "You are logged in",
-                //token, user: { fname }, type: "Influencer"
-            });
-        }
+          //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
+          var token= await userLogin.generateAuthToken()  
+          const { fname } = userLogin;
+            console.log(token)
+            if(token){
+
+                return res.status(200).json({
+                    success: true, message: "You are logged in",
+                    token, user: { fname }, type: "Influencer"
+                });
+            }else{
+                return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
+            }
+            }
         // bcrypt
         // .compare(password, user.password)
         //     .then(doMatch => {
