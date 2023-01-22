@@ -22,6 +22,7 @@ import InfluencerCurrentConsignments from "./components/Influencer/InfluencerCur
 import InfluencerHistory from "./components/Influencer/InfluencerHistory";
 import InfluencerLogin from "./components/Influencer/InfluencerLogin";
 
+
 import ManagerHome from './components/manager/ManagerHome';
 import ManagerLogin from './components/manager/ManagerLogin';
 import ManagerHeader from './components/manager/ManagerHeader';
