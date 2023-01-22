@@ -66,7 +66,7 @@ const cardProfile = [
 
 const BrandHome = () => {
   return (
-    <div className="bg-gray-200 ">
+    <div className="">
       <BrandHeader />
 
       <div className="flex ">

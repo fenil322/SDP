@@ -15,7 +15,6 @@ const managerRoutes = require('./routes/manager');
 //models
 //  const Influencer=require('./models/influencers')
 
-
 //parser for parsing data in body...
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
