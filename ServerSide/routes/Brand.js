@@ -1,15 +1,23 @@
 const express= require('express')
 const router=express.Router();
 
-const BrandController = require('../controllers/brandController');
+const {brandSignUpData,getAllBrands,brandLogin} = require('../controllers/brandController');
+const brandIsAuth=require('../middleware/brandIsAuth');
+const influencerIsAuth=require('../middleware/influencerIsAuth');
 
 
 router.get('/',(req,res,next)=>{
         res.send('<h1>hello from brand </h1>');
 
 });
- 
-router.post('/brandsignup',BrandController.brandSignUpData);
 
+//==>>saving signup data POST
+router.post('/signup',brandSignUpData);
+
+//==>> displaying all brands
+router.get('/getAllbrand',influencerIsAuth.isAuth,getAllBrands)
+
+//=>brand login POST
+router.post('/brandlogin',brandLogin)
 
 module.exports=router;

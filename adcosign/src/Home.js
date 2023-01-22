@@ -10,7 +10,7 @@ const Home = () => {
 // from ss
   return (
 
-    <div className=''>
+    <div className=' bg-white'>
       <Header />
 
 

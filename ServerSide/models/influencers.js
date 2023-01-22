@@ -1,22 +1,26 @@
 const mongoose = require("mongoose");
-
-const influencerSchema = {
+const jwt = require("jsonwebtoken");
+const influencerSchema = new mongoose.Schema({
   fname: {
     type: String,
-    // required: true,
+    required: true,
   },
   lname: {
+    type: String,
+    required: true,
+  },
+  gender: {
     type: String,
     // required: true,
   },
   email: {
     type: String,
-    // required: true,
+    required: true,
     unique: true,
   },
   password: {
     type: String,
-    // required: true,
+    required: true,
   },
   phone: {
     type: String,
@@ -24,15 +28,15 @@ const influencerSchema = {
   },
   age: {
     type: String,
-    // required: true,
+    required: true,
   },
   city: {
     type: String,
-    // required: true,
+    required: true,
   },
   state: {
     type: String,
-    // required: true,
+    required: true,
   },
   country: {
     type: String,
@@ -44,35 +48,35 @@ const influencerSchema = {
   },
   instagram: {
     type: String,
-    // required: true,
+    required: true,
   },
   instagramURL: {
     type: String,
-    // required: true,
+    required: true,
   },
   instagramFollowers: {
     type: String,
-    // required: true,
+    required: true,
   },
   instagramEngagementRate: {
     type: String,
-    // required: true,
+    required: true,
   },
   facebook: {
     type: String,
-    // required: true,
+    required: true,
   },
   facebookURL: {
     type: String,
-    // required: true,
+    required: true,
   },
   facebookFollowers: {
     type: String,
-    // required: true,
+    required: true,
   },
   facebookEngagementRate: {
     type: String,
-    // required: true,
+    required: true,
   },
   twitter: String,
   twitterURL: String,
@@ -82,8 +86,6 @@ const influencerSchema = {
     type: Number,
     default: 0,
   },
-  resetToken: String,
-  expireToken: Date,
   rating: {
     type: Number,
     default: 0,
@@ -92,8 +94,31 @@ const influencerSchema = {
     type: Number,
     default: 0,
   },
-};
+  tokens: [{
 
+    token: {
+      type: String,
+      // required: true
+
+    }
+  }
+  ],
+  resetToken: String,
+  expireToken: Date,
+});
+
+influencerSchema.methods.generateAuthToken = async function () {
+  try {
+    const newtoken = jwt.sign({ _id: this._id }, "mynameisFenilsavaniandthisisoursdpproject");
+    // console.log(newtoken);
+    this.tokens=this.tokens.concat({ token: newtoken });
+    await this.save();
+    return newtoken;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
 const influencer = mongoose.model("influencer", influencerSchema);
 
 module.exports = influencer;
