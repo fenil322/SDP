@@ -10,7 +10,7 @@ const Home = () => {
 // from ss
   return (
 
-    <div className=''>
+    <div className=' bg-white'>
       <Header />
 
 
@@ -149,9 +149,9 @@ const Home = () => {
           <div className='flex  justify-between'>
 
             <div className={commonClass}><div className='text-blue-700 text-3xl'>25k+</div><div className=''>influencers on the platform</div></div>
-            <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>12M+</div><div className=''>Minimum number of followers to work with  </div></div>
-            <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>4</div><div className=''>Max earnings in a single month by a single influencer so far</div></div>
-            <div className='w-30 mx-20 bg-white my-20 p-5 rounded-sm'><div className='text-blue-700 text-3xl'>120+</div><div className=''>Micro-influencers on the platform</div></div>
+            <div className={commonClass}><div className='text-blue-700 text-3xl'>12M+</div><div className=''>Minimum number of followers to work with  </div></div>
+            <div className={commonClass}><div className='text-blue-700 text-3xl'>4</div><div className=''>Max earnings in a single month by a single influencer so far</div></div>
+            <div className={commonClass}><div className='text-blue-700 text-3xl'>120+</div><div className=''>Micro-influencers on the platform</div></div>
           </div>
         </div>
       </div>

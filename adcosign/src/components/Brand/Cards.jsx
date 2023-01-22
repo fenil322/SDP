@@ -7,9 +7,8 @@ function Card({ item }) {
     <>
       <div className="relative max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-white  shadow-lg rounded-xl my-10">
         <div className="px-6">
-          <div className="flex flex-wrap justify-center">
-            <div className="w-full flex justify-center">
-              <div className="flex px-4">
+          <div className="flex flex-wrap ">
+              <div className="flex px-4 my-5">
                 <div className="w-20 h-20 rounded-full">
                   <img
                     src={item.imgsrc}
@@ -18,7 +17,7 @@ function Card({ item }) {
                     className="shadow-xl w-full h-full rounded-full  "
                   />
                 </div>
-                <div className="text-center mt-2">
+                <div className=" mt-2 ml-10">
                   <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
                     {item.name}
                   </h3>
@@ -29,6 +28,7 @@ function Card({ item }) {
                   </div>
                 </div>
               </div>
+            <div className="w-full flex justify-center">
               {/* <div className="w-full text-center mt-20">
                 <div className="flex justify-center lg:pt-4 pt-8 pb-0">
                   <div className="p-3 text-center">
@@ -69,7 +69,7 @@ function Card({ item }) {
             </span>
           </div>
 
-          <div className="mt-6 py-5 border-t border-slate-200 text-center">
+          <div className="mt-6 py-5 border-t border-slate-200 ">
             <div className="flex flex-wrap justify-center">
               <div className="w-full px-4">
                 <p className="font-light leading-relaxed text-slate-600 mb-4">

@@ -6,9 +6,9 @@ import siti from "../../Images/demo.JPG";
 import BrandHeader from "./BrandHeader";
 const InfluencerDetails = () => {
   return (
-    <>
+    <div className="" >
       <BrandHeader />
-      <div>
+      <div className="w-5/6  m-auto my-10 pb-10">
         <link
           rel="stylesheet"
           href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"
@@ -240,12 +240,12 @@ const InfluencerDetails = () => {
           </div>
           <div className="flex space-x-56">
             <div className="mt-8">
-              <h2>Age Enagagement Rate</h2>
+              {/* <h2>Age Enagagement Rate</h2> */}
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

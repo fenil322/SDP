@@ -36,7 +36,7 @@ const BrandHeader = () => {
               {/* more items */}
               <div>
                 <div className="group inline-block">
-                  <button className="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
+                  {/* <button className="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
                     <span className="pr-1 font-semibold flex-1 hover:text-blue-500 cursor-pointer">
                       More
                     </span>
@@ -49,16 +49,16 @@ const BrandHeader = () => {
                         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
                       </svg>
                     </span>
-                  </button>
-                  <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
+                  </button> */}
+{/*                   
+            <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
                     <NavLink to="/BrandHistory">
                       <li className={menuitemCommoncss}>History</li>
                     </NavLink>
-                    {/* <li className={menuitemCommoncss}>Add Images</li> */}
-                    <NavLink to="/">
+                     <NavLink to="/">
                       <li className={menuitemCommoncss}>Logout</li>
                     </NavLink>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </li>
@@ -72,7 +72,7 @@ const BrandHeader = () => {
         <div className="mr-20 justify-center header-new flex">
           <div class="flex items-center space-x-4">
             <img class="w-10 h-10 rounded-full" src={siti} alt="" />
-            <div class="font-medium dark:text-white">
+            <div class="font-medium ">
               <div>Hi,Shwetangi</div>
             </div>
           </div>

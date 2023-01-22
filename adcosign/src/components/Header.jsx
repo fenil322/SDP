@@ -74,52 +74,38 @@ const Header = () => {
 
                     <div>
                         <div class="group inline-block">
-                            <button
-                                class="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32"
-                            >
-                                <span class="pr-1 font-semibold flex-1 cursor-pointer">
-                                    <div className='ml-5 my-1 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded cursor-pointer'>Log in</div>
-                                </span>
+                            <NavLink to='/InfluencerLogin'>
 
-                            </button>
-                            <ul
-                                class="ml-5 bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-30 ease-in-out origin-top min-w-32"
-                            >
-                                <NavLink to='/BrandLogin'>
 
-                                    <li class={menuitemCommoncss}>For Brand</li>
-                                </NavLink>
-                                <NavLink to='/InfluencerLogin'>
+                                <button
+                                    class="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32"
+                                >
+                                    <span class="pr-1 font-semibold flex-1 cursor-pointer">
+                                        <div className='ml-5 my-1 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded cursor-pointer'>Log in</div>
+                                    </span>
 
-                                    <li class={menuitemCommoncss}>For Influencer</li>
-                                </NavLink>
+                                </button>
+                            </NavLink>
 
-                            </ul>
                         </div>
                     </div>
                     <div>
                         <div class="group inline-block">
-                            <button
-                                class="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32"
-                            >
-                                <span class="pr-1 font-semibold flex-1 cursor-pointer">
-                                    <div className='ml-1 my-1 bg-sky-400 px-7 py-3 hover:bg-sky-500 ease-in duration-200 rounded cursor-pointer'>Sign Up</div>
-                                </span>
+                            <NavLink to='/InfluencerSignUp'>
 
-                            </button>
-                            <ul
-                                class="ml-7 bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-30 ease-in-out origin-top min-w-32"
-                            >
-                                <NavLink to='/BrandSignUp'>
 
-                                    <li class={menuitemCommoncss}>For Brand</li>
-                                </NavLink>
-                                <NavLink to='/InfluencerSignUp'>
+                                <button
+                                    class="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32"
+                                >
+                                    <span class="pr-1 font-semibold flex-1 cursor-pointer">
+                                        <div className='ml-1 my-1 bg-sky-400 px-7 py-3 hover:bg-sky-500 ease-in duration-200 rounded cursor-pointer'>Sign Up</div>
+                                    </span>
 
-                                    <li class={menuitemCommoncss}>For Influencer</li>
-                                </NavLink>
+                                </button>
+                            </NavLink>
 
-                            </ul>
+
+
                         </div>
                     </div>
                 </div>
