@@ -2,6 +2,9 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const app = express();
 
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 const connection = require("./db/db");
 
 const errorController = require('./controllers/error');

@@ -3,11 +3,15 @@ const express= require('express');
 const router=express.Router();
 
 const ManagerController=require('../controllers/managerController');
+const managerIsAuth=require('../middleware/managerIsAuth');
 
 
 //get unvalide brand and influencer GET
-router.get('/getunverifiedbrand',ManagerController.getunverifiedbrand);
-router.get('/getunverifiendInfluencer',ManagerController.getunverifiendInfluencer);
+router.get('/getunverifiedbrand',managerIsAuth.isAuth,ManagerController.getunverifiedbrand);
+router.get('/getunverifiendInfluencer',managerIsAuth.isAuth,ManagerController.getunverifiendInfluencer);
+
+//get home page GET
+router.get('/managerhome',managerIsAuth.isAuth,ManagerController.gethompage)
 
 //validate brand and influencer PUT
 router.put('/validatebrand',ManagerController.validatebrand);

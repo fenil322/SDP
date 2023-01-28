@@ -1,10 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { RiFacebookBoxLine } from "react-icons/ri";
 import { FaInstagram } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
 import siti from "../../Images/demo.JPG";
 import BrandHeader from "./BrandHeader";
-const InfluencerDetails = () => {
+import { useLocation, useParams } from "react-router-dom";
+import { useEffect } from "react";
+
+const InfluencerDetails = (props) => {
+
+  const location= useLocation();
+  // const { state } = useLocation();
+  const [persondata,setpersonData] = useState({ fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
+  age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
+  facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
+  twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
+  photo: "", cat1: "", cat2: "", cat3: "", discription: ""
+    });
+
+  const consolelog = () => {
+    // persondata=state;
+    setpersonData(location.state)
+console.log(persondata);
+    // console.log(persondata.fname);
+    // console.log(persondata.lname);
+  }
+
+  useEffect(() => {
+    consolelog()
+  }, []);
+
   return (
     <div className="" >
       <BrandHeader />
@@ -15,7 +40,6 @@ const InfluencerDetails = () => {
         />
         <link
           rel="stylesheet"
-          // href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
           href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
         ></link>
 
@@ -35,7 +59,8 @@ const InfluencerDetails = () => {
             <div className="flex ml-20">
               <div class=" flex flex-col items-center -mt-24">
                 <img
-                  src={siti}
+                   src={siti} 
+                  //  src={persondata.photo}
                   class="border-4 w-40 border-white rounded-full"
                   alt="pic"
                 />
@@ -43,8 +68,12 @@ const InfluencerDetails = () => {
               <div className="name -mt-8 ml-8">
                 <div class=" flex items-center space-x-2 ">
                   <div className="flex-row">
-                    <p class="text-2xl">Alia Bhatt</p>
-                    <p class="text-sm text-gray-500">New York, USA</p>
+                    <p class="text-2xl">
+                      {persondata.fname+" "+ persondata.lname}
+                      </p>
+                    <p class="text-sm text-gray-500">
+                      {persondata.city+", "+persondata.country } 
+                      </p>
                   </div>
                   <span
                     class="bg-blue-500 rounded-full p-1 -mt-4 "
