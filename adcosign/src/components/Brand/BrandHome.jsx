@@ -346,8 +346,9 @@ const BrandHome = () => {
 
             {/* {/* <InfluencerDetails /> */}
             {
-            // profilecard ?
+            profilecard.length >0 &&
               // profilecard.map((item) => (
+
               profilecard.map((item) => (
                 
                   <Card item={item} />
