@@ -92,8 +92,12 @@ const BrandHome = () => {
 
       const data = await res.json();
       // console.log(data)
+      if(data.success!=true){
+        navigate("/BrandLogin");
+      }
       setprofilecard(data.data);
       console.log(profilecard)
+      
     } catch (err) {
       navigate("/BrandLogin");
 

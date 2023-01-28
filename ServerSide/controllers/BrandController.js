@@ -39,7 +39,7 @@ exports.brandSignUpData = (req, res) => {
         .catch(err => console.log(err));
 };
 
-exports.getAllBrands = (req, res) => {
+exports.brandhome = (req, res) => {
     res.send("hello from getallbrand");
     Brand.find({ valid: 1 }).limit(1)
         .then(result => console.log(result));
