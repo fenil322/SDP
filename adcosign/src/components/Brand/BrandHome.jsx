@@ -9,7 +9,8 @@ import { NavLink, redirect, useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
+import client from "../../api/client"
+import axios from "axios";
 
 const cardProfile = [
   {
@@ -81,29 +82,37 @@ const BrandHome = () => {
 
   const callgetInfluencerPage = async () => {
     try {
-      const res = await fetch("influencer/getAllInfluencer", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        }
-        , credentials: "include"
-      });
+      // const res = await fetch("influencer/getAllInfluencer", {
+      //   method: "GET",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   }
+      //   , credentials: "include"
+      // });
+      const res = await axios.get("influencer/getAllInfluencer");
 
-      const data = await res.json();
+      const data = res.data;
       // console.log(data)
+      if(data.success!=true){
+        console.log(data);
+        navigate("/BrandLogin");
+      }
+      
       setprofilecard(data.data);
-      console.log(profilecard)
+      // console.log(profilecard)
+
     } catch (err) {
+      console.log(err);
       navigate("/BrandLogin");
 
     }
   }
-  
+
 
   useEffect(() => {
     callgetInfluencerPage();
-  },[])
+  }, [])
 
   return (
     <div className="">
@@ -344,22 +353,16 @@ const BrandHome = () => {
           </div>
           <div className="grid grid-cols-2 ">
 
-            {/* {/* <InfluencerDetails /> */}
             {
-            profilecard.length >0 &&
+              profilecard.length > 0 &&
               // profilecard.map((item) => (
 
               profilecard.map((item) => (
-                
-                  <Card item={item} />
 
-              )) 
-              // :
-              // cardProfile.map((item) => (
-              //   <NavLink to="/InfluencerDetails">
-              //     <Card item={item} />
-              //   </NavLink>
-              // ))
+                <Card item={item} />
+
+              ))
+             
             }
           </div>
         </div>

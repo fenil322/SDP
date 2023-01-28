@@ -23,8 +23,6 @@ const ManagerHome = () => {
 
       if(data.success==false){
         navigate("/ManagerLogin");
-      }else{
-        return
       }
     } catch (err) {
       navigate("/ManagerLogin");
