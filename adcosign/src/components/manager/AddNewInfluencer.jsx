@@ -62,14 +62,14 @@ const AddNewInfluencer = () => {
                 </tr>
               </thead>
               <tbody class="bg-white">
-                {data.map((key, value) => {
-                  return (
-                    <tr key={key}>
+                {data.map((value, index) => 
+                (
+                    <tr key={index}>
                       <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                         <div class="flex items-center">
                           <div>
                             <div class="text-sm leading-5 text-gray-800">
-                              {value.id}
+                            {value.id}
                             </div>
                           </div>
                         </div>
@@ -101,8 +101,8 @@ const AddNewInfluencer = () => {
                         </button>
                       </td>
                     </tr>
-                  );
-                })}
+                
+                ))}
 
                 {/* <tr>
                   <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
