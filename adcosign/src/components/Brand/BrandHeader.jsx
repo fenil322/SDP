@@ -5,15 +5,12 @@ import siti from "../../Images/demo.JPG";
 import { FiSettings } from "react-icons/fi";
 
 const BrandHeader = () => {
-  let menuitemCommoncss =
-    "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer";
-
   return (
     <div className=" h-20 justify-center flex font-black ">
       <div className="header-new w-full bg-white-50 flex">
         <div className="logo">
           <NavLink to="/BrandHome">
-            <img src={logo} className="h-20 pr-10"></img>
+            <img src={logo} alt="no img" className="h-20 pr-10"></img>
           </NavLink>
         </div>
         <nav className="menubar my-auto ">
@@ -23,6 +20,9 @@ const BrandHeader = () => {
             </li>
             <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
               <NavLink to="/BrandPendingRequest">Pending Requests</NavLink>
+            </li>
+            <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+              <NavLink to="/BrandArrivalRequest">Arrival Requests</NavLink>
             </li>
             <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
               <NavLink to="/BrandConsignments">Consignments</NavLink>
@@ -50,7 +50,7 @@ const BrandHeader = () => {
                       </svg>
                     </span>
                   </button> */}
-{/*                   
+                  {/*                   
             <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
                     <NavLink to="/BrandHistory">
                       <li className={menuitemCommoncss}>History</li>

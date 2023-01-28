@@ -9,10 +9,13 @@ import ManagerSignUp from "./components/manager/ManagerSignUp";
 
 import BrandHome from "./components/Brand/BrandHome";
 import BrandPendingRequest from "./components/Brand/BrandPendingRequest";
+import BrandArrivalRequest from "./components/Brand/BrandArrivalRequest";
 import BrandConsignments from "./components/Brand/BrandConsignments";
 import BrandCurrentConsignment from "./components/Brand/BrandCurrentConsignment";
 import BrandHistory from "./components/Brand/BrandHistory";
 import BrandLogin from "./components/Brand/BrandLogin";
+
+
 import InfluencerDetails from "./components/Brand/InfluencerDetails";
 import InfluencerHome from "./components/Influencer/InfluencerHome";
 import InfluencerProfile from "./components/Influencer/InfluencerProfile";
@@ -45,6 +48,7 @@ const App = () => {
 
         <Route path="/BrandHome" element={<BrandHome />} />
         <Route path="/BrandPendingRequest" element={<BrandPendingRequest />} />
+        <Route path="/BrandArrivalRequest" element={<BrandArrivalRequest />} />
         <Route path="/BrandConsignments" element={<BrandConsignments />} />
         <Route
           path="/BrandCurrentConsignment"

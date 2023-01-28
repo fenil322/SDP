@@ -308,7 +308,6 @@ const BrandHome = () => {
                 <Card item={item} />
               </NavLink>
             ))}
-            {/* <InfluencerDetails /> */}
           </div>
         </div>
       </div>
