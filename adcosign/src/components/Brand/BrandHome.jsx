@@ -353,7 +353,6 @@ const BrandHome = () => {
           </div>
           <div className="grid grid-cols-2 ">
 
-            {/* {/* <InfluencerDetails /> */}
             {
               profilecard.length > 0 &&
               // profilecard.map((item) => (
@@ -363,12 +362,7 @@ const BrandHome = () => {
                 <Card item={item} />
 
               ))
-              // :
-              // cardProfile.map((item) => (
-              //   <NavLink to="/InfluencerDetails">
-              //     <Card item={item} />
-              //   </NavLink>
-              // ))
+             
             }
           </div>
         </div>
