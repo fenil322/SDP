@@ -32,7 +32,7 @@ const InfluencerSignUp = () => {
 
   const postdata = async (e) => {
     e.preventDefault();
-    const { fname, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
+    const { fname,phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
 
     const res = await fetch("/influencer/signup", {
       method: 'POST',
@@ -126,8 +126,9 @@ const InfluencerSignUp = () => {
 
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Contact Number</label>
-                    <input type="text" placeholder="XXX-XX-XXXX-XXX" name="phone"
+                    <input type="tel" placeholder="XXX-XX-XXX-XX" name="phone"
                       value={userdata.phone}
+                      // pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
 

@@ -3,17 +3,22 @@ import BrandHeader from "./BrandHeader";
 import InfluencerDetails from "./InfluencerDetails";
 import { ReactDOM } from "react";
 import Card from "./Cards";
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { NavLink, redirect, useNavigate } from 'react-router-dom'
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const cardProfile = [
   {
-    imgsrc:
+    photo:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7XJfS6pt30XMVTuDoHk4IviKg7N4-Lmlh64SJ7KJrnES0pNRv1vb_JMu8noHPJ49wjV0&usqp=CAU",
-    photo: "1,040",
     followers: "2,452",
     following: "232",
-    name: "Alia Bhatt",
-    citycountry: "Surat , Gujarat",
+    fname: "Alia Bhatt",
+    country: "Surat , Gujarat",
     cat1: "Fashion",
     cat2: "Dance",
     cat3: "Drama",
@@ -21,13 +26,12 @@ const cardProfile = [
       "Alia Bhatt was born on 15 March 1993 into the Bhatt family to Indian film director.",
   },
   {
-    imgsrc:
+    photo:
       "https://i.pinimg.com/originals/a3/fb/5d/a3fb5def518705c9cc739299234c2779.jpg",
-    photo: "2,345",
     followers: "4,467",
     following: "455",
-    name: "Virat Kohli",
-    citycountry: "Banglore , Tamilnadu",
+    fname: "Virat Kohli",
+    country: "Banglore , Tamilnadu",
     cat1: "Mimic",
     cat2: "Dance",
     cat3: "Singing",
@@ -35,13 +39,12 @@ const cardProfile = [
       "Kohli holds the record for scoring most runs in both T20 internationals and in IPL.",
   },
   {
-    imgsrc:
+    photo:
       "https://i.pinimg.com/originals/35/26/c9/3526c95d80aa84f945af8b9c001c9774.jpg",
-    photo: "5,450",
     followers: "3,424",
     following: "243",
-    name: "Deepika Padukon",
-    citycountry: "kochi , kerala",
+    fname: "Deepika Padukon",
+    country: "kochi , kerala",
     cat1: "Beauty",
     cat2: "Dance",
     cat3: "drama",
@@ -49,13 +52,12 @@ const cardProfile = [
       "Inspired by her badminton legend father,  she started playing badminton at a young age.",
   },
   {
-    imgsrc:
+    photo:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLIElUGQn7n_thMKAqmEMTqAgzgHMLkJZfzA&usqp=CAU",
-    photo: "3,550",
     followers: "3,232",
     following: "532",
-    name: "Varun Dhawan",
-    citycountry: "Mumbai , Maharashtra",
+    fname: "Varun Dhawan",
+    country: "Mumbai , Maharashtra",
     cat1: "Fashion",
     cat2: "Dance",
     cat3: "Catholic",
@@ -65,6 +67,44 @@ const cardProfile = [
 ];
 
 const BrandHome = () => {
+
+  const [profilecard, setprofilecard] = useState([{
+    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
+    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
+    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
+    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
+    photo: "", cat1: "fation", cat2: "study", cat3: "dance", discription: "hello i am there"
+    // ,name:this.fname + " " + this.lname,
+  }])
+  const navigate = useNavigate();
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  const callgetInfluencerPage = async () => {
+    try {
+      const res = await fetch("influencer/getAllInfluencer", {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        }
+        , credentials: "include"
+      });
+
+      const data = await res.json();
+      // console.log(data)
+      setprofilecard(data.data);
+      console.log(profilecard)
+    } catch (err) {
+      navigate("/BrandLogin");
+
+    }
+  }
+  
+
+  useEffect(() => {
+    callgetInfluencerPage();
+  },[])
+
   return (
     <div className="">
       <BrandHeader />
@@ -303,12 +343,23 @@ const BrandHome = () => {
             <h1>Showing 14 of 100 Influencer</h1>
           </div>
           <div className="grid grid-cols-2 ">
-            {cardProfile.map((item) => (
-              <NavLink to="/InfluencerDetails">
-                <Card item={item} />
-              </NavLink>
-            ))}
-            {/* <InfluencerDetails /> */}
+
+            {/* {/* <InfluencerDetails /> */}
+            {
+            // profilecard ?
+              // profilecard.map((item) => (
+              profilecard.map((item) => (
+                
+                  <Card item={item} />
+
+              )) 
+              // :
+              // cardProfile.map((item) => (
+              //   <NavLink to="/InfluencerDetails">
+              //     <Card item={item} />
+              //   </NavLink>
+              // ))
+            }
           </div>
         </div>
       </div>
@@ -362,6 +413,7 @@ const BrandHome = () => {
           </nav>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

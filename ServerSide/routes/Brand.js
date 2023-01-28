@@ -15,7 +15,7 @@ router.get('/',(req,res,next)=>{
 router.post('/signup',brandSignUpData);
 
 //==>> displaying all brands
-router.get('/getAllbrand',influencerIsAuth.isAuth,getAllBrands)
+router.get('/getAllbrand',brandIsAuth.isAuth,getAllBrands)
 
 //=>brand login POST
 router.post('/brandlogin',brandLogin)

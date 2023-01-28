@@ -12,11 +12,15 @@ exports.influencerSignupdata = (req, res) => {
         twitter, twitterURL, twitterFollowers, twitterEngagementRate
     } = req.body;
 
-    city = city.toLowerCase();
 
     if (
-        !email || !password || !fname || !lname || !phone || !age || !city || !state || !country || !instagram || !instagramURL ||
-        !instagramFollowers || !instagramEngagementRate || !facebook || !facebookURL || !facebookFollowers || !facebookEngagementRate
+        !email ||
+         !fname || 
+         !lname || 
+         !phone || 
+         !age || 
+         !city || !state || !country || 
+         !instagram || !instagramURL || !instagramFollowers || !instagramEngagementRate 
     ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
@@ -42,11 +46,13 @@ exports.influencerSignupdata = (req, res) => {
 };
 
 
-exports.getAllInfluencer = (req, res) => {
-
-    const influencers = Influencer.find({ valid: 1 }).limit(1)
-    console.log(influencers.then(result => console.log(result)));
-
+exports.getAllInfluencer = async (req, res) => {
+    const influencers = await Influencer.find({ valid: 1 })
+    if(influencers){
+        res.status(200).json({ success: true, data: influencers })
+    }
+    // res.send(req.rootUser)
+    
 }
 
 exports.editProfiledisplay = (req, res) => {
@@ -88,7 +94,7 @@ exports.influencerlogin = async (req, res) => {
             console.log(token)
 
             if(token){
-                res.cookie('token',token,{
+                res.cookie('jwtoken',token,{
                     expires: new Date(Date.now() + 2589200000),
                     httpOnly:true
                 })

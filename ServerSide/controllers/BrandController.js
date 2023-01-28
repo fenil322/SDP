@@ -71,7 +71,10 @@ exports.brandLogin = async (req, res) => {
         const { fname } = userLogin;
           console.log(token)
           if(token){
-
+            res.cookie('jwtoken',token,{
+                expires: new Date(Date.now() + 2589200000),
+                httpOnly:true
+            })
               return res.status(200).json({
                   success: true, message: "You are logged in",
                   token, user: { fname }, type: "Influencer"

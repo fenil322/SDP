@@ -3,11 +3,8 @@ const router = express.Router();
 
 const  { influencerSignupdata, influencerlogin, getAllInfluencer, editProfiledisplay, updateProfile, influencerhome } = require('../controllers/influencrController');
 const influencerIsAuth = require('../middleware/influencerIsAuth');
+const brandIsAuth = require('../middleware/brandIsAuth');
 
-//==> signup GET
-// router.get("/signup", (req, res) => {
-//     //res.send("hello world");
-// });
 
 //==> signup POST
 router.post("/signup", influencerSignupdata);
@@ -16,16 +13,16 @@ router.post("/signup", influencerSignupdata);
 router.post("/influencerlogin",influencerlogin);
 
 //==> getting influencer data GET
-router.get("/getAllInfluencer", getAllInfluencer);
+router.get("/getAllInfluencer",brandIsAuth.isAuth, getAllInfluencer);
 
 //=>updating influencer data GET
-router.get("/editprofiledisplay",influencerIsAuth.isAuth,  editProfiledisplay);
+router.get("/editprofiledisplay",  editProfiledisplay);
 
 //=>updating influencer data PUT
 router.put("/updateprofile",  updateProfile);
 
 //=>influencer home GET
-router.get("/influencerhome",  influencerhome);
+router.get("/influencerhome", influencerIsAuth.isAuth, influencerhome);
 
 module.exports = router;
 
