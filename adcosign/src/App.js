@@ -14,6 +14,7 @@ import BrandConsignments from "./components/Brand/BrandConsignments";
 import BrandCurrentConsignment from "./components/Brand/BrandCurrentConsignment";
 import BrandHistory from "./components/Brand/BrandHistory";
 import BrandLogin from "./components/Brand/BrandLogin";
+import BrandDetails from "./components/Influencer/BrandDetails";
 
 
 import InfluencerDetails from "./components/Brand/InfluencerDetails";
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/BrandPendingRequest" element={<BrandPendingRequest />} />
         <Route path="/BrandArrivalRequest" element={<BrandArrivalRequest />} />
         <Route path="/BrandConsignments" element={<BrandConsignments />} />
+        <Route path="/BrandDetails" element={<BrandDetails />} />
         <Route
           path="/BrandCurrentConsignment"
           element={<BrandCurrentConsignment />}

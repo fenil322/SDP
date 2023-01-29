@@ -1,41 +1,55 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import InfluencerHeader from "./InfluencerHeader";
+import axios from "axios";
+import { NavLink, useNavigate } from 'react-router-dom'
+import Card from "./Card";
 
 const InfluencerHome = () => {
+  const navigate = useNavigate();
+
+
+  const [brandCard, setBrandCard] = useState({
+    uname: "", shopName: "", brandType: "",
+    phone: "", email: "", city: "", state: "", country: "",
+    address: "", location: "", password: "", photo1: "", photo2: ""
+  });
+  const callGetBrand = async () => {
+    try {
+      const res = await axios.get("brand/getAllbrand");
+      const data = res.data;
+      // console.log(data)
+      if (data.success != true) {
+        // console.log(data);
+        navigate("/InfluencerLogin");
+      }
+      setBrandCard(data.data);
+      // console.log(brandCard);
+    } catch (err) {
+      console.log(err);
+      navigate("/InfluencerLogin");
+    }
+  }
+  useEffect(() => {
+    callGetBrand();
+  }, [])
+
   return (
     <>
       <div className="">
         <InfluencerHeader />
         <div className="">
-          <div className="ml-10 mt-10">
-            <a
-              href="#"
-              class="block w-4/6 p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-            >
-              <h6 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                Shop Owner Name:
-              </h6>
-              <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                Shop Name:
-              </h5>
-              <h5 class="mb-2 text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                Shop Address:
-              </h5>
-              {/* <p class="font-normal text-gray-700 dark:text-gray-400">
-            Here are the biggest enterprise technology acquisitions of 2021 so
-            far, in reverse chronological order.
-          </p> */}
-              <div>
-                <button
-                  type="button"
-                  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-none text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                >
-                  View More
-                </button>
-              </div>
-            </a>
+          <div className="px-10 font-semibold font-mono text-xl">
+            <h1>Showing 14 of 100 Influencer</h1>
+          </div>
+          <div className="grid grid-cols-2 px-20 ">
+            {brandCard.length > 0 &&
+              brandCard.map((item, index) => (
+                <Card item={item} key={index} />
+              ))
+            }
           </div>
         </div>
+
       </div>
     </>
   );

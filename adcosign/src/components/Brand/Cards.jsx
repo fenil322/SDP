@@ -7,8 +7,7 @@ import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import InfluencerDetails from "./InfluencerDetails";
 
 function Card({ item }) {
-  const [data, setData] = useState();
-  const navigate = useNavigate();
+
 
   const { fname, lname, phone, email, city, state, country, password,
     age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
@@ -18,8 +17,8 @@ function Card({ item }) {
 
   } = item;
 
+  const navigate = useNavigate();
   const influencerdetailpage = () => {
-    setData(item);
     navigate("/InfluencerDetails", { state: item })
   }
 

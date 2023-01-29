@@ -36,11 +36,11 @@ exports.brandSignUpData =async (req, res) => {
     };
 };
 
-exports.brandhome = (req, res) => {
-    res.send("hello from getallbrand");
-    Brand.find({ valid: 1 }).limit(1)
-        .then(result => console.log(result));
-
+exports.brandhome =async (req, res) => {
+    const brand = await Brand.find({ valid: 1 })
+    if(brand){
+        res.status(200).json({ success: true, data: brand })
+    }
 }
 
 exports.brandLogin = async (req, res) => {
