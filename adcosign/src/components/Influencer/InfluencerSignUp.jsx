@@ -254,7 +254,7 @@ const InfluencerSignUp = () => {
                   <button
                     onClick={postdata}
                     className="flex items-center justify-between w-1/2 px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                    <span >Sign Up </span>
+                    <span >Sign Up</span>
 
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd"
