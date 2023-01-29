@@ -64,19 +64,19 @@ const influencerSchema = new mongoose.Schema({
   },
   facebook: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebookURL: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebookFollowers: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebookEngagementRate: {
     type: String,
-    required: true,
+    // required: true,
   },
   twitter: String,
   twitterURL: String,

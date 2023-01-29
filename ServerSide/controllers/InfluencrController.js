@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 
-exports.influencerSignupdata = (req, res) => {
+exports.influencerSignupdata =async (req, res) => {
     const {
         fname, lname, phone, email, city, state, country, password,
         age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
@@ -24,24 +24,21 @@ exports.influencerSignupdata = (req, res) => {
     ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
-    Influencer.findOne({ email: email })
-        .then(user => {
-            if (user) {
-                return res.status(422).json({ error: "Email already exists", success: false });
-            }
-            //     return bcrypt.hash(req.body.password, 10)
-            const influencer = new Influencer(req.body);
-            console.log(influencer)
-            influencer.save((err, result) => { })
-            return res.status(200).json({ success: true, message: "Your data is under verification" });
+    try{
 
+        const data= await Influencer.findOne({ email: email });
+        if(data){
+            return res.status(422).json({ error: "Email already exists", success: false });
+        }
+        const influencer = new Influencer(req.body);
+        influencer.save()
+        console.log(influencer)
+        return res.status(200).json({ success: true, message: "Your data is under verification" });
 
-        })
-        // .then(hashedpassword => {
-        //     // req.body.password = hashedpassword;
-        //     return;
-        // })
-        .catch(err => console.log(err));
+    } catch(err ){
+        return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
+          
+    };
 
 };
 

@@ -9,21 +9,19 @@ import { useEffect } from "react";
 
 const InfluencerDetails = (props) => {
 
-  const location= useLocation();
-  // const { state } = useLocation();
-  const [persondata,setpersonData] = useState({ fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
-  age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-  facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-  twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-  photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-    });
 
+  const [persondata, setpersonData] = useState({
+    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
+    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
+    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
+    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
+    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
+  });
+
+  const location = useLocation();
   const consolelog = () => {
-    // persondata=state;
     setpersonData(location.state)
-console.log(persondata);
-    // console.log(persondata.fname);
-    // console.log(persondata.lname);
+    console.log(persondata);
   }
 
   useEffect(() => {
@@ -59,7 +57,7 @@ console.log(persondata);
             <div className="flex ml-20">
               <div class=" flex flex-col items-center -mt-24">
                 <img
-                   src={siti} 
+                  src={siti}
                   //  src={persondata.photo}
                   class="border-4 w-40 border-white rounded-full"
                   alt="pic"
@@ -69,11 +67,11 @@ console.log(persondata);
                 <div class=" flex items-center space-x-2 ">
                   <div className="flex-row">
                     <p class="text-2xl">
-                      {persondata.fname+" "+ persondata.lname}
-                      </p>
+                      {persondata.fname + " " + persondata.lname}
+                    </p>
                     <p class="text-sm text-gray-500">
-                      {persondata.city+", "+persondata.country } 
-                      </p>
+                      {persondata.city + ", " + persondata.country}
+                    </p>
                   </div>
                   <span
                     class="bg-blue-500 rounded-full p-1 -mt-4 "

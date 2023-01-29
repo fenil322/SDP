@@ -68,7 +68,7 @@ const InfluencerProfile = () => {
               </form>
               <div className="flex-justify-between p-3 px-14">
                 <button className="text-base font-bold  rounded-none text-blue-50  border-2 py-2 px-6 bg-blue-500">
-                  Uploading...
+                  Upload
                 </button>
               </div>
             </div>

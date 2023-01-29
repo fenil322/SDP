@@ -17,6 +17,11 @@ router.get('/managerhome',managerIsAuth.isAuth,ManagerController.gethompage)
 router.put('/validatebrand',ManagerController.validatebrand);
 router.put('/validateinfluencer',ManagerController.validateinfluencer);
 
+//validate brand and influencer DELETE
+router.delete('/deletebrand',ManagerController.deletebrand);
+router.delete('/deleteinfluencer',ManagerController.deleteinfluencer);
+
+
 //=>String new manager POST
 router.post('/managersignup',ManagerController.managersignup);
 

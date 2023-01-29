@@ -91,37 +91,57 @@ exports.getunverifiendInfluencer = (req, res) => {
 
 }
 
-exports.validateinfluencer = (req, res) => {
+exports.validateinfluencer = async(req, res) => {
+   
     const { email } = req.body;
-    Influencer.findOneAndUpdate(
+    const data = await Influencer.findOneAndUpdate(
         { email: email },
         { $set: { valid: 1 } },
-        { new: true },
-        (err, doc) => {
-            if (err) {
-                console.log("Something wrong when updating data!");
-            } else {
-                res.status(200).json({ message: "Data updated successfully!", success: true });
+        { new: true });
 
-            }
-        }).then(result =>
-            result.status(200).json({ message: "Data updated successfully!", success: true }))
-        .catch((err) => console.log(err))
+    if (!data) {
+        return res.status(422).json({ message: "Data not updated!", success: false,data:data });
+    } else {
+        return res.status(200).json({ message: "Data updated successfully!", success: true, data: data });
+    }
 }
 
-exports.validatebrand = (req, res) => {
+exports.validatebrand = async (req, res) => {
     const { email } = req.body;
-    Brand.findOneAndUpdate(
+    const data = await Brand.findOneAndUpdate(
         { email: email },
         { $set: { valid: 1 } },
-        { new: true },
-        (err, doc) => {
-            if (err) {
-                console.log("Something wrong when updating data!");
-            } else {
-                res.status(200).json({ message: "Data updated successfully!", success: true });
-            }
-        }).then(result =>
-            result.status(200).json({ message: "Data updated successfully!", success: true }))
-        .catch((err) => console.log(err))
+        { new: true });
+
+    if (!data) {
+        return res.status(422).json({ message: "Data not updated!", success: false,data:data });
+    } else {
+        return res.status(200).json({ message: "Data updated successfully!", success: true, data: data });
+    }
+    // .then(result =>
+    // result.status(200).json({ message: "Data updated successfully!", success: true }))
+    // .catch((err) => console.log(err))
+}
+
+exports.deleteinfluencer =async (req, res) => {
+    const { email } = req.body;
+    const data = await Influencer.findOneAndDelete({ email: email })
+        
+    if (!data) {
+        return res.status(422).json({ message: "Data not deleted!", success: false,data:data });
+    } else {
+        return res.status(200).json({ message: "Data deleted successfully!", success: true, data: data });
+    }
+}
+
+exports.deletebrand = async (req, res) => {
+    const { email } = req.body;
+    // console.log(email);
+    const data = await Brand.findOneAndDelete({email:email})
+    // console.log(data);
+    if (!data) {
+        return res.status(422).json({ message: "Data not deleted!", success: false,data:data });
+    } else {
+        return res.status(200).json({ message: "Data deleted successfully!", success: true,data:data });
+    }
 }

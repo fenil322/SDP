@@ -352,17 +352,11 @@ const BrandHome = () => {
             <h1>Showing 14 of 100 Influencer</h1>
           </div>
           <div className="grid grid-cols-2 ">
-
-            {
-              profilecard.length > 0 &&
+            {profilecard.length > 0 &&
               // profilecard.map((item) => (
-
               profilecard.map((item) => (
-
-                <Card item={item} />
-
-              ))
-             
+                <Card item={item} />  
+              ))             
             }
           </div>
         </div>

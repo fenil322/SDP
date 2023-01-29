@@ -11,7 +11,7 @@ const cardProfile = [
     type: "shoes",
     desc: "Contrary to popular belief. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
     contact: " +91 82006575767",
-    email: "adidas@gmail.com",
+    email: "kfintech123@gmail.com",
     city: "Surat",
     state: "Gujarat",
     country: "India",
@@ -90,45 +90,46 @@ const AddNewBrand = () => {
       <div>
         {" "}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {cardProfile.map((item) => (
-            <NavLink to="">
+          {profilecard.length > 0 &&
+            profilecard.map((item) => (
+
               <Card item={item} />
-            </NavLink>
-          ))}
+
+            ))}
         </div>
       </div>
-      
-      {profilecard.length > 0 &&
-      profilecard.map((item, index) => (
-        <div>
-          {item.uname}
-          <button onClick={async (e) => {
-            e.preventDefault()
-            console.log("hello")
-            try {
-              const res = await fetch("manager/validatebrand", {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                  email: item.email,
-                }),
-              });
-              const data = await res.json();
-              console.log( data)
-              if(data.success == true){
-                window.location.reload();
-               }
-            } catch (err) {
-              navigate("/AddNewBrand");
-              console.log(err)
-            }
-          }} className="text-3xl bg-white m-4">Add </button>
-      
 
-        </div>
-      ))}
+      {/* {profilecard.length > 0 &&
+        profilecard.map((item, index) => (
+          <div>
+            {item.uname}
+            <button onClick={async (e) => {
+              e.preventDefault()
+              console.log("hello")
+              try {
+                const res = await fetch("manager/validatebrand", {
+                  method: "PUT",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    email: item.email,
+                  }),
+                });
+                const data = await res.json();
+                console.log(data)
+                if (data.success == true) {
+                  window.location.reload();
+                }
+              } catch (err) {
+                navigate("/AddNewBrand");
+                console.log(err)
+              }
+            }} className="text-3xl bg-white m-4">Add </button>
+
+
+          </div>
+        ))} */}
     </div>
   );
 };

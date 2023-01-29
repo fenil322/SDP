@@ -9,27 +9,27 @@ exports.isAuth = async (req, res, next) => {
     const rootUser = await Brand.findOne({ _id: verifytoken._id, "tokens.token": token });
     console.log(rootUser);
     if (!rootUser) { throw new Error("Unauthorized"); }
-     
+
     else {
 
       req.token = token;
       req.rootUser = rootUser;
       req.userId = rootUser._id;
-     // res.status(422).json({ message: "You are already logged in!" });
+      // res.status(422).json({ message: "You are already logged in!" });
       next();
     }
 
   } catch (error) {
     if (error.name === "JsonWebTokenError") {
-     return  res.status(422).send({ success: false, error: "Unauthorized Access" });
+      return res.status(422).send({ success: false, error: "Unauthorized Access" });
     }
     if (error.name === "TokenExpiredError") {
-     return  res.status(422).send({
+      return res.status(422).send({
         success: false,
         error: "Token Expired Try generating new TOKEN",
       });
     }
-  return  res.status(422).send({ success: false, error: "Session Expired try sign in again" });
+    return res.status(422).send({ success: false, error: "Session Expired try sign in again" });
 
   }
 
