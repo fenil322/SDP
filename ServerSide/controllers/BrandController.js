@@ -1,7 +1,7 @@
 const Brand = require('../models/brand')
 const Influencer = require('../models/influencers')
 
-exports.brandSignUpData = (req, res) => {
+exports.brandSignUpData =async (req, res) => {
     const {
         uname, shopName, brandType, phone, email, city, state, country,
         address, location, password
@@ -19,24 +19,21 @@ exports.brandSignUpData = (req, res) => {
     ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
-    Brand.findOne({ email: req.body.email })
-        .then(user => {
-            if (user) {
-                return res.status(422).json({ error: "Email already exists", success: false });
-            }
-            //     return bcrypt.hash(req.body.password, 10)
-            const brand = new Brand(req.body);
-            console.log(brand)
-            brand.save((err, result) => { })
-            return res.status(200).json({ success: true, message: "Your data is under verification" });
+    try{
 
+        const data= await Brand.findOne({ email: email });
+        if(data){
+            return res.status(422).json({ error: "Email already exists", success: false });
+        }
+        const brand = new Brand(req.body);
+        brand.save()
+        console.log(brand)
+        return res.status(200).json({ success: true, message: "Your data is under verification" });
 
-        })
-        // .then(hashedpassword => {
-        //     // req.body.password = hashedpassword;
-        //     return;
-        // })
-        .catch(err => console.log(err));
+    } catch(err ){
+        return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
+          
+    };
 };
 
 exports.brandhome = (req, res) => {

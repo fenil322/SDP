@@ -1,27 +1,35 @@
 import React from "react";
 import { BiCurrentLocation } from "react-icons/bi";
-import { TiPlus } from "react-icons/ti";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
+import { TiPlus } from "react-icons/ti";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 function Card({ item }) {
+  const navigate = useNavigate();
+  const { uname, shopName, brandType, phone, email, city, state, country,
+    address, location, password, photo } = item
   return (
     <>
       <div className="">
         <div className="flex min-h-screen items-center justify-center overflow-hidden transition-shadow hover:shadow-xl hover:shadow-black/20">
           <div class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow ">
             <img
-              src={item.imgsrc}
+              //src={photo}
+              src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
               class="h-full w-full object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
-              alt=""
+              alt="image"
             />
             <div class="p-4">
               <div className="text-center">
                 <h3 class="text-3xl font-bold font-dmserif text-neutral-700">
-                  {item.name}
+                  {shopName}
                 </h3>
 
                 <p class="mb-1 text-xl text-gray-700 font-dmserif">
-                  {item.type}
+                  {brandType}
                 </p>
               </div>
 
@@ -38,7 +46,7 @@ function Card({ item }) {
                   <RiContactsFill size={20} />
                 </div>
                 <div>
-                  <p class="mb-1 text-lg ">{item.contact}</p>
+                  <p class="mb-1 text-lg ">{phone}</p>
                 </div>
               </div>
               <div className="flex space-x-2.5 items-center">
@@ -46,7 +54,7 @@ function Card({ item }) {
                   <MdMarkEmailUnread size={20} />
                 </div>
                 <div>
-                  <p class="mb-1 text-lg">{item.email}</p>
+                  <p class="mb-1 text-lg">{email}</p>
                 </div>
               </div>
 
@@ -59,21 +67,58 @@ function Card({ item }) {
                 </div>
               </div>
               <p class="mb-1 ml-8 text-lg ">
-                {item.city} ,{item.state}
+                {city + " " + state}
               </p>
 
-              <p class="mb-1 ml-8 text-lg">{item.country}</p>
-              <p class="mb-1 ml-8 text-lg ">{item.address}</p>
+              <p class="mb-1 ml-8 text-lg">{country}</p>
+              <p class="mb-1 ml-8 text-lg ">{address}</p>
             </div>
-            <div className="flex justify-center space-x-6">
+            <div className="flex justify-center space-x-6 mb-5">
               <div>
-                <button class="flex space-x-2 items-center px-3 py-2 bg-green-700 hover:bg-green-800 rounded-md drop-shadow-md">
+                <button
+
+                  onClick={async (e) => {
+                    e.preventDefault()
+                    console.log("hello")
+                    try {
+                      const res = await axios.put("manager/validatebrand",{email})
+                      const data = res.data;
+                      console.log(data)
+                      if (data.success == true) {
+                        window.location.reload();
+                      }
+                    } catch (err) {
+                      navigate("/AddNewBrand");
+                      console.log(err)
+                    }
+                  }}
+
+                  class="flex space-x-2 items-center px-3 py-2 bg-green-700 hover:bg-green-800 rounded-md drop-shadow-md">
                   <TiPlus size={24} className="fill-white" />
                   <span class="text-white">Add</span>
                 </button>
               </div>
               <div>
-                <button class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md">
+                <button
+                  onClick={async (e) => {
+                    e.preventDefault()
+                    console.log("hello2")   
+                    try {
+
+                      const res = await axios.delete("manager/deletebrand",{ data:{email:email}});
+                      const data = res.data;
+                      console.log(data)
+                      if (data.success == true) {
+                        window.location.reload();
+                      }
+                    } catch (err) {
+                      navigate("/AddNewBrand");
+                      console.log(err);
+                    }
+
+
+                  }}
+                  class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md">
                   <svg
                     class="fill-white"
                     xmlns="http://www.w3.org/2000/svg"
