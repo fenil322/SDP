@@ -28,7 +28,7 @@ exports.influencerSignupdata = async (req, res) => {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
 
-
+    try {
         const data = await Influencer.findOne({ email: email });
         if (data) {
 
@@ -72,7 +72,7 @@ exports.editProfiledisplay = (req, res) => {
 }
 
 exports.updateProfile = async (req, res) => {
-    const id=req.userId
+    const id = req.userId
     // console.log(req.body)
     // // const data=req.body;  
     const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true })
