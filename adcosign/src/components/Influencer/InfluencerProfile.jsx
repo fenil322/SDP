@@ -211,6 +211,7 @@ const InfluencerProfile = () => {
 
 
                 </div>
+
               </div>
             </div>
             {/*                 Avout                        */}

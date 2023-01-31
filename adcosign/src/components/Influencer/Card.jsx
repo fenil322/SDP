@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+
 import { AiOutlineInstagram } from "react-icons/ai";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { CiTwitter } from "react-icons/ci";
@@ -40,6 +41,8 @@ const slideImages = [
 
 
 
+
+
 const Card = ({ item }) => {
     const { uname, shopName, brandType,
         phone, email, city, state, country,
@@ -64,6 +67,7 @@ const Card = ({ item }) => {
             {/* <div className="">
                 <div className="ml-10 mt-10">
                     <div className=" flex items-center justify-between w-4/6 p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+
                         <img src={photo1} alt="" className="w-40 h-40 rounded-full ml-10" />
                         <div className='mr-8'>
                             <div className="mb-2 text-lg font-semibold  text-gray-900 dark:text-white">
@@ -91,6 +95,7 @@ const Card = ({ item }) => {
                     </div>
 
                 </div>
+
             </div> */}
             <div className="relative max-w-md mx-10 md:max-w-xl  min-w-0 break-words bg-white  shadow-lg rounded-xl my-10">
                 {/* <Link to={{
@@ -163,6 +168,7 @@ const Card = ({ item }) => {
                 </div>
 
                 {/* </Link > */}
+
             </div>
         </div>
     )
@@ -210,5 +216,6 @@ const Wrap = styled.div`
     // }
    
 `;
+
 
 export default Card

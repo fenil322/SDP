@@ -9,6 +9,7 @@ exports.isAuth = async (req, res, next) => {
     const rootUser = await Influencer.findOne({ _id: verifytoken._id, "tokens.token": token });
     // console.log(rootUser);
     if (!rootUser) { throw new Error("Unauthorized"); }
+
     else {
       req.token = token;
       req.rootUser = rootUser;

@@ -40,7 +40,9 @@ const InfluencerSignUp = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+
         fname, phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate
+
       }),
     })
 
