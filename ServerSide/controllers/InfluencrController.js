@@ -2,9 +2,10 @@ const Influencer = require('../models/influencers')
 var id = '63c5825341af87b8073eaf87';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { response } = require('express');
 
 
-exports.influencerSignupdata =async (req, res) => {
+exports.influencerSignupdata = async (req, res) => {
     const {
         fname, lname, phone, email, city, state, country, password,
         age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
@@ -15,29 +16,29 @@ exports.influencerSignupdata =async (req, res) => {
 
     if (
         !email ||
-         !fname || 
-         !lname || 
-         !phone || 
-         !age || 
-         !city || !state || !country || 
-         !instagram || !instagramURL || !instagramFollowers || !instagramEngagementRate 
+        !fname ||
+        !lname ||
+        !phone ||
+        !age ||
+        !city || !state || !country ||
+        !instagram || !instagramURL || !instagramFollowers || !instagramEngagementRate
     ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
-    try{
+    try {
 
-        const data= await Influencer.findOne({ email: email });
-        if(data){
+        const data = await Influencer.findOne({ email: email });
+        if (data) {
             return res.status(422).json({ error: "Email already exists", success: false });
         }
         const influencer = new Influencer(req.body);
         influencer.save()
-        console.log(influencer)
+        // console.log(influencer)
         return res.status(200).json({ success: true, message: "Your data is under verification" });
 
-    } catch(err ){
+    } catch (err) {
         return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
-          
+
     };
 
 };
@@ -45,25 +46,37 @@ exports.influencerSignupdata =async (req, res) => {
 
 exports.getAllInfluencer = async (req, res) => {
     const influencers = await Influencer.find({ valid: 1 })
-    if(influencers){
+    if (influencers) {
         res.status(200).json({ success: true, data: influencers })
     }
     // res.send(req.rootUser)
-    
+
+}
+
+exports.getInfluencer = async (req, res) => {
+    const rootUser = req.rootUser
+    if (!rootUser) return res.status(422).json({ error: "Please login first", success: false });
+    res.status(200).json({ success: true, data: rootUser })
+
 }
 
 exports.editProfiledisplay = (req, res) => {
-    res.send("hello from editProfiledisplay");
-    Influencer.findById(id)
-        .then(res => console.log(res));
+    // res.send("hello from editProfiledisplay");
+    // Influencer.findById(id)
+    //     .then(res => console.log(res));
 
 }
 
-exports.updateProfile = (req, res) => {
-    Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true })
-        .then(result => console.log(result), (err, doc) => {
-            console.log("error" + err)
-        });
+exports.updateProfile = async (req, res) => {
+    const id=req.userId
+    // console.log(req.body)
+    // // const data=req.body;  
+    const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    if (!influencer) {
+        return res.status(422).json({ message: "Data not updated!", success: false, data: influencer });
+    } else {
+        return res.status(200).json({ message: "Data updated successfully!", success: true, data: influencer });
+    }
 
 }
 
@@ -74,7 +87,7 @@ exports.influencerlogin = async (req, res) => {
     }
     else {
         const userLogin = await Influencer.findOne({ email: email, password: password });
-        console.log(userLogin);
+        // console.log(userLogin);
 
         if (!userLogin) {
             return res.status(422).json({ error: "User not found", success: false });
@@ -85,24 +98,24 @@ exports.influencerlogin = async (req, res) => {
         }
         else {
 
-          //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
-          var token= await userLogin.generateAuthToken()  
-          const { fname } = userLogin;
-            console.log(token)
+            //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
+            var token = await userLogin.generateAuthToken()
+            const { fname } = userLogin;
+            // console.log(token)
 
-            if(token){
-                res.cookie('jwtoken',token,{
+            if (token) {
+                res.cookie('jwtoken', token, {
                     expires: new Date(Date.now() + 2589200000),
-                    httpOnly:true
+                    httpOnly: true
                 })
                 return res.status(200).json({
                     success: true, message: "You are logged in",
                     token, user: { fname }, type: "Influencer"
                 });
-            }else{
+            } else {
                 return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
             }
-            }
+        }
         // bcrypt
         // .compare(password, user.password)
         //     .then(doMatch => {
@@ -114,6 +127,6 @@ exports.influencerlogin = async (req, res) => {
     }
 
 }
-exports.influencerhome=(req,res)=>{
-    
+exports.influencerhome = (req, res) => {
+
 }

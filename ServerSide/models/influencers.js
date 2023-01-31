@@ -99,10 +99,23 @@ const influencerSchema = new mongoose.Schema({
     token: {
       type: String,
       // required: true
-
     }
   }
   ],
+  cat1:{
+    type: String
+  }
+  ,
+  cat2:{
+    type: String
+  }
+  ,
+  cat3:{
+    type: String
+  },
+  discription:{
+    type: String
+  },
   resetToken: String,
   expireToken: Date,
 });
