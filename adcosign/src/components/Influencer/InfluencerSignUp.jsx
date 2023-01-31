@@ -28,11 +28,11 @@ const InfluencerSignUp = () => {
     console.log(e.target.value)
     setuserdata({ ...userdata, [name]: value });
   }
- 
+
 
   const postdata = async (e) => {
     e.preventDefault();
-    const { fname,phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
+    const { fname, phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
 
     const res = await fetch("/influencer/signup", {
       method: 'POST',
@@ -40,17 +40,19 @@ const InfluencerSignUp = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        fname,phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate
+
+        fname, phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate
+
       }),
     })
 
     const data = await res.json();
     console.log(data)
-    if(res.status==200){
+    if (res.status == 200) {
       toast.success(data.message);
       await sleep(2200)
       navigate("/InfluencerLogin");
-    }else{
+    } else {
       toast.error(data.error);
     }
 
@@ -254,7 +256,7 @@ const InfluencerSignUp = () => {
                   <button
                     onClick={postdata}
                     className="flex items-center justify-between w-1/2 px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                    <span >Sign Up </span>
+                    <span >Sign Up</span>
 
                     <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
                       <path fill-rule="evenodd"
@@ -268,7 +270,8 @@ const InfluencerSignUp = () => {
           </div>
         </section>
       </div>
-      <ToastContainer autoClose={1500}/> 
+      <ToastContainer autoClose={1500} 
+      />
 
     </div>
   )

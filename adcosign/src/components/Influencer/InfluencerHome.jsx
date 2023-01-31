@@ -41,7 +41,8 @@ const InfluencerHome = () => {
           <div className="px-10 font-semibold font-mono text-xl">
             <h1>Showing 14 of 100 Influencer</h1>
           </div>
-          <div className="grid grid-cols-2 px-20 ">
+          <div className="grid grid-cols-3  px-20 ">
+
             {brandCard.length > 0 &&
               brandCard.map((item, index) => (
                 <Card item={item} key={index} />
