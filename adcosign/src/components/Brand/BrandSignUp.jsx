@@ -1,23 +1,33 @@
 import React from 'react'
 import { useState } from 'react'
-import {  NavLink, redirect, useNavigate } from 'react-router-dom'
+import { NavLink, redirect, useNavigate } from 'react-router-dom'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 
 const BrandSignUp = () => {
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-
+  const [cpass, setcpass] = useState();
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-blue-500 rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = 'flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
-  
+
   const [userdata, setuserdata] = useState({
     uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
     address: "", location: "", password: ""
   });
+
+  const [passwordType, setPasswordType] = useState("password");
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text")
+      //return;
+    }
+    else setPasswordType("password")
+  }
 
   let name, value;
   const handleInput = (e) => {
@@ -31,29 +41,33 @@ const BrandSignUp = () => {
     e.preventDefault();
     const { uname, shopName, brandType, phone, email, city, state, country,
       address, location, password } = userdata;
-
-    const res = await fetch("/brand/signup", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        uname, shopName, brandType, phone, email, city, state, country,
-        address, location, password
-      }),
-    })
-    const data = await res.json();
-    console.log(data)
-    if(res.status==200){
-      toast.success(data.message);
-      await sleep(2200)
-      navigate("/BrandLogin");
-    }else{
-      toast.error(data.error);
+    if (password == cpass) {
+      const res = await fetch("/brand/signup", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uname, shopName, brandType, phone, email, city, state, country,
+          address, location, password
+        }),
+      })
+      const data = await res.json();
+      console.log(data)
+      if (res.status == 200) {
+        toast.success(data.message);
+        await sleep(2200)
+        navigate("/BrandLogin");
+      } else {
+        toast.error(data.error);
+      }
+      // .then(res => res.json())
+      //   .then(navigate("/BrnadLogin"))
+      //   .catch(err => console.log(err));
+    } else {
+      toast.error(
+        "Passwords do not match");
     }
-    // .then(res => res.json())
-    //   .then(navigate("/BrnadLogin"))
-    //   .catch(err => console.log(err));
   }
 
   return (
@@ -61,7 +75,9 @@ const BrandSignUp = () => {
 
       <div className=''>
         <section className="bg-white dark:bg-gray-900">
-          <div className="flex justify-center min-h-screen">  
+          <div className="flex justify-center min-h-screen">
+            <div className="hidden bg-cover lg:block lg:w-1/2  bg-[url(https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80)]">
+            </div>
             <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
               <div className="w-full">
                 <h1 className="text-2xl font-semibold tracking-wider text-gray-800 capitalize dark:text-white">
@@ -178,13 +194,21 @@ const BrandSignUp = () => {
                       value={userdata.password}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
-
                   <div>
-                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirm password</label>
-                    <input type="password" placeholder="Enter your password" name='cpassword'
-                      value={userdata.cpassword}
-                      onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+
+                    <div>
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirm password</label>
+                      <input type={passwordType} placeholder="Enter your password" name='cpassword'
+                        value={cpass}
+                        onChange={(e) => { setcpass(e.target.value) }}
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                    </div>
+                    <div className='cursor-pointer -mt-9 right-28 absolute' onClick={togglePassword}>
+
+                      {passwordType === "password" ? <AiFillEye className='dark:text-white  text-gray-500' size={25} /> : <AiFillEyeInvisible size={25} className='dark:text-white  text-gray-500' />}
+                    </div>
                   </div>
+
 
                   <button
                     onClick={postData}
@@ -204,7 +228,7 @@ const BrandSignUp = () => {
         </section>
 
       </div>
-      <ToastContainer autoClose={1500}/> 
+      <ToastContainer autoClose={1500} />
     </div>
   )
 }

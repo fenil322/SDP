@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 const influencerSchema = new mongoose.Schema({
   fname: {
     type: String,
-    required: true,
+    // required: true,
   },
   lname: {
     type: String,
-    required: true,
+    // required: true,
   },
   gender: {
     type: String,
@@ -28,15 +28,15 @@ const influencerSchema = new mongoose.Schema({
   },
   age: {
     type: String,
-    required: true,
+    // required: true,
   },
   city: {
     type: String,
-    required: true,
+    // required: true,
   },
   state: {
     type: String,
-    required: true,
+    // required: true,
   },
   country: {
     type: String,
@@ -48,19 +48,19 @@ const influencerSchema = new mongoose.Schema({
   },
   instagram: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramURL: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramFollowers: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramEngagementRate: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebook: {
     type: String,
@@ -98,7 +98,7 @@ const influencerSchema = new mongoose.Schema({
 
     token: {
       type: String,
-      // required: true
+      required: true
     }
   }
   ],

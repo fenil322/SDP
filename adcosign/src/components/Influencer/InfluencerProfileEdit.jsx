@@ -50,7 +50,8 @@ const InfluencerProfileEdit = () => {
       if (data.success == true) {
         toast.success(data.message);
         await sleep(1500)
-        window.location.reload();
+        navigate("/InfluencerProfile")
+        //window.location.reload();
 
 
       }

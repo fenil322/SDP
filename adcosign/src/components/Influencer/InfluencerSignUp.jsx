@@ -8,19 +8,29 @@ import { Navigate, NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 
 const InfluencerSignUp = () => {
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+  const [passwordType, setPasswordType] = useState("password");
+  const togglePassword = () => {
+    if (passwordType === "password") {
+      setPasswordType("text")
+      //return;
+    }
+    else setPasswordType("password")
+  }
+
   const [userdata, setuserdata] = useState({
     fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
+    gender: "", age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
     facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
     twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
   });
-
+  const [cpass, setcpass] = useState();
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
@@ -32,28 +42,33 @@ const InfluencerSignUp = () => {
 
   const postdata = async (e) => {
     e.preventDefault();
-    const { fname, phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
+    const { fname, phone, lname, email, city, state, gender, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate } = userdata;
+    if (cpass == password) {
+      const res = await fetch("/influencer/signup", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
 
-    const res = await fetch("/influencer/signup", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+          fname, phone, lname, email, city, state, gender, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate
 
-        fname, phone, lname, email, city, state, country, password, age, instagram, instagramURL, instagramFollowers, instagramEngagementRate, facebook, facebookURL, facebookFollowers, facebookEngagementRate, twitter, twitterURL, twitterFollowers, twitterEngagementRate
+        }),
+      })
 
-      }),
-    })
+      const data = await res.json();
+      console.log(data)
+      if (res.status == 200) {
+        toast.success(data.message);
+        await sleep(2200)
+        navigate("/InfluencerLogin");
+      } else {
+        toast.error(data.error);
+      }
+    }
+    else {
+      toast.error("Passwords do not match")
 
-    const data = await res.json();
-    console.log(data)
-    if (res.status == 200) {
-      toast.success(data.message);
-      await sleep(2200)
-      navigate("/InfluencerLogin");
-    } else {
-      toast.error(data.error);
     }
 
   }
@@ -64,10 +79,11 @@ const InfluencerSignUp = () => {
   return (
     <div>
       <div className=''>
-        <section className="bg-white dark:bg-gray-900">
+        <section className="bg-white dark:bg-gray-900 ">
+
           <div className="flex justify-center min-h-screen">
-            {/* <div className="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80')">
-            </div> */}
+            <div className="hidden bg-cover lg:block lg:w-1/2  bg-[url(https://images.unsplash.com/photo-1494621930069-4fd4b2e24a11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80)]">
+            </div>
 
             <div className="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
               <div className="w-full">
@@ -160,6 +176,27 @@ const InfluencerSignUp = () => {
                       onChange={handleInput}
                       className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
+                  <div>
+
+                  </div>
+                  <div className=''>
+                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Gender</label>
+                    <div className='flex pl-8 pt-2'>
+                      <input type="radio" id='Male' name="gender"
+                        value='Male'
+                        onChange={handleInput}
+                        // onChange={()=>setuserdata.gender='Male'}
+
+                        className="block h-5 w-5 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-black" />
+                      <label for="Male" className='px-2 text-gray-700'>Male</label>
+                      <input type="radio" id='Female' name="gender"
+                        value='Female'
+                        onChange={handleInput}
+                        className="block h-5 w-5 ml-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md  dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-black" />
+                      <label for="Female" className='px-2 text-gray-700'>Female</label>
+                    </div>
+                  </div>
+
 
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Age</label>
@@ -173,7 +210,7 @@ const InfluencerSignUp = () => {
                       value={userdata.instagram}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Instagram Follower</label>
                     <input type="text" placeholder="Instagram Follower" name='instagramFollowers'
                       value={userdata.instagramFollowers}
@@ -184,7 +221,7 @@ const InfluencerSignUp = () => {
                     <input type="text" placeholder="Engagement Rate" name='instagramEngagementRate'
                       value={userdata.instagramEngagementRate}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                  </div>
+                  </div> */}
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Url</label>
                     <input type="text" placeholder="Instagram Url" name='instagramURL'
@@ -197,7 +234,7 @@ const InfluencerSignUp = () => {
                       value={userdata.facebook}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Facebook Follower</label>
                     <input type="text" placeholder="Facebook Follower" name='facebookFollowers'
                       value={userdata.facebookFollowers}
@@ -208,14 +245,14 @@ const InfluencerSignUp = () => {
                     <input type="text" placeholder="Engagement Rate" name='facebookEngagementRate'
                       value={userdata.facebookEngagementRate}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                  </div>
+                  </div> */}
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Url</label>
                     <input type="text" placeholder="Facebook url" name='facebookURL'
                       value={userdata.facebookURL}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
-                  <div>
+                  {/* <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Twitter Handle</label>
                     <input type="text" placeholder="Twitter Handle" name='twitter'
                       value={userdata.twitter}
@@ -238,7 +275,7 @@ const InfluencerSignUp = () => {
                     <input type="text" placeholder="Twitter Url" name='twitterURL'
                       value={userdata.twitterURL}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                  </div>
+                  </div> */}
 
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
@@ -246,12 +283,19 @@ const InfluencerSignUp = () => {
                       value={userdata.password}
                       onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                   </div>
-
                   <div>
-                    <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirm password</label>
-                    <input type="password" placeholder="Enter your password" name='cpassword'
-                      value={userdata.cpassword}
-                      onChange={handleInput} className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+
+                    <div>
+                      <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirm password</label>
+                      <input type={passwordType} placeholder="Enter your password" name='cpassword'
+                        value={cpass}
+                        onChange={(e) => { setcpass(e.target.value) }}
+                        className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                    </div>
+                    <div className='cursor-pointer  -mt-9 right-28 absolute' onClick={togglePassword}>
+
+                      {passwordType === "password" ? <AiFillEye className='dark:text-white text-gray-500' size={25} /> : <AiFillEyeInvisible size={25} className='dark:text-white  text-gray-500' />}
+                    </div>
                   </div>
                   <button
                     onClick={postdata}
@@ -270,7 +314,7 @@ const InfluencerSignUp = () => {
           </div>
         </section>
       </div>
-      <ToastContainer autoClose={1500} 
+      <ToastContainer autoClose={1500}
       />
 
     </div>
