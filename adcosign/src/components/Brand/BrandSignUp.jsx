@@ -118,7 +118,7 @@ const BrandSignUp = () => {
                   </div>
                 </div>
 
-                <form method='POST' className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2" >
+                <form method='POST' className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2 mb-5" >
                   <div>
                     <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">User Name</label>
                     <input type="text" placeholder={"User name"} name="uname"
@@ -221,7 +221,11 @@ const BrandSignUp = () => {
                         clip-rule="evenodd" />
                     </svg>
                   </button>
+                  <br>
+                  </br>
                 </form>
+                  <hr></hr>
+                  <p class="mt-6 text-sm text-center text-gray-400">Already have an account? <a href="BrandLogin" class="text-blue-500 focus:outline-none focus:underline hover:underline">Login here</a>... </p>
               </div>
             </div>
           </div>
