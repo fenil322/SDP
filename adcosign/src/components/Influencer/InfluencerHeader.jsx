@@ -51,9 +51,9 @@ const InfluencerHeader = () => {
                       </span>
                     </button>
                     <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
-                      <NavLink to="/InfluencerProfileEdit">
+                      {/* <NavLink to="/InfluencerProfileEdit">
                         <li className={menuitemCommoncss}>Edit Profile</li>
-                      </NavLink>
+                      </NavLink> */}
                       <NavLink to="/InfluencerHistory">
                         <li className={menuitemCommoncss}>History</li>
                       </NavLink>

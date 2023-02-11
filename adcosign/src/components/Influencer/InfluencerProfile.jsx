@@ -146,7 +146,7 @@ const InfluencerProfile = () => {
                   </li>
                   <li class="flex border-b py-2">
                     <span class="font-bold w-24">Location:</span>
-                    <span class="text-gray-700">{userdata.city + ", " + userdata.country}</span>
+                    <span class="text-gray-700">{userdata.city + ", " +userdata.state+", "+ userdata.country}</span>
                   </li>
                   <li class="flex border-b py-2">
                     <span class="font-bold w-24">Languages:</span>
