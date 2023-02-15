@@ -19,11 +19,11 @@ const InfluencerProfileEdit = () => {
 
 
   const [userdata, setuserdata] = useState({
-    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
+    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "",
     age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
     facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
     twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
+    photo: "", cat1: "", cat2: "", cat3: "", discription: "", profile: ""
   });
 
 
@@ -38,7 +38,9 @@ const InfluencerProfileEdit = () => {
   }
 
   const imageupload = (e) => {
-
+    console.log("image is");
+    console.log(e.target.files[0]);
+    setuserdata({ ...userdata, profile: e.target.files[0] });
   }
 
   const updateProfile = async (e) => {
@@ -46,7 +48,7 @@ const InfluencerProfileEdit = () => {
     try {
       const res = await axios.put("influencer/updateprofile", userdata);
       const data = res.data;
-      console.log(data);
+      // console.log(data);
       if (data.success == true) {
         toast.success(data.message);
         await sleep(1500)
@@ -66,8 +68,8 @@ const InfluencerProfileEdit = () => {
     const res = await axios.get("influencer/getInfluencer");
     const data = res.data;
     setuserdata(data.data)
-    console.log("Logged in user is:- ");
-    console.log(userdata);
+    // console.log("Logged in user is:- ");
+    // console.log(userdata);
   }
   useEffect(() => {
     getInfluencerData()
@@ -119,7 +121,7 @@ const InfluencerProfileEdit = () => {
                       Upload image
                     </h1>
 
-                    <form class="flex items-center space-x-6">
+                    <form class="flex items-center space-x-6" encType="multipart/form-data">
                       <div class="shrink-0">
                         <img
                           class="h-16 w-16 object-cover rounded-full"
@@ -130,7 +132,7 @@ const InfluencerProfileEdit = () => {
                         />
                       </div>
                       <label class="block">
-                        <span class="sr-only">Choose profile photo</span>
+                        {/* <span class="sr-only">Choose profile photo</span> */}
                         <input
                           type="file"
                           enctype="multipart/form-data"
@@ -141,12 +143,16 @@ const InfluencerProfileEdit = () => {
                                     file:bg-blue-50 file:text-blue-700
                                     hover:file:bg-violet-100
                                   "
+                          name="profile"
                           onChange={imageupload}
+
                         />
                       </label>
                     </form>
                     <div className="flex-justify-between p-3 px-14">
-                      <button class="px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                      <button
+                        onClick={updateProfile}
+                        class="px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                         Upload
                       </button>
                     </div>
@@ -447,12 +453,12 @@ const InfluencerProfileEdit = () => {
             </div>
             <br></br>
             <div class="flex-justify-between">
-                <button
-                  onClick={updateProfile}
-                  class="w-1/5 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                  Update Details
-                </button>
-              </div>
+              <button
+                onClick={updateProfile}
+                class="w-1/5 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                Update Details
+              </button>
+            </div>
           </div>
         </div>
       </div>

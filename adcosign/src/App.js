@@ -25,6 +25,7 @@ import InfluencerConsignments from "./components/Influencer/InfluencerConsignmen
 import InfluencerCurrentConsignments from "./components/Influencer/InfluencerCurrentConsignments";
 import InfluencerHistory from "./components/Influencer/InfluencerHistory";
 import InfluencerLogin from "./components/Influencer/InfluencerLogin";
+import InfluencerArrivalRequest from "./components/Influencer/InfluencerArrivalRequest";
 
 
 import ManagerHome from './components/manager/ManagerHome';
@@ -60,6 +61,7 @@ const App = () => {
         <Route path="/InfluencerDetails" element={<InfluencerDetails />} />
 
         <Route path="/InfluencerHome" element={<InfluencerHome />} />
+        <Route path="/InfluencerArrivalRequest" element={<InfluencerArrivalRequest />} />
         <Route path="/InfluencerProfile" element={<InfluencerProfile />} />
         <Route
           path="/InfluencerProfileEdit"

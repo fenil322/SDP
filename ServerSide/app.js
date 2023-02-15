@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const app = express();
-
+const multer=require('multer');
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 
@@ -19,6 +19,7 @@ const managerRoutes = require('./routes/manager');
 //  const Influencer=require('./models/influencers')
 
 //parser for parsing data in body...
+app.use(multer().single('profile')) 
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
 

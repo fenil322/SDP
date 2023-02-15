@@ -2,15 +2,21 @@ import React, { useState } from "react";
 import { RiFacebookBoxLine } from "react-icons/ri";
 import { FaInstagram } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
-import siti from "../../Images/demo.JPG";
+
 import BrandHeader from "./BrandHeader";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const InfluencerDetails = (props) => {
 
 
+
+
   const [persondata, setpersonData] = useState({
+    _id:"",
     fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
     age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
     facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
@@ -22,6 +28,34 @@ const InfluencerDetails = (props) => {
   const consolelog = () => {
     setpersonData(location.state)
     console.log(persondata);
+  }
+  const createConsignment = async (e) => {
+    const influencerId = persondata._id;
+    const email = persondata.email;
+
+    console.log(influencerId);
+    try {
+      const res = await axios.post("consignment/sendrequest", { influencerId: persondata._id ,email:email})
+      const data = res.data;
+      console.log(data);
+      console.log(data.status);
+      if (res.status == 200) {
+        toast.success(data.message)
+      }
+
+
+    } catch (err) {
+      // console.log(err.response)
+      // console.log(err.data.error);
+      if (err.response.status == 400) {
+        console.log(err.response.data);
+        
+        console.log(err.response.data.error);
+        toast.error(err.response.data.error)
+      }
+
+      // console.log(err.response);
+    }
   }
 
   useEffect(() => {
@@ -57,12 +91,13 @@ const InfluencerDetails = (props) => {
             <div className="flex ml-20">
               <div class=" flex flex-col items-center -mt-24">
                 <img
-                  src={siti}
+                  src={persondata.photo}
                   //  src={persondata.photo}
-                  class="border-4 w-40 border-white rounded-full"
+                  class="border-4 w-40 border-white rounded-full bg-gray-200"
                   alt="pic"
                 />
               </div>
+
               <div className="name -mt-8 ml-8">
                 <div class=" flex items-center space-x-2 ">
                   <div className="flex-row">
@@ -97,7 +132,9 @@ const InfluencerDetails = (props) => {
             </div>
             <div class=" flex  items-center lg:items-end -mt-10 -ml-40">
               <div class="flex items-center space-x-4 mt-2 justify-between">
-                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                <button
+                  onClick={createConsignment}
+                  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
@@ -192,77 +229,66 @@ const InfluencerDetails = (props) => {
               </div>
             </div>
           </div>
-          <div className="ml-20">
-            <div className="flex space-x-20">
-              <div className="items-center">
+          <div className="mx-20">
+            <div className="flex  grid lg:grid-cols-3   sm:grid-cols-2">
+              <div className="items-center mt-10">
                 <a
-                  href="#"
+                  target="_blank"
+                  href={persondata.facebookURL}
                   class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
-                  <div className="flex space-x-60">
+                  <div className="flex justify-between">
                     <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
                     <div className="text-[#244489] font-bold">1K Views</div>
                   </div>
 
                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
-                  <div className="flex space-x-20 font-bold">
-                    <div>4.42M</div>
-                    <div>342</div>
-                    <div>90</div>
-                  </div>
-                  <div className="flex space-x-14 font-light text-xs">
-                    <div>Followers</div>
-                    <div>Reactions</div>
-                    <div>Comments</div>
+                  <div className="flex justify-between font-bold">
+                    <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
+                    <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
+                    <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
                   </div>
                 </a>
               </div>
-              <div className="items-center">
+              <div className="items-center mt-10">
                 <a
-                  href="#"
+                  target="_blank"
+                  href={persondata.instagramURL}
                   class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
-                  <div className="flex space-x-56">
+                  <div className="flex justify-between">
                     <FaInstagram size={20} className="text-[#d62976]" />
                     <div className="text-[#d62976] font-bold">1.3K Views</div>
                   </div>
 
                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
-                  <div className="flex space-x-20 font-bold">
-                    <div>4.42M</div>
-                    <div>90</div>
-                    <div>342</div>
-                  </div>
-                  <div className="flex space-x-14 font-light text-xs">
-                    <div>Followers</div>
-                    <div>Reactions</div>
-                    <div>Comments</div>
+                  <div className="flex justify-between font-bold">
+                    <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
+                    <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
+                    <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
                   </div>
                 </a>
               </div>
-              <div className="items-center">
+              <div className="items-center mt-10">
                 <a
-                  href="#"
+                  target="_blank"
+                  href={persondata.twitterURL}
                   class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
-                  <div className="flex space-x-60">
+                  <div className="flex justify-between">
                     <FiTwitter size={20} className="text-[#00acee]" />
                     <div className="text-[#00acee] font-bold">2K Views</div>
                   </div>
 
                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
-                  <div className="flex space-x-20 font-bold">
-                    <div>4.42M</div>
-                    <div>90</div>
-                    <div>342</div>
-                  </div>
-                  <div className="flex space-x-14 font-light text-xs">
-                    <div>Followers</div>
-                    <div>Reactions</div>
-                    <div>Comments</div>
+                  <div className="flex justify-between font-bold">
+                    <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
+                    <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
+                    <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
                   </div>
                 </a>
               </div>
+
             </div>
           </div>
           <div className="flex space-x-56">
@@ -272,6 +298,7 @@ const InfluencerDetails = (props) => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={1500} />
     </div>
   );
 };

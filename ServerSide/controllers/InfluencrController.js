@@ -9,7 +9,7 @@ const { response } = require('express');
 exports.influencerSignupdata = async (req, res) => {
 
     const {
-        fname, lname, phone, email, city, state, country, password,gender,
+        fname, lname, phone, email, city, state, country, password, gender,
         age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
         facebook, facebookURL, facebookFollowers, facebookEngagementRate,
         twitter, twitterURL, twitterFollowers, twitterEngagementRate
@@ -21,14 +21,14 @@ exports.influencerSignupdata = async (req, res) => {
         !fname ||
         !lname ||
         !phone ||
-        !age || !gender||
+        !age || !gender ||
         !city || !state || !country ||
-        !instagram || !instagramURL ||!password
+        !instagram || !instagramURL || !password
     ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
 
-try{
+    try {
         const data = await Influencer.findOne({ email: email });
         if (data) {
 
@@ -72,9 +72,9 @@ exports.editProfiledisplay = (req, res) => {
 }
 
 exports.updateProfile = async (req, res) => {
-    const id=req.userId
-    // console.log(req.body)
-    // // const data=req.body;  
+    const id = req.userId
+    console.log(req.file)
+    // const data=req.body;  
     const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true })
     if (!influencer) {
         return res.status(422).json({ message: "Data not updated!", success: false, data: influencer });

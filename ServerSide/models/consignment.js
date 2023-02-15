@@ -1,12 +1,12 @@
-const { Double } = require("mongodb");
+// const { Double } = require("mongodb");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
-const consignmentSchema = {
-  shopid: {
+const consignmentSchema = new mongoose.Schema({
+  brandId: {
     type: ObjectId,
     ref: "Shop",
   },
-  influencerid: {
+  influencerId: {
     type: ObjectId,
     ref: "influencer",
   },
@@ -42,7 +42,7 @@ const consignmentSchema = {
     type: Number,
     default: 0,
   },
-};
+});
 
 const consignment = mongoose.model("consignment", consignmentSchema);
 

@@ -27,7 +27,7 @@ exports.brandSignUpData =async (req, res) => {
         }
         const brand = new Brand(req.body);
         brand.save()
-        console.log(brand)
+        // console.log(brand)
         return res.status(200).json({ success: true, message: "Your data is under verification" });
 
     } catch(err ){
@@ -52,7 +52,7 @@ exports.brandLogin = async (req, res) => {
       const userLogin=await  Brand.findOne({ email: email, password: password })
             
       
-      console.log(userLogin);
+    //   console.log(userLogin);
 
       if (!userLogin) {
           return res.status(422).json({ error: "User not found", success: false });
@@ -66,7 +66,7 @@ exports.brandLogin = async (req, res) => {
         //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
         const token= await userLogin.generateAuthToken()  
         const { fname } = userLogin;
-          console.log(token)
+        //   console.log(token)
           if(token){
             res.cookie('jwtoken',token,{
                 expires: new Date(Date.now() + 2589200000),

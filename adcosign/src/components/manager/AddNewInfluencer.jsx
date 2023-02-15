@@ -410,37 +410,7 @@ const AddNewInfluencer = () => {
           </div>
         </div> */}
       </div>
-      {/* {profilecard.length > 0 &&
-        profilecard.map((item, index) => (
-          <div>
-            {item.fname + " " + item.lname}
-            
-            <button onClick={async (e) => {
-              e.preventDefault()
-              console.log("hello")
-              try {
-                const res = await fetch("manager/validateinfluencer", {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: item.email,
-                  }),
-                });
-                const data = await res.json();
-                console.log(data)
-                if (data.success == true) {
-                  window.location.reload();
-                }
-
-              } catch (err) {
-                navigate("/AddNewInfluencer");
-                console.log(err)
-              }
-            }} className="text-3xl bg-white m-4">Add </button>
-          </div>
-        ))} */}
+    
 
 
     </div>

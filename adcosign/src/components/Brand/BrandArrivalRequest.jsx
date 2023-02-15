@@ -1,6 +1,6 @@
 import React from "react";
 import BrandHeader from "./BrandHeader";
-import siti from "../../Images/demo.JPG";
+import img from "../../Images/demo.JPG";
 const BrandArrivalRequest = () => {
   return (
     <div>
@@ -12,8 +12,9 @@ const BrandArrivalRequest = () => {
         >
           <img
             class="object-cover w-full rounded-full h-96 md:h-auto md:w-48 md:rounded-full md:rounded-full-lg m-2 p-2"
-            src={siti}
+            src={img}
             alt=""
+            
           />
           <div class="flex flex-col justify-between p-4 leading-normal">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

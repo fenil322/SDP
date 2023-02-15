@@ -24,6 +24,10 @@ const InfluencerHeader = () => {
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
                 <NavLink to="/InfluencerConsignments">Consignments</NavLink>
               </li>
+
+              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+                <NavLink to="/InfluencerArrivalRequest">Arrival Request</NavLink>
+              </li>
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
                 <NavLink to="/InfluencerCurrentConsignments">
                   Current Consignment
