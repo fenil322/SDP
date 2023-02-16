@@ -58,6 +58,10 @@ const influencerSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  Adsrequired: {
+    type: Boolean
+    , default: false
+  },
   instagramEngagementRate: {
     type: String,
     // required: true,
@@ -102,18 +106,18 @@ const influencerSchema = new mongoose.Schema({
     }
   }
   ],
-  cat1:{
+  cat1: {
     type: String
   }
   ,
-  cat2:{
+  cat2: {
     type: String
   }
   ,
-  cat3:{
+  cat3: {
     type: String
   },
-  discription:{
+  discription: {
     type: String
   },
   resetToken: String,
@@ -124,7 +128,7 @@ influencerSchema.methods.generateAuthToken = async function () {
   try {
     const newtoken = jwt.sign({ _id: this._id }, "mynameisFenilsavaniandthisisoursdpproject");
     // console.log(newtoken);
-    this.tokens=this.tokens.concat({ token: newtoken });
+    this.tokens = this.tokens.concat({ token: newtoken });
     await this.save();
     return newtoken;
   } catch (err) {

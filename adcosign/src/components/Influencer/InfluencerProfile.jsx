@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import InfluencerHeader from "./InfluencerHeader";
-// import  { useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
-// import { toast } from "react-toastify";
-import { BsFacebook,BsInstagram,BsTwitter } from "react-icons/bs";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import { FiTwitter } from "react-icons/fi";
 import { FaInstagram } from "react-icons/fa";
 import { RiFacebookBoxLine } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
-import {AiFillTwitterCircle,AiFillInstagram} from "react-icons/ai";
+import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 
 import axios from "axios";
 import { NavLink } from "react-router-dom";
@@ -111,6 +110,44 @@ const InfluencerProfile = () => {
                     <span>Edit Profile</span>
                   </button>
                 </NavLink>
+                <button
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    try {
+                      const res = await axios.put('influencer/adsrequired', userdata.email)
+                      console.log(res);
+                      const data = res.data;
+                      if (data.success === true) {
+                        toast.success(data.message);
+                      }
+
+                    } catch (err) {
+
+                    }
+                  }}
+                  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                  {/* <FaUserEdit size={17} /> */}
+                  <span>Request Ads</span>
+                </button>
+                <button
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    try {
+                      const res = await axios.put('influencer/adsrequiredremove', userdata.email)
+                      console.log(res);
+                      const data = res.data;
+                      if (data.success === true) {
+                        toast.success(data.message);
+                      }
+
+                    } catch (err) {
+
+                    }
+                  }}
+                  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                  {/* <FaUserEdit size={17} /> */}
+                  <span>Remove Request</span>
+                </button>
 
               </div>
             </div>
@@ -146,7 +183,7 @@ const InfluencerProfile = () => {
                   </li>
                   <li class="flex border-b py-2">
                     <span class="font-bold w-24">Location:</span>
-                    <span class="text-gray-700">{userdata.city + ", " +userdata.state+", "+ userdata.country}</span>
+                    <span class="text-gray-700">{userdata.city + ", " + userdata.state + ", " + userdata.country}</span>
                   </li>
                   <li class="flex border-b py-2">
                     <span class="font-bold w-24">Languages:</span>
@@ -154,27 +191,27 @@ const InfluencerProfile = () => {
                   </li>
                   <li class="flex items-center border-b py-2 space-x-2">
                     <span class="font-bold w-24">Elsewhere:</span>
-                    <a 
-                     target="_blank"
-                     href={userdata.facebookURL}
+                    <a
+                      target="_blank"
+                      href={userdata.facebookURL}
                       title="Facebook">
-                     <BsFacebook size={20} color='#3b5998'/>
-                     </a>
-                    <a  target="_blank"
+                      <BsFacebook size={20} color='#3b5998' />
+                    </a>
+                    <a target="_blank"
                       href={userdata.twitterURL}
-                       title="Twitter">
-                      <AiFillTwitterCircle size={24} color='#1da1f2'/>
+                      title="Twitter">
+                      <AiFillTwitterCircle size={24} color='#1da1f2' />
 
-                     </a>
+                    </a>
                     <a href="#" title="LinkedIn">
                       <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"><path d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z" fill="#0077b5"></path></svg>
                     </a>
                     <a
-                     target="_blank"
-                     href={userdata.instagramURL}
-                       title="Instagram">
-                    <BsInstagram size={20} color="#E1306C"/>
-                       </a>
+                      target="_blank"
+                      href={userdata.instagramURL}
+                      title="Instagram">
+                      <BsInstagram size={20} color="#E1306C" />
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -289,7 +326,7 @@ const InfluencerProfile = () => {
 
                   <div className="items-center">
                     <a
-                    target="_blank"
+                      target="_blank"
                       href={userdata.facebookURL}
                       class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
@@ -308,7 +345,7 @@ const InfluencerProfile = () => {
                   </div>
                   <div className="items-center">
                     <a
-                    target="_blank"
+                      target="_blank"
                       href={userdata.instagramURL}
                       class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
@@ -327,7 +364,7 @@ const InfluencerProfile = () => {
                   </div>
                   <div className="items-center">
                     <a
-                    target="_blank"
+                      target="_blank"
                       href={userdata.twitterURL}
                       class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
@@ -356,6 +393,7 @@ const InfluencerProfile = () => {
         </div>
       </div>
 
+      <ToastContainer autoClose={800} />
 
     </div>
 

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function ReqArrivalCard({ item }) {
   const navigate = useNavigate();
-  const { _id,uname, shopName, brandType, phone, email, city, state, country,
+  const { _id, uname, shopName, brandType, phone, email, city, state, country,
     address, location, photo } = item
   return (
     <>
@@ -32,7 +32,7 @@ function ReqArrivalCard({ item }) {
                 </p>
               </div>
 
-              
+
               <br></br>
               <hr></hr>
               <br></br>
@@ -59,7 +59,7 @@ function ReqArrivalCard({ item }) {
                 </div>
                 <div>
                   <a href="#" className="" >
-                  <p class="mb-1 text-lg hover:text-blue-500 ">{location}</p>
+                    <p class="mb-1 text-lg hover:text-blue-500 ">{location}</p>
                   </a>
                 </div>
               </div>
@@ -78,7 +78,7 @@ function ReqArrivalCard({ item }) {
                     e.preventDefault()
                     console.log("hello")
                     try {
-                      const res = await axios.put("consignment/acceptbrandreq",{email,_id})
+                      const res = await axios.put("consignment/acceptbrandreq", { email, _id })
                       const data = res.data;
                       console.log(data)
                       if (data.success == true) {
@@ -99,18 +99,22 @@ function ReqArrivalCard({ item }) {
                 <button
                   onClick={async (e) => {
                     e.preventDefault()
-                    console.log("hello2")   
-                    try {
+                    console.log("hello2")
+                    if (window.confirm("Are you sure you want to reject this request?")) {
+                      try {
 
-                      const res = await axios.delete("consignment/deletetbrandreq",{ data:{_id:_id}});
-                      const data = res.data;
-                      console.log(data)
-                      if (data.success == true) {
-                        window.location.reload();
+                        const res = await axios.delete("consignment/deletetbrandreq", { data: { _id: _id } });
+                        const data = res.data;
+                        console.log(data)
+                        if (data.success == true) {
+                          window.location.reload();
+                        }
+                      } catch (err) {
+                        navigate("/InfluencerArrivalRequest");
+                        console.log(err);
                       }
-                    } catch (err) {
+                    } else {
                       navigate("/InfluencerArrivalRequest");
-                      console.log(err);
                     }
                   }}
                   class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md">

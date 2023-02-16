@@ -7,9 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 const InfluencerArrivalRequest = () => {
-  
+
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([{_id:"",
+  const [profilecard, setprofilecard] = useState([{
+    _id: "",
     uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
     address: "", location: "", photo1: ""
   }])
@@ -35,20 +36,18 @@ const InfluencerArrivalRequest = () => {
   }, [])
 
   return (
-    <div>
+    <div className='h-screen'>
       <InfluencerHeader />
       <div className='flex grid  md:grid-cols-3'>
-      {
-        profilecard.length==0?
-        <h1>No any pending request</h1>
-        :
-        profilecard.map((item) => (
+        {
+          profilecard.length == 0 ? <h1 className="text-3xl font-bold text-center">No Request Found</h1> :
+            profilecard.map((item) => (
 
-          <ReqArrivalCard item={item} />
-          
-          // <div>hello</div>
-          ))}
-          </div>
+              <ReqArrivalCard item={item} />
+
+              // <div>hello</div>
+            ))}
+      </div>
       <ToastContainer autoClose={500} />
     </div>
   )

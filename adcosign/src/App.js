@@ -26,7 +26,7 @@ import InfluencerCurrentConsignments from "./components/Influencer/InfluencerCur
 import InfluencerHistory from "./components/Influencer/InfluencerHistory";
 import InfluencerLogin from "./components/Influencer/InfluencerLogin";
 import InfluencerArrivalRequest from "./components/Influencer/InfluencerArrivalRequest";
-
+import InfluencerPendingRequest from "./components/Influencer/InfluencerPendingRequest";
 
 import ManagerHome from './components/manager/ManagerHome';
 import ManagerLogin from './components/manager/ManagerLogin';
@@ -76,12 +76,13 @@ const App = () => {
           element={<InfluencerCurrentConsignments />}
         />
         <Route path="/InfluencerHistory" element={<InfluencerHistory />} />
+        <Route path="/InfluencerPendingRequest" element={<InfluencerPendingRequest />} />
 
         <Route path="/ManagerHome" element={<ManagerHome />} />
         <Route path="/ManagerLogin" element={<ManagerLogin />} />
         <Route path="/ManagerHeader" element={<ManagerHeader />} />
-        <Route path="/AddNewInfluencer" element={<AddNewInfluencer/>}/>
-        <Route path="/AddNewBrand" element={<AddNewBrand/>}/>
+        <Route path="/AddNewInfluencer" element={<AddNewInfluencer />} />
+        <Route path="/AddNewBrand" element={<AddNewBrand />} />
 
       </Routes>
     </BrowserRouter>

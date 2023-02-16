@@ -49,7 +49,7 @@ exports.influencerSignupdata = async (req, res) => {
 
 
 exports.getAllInfluencer = async (req, res) => {
-    const influencers = await Influencer.find({ valid: 1 })
+    const influencers = await Influencer.find({ valid: 1, Adsrequired: true })
     if (influencers) {
         res.status(200).json({ success: true, data: influencers })
     }
@@ -133,4 +133,42 @@ exports.influencerlogin = async (req, res) => {
 }
 exports.influencerhome = (req, res) => {
 
+}
+
+exports.adrequired = async (req, res) => {
+    const email = req.body.email;
+
+    // const Adsrequired = req.body.Adsrequired;
+    const id = req.userId;
+    try {
+        const data = await Influencer.findByIdAndUpdate(id, { $set: { Adsrequired: true } })
+        // console.log(data);
+        if (!data) {
+            return res.status(400).json({ success: false, error: "Something went wronge!! try later!!" });
+        }
+        return res.status(200).json({ success: true, message: "Profile is now public to brand for Ads...!!!", data: data });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
+
+    }
+}
+
+exports.adrequiredRemove = async (req, res) => {
+    const email = req.body.email;
+
+    // const Adsrequired = req.body.Adsrequired;
+    const id = req.userId;
+    try {
+        const data = await Influencer.findByIdAndUpdate(id, { $set: { Adsrequired: false } })
+        // console.log(data);
+        if (!data) {
+            return res.status(400).json({ success: false, error: "Something went wronge!! try later!!" });
+        }
+        return res.status(200).json({ success: true, message: "Ads request Removed...!!", data: data });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
+
+    }
 }

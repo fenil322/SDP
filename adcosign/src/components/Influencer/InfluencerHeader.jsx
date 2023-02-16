@@ -17,16 +17,20 @@ const InfluencerHeader = () => {
           </div>
           <nav className="menubar my-auto ">
             <ul className="menu flex items-center text-lg ">
-              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300 ">
+              <li className="menu-item py-3 px-4 visited:text-blue-500 hover:text-blue-500 ease-in duration-300 ">
                 <NavLink to="/InfluencerHome">Home</NavLink>
               </li>
 
-              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
-                <NavLink to="/InfluencerConsignments">Consignments</NavLink>
-              </li>
+              
 
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+                <NavLink to="/InfluencerPendingRequest">Pending Request</NavLink>
+              </li>
+              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
                 <NavLink to="/InfluencerArrivalRequest">Arrival Request</NavLink>
+              </li>
+              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+                <NavLink to="/InfluencerConsignments">Consignments</NavLink>
               </li>
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
                 <NavLink to="/InfluencerCurrentConsignments">

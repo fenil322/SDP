@@ -74,8 +74,7 @@ const BrandHome = () => {
     age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
     facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
     twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "fation", cat2: "study", cat3: "dance", discription: "hello i am there"
-    // ,name:this.fname + " " + this.lname,
+    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
   }])
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -94,11 +93,11 @@ const BrandHome = () => {
 
       const data = res.data;
       // console.log(data)
-      if(data.success!=true){
+      if (data.success != true) {
         console.log(data);
         navigate("/BrandLogin");
       }
-      
+
       setprofilecard(data.data);
       // console.log(profilecard)
 
@@ -355,8 +354,8 @@ const BrandHome = () => {
             {profilecard.length > 0 &&
               // profilecard.map((item) => (
               profilecard.map((item) => (
-                <Card item={item} />  
-              ))             
+                <Card item={item} />
+              ))
             }
           </div>
         </div>

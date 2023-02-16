@@ -14,6 +14,11 @@ const consignmentSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  acceptstatus:{
+    type:Boolean,
+    default:false,
+
+  },
   Amount: {
     type: Number,
     default: 0,
