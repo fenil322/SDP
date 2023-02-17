@@ -156,6 +156,19 @@ exports.deleteBrandPendingRequest = async (req, res) => {
 
 }
 
+const handleData = async (data, array, array2) => {
+    data.map(async (element) => {
+        const id = element.influencerId.toString();
+        var data2 = await Influencer.findById(id).select("-tokens")
+        array2.push(element.Amount);
+        array.push(data2);
+    })
+
+    let result = { array, array2 }
+    return result;
+
+}
+
 exports.getBrandConsignment = async (req, res) => {
     const brandId = req.userId;
     // console.log("get");
@@ -169,6 +182,7 @@ exports.getBrandConsignment = async (req, res) => {
     let array = new Array();
     let array2 = new Array();
 
+
     data.map(async (element) => {
         const id = element.influencerId.toString();
         var data2 = await Influencer.findById(id).select("-tokens")
@@ -176,6 +190,8 @@ exports.getBrandConsignment = async (req, res) => {
         array2.push(element.Amount);
         array.push(data2);
     })
+
+    // let result =await handleData(data, array, array2);
     // console.log("array data");
     setTimeout(() => {
         return res.status(200).json({ success: true, message: "data sent...", data: array, data1: array2 })
@@ -234,7 +250,7 @@ exports.getBrandCurrentConsignments = async (req, res) => {
 
 }
 
-exports.withoutPayment=async(req,res)=>{
+exports.withoutPayment = async (req, res) => {
     const brandId = req.userId;
     const influencerId = req.body.id;
     console.log(brandId);
@@ -252,7 +268,7 @@ exports.withoutPayment=async(req,res)=>{
 
 }
 
-exports.getInfluencerCurrentConsignments=async (req,res)=>{
+exports.getInfluencerCurrentConsignments = async (req, res) => {
     const influencerId = req.userId;
 
     const data = await Consignment.find({ influencerId, shoprequest: 1, acceptstatus: true })

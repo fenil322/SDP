@@ -19,7 +19,7 @@ const BrandConsignments = () => {
   const [starttime, setstarttime] = useState([]);
   const [endtime, setendtime] = useState([]);
 const handleendtime=(e)=>{
-  setendtime((data)=>[...data,e.target.value])
+  // setendtime((data)=>[...data,e.target.value])
 }
 
   const getbrandconsignments = async () => {
