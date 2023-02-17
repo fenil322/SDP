@@ -32,6 +32,9 @@ const BrandHeader = () => {
                 Current Consignment
               </NavLink>
             </li>
+            <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+              <NavLink to="/BrandProfile">Brand Profile</NavLink>
+            </li>
             <li className="menu-item py-3 px-4  ease-in duration-300">
               {/* more items */}
               <div>

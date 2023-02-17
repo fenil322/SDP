@@ -6,6 +6,10 @@ import { FiTwitter } from "react-icons/fi";
 import BrandHeader from "./BrandHeader";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { TiLocation } from "react-icons/ti";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdEmail } from "react-icons/md";
+import { MdOutlineLocationCity } from "react-icons/md";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -26,7 +30,7 @@ const InfluencerDetails = (props) => {
 
   const location = useLocation();
   const consolelog = () => {
-    setpersonData(location.state)
+    setpersonData(location.state);
     console.log(persondata);
   }
   const createConsignment = async (e) => {
@@ -59,11 +63,11 @@ const InfluencerDetails = (props) => {
   }
 
   useEffect(() => {
-    consolelog()
+    consolelog();
   }, []);
 
   return (
-    <div className="" >
+    <div className="">
       <BrandHeader />
       <div className="w-5/6  m-auto my-10 pb-10">
         <link
@@ -291,9 +295,94 @@ const InfluencerDetails = (props) => {
 
             </div>
           </div>
-          <div className="flex space-x-56">
+          {/* <div className="flex w-5/6  m-auto my-10 pb-10">
             <div className="mt-8">
-              {/* <h2>Age Enagagement Rate</h2> */}
+              <div>
+                <br></br>
+                <div className="flex">
+                  <br></br>
+                  <FiPhoneCall size={20} />
+                  <div> {persondata.phone} +91 243543656</div>
+                </div>
+                <br></br>
+                <div className="flex">
+                  <br></br>
+                  <TiLocation size={20} />
+                  <div>
+                    {" "}
+                    {persondata.city +
+                      " , " +
+                      persondata.state +
+                      " , " +
+                      persondata.country}
+                  </div>
+                  <br></br>
+                </div>
+                <div className="flex justify-between">
+                  <br></br>
+                  Contrary to popular belief, Lorem Ipsum is not simply random
+                  text. It has roots in a piece of classical Latin literature
+                  from 45 BC, making it over 2000 years old. Richard McClintock,
+                  a Latin professor at Hampden-Sydney College in Virginia,
+                  looked up one of the more obscure Latin words, consectetur
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className="flex w-5/6  m-auto my-10 pb-10">
+            <div>
+              <h2 className="font-bold font-mono text-2xl">About Influencer</h2>
+              <div className="w-1/2">
+                Contrary to popular belief, Lorem Ipsum is not simply random
+                text. It has roots in a piece of classical Latin literature from
+                45 BC, making it over 2000 years old. Richard McClintock, a
+                Latin professor at Hampden-Sydney College in Virginia
+              </div>
+            </div>
+            <div className="w-80">
+              <h2 className="font-bold font-mono text-2xl w-80">
+                Influencer Details
+              </h2>
+              <br></br>
+              <div className="flex space-x-4">
+                <div>
+                  <FiPhoneCall size={18} />
+                </div>
+                <div>{persondata.phone}</div>
+              </div>
+
+              <br></br>
+              <hr></hr>
+              <br></br>
+              <div className="flex space-x-4">
+                <div>
+                  <MdOutlineLocationCity size={20} />
+                </div>
+                <div className="">{persondata.address}</div>
+              </div>
+              <br></br>
+              <hr></hr>
+              <br></br>
+              <div className="flex align-middle space-x-4">
+                <div>
+                  <MdEmail size={20} />
+                </div>
+                <div>{persondata.email}</div>
+              </div>
+              <div className="flex space-x-20">
+                <div className="flex space-x-60">
+                  <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
+                </div>
+
+                <div className="flex space-x-4">
+                  <FaInstagram size={20} className="text-[#d62976]" />
+                </div>
+
+                <div className="flex space-x-60">
+                  <FiTwitter size={20} className="text-[#00acee]" />
+                </div>
+              </div>
+              <div></div>
             </div>
           </div>
         </div>
