@@ -1,7 +1,7 @@
 const express= require('express')
 const router=express.Router();
 
-const {brandSignUpData,brandLogin, brandhome} = require('../controllers/brandController');
+const {brandSignUpData,brandLogin, brandhome,getBrandData} = require('../controllers/brandController');
 const brandIsAuth=require('../middleware/brandIsAuth');
 const influencerIsAuth=require('../middleware/influencerIsAuth');
 
@@ -19,5 +19,8 @@ router.get('/getAllbrand',influencerIsAuth.isAuth,brandhome)
 
 //=>brand login POST
 router.post('/brandlogin',brandLogin)
+
+
+router.get('/getBrandData',brandIsAuth.isAuth,getBrandData)
 
 module.exports=router;
