@@ -7,13 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BrandCurrentConsignment = () => {
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([{
-    _id: "", fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "", gender: "",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const [amount, setamount] = useState(0);
   const [paymentstatus, setpaymentstatus] = useState(0);
 

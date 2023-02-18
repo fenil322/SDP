@@ -14,7 +14,28 @@ exports.createConsignment = async (req, res, next) => {
     if (consignment) {
         return res.status(400).json({ success: false, error: 'Consignment already exists with this influencer...' })
     }
-    const newconsignment = new Consignment({ brandId, influencerId });
+    const newconsignment = new Consignment({ brandId, influencerId, influencerrequest: 1 });
+    try {
+        newconsignment.save();
+        return res.status(200).json({
+            success: true, data: { brandId, influencerId }, message: "Request sent to influencer"
+        });
+    } catch (e) {
+        return res.status(422).json({
+            success: false, error: "Somthing went wrong"
+        })
+    }
+}
+exports.createConsignmentInf = async (req, res, next) => {
+
+    const influencerId = req.userId;
+    const brandId = req.body.brandId;
+
+    const consignment = await Consignment.findOne({ brandId: brandId, influencerId: influencerId })
+    if (consignment) {
+        return res.status(400).json({ success: false, error: 'Consignment already exists with this influencer...' })
+    }
+    const newconsignment = new Consignment({ brandId, influencerId, shoprequest: 1 },);
     try {
         newconsignment.save();
         return res.status(200).json({
@@ -48,11 +69,26 @@ exports.getBrandRequest = async (req, res, next) => {
         // console.log(array);
         return res.status(200).json({ success: true, data: array })
 
-    }, 1000)
+    }, 100)
+}
+exports.getInfluenerPendingRequest = async (req, res, next) => {
+    const influencerId = req.userId;
+    console.log(influencerId);
+    const data = await Consignment.find({ influencerId, influencerrequest: 0 });
+    // array.push({ data: "hello world" })
+    let array = new Array();
+    data.map(async (element) => {
+        const id = element.brandId.toString();
+        var data2 = await Brand.findById(id).select("-tokens")
+        // console.log(data2);
+        array.push(data2)
+    })
+    // console.log("array data");
+    setTimeout(() => {
+        // console.log(array);
+        return res.status(200).json({ success: true, data: array })
 
-
-
-
+    }, 100)
 }
 
 exports.acceptBrandReq = async (req, res) => {
@@ -88,12 +124,46 @@ exports.deleteBrandReq = async (req, res) => {
     return res.status(200).json({ success: true, message: "Deleted request" })
 
 }
+
+exports.acceptInfluencerReq = async (req, res) => {
+    const brandId = req.userId;
+    const influencerId = req.body._id;
+    console.log(req.body.email);
+    console.log(req.body._id);
+
+    const data = await Consignment.findOneAndUpdate(
+        { influencerId, brandId },
+        { $set: { influencerrequest: 1 } },
+        { new: true });
+    if (!data) {
+        return res.status(400).json({ success: false, error: "Something went wrong" })
+    }
+    // console.log(data);
+    return res.status(200).json({ success: true, message: "Request accepted" })
+
+}
+exports.deleteInfluencerReq = async (req, res) => {
+    const brandId = req.userId;
+    const influencerId = req.body._id;
+    // console.log("delete");
+    // console.log(req.body.email);
+    // console.log(req.body);
+
+    const data = await Consignment.findOneAndDelete({ influencerId, brandId })
+    // console.log(data);
+    if (!data) {
+        return res.status(400).json({ success: false, error: "Something went wrong" })
+    }
+
+    return res.status(200).json({ success: true, message: "Deleted request" })
+
+}
 exports.getInfConsignment = async (req, res) => {
     const influencerId = req.userId;
     // console.log("get");
     // console.log(req.body);
 
-    const data = await Consignment.find({ influencerId, shoprequest: 1 })
+    const data = await Consignment.find({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false })
     // console.log(data);
     if (!data) {
         return res.status(400).json({ success: false, error: "Something went wrong" })
@@ -111,7 +181,7 @@ exports.getInfConsignment = async (req, res) => {
     // console.log("array data");
     setTimeout(() => {
         return res.status(200).json({ success: true, message: "data sent...", data: array, data1: array2 })
-    }, 1000)
+    }, 100)
 
 }
 
@@ -136,9 +206,33 @@ exports.getBrandPendingRequest = async (req, res) => {
         // console.log(array);
         return res.status(200).json({ success: true, data: array })
 
-    }, 1000)
+    },100)
 
 }
+
+exports.getInfluencerRequest = async (req, res) => {
+    const brandId = req.userId;
+    // console.log(brandId);
+
+    const data = await Consignment.find({ brandId, influencerrequest: 0 });
+// console.log(data);
+
+    let array = new Array();
+    data.map(async (element) => {
+        const id = element.influencerId.toString();
+        var data2 = await Influencer.findById(id).select("-tokens")
+        // console.log(data2);
+        array.push(data2)
+    })
+    // console.log("array data");
+    setTimeout(() => {
+        // console.log(array);
+        return res.status(200).json({ success: true, data: array })
+
+    }, 100)
+
+}
+
 exports.deleteBrandPendingRequest = async (req, res) => {
     const brandId = req.userId;
     const influencerId = req.body._id;
@@ -174,7 +268,7 @@ exports.getBrandConsignment = async (req, res) => {
     // console.log("get");
     // console.log(req.body);
 
-    const data = await Consignment.find({ brandId, shoprequest: 1, acceptstatus: false })
+    const data = await Consignment.find({ brandId, shoprequest: 1, acceptstatus: false, influencerrequest: 1 })
     // console.log(data);
     if (!data) {
         return res.status(400).json({ success: false, error: "Something went wrong" })
@@ -195,7 +289,7 @@ exports.getBrandConsignment = async (req, res) => {
     // console.log("array data");
     setTimeout(() => {
         return res.status(200).json({ success: true, message: "data sent...", data: array, data1: array2 })
-    }, 1000)
+    }, 100)
 
 }
 
@@ -246,7 +340,7 @@ exports.getBrandCurrentConsignments = async (req, res) => {
         return res.status(200).json({ success: true, message: "data sent...", data: array, data1: array1, data2: array2, data3: array3, data4: array4 })
 
 
-    }, 1000)
+    }, 100)
 
 }
 
@@ -294,5 +388,5 @@ exports.getInfluencerCurrentConsignments = async (req, res) => {
     // console.log("array data");
     setTimeout(() => {
         return res.status(200).json({ success: true, message: "data sent...", data: array, data1: array1, data2: array2, data3: array3, data4: array4 })
-    }, 1000)
+    }, 100)
 }

@@ -21,7 +21,7 @@ const InfluencerHeader = () => {
                 <NavLink to="/InfluencerHome">Home</NavLink>
               </li>
 
-              
+
 
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
                 <NavLink to="/InfluencerPendingRequest">Pending Request</NavLink>
@@ -30,19 +30,19 @@ const InfluencerHeader = () => {
                 <NavLink to="/InfluencerArrivalRequest">Arrival Request</NavLink>
               </li>
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
-                <NavLink to="/InfluencerConsignments">Consignments</NavLink>
+                <NavLink to="/InfluencerConsignments">Agreements</NavLink>
               </li>
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
-                <NavLink to="/InfluencerCurrentConsignments">
-                  Current Consignment
+                <NavLink to="/InfluencerHistory">
+                  History
                 </NavLink>
               </li>
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
-                <NavLink to="/InfluencerProfile">My Profile</NavLink>
+                <NavLink to="/InfluencerProfile">Profile</NavLink>
               </li>
-              <li className="menu-item py-3 px-4  ease-in duration-300">
-                {/* more items */}
-                <div>
+
+              {/* more items */}
+              {/* <div>
                   <div className="group inline-block">
                     <button className="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32">
                       <span className="pr-1 font-semibold flex-1 hover:text-blue-500 cursor-pointer">
@@ -59,20 +59,22 @@ const InfluencerHeader = () => {
                       </span>
                     </button>
                     <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
-                      {/* <NavLink to="/InfluencerProfileEdit">
+                      <NavLink to="/InfluencerProfileEdit">
                         <li className={menuitemCommoncss}>Edit Profile</li>
-                      </NavLink> */}
+                      </NavLink>
                       <NavLink to="/InfluencerHistory">
                         <li className={menuitemCommoncss}>History</li>
                       </NavLink>
-                      {/* <li className={menuitemCommoncss}>Add Images</li> */}
-                      <NavLink to="/">
-                        <li className={menuitemCommoncss}>Logout</li>
-                      </NavLink>
+                      <li className={menuitemCommoncss}>Add Images</li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
+              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+                <NavLink to="/">
+                  <li className={menuitemCommoncss}>Logout</li>
+                </NavLink>
               </li>
+
             </ul>
           </nav>
         </div>

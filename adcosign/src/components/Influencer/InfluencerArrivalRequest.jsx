@@ -9,19 +9,15 @@ import { useNavigate } from 'react-router-dom';
 const InfluencerArrivalRequest = () => {
 
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([{
-    _id: "",
-    uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
-    address: "", location: "", photo1: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const getBrandRequest = async () => {
     try {
-
       const res = await axios.get('consignment/getbrandreq');
       const data = res.data;
-      // console.log(data.data);
+      console.log(data.data);
       setprofilecard(data.data)
       console.log(profilecard)
+      
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message)
@@ -40,12 +36,12 @@ const InfluencerArrivalRequest = () => {
       <InfluencerHeader />
       <div className='flex grid  md:grid-cols-3'>
         {
-          profilecard.length == 0 ? <h1 className="text-3xl font-bold text-center">No Request Found</h1> :
+          profilecard.length == 0 ?
+           <h1 className="text-3xl font-bold text-center">No Request Found</h1> :
             profilecard.map((item) => (
 
               <ReqArrivalCard item={item} />
 
-              // <div>hello</div>
             ))}
       </div>
       <ToastContainer autoClose={500} />

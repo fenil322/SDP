@@ -11,11 +11,7 @@ const InfluencerConsignments = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState([]);
 
-  const [profilecard, setprofilecard] = useState([{
-    _id: "",
-    uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
-    address: "", location: "", photo1: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const getconsignmets = async () => {
     try {
 
@@ -41,7 +37,8 @@ const InfluencerConsignments = () => {
   return (
     <div className="h-screen">
       <InfluencerHeader />
-      {profilecard.length == 0 ? <div>No any consignment</div> :
+      {profilecard.length == 0 ? 
+      <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1> :
 
         profilecard.map((data, index) => (
           <div className="ml-60 mt-10 ">

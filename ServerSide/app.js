@@ -8,6 +8,7 @@ app.use(cookieParser());
 const connection = require("./db/db");
 
 const errorController = require('./controllers/error');
+const logoutcontroller = require('./controllers/logoutcontroller');
 
 const adminRoutes = require('./routes/admin.js');
 const brandRoutes = require('./routes/brand.js');
@@ -37,7 +38,18 @@ app.use('/admin', adminRoutes)
 app.use('/brand', brandRoutes)
 app.use('/consignment', consignmentRoutes)
 app.use('/manager', managerRoutes)
+app.get('/logout',(req,res)=>{
+    res.clearCookie("jwtoken");
+    try{
 
+        res.status(200).json({success:true,message:"Logged out successfully"});
+    } catch (error) {
+       
+        res.status(400).json({success:false,message:"somthing went wronge"});
+    }
+
+
+})
 //default 404 page...
 app.use(errorController.error404);
 

@@ -10,17 +10,13 @@ import { FaUserEdit } from "react-icons/fa";
 import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink ,useLocation} from "react-router-dom";
 
 const InfluencerProfile = () => {
+const location = useLocation();
 
-  const [userdata, setuserdata] = useState({
-    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-  });
+  const [userdata, setuserdata] = useState({ Adsrequired: "" });
+
   const getInfluencerData = async () => {
     const res = await axios.get("influencer/getInfluencer");
     const data = res.data;
@@ -110,44 +106,49 @@ const InfluencerProfile = () => {
                     <span>Edit Profile</span>
                   </button>
                 </NavLink>
-                <button
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    try {
-                      const res = await axios.put('influencer/adsrequired', userdata.email)
-                      console.log(res);
-                      const data = res.data;
-                      if (data.success === true) {
-                        toast.success(data.message);
-                      }
+                {
+                  userdata.Adsrequired == false ?
+                    <button
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        try {
+                          const res = await axios.put('influencer/adsrequired', userdata.email)
+                          console.log(res);
+                          const data = res.data;
+                          if (data.success === true) {
+                            toast.success(data.message);
+                          }
+                          setuserdata({ ...userdata, Adsrequired: false })
+                          // location.reload();
 
-                    } catch (err) {
-
-                    }
-                  }}
-                  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                  {/* <FaUserEdit size={17} /> */}
-                  <span>Request Ads</span>
-                </button>
-                <button
-                  onClick={async (e) => {
-                    e.preventDefault();
-                    try {
-                      const res = await axios.put('influencer/adsrequiredremove', userdata.email)
-                      console.log(res);
-                      const data = res.data;
-                      if (data.success === true) {
-                        toast.success(data.message);
-                      }
-
-                    } catch (err) {
-
-                    }
-                  }}
-                  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                  {/* <FaUserEdit size={17} /> */}
-                  <span>Remove Request</span>
-                </button>
+                        } catch (err) {
+                          console.log(err);
+                        }
+                      }}
+                      class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                      {/* <FaUserEdit size={17} /> */}
+                      <span>Request Ads</span>
+                    </button> :
+                    <button
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        try {
+                          const res = await axios.put('influencer/adsrequiredremove', userdata.email)
+                          console.log(res);
+                          const data = res.data;
+                          if (data.success === true) {
+                            toast.success(data.message);
+                          }
+                          setuserdata({ ...userdata, Adsrequired: true })
+                          // location.reload();
+                        } catch (err) {
+                          console.log(err);
+                        }
+                      }}
+                      class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                      <span>Remove Request</span>
+                    </button>
+                }
 
               </div>
             </div>

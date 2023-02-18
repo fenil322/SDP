@@ -8,31 +8,26 @@ import { RiFacebookBoxLine } from "react-icons/ri";
 import { FaUserEdit } from "react-icons/fa";
 import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const BrandProfile = () => {
-  const [brandData, setbrandData] = useState({
-    uname: "",
-    shopName: "",
-    brandType: "",
-    phone: "",
-    email: "",
-    city: "",
-    state: "",
-    country: "",
-    address: "",
-    location: "",
-    password: "",
-    photo1: "",
-    photo2: "",
-  });
-  const getBrandData = async () => {
+  const navigate = useNavigate();
 
-    const res = await axios.get("/brand/getBrandData");
-    const data = res.data;
-    console.log(data);
-    setbrandData(data.data);
-    console.log("Logged in brand is:- ");
-    console.log(brandData);
+  const [brandData, setbrandData] = useState([]);
+  const getBrandData = async () => {
+    try {
+
+      const { data } = await axios.get("/brand/getBrandData");
+      // const data = res.data;
+      // console.log(data);
+      setbrandData(data.data);
+      console.log("Logged in brand is:- ");
+      console.log(brandData);
+    } catch (err) {
+      console.log(err.response.status);
+      if (err.response.status == 422) {
+        navigate('/')
+      }
+    }
   };
   useEffect(() => {
     getBrandData();
@@ -52,7 +47,7 @@ const BrandProfile = () => {
           <div class="flex flex-col items-center -mt-20">
             <img
               //src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg"
-                src={brandData.photo2}
+              src={brandData.photo2}
               class="w-40 border-4 border-white bg-gray-50 rounded-none "
             />
             <div class="flex items-center space-x-2 mt-2">
@@ -197,7 +192,7 @@ const BrandProfile = () => {
           <div class="flex flex-col w-full 2xl:w-2/3">
             <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
               <h4 class="text-xl text-gray-900 font-bold">About</h4>
-              <p class="mt-2 text-gray-700">{}</p>
+              <p class="mt-2 text-gray-700">{brandData.description}</p>
             </div>
             {/*                 Social Information                     */}
             <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">

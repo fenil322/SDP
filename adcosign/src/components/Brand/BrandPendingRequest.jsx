@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import BrandHeader from "./BrandHeader";
-import img from "../../Images/demo.JPG";
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,13 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const BrandPendingRequest = () => {
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([{
-    _id: "", fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",gender:"",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const getBrandRequest = async () => {
     try {
 
@@ -41,10 +34,9 @@ const BrandPendingRequest = () => {
       <BrandHeader />
       <div className="mx-20  my-10 grid grid-cols-2">
         {
-          profilecard.length==0 ?<h1 className="text-center">No Pending Request</h1>:
+          profilecard.length==0 ?<h1 className="text-center text-3xl text-bold">No Pending Request</h1>:
           profilecard.map((item, index) => (
-            <a
-            href="#"
+            <div
             class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
             >
           <img
@@ -106,7 +98,7 @@ const BrandPendingRequest = () => {
                   </button>
             </div>
           </div>
-        </a>
+        </div>
           ))
         }
         </div>

@@ -68,6 +68,9 @@ const shopSchema =new mongoose.Schema( {
     }
   }
   ],
+  description:{
+type:String,
+  },
   resetToken: String,
   expireToken: Date,
 });

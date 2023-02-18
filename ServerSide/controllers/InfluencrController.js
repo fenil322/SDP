@@ -101,7 +101,7 @@ exports.influencerlogin = async (req, res) => {
                 .json({ error: "Verification under process, You can't proceed.", success: false });
         }
         else {
-
+            
             //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
             var token = await userLogin.generateAuthToken()
             const { fname } = userLogin;

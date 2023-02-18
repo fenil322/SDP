@@ -5,24 +5,30 @@ import { FaInstagram } from "react-icons/fa";
 import { FiTwitter } from "react-icons/fi";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdOutlineLocationCity } from "react-icons/md";
-import siti from "../../Images/demo.JPG";
-import { Slide } from "react-slideshow-image";
+
 import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import InfluencerHeader from "./InfluencerHeader";
+
 const divStyle = {
   display: "flex",
+
   alignItems: "center",
-  justifyContent: "center",
+  // justifyContent: "center",
   backgroundSize: "cover",
   height: "300px",
   width: "300px",
   borderRadius: "12px",
   margin: "20px",
-  padding: "20px",
+  // padding: "20px",
+  justifyContent:"space-between",
 };
 
 let settings = {
@@ -36,6 +42,7 @@ let settings = {
 
 const BrandDetails = () => {
   const [brandData, setbrandData] = useState({
+    _id:"",
     uname: "",
     shopName: "",
     brandType: "",
@@ -50,6 +57,34 @@ const BrandDetails = () => {
     photo1: "",
     photo2: "",
   });
+  const createConsignment = async (e) => {
+    e.preventDefault();
+    const brandId = brandData._id;
+    const email = brandData.email;
+    console.log(brandId);
+    try {
+      const res = await axios.post("consignment/sendrequesttobrand", { brandId: brandData._id ,email:email})
+      const data = res.data;
+      console.log(data);
+      console.log(data.status);
+      if (res.status == 200) {
+        toast.success(data.message)
+      }
+
+
+    } catch (err) {
+      // console.log(err.response)
+      // console.log(err.data.error);
+      if (err.response.status == 400) {
+        console.log(err.response.data);
+        
+        console.log(err.response.data.error);
+        toast.error(err.response.data.error)
+      }
+
+      // console.log(err.response);
+    }
+  }
 
   const location = useLocation();
   const consollog = () => {
@@ -84,17 +119,11 @@ const BrandDetails = () => {
   ];
 
   return (
-    <div>
-      {/* <div>
-                <h3>user:- {brandData.uname} </h3>
-                <h3>shopname:- {brandData.shopName} </h3>
-                <h3>brandType:- {brandData.brandType}</h3>
-                <h3>city:- {brandData.city}</h3>
-                <h3>state:- {brandData.state}</h3>
-                <h3>address:- {brandData.address}</h3>
-            </div> */}
-      <div className="w-5/6  m-auto my-10 pb-10">
-        <link
+    <div className="h-[screen]">
+        <InfluencerHeader />
+      
+      <div className="w-9/12 m-auto  mt-5 pb-10">
+      <link
           rel="stylesheet"
           href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"
         />
@@ -104,10 +133,7 @@ const BrandDetails = () => {
         ></link>
 
         <div class="bg-white rounded-lg shadow-xl pb-8">
-          <div
-            x-data="{ openSettings: false }"
-            class="absolute right-12 mt-4 rounded"
-          ></div>
+        
           <div class="w-full h-[250px]">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlCS3StOf9LlaFuAG5lUzzqduKG50o84t-sg&usqp=CAU"
@@ -119,8 +145,7 @@ const BrandDetails = () => {
             <div className="flex ml-20">
               <div class=" flex flex-col items-center -mt-24">
                 <img
-                  src={siti}
-                  //  src={persondata.photo}
+                  src={brandData.photo1}
                   class="border-4 w-40 border-white rounded-full"
                   alt="pic"
                 />
@@ -155,7 +180,9 @@ const BrandDetails = () => {
             </div>
             <div class=" flex  items-center lg:items-end -mt-10 -ml-40">
               <div class="flex items-center space-x-4 mt-2 justify-between">
-                <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                <button
+                onClick={createConsignment}
+                class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
@@ -197,7 +224,7 @@ const BrandDetails = () => {
 
           <div className="ml-20 w-5/6 mx-auto">
             <div className="">
-              <div className="py-3 border-t border-slate-200 ">
+              <div className="py-3 mt-5 border-t border-slate-200 ">
                 <Carousel {...settings}>
                   {slideImages.map((slideImage, index) => (
                     <Wrap>
@@ -271,6 +298,7 @@ const BrandDetails = () => {
             <div className="mt-8">{/* <h2>Age Enagagement Rate</h2></div>*/}
         </div>
       </div>
+      <ToastContainer autoClose={1500} />
     </div>
     // </div>
   );
@@ -282,10 +310,15 @@ const Carousel = styled(Slider)`
       color: white;
     }
   }
-
+.slick-active{
+  margin-right:0px;
+  width:300px;
+}
   .slick-list {
-    overflow: hidden;
+    // overflow: hidden;
     color: white;
+    justify-content: space-between; 
+
   }
   button {
     z-index: 1;
@@ -295,7 +328,7 @@ const Carousel = styled(Slider)`
     color: white;
   }
   .slick-next {
-    right: 75px;
+    right: 50px;
   }
   .slick-prev {
     left: 20px;

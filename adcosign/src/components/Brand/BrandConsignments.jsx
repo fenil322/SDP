@@ -8,17 +8,9 @@ import { useNavigate } from 'react-router-dom';
 
 const BrandConsignments = () => {
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([{
-    _id: "", fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "", gender: "",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const [amount, setamount] = useState(0);
-  const [starttime, setstarttime] = useState([]);
-  const [endtime, setendtime] = useState([]);
-const handleendtime=(e)=>{
+ const handleendtime=(e)=>{
   // setendtime((data)=>[...data,e.target.value])
 }
 
@@ -41,7 +33,6 @@ const handleendtime=(e)=>{
 
   }
   useEffect(() => {
-
     getbrandconsignments()
   }, [])
   return (
@@ -95,22 +86,12 @@ const handleendtime=(e)=>{
                   <p class="mb-2 font-normal text-gray-800 dark:text-gray-400">
                     {/* {amount[index]}              */}
                   </p>
+                
                   <div>
-                    <div>Set Date From </div>
-                    <input type="date" className="px-3 py-2 rounded-md bg-gray-200 mt-3 mr-3" name="startdate"
-                    onChange={(e)=>{
-                      setstarttime(e.target.value)
-                    }}
-                    /> 
-                    TO <input type="date" className="px-3 py-2 rounded-md bg-gray-200 my-3" name="enddate" 
-                    onChange={handleendtime}  
-                    />
-                  </div>
-                  <div>
-                    <div className=" flex  grid grid-cols-2">
+                    <div className=" grid grid-cols-2">
 
                       
-                      <button
+                      {/* <button
                         onClick={async (e) => {
                           e.preventDefault();
                           try {
@@ -127,7 +108,7 @@ const handleendtime=(e)=>{
 
 
                         <span class="text-white">Make Payment</span>
-                      </button>
+                      </button> */}
                       <button
                         onClick={async (e) => {
                           e.preventDefault();
