@@ -1,8 +1,24 @@
+import axios from "axios";
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../../logo192.png";
 
 const InfluencerHeader = () => {
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    try {
+
+      const res = await axios.get('/logout')
+      console.log(res.data);
+      if (res.data.success == true) {
+        navigate('/');
+      }
+    } catch (err) {
+
+    }
+
+  }
   let menuitemCommoncss =
     "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer";
 
@@ -70,9 +86,9 @@ const InfluencerHeader = () => {
                   </div>
                 </div> */}
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
-                <NavLink to="/">
-                  <li className={menuitemCommoncss}>Logout</li>
-                </NavLink>
+
+                <li className={menuitemCommoncss} onClick={logout}>Logout</li>
+
               </li>
 
             </ul>
