@@ -9,6 +9,7 @@ import { FaUserEdit } from "react-icons/fa";
 import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 const BrandProfile = () => {
   const navigate = useNavigate();
 
@@ -34,8 +35,11 @@ const BrandProfile = () => {
   }, []);
 
   return (
-    <div>
-      <BrandHeader />
+    <div className="flex flex-row h-screen">
+    <Navbar  />
+  
+        <div className=" ml-14 w-screen">
+      <BrandHeader page="Profile"/>
       <div class="h-full bg-gray-200 py-8 w-5/6 m-auto">
         <div class="bg-white w-5/6 m-auto rounded-lg shadow-xl pb-8">
           <div class="w-full h-[300px]">
@@ -281,6 +285,7 @@ const BrandProfile = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

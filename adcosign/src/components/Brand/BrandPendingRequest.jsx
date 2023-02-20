@@ -4,7 +4,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from "./Navbar";
 
 const BrandPendingRequest = () => {
   const navigate = useNavigate();
@@ -30,8 +30,10 @@ const BrandPendingRequest = () => {
     getBrandRequest()
   }, [])
   return (
-    <div className="h-screen">
-      <BrandHeader />
+    <div className="flex flex-row h-[screen]">
+      <Navbar />
+    <div className="h-screen ml-14 w-screen">
+      <BrandHeader page="BrandPendingRequest" />
       <div className="mx-20  my-10 grid grid-cols-2">
         {
           profilecard.length==0 ?<h1 className="text-center text-3xl text-bold">No Pending Request</h1>:
@@ -102,6 +104,7 @@ const BrandPendingRequest = () => {
           ))
         }
         </div>
+    </div>
     </div>
   );
 };

@@ -32,7 +32,6 @@ function Card({ item }) {
         <div className="cursor-pointer"
           onClick={influencerdetailpage}>
           <div className="cursor-pointer">
-
             <div className="px-6">
               <div className="flex flex-wrap ">
                 <div className="flex px-4 my-5">

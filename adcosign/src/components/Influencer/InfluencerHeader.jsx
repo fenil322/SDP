@@ -1,10 +1,23 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../../logo192.png";
-
-const InfluencerHeader = () => {
+import { FiSettings } from "react-icons/fi";
+  
+const InfluencerHeader = (props) => {
   const navigate = useNavigate();
+
+  const [userdata, setuserdata] = useState({ Adsrequired: "" });
+
+  const getInfluencerData = async () => {
+    const res = await axios.get("influencer/getInfluencer");
+    const data = res.data;
+    setuserdata(data.data)
+    console.log("Logged in user is:- ");
+    console.log(userdata);
+  }
+  useEffect(() => {
+    getInfluencerData()
+  }, [])
 
   const logout = async () => {
     try {
@@ -23,15 +36,37 @@ const InfluencerHeader = () => {
     "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer";
 
   return (
-    <div>
-      <div className=" h-20 justify-center flex font-black ">
-        <div className="header-new w-5/6 bg-white-50 flex">
-          <div className="logo">
+    <div className="h-20 flex items-center justify-between mx-20 w-[screen]">
+      <nav className="">
+        <p className="font-bold">Influencer  &gt; {props.page}</p>
+      </nav>
+      <div className="flex items-center">
+        <div className="flex mx-5">
+          <FiSettings />
+        </div>
+        <div class="flex items-center space-x-4">
+          <div className="">
+
+          <img class="w-10 h-10 rounded-full group" src={userdata.photo} alt="" />
+          <div className="absolute hidden group-hover:block">hello</div>
+        </div>
+          <div class="font-medium ">
+            <div>Hi,{userdata.fname}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default InfluencerHeader;
+
+  {/* <div className="logo">
             <NavLink to="/InfluencerHome">
               <img src={logo} className="h-20 pr-10"></img>
             </NavLink>
-          </div>
-          <nav className="menubar my-auto ">
+          </div> */}
+          {/* <nav className="menubar my-auto ">
             <ul className="menu flex items-center text-lg ">
               <li className="menu-item py-3 px-4 visited:text-blue-500 hover:text-blue-500 ease-in duration-300 ">
                 <NavLink to="/InfluencerHome">Home</NavLink>
@@ -55,7 +90,7 @@ const InfluencerHeader = () => {
               </li>
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
                 <NavLink to="/InfluencerProfile">Profile</NavLink>
-              </li>
+              </li> */}
 
               {/* more items */}
               {/* <div>
@@ -85,18 +120,11 @@ const InfluencerHeader = () => {
                     </ul>
                   </div>
                 </div> */}
-              <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
+              {/* <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300">
 
                 <li className={menuitemCommoncss} onClick={logout}>Logout</li>
 
               </li>
 
             </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default InfluencerHeader;
+          </nav> */}

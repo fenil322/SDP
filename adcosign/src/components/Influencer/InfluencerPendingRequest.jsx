@@ -9,6 +9,7 @@ import { BiCurrentLocation } from "react-icons/bi";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 import { TiPlus } from "react-icons/ti";
+import Navbar from './Navbar'
 
 const InfluencerPendingRequest = () => {
 
@@ -34,8 +35,10 @@ const InfluencerPendingRequest = () => {
   }, [])
 
   return (
-    <div className='h-screen'>
-      <InfluencerHeader />
+    <div className="flex">
+    <Navbar />
+      <div className="h-screen ml-14 w-screen">
+      <InfluencerHeader page="InfluencerPendingRequest" />
       <div className='flex grid  md:grid-cols-3'>
         {
           profilecard.length == 0 ? 
@@ -148,6 +151,7 @@ const InfluencerPendingRequest = () => {
             ))}
       </div>
       <ToastContainer autoClose={500} />
+    </div>
     </div>
   )
 }

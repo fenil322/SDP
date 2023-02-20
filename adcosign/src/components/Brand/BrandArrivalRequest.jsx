@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { TiPlus } from "react-icons/ti";
+import Navbar from "./Navbar";
 
 const BrandArrivalRequest = () => {
   const navigate = useNavigate();
@@ -26,12 +27,14 @@ const BrandArrivalRequest = () => {
 
   }
   useEffect(() => {
-
     getBrandRequest()
   }, [])
+
   return (
-    <div className="h-screen">
-      <BrandHeader />
+    <div className="flex flex-row h-[screen]">
+      <Navbar />
+    <div className="h-screen ml-14 w-screen">
+      <BrandHeader page="BrandArrivalRequest"/>
       <div className="mx-20  my-10 grid grid-cols-2">
         {
           profilecard.length == 0 ? <h1 className="text-3xl font-bold text-center">No Pending Request</h1> :
@@ -127,6 +130,7 @@ const BrandArrivalRequest = () => {
             ))
         }
       </div>
+    </div>
     </div>
   );
 };

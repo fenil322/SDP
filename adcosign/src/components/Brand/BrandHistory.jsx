@@ -4,6 +4,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import Navbar from "./Navbar";
 
 const BrandHistory = () => {
   const navigate = useNavigate();
@@ -38,8 +39,11 @@ const BrandHistory = () => {
     getbrandcurrentconsignments()
   }, [])
   return (
-    <div className="h-screen">
-      <BrandHeader />
+    <div className="flex flex-row h-screen">
+    <Navbar  />
+  
+        <div className=" ml-14 w-screen">
+      <BrandHeader page="History"/>
       <div className="my-10 mx-10  grid grid-cols-2">
         {
         profilecard.length == 0 ? <h1 className="text-3xl font-bold text-center">No Consignments Found</h1> :
@@ -104,6 +108,7 @@ const BrandHistory = () => {
               </div>
             </a>
           ))}
+      </div>
       </div>
     </div>
   );

@@ -1,11 +1,27 @@
+import axios from 'axios'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../../logo192.png'
 
 
 const ManagerHeader = () => {
+  const navigate = useNavigate();
   let menuitemCommoncss = "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer"
 
+  const logout = async () => {
+    try {
+
+      const res = await axios.get('/logout')
+      console.log(res.data);
+      if (res.data.success == true) {
+        navigate('/');
+      }
+    } catch (err) {
+      console.log(err);
+
+    }
+
+  }
   return (
     <div>
       <div className=' h-20 justify-center flex font-black '>
@@ -63,9 +79,9 @@ const ManagerHeader = () => {
                         <li className={menuitemCommoncss}>History</li>
                       </NavLink>
                       {/* <li className={menuitemCommoncss}>Add Images</li> */}
-                      <NavLink to="/">
-                        <li className={menuitemCommoncss}>Logout</li>
-                      </NavLink>
+
+                      <li className={menuitemCommoncss} onClick={logout}>Logout</li>
+
                     </ul>
                   </div>
                 </div>
