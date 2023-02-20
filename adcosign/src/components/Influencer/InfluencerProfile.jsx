@@ -11,6 +11,7 @@ import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 
 import axios from "axios";
 import { NavLink ,useLocation} from "react-router-dom";
+import Navbar from "./Navbar";
 
 const InfluencerProfile = () => {
 const location = useLocation();
@@ -29,15 +30,11 @@ const location = useLocation();
   }, [])
 
   return (
-    <div className="">
-      <div>
-        <InfluencerHeader />
-
-
-
-
-
-        <div class="h-full bg-gray-200 py-8 w-5/6 m-auto">
+     <div className='flex h-[screen]'>
+    <Navbar />
+  <div className=' ml-14 w-screen'>
+<InfluencerHeader page="Profile"/>
+        <div class="h-full py-8 w-5/6 m-auto">
           <div class="bg-white w-5/6 m-auto rounded-lg shadow-xl pb-8">
             {/* <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                   <button class="border border-gray-400 p-2 rounded text-gray-300 hover:text-gray-300 bg-gray-100 bg-opacity-10 hover:bg-opacity-20" title="Settings">

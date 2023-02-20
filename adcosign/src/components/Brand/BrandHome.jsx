@@ -12,6 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import client from "../../api/client"
 import axios from "axios";
 
+import Navbar from './Navbar'
+
 const cardProfile = [
   {
     photo:
@@ -69,13 +71,7 @@ const cardProfile = [
 
 const BrandHome = () => {
 
-  const [profilecard, setprofilecard] = useState([{
-    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -114,303 +110,306 @@ const BrandHome = () => {
   }, [])
 
   return (
-    <div className="">
-      <BrandHeader />
+    <div className="flex flex-row h-[screen]">
+      <Navbar />
+      <div className="ml-14 w-screen">
+        <BrandHeader page="BrandHome" />
 
-      <div className="flex ">
-        <div className="">
-          <aside class="w-64" aria-label="Sidebar">
-            <div class="px-3 py-4 overflow-y-auto rounded-tr-3xl rounded-r-3xl bg-blue-900 text-gray-100">
-              <ul class="space-y-2">
-                <li>
-                  <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"
-                  />
+        <div className="flex ">
+          {/* <div className="">
+            <aside class="w-64" aria-label="Sidebar">
+              <div class="px-3 py-4 overflow-y-auto rounded-tr-3xl rounded-r-3xl bg-blue-900 text-gray-100">
+                <ul class="space-y-2">
+                  <li>
+                    <link
+                      rel="stylesheet"
+                      href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"
+                    />
 
-                  <div class="max-w-2xl mx-auto">
-                    <form>
-                      <label
-                        for="default-search"
-                        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
-                      >
-                        Search
-                      </label>
-                      <div class="relative">
-                        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                          <svg
-                            class="w-5 h-5 text-gray-500 dark:text-gray-400"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                            ></path>
-                          </svg>
-                        </div>
-                        <input
-                          type="search"
-                          id="default-search"
-                          class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                          placeholder="Search Here..."
-                          required
-                        />
-                        <button
-                          type="submit"
-                          class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    <div class="max-w-2xl mx-auto bg-opacity-0">
+                      <form>  
+                        <label
+                          for="default-search"
+                          class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
                         >
                           Search
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </li>
+                        </label>
+                        <div class="relative">
+                          <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                            <svg
+                              class="w-5 h-5 text-gray-500 dark:text-gray-400"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                              ></path>
+                            </svg>
+                          </div>
+                          <input
+                            type="search"
+                            id="default-search"
+                            class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Search Here..."
+                            required
+                          />
+                          <button
+                            type="submit"
+                            class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                          >
+                            Search
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </li>
 
-                <li className="pt-0.5">
-                  <div class="flex justify-left mt-2 mb-2">
+                  <li className="pt-0.5">
+                    <div class="flex justify-left mt-2 mb-2">
+                      <div>
+                        <h1 className="font-semibold py-1 font-mono text-xl">
+                          {" "}
+                          Gender
+                        </h1>
+                        <div class="flex items-center">
+                          <input
+                            id="default-radio-1"
+                            type="radio"
+                            value=""
+                            name="default-radio"
+                            class="w-4 h-4 bg-gray-100 border-gray-300"
+                          />
+                          <label
+                            for="default-radio-1"
+                            class="ml-2 text-sm font-medium dark:text-gray-300 "
+                          >
+                            <h3 className="text-gray-300 font-mono text-lg">
+                              {" "}
+                              Male
+                            </h3>
+                          </label>
+                        </div>
+                        <div class="flex items-center ">
+                          <input
+                            checked
+                            id="default-radio-2"
+                            type="radio"
+                            value=""
+                            name="default-radio"
+                            class="w-4 h-4  bg-gray-100 border-gray-300 "
+                          />
+                          <label
+                            for="default-radio-2"
+                            class="ml-2 text-sm font-medium  dark:text-gray-300"
+                          >
+                            <h3 className="text-gray-300 font-mono text-lg">
+                              Female
+                            </h3>
+                          </label>
+                        </div>
+                        <div class="flex items-center">
+                          <input
+                            checked
+                            id="default-radio-2"
+                            type="radio"
+                            value=""
+                            name="default-radio"
+                            class="w-4 h-4  bg-gray-100 border-gray-300 "
+                          />
+                          <label
+                            for="default-radio-2"
+                            class="ml-2 text-sm font-medium  dark:text-gray-300"
+                          >
+                            <h3 className="text-gray-300 font-mono text-lg">
+                              Both
+                            </h3>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li>
                     <div>
-                      <h1 className="font-semibold py-1 font-mono text-xl">
-                        {" "}
-                        Gender
-                      </h1>
-                      <div class="flex items-center">
-                        <input
-                          id="default-radio-1"
-                          type="radio"
-                          value=""
-                          name="default-radio"
-                          class="w-4 h-4 bg-gray-100 border-gray-300"
-                        />
-                        <label
-                          for="default-radio-1"
-                          class="ml-2 text-sm font-medium dark:text-gray-300 "
-                        >
-                          <h3 className="text-gray-300 font-mono text-lg">
-                            {" "}
-                            Male
-                          </h3>
-                        </label>
+                      <div className="mt-2 mb-2">
+                        <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
+                          By Age
+                        </h2>
                       </div>
-                      <div class="flex items-center ">
-                        <input
-                          checked
-                          id="default-radio-2"
-                          type="radio"
-                          value=""
-                          name="default-radio"
-                          class="w-4 h-4  bg-gray-100 border-gray-300 "
-                        />
-                        <label
-                          for="default-radio-2"
-                          class="ml-2 text-sm font-medium  dark:text-gray-300"
+                      <div className="mt-2 mb-6">
+                        <select
+                          name="cars"
+                          id="cars"
+                          className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
                         >
-                          <h3 className="text-gray-300 font-mono text-lg">
-                            Female
-                          </h3>
-                        </label>
-                      </div>
-                      <div class="flex items-center">
-                        <input
-                          checked
-                          id="default-radio-2"
-                          type="radio"
-                          value=""
-                          name="default-radio"
-                          class="w-4 h-4  bg-gray-100 border-gray-300 "
-                        />
-                        <label
-                          for="default-radio-2"
-                          class="ml-2 text-sm font-medium  dark:text-gray-300"
-                        >
-                          <h3 className="text-gray-300 font-mono text-lg">
-                            Both
-                          </h3>
-                        </label>
+                          <option value="18-20">18-20</option>
+                          <option value="21-32">21-32</option>
+                          <option value="33-44">33-44</option>
+                          <option value="45-60">45-60</option>
+                        </select>
                       </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
 
-                <li>
-                  <div>
-                    <div className="mt-2 mb-2">
-                      <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
-                        By Age
-                      </h2>
+                  <li>
+                    <div>
+                      <div className="mt-2 mb-2">
+                        <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
+                          By Ethinicity
+                        </h2>
+                      </div>
+                      <div className="mt-2 mb-6">
+                        <select
+                          name="cars"
+                          id="cars"
+                          className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
+                        >
+                          <option value="18-20">Asian</option>
+                          <option value="saab">Europian</option>
+                          <option value="opel">Indian</option>
+                          <option value="audi">Canadian</option>
+                        </select>
+                      </div>
                     </div>
-                    <div className="mt-2 mb-6">
+                  </li>
+                  <li>
+                    <div>
+                      <div className="mt-2 mb-2">
+                        <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
+                          By Location
+                        </h2>
+                      </div>
+                      <div className="mt-2 mb-6">
+                        <select
+                          name="cars"
+                          id="cars"
+                          className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
+                        >
+                          <option value="">UK,Londen</option>
+                          <option value="">California,USA</option>
+                          <option value="">Montrial,Canada</option>
+                          <option value="">Bavaria,Germany</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div className="mt-2 mb-2">
+                        <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
+                          Followers
+                        </h2>
+                      </div>
+                      <div className="mt-2 mb-6">
+                        <select
+                          name="followers"
+                          id="followers"
+                          className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
+                        >
+                          <option value="">1K-2K</option>
+                          <option value="">3K-4K</option>
+                          <option value="">5K-6K</option>
+                          <option value="">7K-8K</option>
+                        </select>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <div className="mt-2 mb-2">
+                        <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
+                          Catagories
+                        </h2>
+                      </div>
                       <select
-                        name="cars"
-                        id="cars"
+                        name=""
+                        id=""
                         className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
                       >
-                        <option value="18-20">18-20</option>
-                        <option value="21-32">21-32</option>
-                        <option value="33-44">33-44</option>
-                        <option value="45-60">45-60</option>
+                        <option value="">Drama</option>
+                        <option value="">Dance</option>
+                        <option value="">Singing</option>
+                        <option value="">Speaking</option>
                       </select>
                     </div>
-                  </div>
-                </li>
+                  </li>
+                  <li></li>
+                </ul>
+              </div>
+            </aside>
+          </div> */}
 
-                <li>
-                  <div>
-                    <div className="mt-2 mb-2">
-                      <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
-                        By Ethinicity
-                      </h2>
-                    </div>
-                    <div className="mt-2 mb-6">
-                      <select
-                        name="cars"
-                        id="cars"
-                        className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
-                      >
-                        <option value="18-20">Asian</option>
-                        <option value="saab">Europian</option>
-                        <option value="opel">Indian</option>
-                        <option value="audi">Canadian</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <div className="mt-2 mb-2">
-                      <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
-                        By Location
-                      </h2>
-                    </div>
-                    <div className="mt-2 mb-6">
-                      <select
-                        name="cars"
-                        id="cars"
-                        className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
-                      >
-                        <option value="">UK,Londen</option>
-                        <option value="">California,USA</option>
-                        <option value="">Montrial,Canada</option>
-                        <option value="">Bavaria,Germany</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <div className="mt-2 mb-2">
-                      <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
-                        Followers
-                      </h2>
-                    </div>
-                    <div className="mt-2 mb-6">
-                      <select
-                        name="followers"
-                        id="followers"
-                        className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
-                      >
-                        <option value="">1K-2K</option>
-                        <option value="">3K-4K</option>
-                        <option value="">5K-6K</option>
-                        <option value="">7K-8K</option>
-                      </select>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div>
-                    <div className="mt-2 mb-2">
-                      <h2 className="text-gray-100 font-semibold py-1 font-mono text-xl">
-                        Catagories
-                      </h2>
-                    </div>
-                    <select
-                      name=""
-                      id=""
-                      className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
-                    >
-                      <option value="">Drama</option>
-                      <option value="">Dance</option>
-                      <option value="">Singing</option>
-                      <option value="">Speaking</option>
-                    </select>
-                  </div>
-                </li>
-                <li></li>
-              </ul>
+          <div className="">
+            <div className="px-10 font-semibold font-mono text-xl">
+              {/* <h1>Showing 14 of 100 Influencer</h1> */}
             </div>
-          </aside>
-        </div>
-
-        <div className="">
-          <div className="px-10 font-semibold font-mono text-xl">
-            <h1>Showing 14 of 100 Influencer</h1>
-          </div>
-          <div className="grid grid-cols-2 ">
-            {profilecard.length > 0 &&
-              // profilecard.map((item) => (
-              profilecard.map((item) => (
-                <Card item={item} />
-              ))
-            }
+            <div className="grid md:grid-cols-3 grid-cols-1 ">
+              {profilecard.length > 0 &&
+                // profilecard.map((item) => (
+                profilecard.map((item) => (
+                  <Card item={item} />
+                ))
+              }
+            </div>
           </div>
         </div>
-      </div>
-      <div className="mb-15">
-        <div class="flex justify-center">
-          <nav aria-label="Page navigation example">
-            <ul class="flex list-style-none">
-              <li class="page-item disabled">
-                <a
-                  class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                  href="#"
-                  tabindex="-1"
-                  aria-disabled="true"
-                >
-                  Previous
-                </a>
-              </li>
-              <li class="page-item">
-                <a
-                  class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                  href="#"
-                >
-                  1
-                </a>
-              </li>
-              <li class="page-item active">
-                <a
-                  class="page-link relative block py-1.5 px-3  border-0 bg-blue-600 outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                  href="#"
-                >
-                  2 <span class="visually-hidden"></span>
-                </a>
-              </li>
-              <li class="page-item">
-                <a
-                  class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                  href="#"
-                >
-                  3
-                </a>
-              </li>
-              <li class="page-item">
-                <a
-                  class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                  href="#"
-                >
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
+        <div className="mb-15">
+          <div class="flex justify-center">
+            <nav aria-label="Page navigation example">
+              <ul class="flex list-style-none">
+                <li class="page-item disabled">
+                  <a
+                    class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
+                    href="#"
+                    tabindex="-1"
+                    aria-disabled="true"
+                  >
+                    Previous
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                    href="#"
+                  >
+                    1
+                  </a>
+                </li>
+                <li class="page-item active">
+                  <a
+                    class="page-link relative block py-1.5 px-3  border-0 bg-blue-600 outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
+                    href="#"
+                  >
+                    2 <span class="visually-hidden"></span>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                    href="#"
+                  >
+                    3
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a
+                    class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                    href="#"
+                  >
+                    Next
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -28,7 +28,7 @@ const divStyle = {
   borderRadius: "12px",
   margin: "20px",
   // padding: "20px",
-  justifyContent:"space-between",
+  justifyContent: "space-between",
 };
 
 let settings = {
@@ -42,7 +42,7 @@ let settings = {
 
 const BrandDetails = () => {
   const [brandData, setbrandData] = useState({
-    _id:"",
+    _id: "",
     uname: "",
     shopName: "",
     brandType: "",
@@ -63,7 +63,7 @@ const BrandDetails = () => {
     const email = brandData.email;
     console.log(brandId);
     try {
-      const res = await axios.post("consignment/sendrequesttobrand", { brandId: brandData._id ,email:email})
+      const res = await axios.post("consignment/sendrequesttobrand", { brandId: brandData._id, email: email })
       const data = res.data;
       console.log(data);
       console.log(data.status);
@@ -77,7 +77,7 @@ const BrandDetails = () => {
       // console.log(err.data.error);
       if (err.response.status == 400) {
         console.log(err.response.data);
-        
+
         console.log(err.response.data.error);
         toast.error(err.response.data.error)
       }
@@ -120,10 +120,10 @@ const BrandDetails = () => {
 
   return (
     <div className="h-[screen]">
-        <InfluencerHeader />
-      
-      <div className="w-9/12 m-auto  mt-5 pb-10">
-      <link
+      <InfluencerHeader />
+
+      <div className="w-9/12 m-auto  mt-5 pb-10 ">
+        <link
           rel="stylesheet"
           href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"
         />
@@ -132,8 +132,8 @@ const BrandDetails = () => {
           href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
         ></link>
 
-        <div class="bg-white rounded-lg shadow-xl pb-8">
-        
+        <div class="bg-gray-100 rounded-lg shadow-xl pb-8">
+
           <div class="w-full h-[250px]">
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlCS3StOf9LlaFuAG5lUzzqduKG50o84t-sg&usqp=CAU"
@@ -181,8 +181,8 @@ const BrandDetails = () => {
             <div class=" flex  items-center lg:items-end -mt-10 -ml-40">
               <div class="flex items-center space-x-4 mt-2 justify-between">
                 <button
-                onClick={createConsignment}
-                class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                  onClick={createConsignment}
+                  class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-4 w-4"
@@ -224,7 +224,7 @@ const BrandDetails = () => {
 
           <div className="ml-20 w-5/6 mx-auto">
             <div className="">
-              <div className="py-3 mt-5 border-t border-slate-200 ">
+              <div className="py-3 mt-5 border-t border-gray-400 ">
                 <Carousel {...settings}>
                   {slideImages.map((slideImage, index) => (
                     <Wrap>

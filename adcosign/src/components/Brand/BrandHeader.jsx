@@ -1,36 +1,74 @@
-import React from "react";
-import { NavLink,useNavigate } from "react-router-dom";
-import logo from "../../logo192.png";
-import image from "../../Images/demo.JPG";
+import React, { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import logo from "../../Images/brand1.jpg";
+
 import { FiSettings } from "react-icons/fi";
 import axios from "axios";
 
-const BrandHeader = () => {
-const navigate = useNavigate();
+const BrandHeader = (props) => {
+  const navigate = useNavigate();
+  
+  const [brandData, setbrandData] = useState([]);
+  const getBrandData = async () => {
+    try {
 
-  const logout = async() => {
-    try{
+      const { data } = await axios.get("/brand/getBrandData");
+      // const data = res.data;
+      // console.log(data);
+      setbrandData(data.data);
+      console.log("Logged in brand is:- ");
+      console.log(brandData);
+    } catch (err) {
+      console.log(err.response.status);
+      if (err.response.status == 422) {
+        navigate('/')
+      }
+    }
+  };
+  useEffect(() => {
+    getBrandData();
+  }, []);
+
+  const logout = async () => {
+    try {
 
       const res = await axios.get('/logout')
       console.log(res.data);
-      if(res.data.success == true){
+      if (res.data.success === true) {
         navigate('/');
       }
-    }catch(err){
+    } catch (err) {
       console.log(err);
-      
+
     }
 
   }
   return (
-    <div className=" h-20 justify-center flex font-black ">
-      <div className="header-new w-full bg-white-50 flex">
-        <div className="logo">
-          <NavLink to="/BrandHome">
-            <img src={logo} alt="no img" className="h-20 pr-10"></img>
-          </NavLink>
+    <div className="h-20 flex items-center justify-between mx-20 w-[screen]">
+      <nav className="">
+        <p className="font-bold">Brand  &gt; {props.page}</p>
+      </nav>
+      <div className="flex items-center">
+        <div className="flex mx-5">
+          <FiSettings />
         </div>
-        <nav className="menubar my-auto ">
+        <div class="flex items-center space-x-4">
+          <div className="">
+
+          <img class="w-10 h-10 rounded-full group" src={logo} alt="" />
+          <div className="absolute hidden group-hover:block">hello</div>
+        </div>
+          <div class="font-medium ">
+            <div>Hi,{brandData.uname}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BrandHeader;
+{/* <nav className="menubar my-auto ">
           <ul className="menu flex items-center text-lg ">
             <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300 ">
               <NavLink to="/BrandHome">Home</NavLink>
@@ -53,7 +91,6 @@ const navigate = useNavigate();
               <NavLink to="/BrandProfile">Profile</NavLink>
             </li>
             <li className="menu-item py-3 px-4  ease-in duration-300">
-              {/* more items */}
 
 
               <li className="menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300"
@@ -63,23 +100,4 @@ const navigate = useNavigate();
 
             </li>
           </ul>
-        </nav>
-      </div>
-      <div className="flex">
-        <div className="flex items-center mr-6">
-          <FiSettings />
-        </div>
-        <div className="mr-20 justify-center header-new flex">
-          <div class="flex items-center space-x-4">
-            <img class="w-10 h-10 rounded-full" src={image} alt="" />
-            <div class="font-medium ">
-              <div>Hi,Shwetangi</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default BrandHeader;
+        </nav> */}

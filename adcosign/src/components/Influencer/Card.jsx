@@ -68,7 +68,7 @@ const Card = ({ item }) => {
     autoplay: true,
   };
   return (
-    <div>
+    <div className="">
       {/* <div className="">
                 <div className="ml-10 mt-10">
                     <div className=" flex items-center justify-between w-4/6 p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -102,7 +102,7 @@ const Card = ({ item }) => {
                 </div>
 
             </div> */}
-      <div className="relative max-w-md mx-10 md:max-w-xl  min-w-0 break-words bg-white  shadow-lg rounded-xl my-10">
+      <div className="relative max-w-md mx-10 md:max-w-xl  min-w-0 break-words bg-gray-200  shadow-lg rounded-xl my-7">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
@@ -149,16 +149,16 @@ const Card = ({ item }) => {
                 </Carousel>
               </div>
 
-              <div className=" mb-4">
-                <div className="flex space-x-2">
+              <div className="m-3">
+                <div className="flex space-x-2 p-1">
                   <TiLocation size={20} />
-                  <div>{item.country +", "+item.city}</div>
+                  <div>{item.country + ", " + item.city}</div>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 p-1">
                   <FiPhoneCall size={20} />
                   <div>{item.phone}</div>
                 </div>
-                <div className="flex space-x-2">
+                <div className="flex space-x-2 p-1">
                   <MdEmail size={20} />
                   <div>{item.email}</div>
                 </div>
@@ -166,11 +166,6 @@ const Card = ({ item }) => {
 
               <div className=" py-5 border-t border-slate-200 ">
                 <div className="flex flex-wrap justify-center">
-                  <div className="w-full px-4">
-                    <p className="font-light leading-relaxed text-slate-600 mb-4">
-                      {/* {discription} */}
-                    </p>
-                  </div>
 
                   <div className="flex  items-center">
                     <AiOutlineFacebook size={20} className="text-[#3b5998] " />

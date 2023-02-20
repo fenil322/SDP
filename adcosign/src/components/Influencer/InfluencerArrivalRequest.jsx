@@ -5,6 +5,7 @@ import ReqArrivalCard from './ReqArrivalCard'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const InfluencerArrivalRequest = () => {
 
@@ -32,8 +33,10 @@ const InfluencerArrivalRequest = () => {
   }, [])
 
   return (
-    <div className='h-screen'>
-      <InfluencerHeader />
+    <div className='flex h-screen'>
+      <Navbar />
+    <div className=' ml-14 w-screen'>
+      <InfluencerHeader page="InfluencerArrivalRequest" />
       <div className='flex grid  md:grid-cols-3'>
         {
           profilecard.length == 0 ?
@@ -45,6 +48,7 @@ const InfluencerArrivalRequest = () => {
             ))}
       </div>
       <ToastContainer autoClose={500} />
+    </div>
     </div>
   )
 }
