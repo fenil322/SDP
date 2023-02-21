@@ -33,6 +33,7 @@ import ManagerLogin from './components/manager/ManagerLogin';
 import ManagerHeader from './components/manager/ManagerHeader';
 import AddNewInfluencer from './components/manager/AddNewInfluencer';
 import AddNewBrand from './components/manager/AddNewBrand';
+import ManagerProfile from './components/manager/ManagerProfile';
 
 
 const App = () => {
@@ -84,7 +85,8 @@ const App = () => {
         <Route path="/ManagerHeader" element={<ManagerHeader />} />
         <Route path="/AddNewInfluencer" element={<AddNewInfluencer />} />
         <Route path="/AddNewBrand" element={<AddNewBrand />} />
-
+      <Route path="/ManagerProfile" element={<ManagerProfile />} />
+      
       </Routes>
     </BrowserRouter>
   );

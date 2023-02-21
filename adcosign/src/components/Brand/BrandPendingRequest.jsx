@@ -33,10 +33,10 @@ const BrandPendingRequest = () => {
     <div className="flex flex-row h-[screen]">
       <Navbar />
     <div className="h-screen ml-14 w-screen">
-      <BrandHeader page="BrandPendingRequest" />
+      <BrandHeader page="Pending Request" />
       <div className="mx-20  my-10 grid grid-cols-2">
         {
-          profilecard.length==0 ?<h1 className="text-center text-3xl text-bold">No Pending Request</h1>:
+          profilecard.length==0 ?<h1 className="text-3xl font-bold text-center">No Pending Request</h1>:
           profilecard.map((item, index) => (
             <div
             class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"

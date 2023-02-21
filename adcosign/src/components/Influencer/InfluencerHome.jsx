@@ -9,11 +9,7 @@ const InfluencerHome = () => {
   const navigate = useNavigate();
 
 
-  const [brandCard, setBrandCard] = useState({
-    uname: "", shopName: "", brandType: "",
-    phone: "", email: "", city: "", state: "", country: "",
-    address: "", location: "", password: "", photo1: "", photo2: ""
-  });
+  const [brandCard, setBrandCard] = useState([]);
   const callGetBrand = async () => {
     try {
       const res = await axios.get("brand/getAllbrand");
@@ -38,7 +34,7 @@ const InfluencerHome = () => {
     <div className="h-[screen] flex">
       <Navbar />
       <div className="ml-14 w-screen">
-        <InfluencerHeader page="InfluencerHome" />
+        <InfluencerHeader page="Home" />
         <div className="">
           <div className="grid grid-cols-3  px-20 ">
 

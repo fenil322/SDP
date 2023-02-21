@@ -38,7 +38,7 @@ const InfluencerPendingRequest = () => {
     <div className="flex">
     <Navbar />
       <div className="h-screen ml-14 w-screen">
-      <InfluencerHeader page="InfluencerPendingRequest" />
+      <InfluencerHeader page="PendingRequests" />
       <div className='flex grid  md:grid-cols-3'>
         {
           profilecard.length == 0 ? 

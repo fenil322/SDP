@@ -6,13 +6,12 @@ import { FiSettings } from "react-icons/fi";
 const InfluencerHeader = (props) => {
   const navigate = useNavigate();
 
-  const [userdata, setuserdata] = useState({ Adsrequired: "" });
+  const [userdata, setuserdata] = useState([]);
 
   const getInfluencerData = async () => {
     const res = await axios.get("influencer/getInfluencer");
     const data = res.data;
     setuserdata(data.data)
-    console.log("Logged in user is:- ");
     console.log(userdata);
   }
   useEffect(() => {
@@ -36,7 +35,7 @@ const InfluencerHeader = (props) => {
     "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer";
 
   return (
-    <div className="h-20 flex items-center justify-between mx-20 w-[screen]">
+    <div className="h-20 flex items-center justify-between mx-20 w-[screen] border-b-2">
       <nav className="">
         <p className="font-bold">Influencer  &gt; {props.page}</p>
       </nav>

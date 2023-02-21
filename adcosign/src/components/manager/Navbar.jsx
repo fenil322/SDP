@@ -1,34 +1,24 @@
 import React, { useState } from "react";
 import { HiMenuAlt1 } from 'react-icons/hi';
 import { FaUserCircle, FaHome } from 'react-icons/fa';
-import { CgImport } from 'react-icons/cg';
-import { MdPendingActions } from 'react-icons/md';
-import { BiLogOut, BiHistory } from 'react-icons/bi';
-import { FaHandshake } from 'react-icons/fa';
-// import { BsFilePost } from 'react-icons/bs';
-// import { BsInfoCircle } from 'react-icons/bs';
-// import { IoIosRocket } from 'react-icons/io';
-// import { GiWorld } from 'react-icons/gi';
-// import { GiWallet } from 'react-icons/gi';
-// import { RiArticleLine } from 'react-icons/ri';
-// import { BsQuestionCircleFill } from 'react-icons/bs';
+import { BiLogOut, BiHistory } from 'react-icons/bi'
+import { BsPersonPlusFill } from 'react-icons/bs';
+import { AiTwotoneShop } from 'react-icons/ai';
+
+// import { IoPersonAdd, IoPersonAddSharp } from 'react-icons/Io';  
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from "axios";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const menus = [
-        { name: "Home", link: "/BrandHome", icon: FaHome },
-        { name: "Pending Request", link: "/BrandPendingRequest", icon: MdPendingActions },
-        { name: "Arrival Request", link: "/BrandArrivalRequest", icon: CgImport },
-        { name: "Agreement", link: "/BrandConsignments", icon: FaHandshake },
-        { name: "History", link: "/BrandHistory", icon: BiHistory },
-        { name: "Profile", link: "/BrandProfile", icon: FaUserCircle },
-    // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
-    // { name: "About", link: "/", icon: BsInfoCircle },
-    
+        { name: "Home", link: "/ManagerHome", icon: FaHome },
+        { name: "Add Brand", link: "/AddNewBrand", icon: AiTwotoneShop },
+        { name: "Add Influencer", link: "/AddNewInfluencer", icon: BsPersonPlusFill },
+        { name: "Profile", link: "/ManagerProfile", icon: FaUserCircle },
     ];
 
+    const [open, setOpen] = useState(true);
     const logout = async () => {
         try {
 
@@ -39,12 +29,11 @@ const Navbar = () => {
             }
         } catch (err) {
             console.log(err);
+            navigate('/');
 
         }
 
     }
-    const [open, setOpen] = useState(true);
-
     return (
         <>
             <div className="flex fixed w-screen h-14">

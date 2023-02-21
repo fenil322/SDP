@@ -345,8 +345,8 @@ const BrandHome = () => {
           </div> */}
 
           <div className="">
-            <div className="px-10 font-semibold font-mono text-xl">
-              {/* <h1>Showing 14 of 100 Influencer</h1> */}
+            <div className="mx-20 font-medium font-mono text-xl">
+              <h1>Connect Your Interested Influencer...</h1>
             </div>
             <div className="grid md:grid-cols-3 grid-cols-1 ">
               {profilecard.length > 0 &&

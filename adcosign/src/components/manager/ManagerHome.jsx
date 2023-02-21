@@ -2,12 +2,13 @@ import React from 'react'
 import { useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import ManagerHeader from './ManagerHeader'
+import Navbar from './Navbar'
 
 const ManagerHome = () => {
 
   const navigate = useNavigate()
-  
-  const loadData=async ()=>{
+
+  const loadData = async () => {
     try {
       const res = await fetch("manager/managerhome", {
         method: "GET",
@@ -21,24 +22,24 @@ const ManagerHome = () => {
       const data = await res.json();
       console.log(data)
 
-      if(data.success==false){
+      if (data.success == false) {
         navigate("/ManagerLogin");
       }
     } catch (err) {
       navigate("/ManagerLogin");
     }
-    
+
   }
 
   useEffect(() => {
     loadData();
   }, [])
-  
   return (
-    <div>
-      <ManagerHeader />
-      <div className='text-3xl'>
-        hello this is my manager home page
+    <div className="h-[screen] flex">
+      <Navbar />
+      <div className="ml-14 w-screen">
+        <ManagerHeader page="Home" />
+        <h1 className="mx-32 mt-10 text-3xl font-bold">Manager Home Page</h1> 
       </div>
     </div>
   )

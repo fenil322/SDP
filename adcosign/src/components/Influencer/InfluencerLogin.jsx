@@ -20,8 +20,8 @@ const InfluencerLogin = () => {
     password: Yup.string().min(8, 'password is too short!').required('password is required!'),
   })
 
-  const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-white rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
-  const deactivebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
+  const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-white rounded-md md:mt-0 md:w-auto md:mx-2 focus:outline-none'
+  const deactivebtn = 'hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
   const [passwordType, setPasswordType] = useState("password");
   const togglePassword = () => {
     if (passwordType === "password") {
@@ -87,17 +87,18 @@ const InfluencerLogin = () => {
   const signUp = async (values, FormikActions) => {
     // e.preventDefault()
 
-    console.log("Hello");
+    // console.log("Hello");
     const res = await axios.post('/influencer/influencerlogin', {
       ...values
     });
     console.log(res);
-    if (res.data.status === 200) {
+    if (res.status != 200) {
       // updateError(res.data.message, setError)
       toast.error(res.data.error);
       return;
     }
-    toast.success("Register User successful")
+    await sleep(1000)
+    toast.success("Login User successful")
     // await sleep(1500)
     navigate("/InfluencerHome");
     FormikActions.resetForm();
