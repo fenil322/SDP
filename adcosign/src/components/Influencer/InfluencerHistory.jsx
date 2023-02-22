@@ -64,7 +64,7 @@ const InfluencerHistory = () => {
                       Contact No. :{item.phone}
                     </p>
                     <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Ratings : 4.5
+                      Ratings : {item.rating}
                     </p>
                    
                   </div>

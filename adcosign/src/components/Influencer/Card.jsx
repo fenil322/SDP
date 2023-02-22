@@ -102,7 +102,7 @@ const Card = ({ item }) => {
                 </div>
 
             </div> */}
-      <div className="relative max-w-md mx-10 md:max-w-xl  min-w-0 break-words bg-gray-200  shadow-lg rounded-xl my-7">
+      <div className="relative max-w-md mx-10 md:max-w-xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-xl my-7">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}

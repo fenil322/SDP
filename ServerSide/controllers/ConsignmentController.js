@@ -162,26 +162,103 @@ exports.getInfConsignment = async (req, res) => {
     const influencerId = req.userId;
     // console.log("get");
     // console.log(req.body);
-
-    const data = await Consignment.find({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false })
-    // console.log(data);
-    if (!data) {
-        return res.status(400).json({ success: false, error: "Something went wrong" })
-    }
     let array = new Array();
-    let array2 = new Array();
 
-    data.map(async (element) => {
-        const id = element.brandId.toString();
-        var data2 = await Brand.findById(id).select("-tokens")
-        // console.log(data2);
-        array2.push(element.Amount);
-        array.push(data2);
+    Consignment.find({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false }).then(async (data) => {
+        //         console.log(Object.keys(data).length);
+        //         // Object.data.map((element,index) => {
+        //         //     console.log(element);
+        //         //     // const id = element.brandId.toString();
+        //         //     // Brand.findById(id).select("-tokens").the((data1) => {
+        //         //     //     array.push(data1);
+        //         //     // })
+        //         //     // console.log(data2);
+        //         // })
+        for (i = 0, len = Object.keys(data).length; i < len; i++) {
+            const id = data[i].brandId.toString();
+            // console.log(id);
+            Brand.findById(id).select("-tokens").then((data1) => {
+                console.log(data1);
+                array.push(data1);
+            }).catch((err) => {
+                console.log(err);
+                return res.status(400).json({ success: false, message: "Something went wrong", error: err })
+            })
+        }
+    }).catch((err) => {
+        console.log(err);
+        return res.status(400).json({ success: false, message: "Something went wrong", error: err })
     })
-    // console.log("array data");
+
     setTimeout(() => {
-        return res.status(200).json({ success: true, message: "data sent...", data: array, data1: array2 })
+        console.log(array);
+        return res.status(200).json({ success: true, message: "data sent...", data: array })
     }, 100)
+
+    // console.log(data);
+    // data.map((element) => {
+    //     // console.log(element);
+    //     const id = element.brandId.toString();
+    //     console.log(id);
+    //     var data2 = Brand.findById(id).select("-tokens").then(data1 => {
+    //         console.log(data1);
+    //         array.push(data1)
+    //     })
+    //     // console.log(data2);
+    //     // array.push(data2);
+    // })
+    // // console.log("array data");
+
+
+    // return res.status(200).json({ success: true, message: "data sent...", data: array })
+    // const data = await Consignment.find({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false })
+    // // console.log(data);
+    // if (!data) {
+    //     return res.status(400).json({ success: false, error: "Something went wrong" })
+    // }
+    // let array = new Array();
+    //     // console.log(data);
+    // data.map((element) => {
+    //     // console.log(element);
+    //     const id = element.brandId.toString();
+    //     console.log(id);
+    //     var data2 = Brand.findById(id).select("-tokens").then(data1 =>{
+    //         console.log(data1);
+    //         array.push(data1)
+    //     })
+    //     // console.log(data2);
+    //     // array.push(data2);
+    // })
+    // // console.log("array data");
+
+
+    // return res.status(200).json({ success: true, message: "data sent...", data: array })
+
+    // Consignment.findOne({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false })
+    //     .then(async (data) => {
+    //         console.log(Object.keys(data).length);
+    //         // Object.data.map((element,index) => {
+    //         //     console.log(element);
+    //         //     // const id = element.brandId.toString();
+    //         //     // Brand.findById(id).select("-tokens").the((data1) => {
+    //         //     //     array.push(data1);
+    //         //     // })
+    //         //     // console.log(data2);
+    //         // })
+    //         for (i = 0, len = Object.keys(data).length; i < len; i++) {
+    //             const id = data[i].brandId.toString();
+    //             Brand.findById(id).select("-tokens").the((data1) => {
+    //                 array.push(data1);
+    //             }).catch((err) => {
+    //                 console.log(err);
+    //                 return res.status(400).json({ success: false, message: "Something went wrong", error: err })
+    //             })
+    //         }
+    //         return res.status(200).json({ success: true, message: "data sent...", data: array })
+    //     }).catch((err) => {
+    //         console.log(err);
+    //         return res.status(400).json({ success: false, message: "Something went wrong", error: err })
+    //     })
 
 }
 
@@ -206,7 +283,7 @@ exports.getBrandPendingRequest = async (req, res) => {
         // console.log(array);
         return res.status(200).json({ success: true, data: array })
 
-    },100)
+    }, 100)
 
 }
 
@@ -215,7 +292,7 @@ exports.getInfluencerRequest = async (req, res) => {
     // console.log(brandId);
 
     const data = await Consignment.find({ brandId, influencerrequest: 0 });
-// console.log(data);
+    // console.log(data);
 
     let array = new Array();
     data.map(async (element) => {
