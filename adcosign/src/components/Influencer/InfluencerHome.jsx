@@ -31,13 +31,12 @@ const InfluencerHome = () => {
   }, [])
 
   return (
-    <div className="h-[screen] flex">
+    <div className="h-[screen] flex ">
       <Navbar />
-      <div className="ml-14 w-screen">
+      <div className="ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="Home" />
         <div className="">
-          <div className="grid grid-cols-3  px-20 ">
-
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
             {brandCard.length > 0 &&
               brandCard.map((item, index) => (
                 <Card item={item} key={index} />

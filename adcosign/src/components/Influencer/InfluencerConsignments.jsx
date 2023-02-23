@@ -38,23 +38,22 @@ const InfluencerConsignments = () => {
   return (
     <div className="flex">
       <Navbar />
-      <div className="h-screen ml-14 w-screen">
+      <div className="h-screen ml-14 max-sm:ml-0  w-screen">
         <InfluencerHeader page="Agreements" />
-        <div className="  grid grid-cols-2 gap-4 ">
+        <div className="  grid grid-cols-2 max-sm:grid-cols-1 gap-4 ">
           {profilecard.length == 0 ?
             <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1> :
 
 
             profilecard.map((data, index) => (
-              <div className=" mt-10  mx-20">
-
+              <div className=" mt-10  mx-20 max-sm:mx-10">
                 <div class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" >
                   <img
-                    class="object-cover w-full rounded-none h-96 md:h-auto md:w-48 md:rounded-none md:rounded-none-lg m-1 p-1"
+                    class="object-cover w-full rounded-none h-96 max-sm:h-48 md:h-auto md:w-48 md:rounded-none md:rounded-none-lg m-1 p-1"
                     src={data.photo1}
                     alt=""
                   />
-                  <div class="flex flex-col   justify-between p-6 leading-normal">
+                  <div class="flex flex-col justify-between p-6 leading-normal">
                     <div className="flex justify-between">
                       <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
                         Brand Name : {data.shopName}

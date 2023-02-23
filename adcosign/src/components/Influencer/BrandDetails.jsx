@@ -138,7 +138,7 @@ const BrandDetails = () => {
 
             <div class="w-full h-[250px]">
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlCS3StOf9LlaFuAG5lUzzqduKG50o84t-sg&usqp=CAU"
+                src="https://images.unsplash.com/photo-1572196459043-5c39f99a7555?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80 "
                 class="w-full h-full rounded-tl-lg rounded-tr-lg"
                 alt="not available"
               />
@@ -148,35 +148,16 @@ const BrandDetails = () => {
                 <div class=" flex flex-col items-center -mt-24">
                   <img
                     src={brandData.photo1}
-                    class="border-4 w-40 border-white rounded-full"
+                    class="border-4 w-40 border-white bg-gray-200 rounded-full"
                     alt="pic"
                   />
                 </div>
                 <div className="name -mt-8 ml-8">
                   <div class=" flex items-center space-x-2 ">
                     <div className="flex-row">
-                      <p class="text-2xl">{brandData.uname}</p>
-                      <p class="text-sm text-gray-500">{brandData.shopName}</p>
+                      <p class="text-2xl">{brandData.shopName}</p>
+                      <p class="text-sm text-gray-500">{brandData.brandType}</p>
                     </div>
-                    <span
-                      class="bg-blue-500 rounded-full p-1 -mt-4 "
-                      title="Verified"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="text-gray-100 h-2.5 w-2.5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="4"
-                          d="M5 13l4 4L19 7"
-                        ></path>
-                      </svg>
-                    </span>
                   </div>
                 </div>
               </div>
@@ -245,15 +226,15 @@ const BrandDetails = () => {
               </div>
             </div>
             <div className="flex w-5/6  m-auto my-10 pb-10">
-              <div>
-                <h2 className="font-bold font-mono text-2xl">About Brand</h2>
-                <div className="w-1/2">
-                  Contrary to popular belief, Lorem Ipsum is not simply random
-                  text. It has roots in a piece of classical Latin literature from
-                  45 BC, making it over 2000 years old. Richard McClintock, a
-                  Latin professor at Hampden-Sydney College in Virginia
-                </div>
-              </div>
+              {brandData.description != null ?
+                <div>
+                  <h2 className="font-bold font-mono text-2xl">About Brand</h2>
+                  <div className="w-1/2">
+                    {brandData.description}
+                  </div>
+                </div> :
+                <div></div>
+              }
               <div className="w-80">
                 <h2 className="font-bold font-mono text-2xl w-80">
                   Brand Details
@@ -278,19 +259,21 @@ const BrandDetails = () => {
 
                 <br></br>
                 <hr></hr>
-                <br></br>
+                <div className="">
+                  <div className="my-3">Contact Us On</div>
+                  <div className="flex space-x-5">
+                    <div className="flex ">
 
-                <div className="flex space-x-20">
-                  <div className="flex space-x-60">
-                    <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
-                  </div>
+                      <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
+                    </div>
 
-                  <div className="flex space-x-4">
-                    <FaInstagram size={20} className="text-[#d62976]" />
-                  </div>
+                    <div className="flex ">
+                      <FaInstagram size={20} className="text-[#d62976]" />
+                    </div>
 
-                  <div className="flex space-x-60">
-                    <FiTwitter size={20} className="text-[#00acee]" />
+                    <div className="flex ">
+                      <FiTwitter size={20} className="text-[#00acee]" />
+                    </div>
                   </div>
                 </div>
                 <div></div>

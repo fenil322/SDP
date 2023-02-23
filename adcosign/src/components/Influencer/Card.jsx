@@ -69,47 +69,14 @@ const Card = ({ item }) => {
   };
   return (
     <div className="">
-      {/* <div className="">
-                <div className="ml-10 mt-10">
-                    <div className=" flex items-center justify-between w-4/6 p-6 bg-gray-100 border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-
-                        <img src={photo1} alt="" className="w-40 h-40 rounded-full ml-10" />
-                        <div className='mr-8'>
-                            <div className="mb-2 text-lg font-semibold  text-gray-900 dark:text-white">
-                                Owner Name :
-                            </div><span>{uname}</span>
-                            <div className="mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Shop Name :
-                            </div><span>{shopName}</span>
-                            <div className="mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Type :
-                            </div><span>{brandType}</span>
-                            <div className="mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white">
-                                Shop Address :
-                            </div><span>{address}</span>
-                            <div>
-                                <button
-                                    type="button"
-                                    className="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-none text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
-                                    onClick={branddetailpage}
-                                >
-                                    View More
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div> */}
-      <div className="relative max-w-md mx-10 md:max-w-xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-xl my-7">
+      <div className="bg-gray-100 mx-10 max-sm:mx-0 max-md:mx-10  my-10 shadow-lg rounded-xl ">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
         }} > */}
         <div className="cursor-pointer" onClick={branddetailpage}>
           <div className="cursor-pointer">
-            <div className="px-6">
+            <div className="px-3 py-3">
               <div className="flex flex-wrap ">
                 <div className="flex px-4 my-5">
                   <div className="w-20 h-20 rounded-full">
@@ -164,7 +131,7 @@ const Card = ({ item }) => {
                 </div>
               </div>
 
-              <div className=" py-5 border-t border-slate-200 ">
+              {/* <div className=" py-5 border-t border-slate-200 ">
                 <div className="flex flex-wrap justify-center">
 
                   <div className="flex  items-center">
@@ -178,7 +145,7 @@ const Card = ({ item }) => {
                     <div className="text-[#1DA1F2] mr-3 ml-1"></div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -13,6 +13,7 @@ import { MdOutlineLocationCity } from "react-icons/md";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from "./Navbar";
 
 const InfluencerDetails = (props) => {
 
@@ -20,7 +21,7 @@ const InfluencerDetails = (props) => {
 
 
   const [persondata, setpersonData] = useState({
-    _id:"",
+    _id: "",
     fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
     age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
     facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
@@ -39,7 +40,7 @@ const InfluencerDetails = (props) => {
 
     console.log(influencerId);
     try {
-      const res = await axios.post("consignment/sendrequest", { influencerId: persondata._id ,email:email})
+      const res = await axios.post("consignment/sendrequest", { influencerId: persondata._id, email: email })
       const data = res.data;
       console.log(data);
       console.log(data.status);
@@ -53,7 +54,7 @@ const InfluencerDetails = (props) => {
       // console.log(err.data.error);
       if (err.response.status == 400) {
         console.log(err.response.data);
-        
+
         console.log(err.response.data.error);
         toast.error(err.response.data.error)
       }
@@ -67,8 +68,11 @@ const InfluencerDetails = (props) => {
   }, []);
 
   return (
-    <div className="">
-      <BrandHeader />
+    <div className="flex flex-row h-screen">
+    <Navbar  />
+  
+        <div className=" ml-14 w-screen">
+      <BrandHeader page="Influencer Detail"/>
       <div className="w-5/6  m-auto my-10 pb-10">
         <link
           rel="stylesheet"
@@ -86,7 +90,7 @@ const InfluencerDetails = (props) => {
           ></div>
           <div class="w-full h-[250px]">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlCS3StOf9LlaFuAG5lUzzqduKG50o84t-sg&usqp=CAU"
+              src="https://images.unsplash.com/photo-1572196459043-5c39f99a7555?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
               class="w-full h-full rounded-tl-lg rounded-tr-lg"
               alt="not available"
             />
@@ -196,7 +200,7 @@ const InfluencerDetails = (props) => {
             {/* </div> */}
           </div>
 
-          <div className="ml-20 mt-10">
+          <div className="ml-20 mt-10 ">
             <div>
               <button
                 type="button"
@@ -233,9 +237,10 @@ const InfluencerDetails = (props) => {
               </div>
             </div>
           </div>
+          
           <div className="mx-20">
-            <div className="flex  grid lg:grid-cols-3   sm:grid-cols-2">
-              <div className="items-center mt-10">
+            <div className="  grid lg:grid-cols-3  grid-cols-2 sm:grid-cols-1 border-y-2 pb-10">
+              <div className="items-center mt-10 ">
                 <a
                   target="_blank"
                   href={persondata.facebookURL}
@@ -388,6 +393,7 @@ const InfluencerDetails = (props) => {
         </div>
       </div>
       <ToastContainer autoClose={1500} />
+    </div>
     </div>
   );
 };

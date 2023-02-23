@@ -37,7 +37,7 @@ const InfluencerPendingRequest = () => {
   return (
     <div className="flex">
     <Navbar />
-      <div className="h-screen ml-14 w-screen">
+      <div className="h-screen ml-14 max-sm:ml-0 w-screen">
       <InfluencerHeader page="PendingRequests" />
       <div className='flex grid  md:grid-cols-3'>
         {

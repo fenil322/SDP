@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const jwt =require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
-const shopSchema =new mongoose.Schema( {
+const shopSchema = new mongoose.Schema({
   uname: {
     type: String,
     required: true,
@@ -44,20 +44,20 @@ const shopSchema =new mongoose.Schema( {
     required: true,
   },
   location: {
-    type:String,
+    type: String,
     required: true,
   },
-  valid:{
-    type:Number,
-    default:0,
+  valid: {
+    type: Number,
+    default: 0,
   },
   photo1: {
     type: String,
-    default:"https://bootdey.com/img/Content/avatar/avatar7.png"
+    default: "https://bootdey.com/img/Content/avatar/avatar7.png"
   },
   photo2: {
     type: String,
-    default:"https://bootdey.com/img/Content/avatar/avatar7.png"
+    default: "https://bootdey.com/img/Content/avatar/avatar7.png"
   },
   tokens: [{
 
@@ -68,18 +68,30 @@ const shopSchema =new mongoose.Schema( {
     }
   }
   ],
-  description:{
-type:String,
+  description: {
+    type: String,
   },
   resetToken: String,
   expireToken: Date,
+  instagramUrl:{
+    type:String
+  },
+  facebookUrl:{
+    type:String
+  },
+  twitterUrl:{
+    type:String
+  },
+  description: {
+  type:String
+  }
 });
 
 shopSchema.methods.generateAuthToken = async function () {
   try {
     const newtoken = jwt.sign({ _id: this._id }, "mynameisFenilsavaniandthisisoursdpproject");
     // console.log(newtoken);
-    this.tokens=this.tokens.concat({ token: newtoken });
+    this.tokens = this.tokens.concat({ token: newtoken });
     await this.save();
     return newtoken;
   } catch (err) {

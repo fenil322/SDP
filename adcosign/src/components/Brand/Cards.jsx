@@ -24,7 +24,7 @@ function Card({ item }) {
 
   return (
     <>
-      <div className="relative max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-white  shadow-lg rounded-xl my-10">
+      <div className=" max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-xl my-10">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
