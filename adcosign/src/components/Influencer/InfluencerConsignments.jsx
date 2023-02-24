@@ -33,14 +33,15 @@ const InfluencerConsignments = () => {
   return (
     <div className="">
       <Navbar />
-      <div className="h-screen ml-14 w-screen">
+      <div className="h-screen ml-14 max-sm:ml-0  w-screen">
         <InfluencerHeader page="Agreements" />
-        <div className="grid grid-cols-2 gap-4 ">
-          {profilecard.length == 0 ? (
-            <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1>
-          ) : (
+        <div className="  grid grid-cols-2 max-sm:grid-cols-1 gap-4 ">
+          {profilecard.length == 0 ?
+            <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1> :
+
+
             profilecard.map((data, index) => (
-              <div className="w-[700px] bg-teal-300 mx-auto my-8 p-10 rounded-xl shadow-xl relative pl-60">
+              <div className="w-[700px] bg-teal-300 max-sm:mx-10 mx-auto my-8 p-10 rounded-xl shadow-xl relative pl-60">
                 <div className="absolute -left-8 h-full top-0 w-[250px] flex items-center">
                   <img
                     className="rounded-xl shadow-lg"

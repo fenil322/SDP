@@ -9,11 +9,6 @@ import Navbar from "./Navbar";
 const InfluencerHistory = () => {
 
   const navigate = useNavigate();
-  const [amount, setamount] = useState(0);
-  const [paymentstatus, setpaymentstatus] = useState(0);
-
-  const [starttime, setstarttime] = useState(0);
-  const [endtime, setendtime] = useState(0);
 
   const [profilecard, setprofilecard] = useState([])
   const getcurrentconsignmets = async () => {
@@ -22,10 +17,7 @@ const InfluencerHistory = () => {
       const data = res.data;
       console.log(data);
       setprofilecard(data.data)
-      setamount(data.data1)
-      setstarttime(data.data2)
-      setendtime(data.data3)
-      setpaymentstatus(data.data4)
+      
 
     } catch (err) {
       if (err.response.status == 422) {
@@ -72,7 +64,7 @@ const InfluencerHistory = () => {
                       Contact No. :{item.phone}
                     </p>
                     <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Ratings : 4.5
+                      Ratings : {item.rating}
                     </p>
                    
                   </div>

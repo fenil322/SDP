@@ -35,7 +35,7 @@ const InfluencerHeader = (props) => {
     "rounded-sm px-3 py-1 hover:bg-gray-100 hover:text-blue-500 cursor-pointer";
 
   return (
-    <div className="h-20 flex items-center justify-between mx-20 w-[screen] border-b-2">
+    <div className="h-20 flex items-center justify-between mx-20 max-sm:mx-2 w-[screen] border-b-2">
       <nav className="">
         <p className="font-bold">Influencer  &gt; {props.page}</p>
       </nav>

@@ -86,22 +86,25 @@ const InfluencerLogin = () => {
     // e.preventDefault()
 
     // console.log("Hello");
-    const res = await axios.post("/influencer/influencerlogin", {
-      ...values,
-    });
-    console.log(res);
-    if (res.status != 200) {
-      // updateError(res.data.message, setError)
-      toast.error(res.data.error);
-      return;
+    try {
+      const res = await axios.post('/influencer/influencerlogin', {
+        ...values
+      });
+      const data = res.data;
+      console.log(data)
+      if (res.status == 200) {
+        toast.success(data.message);
+        await sleep(1000)
+        navigate("/InfluencerHome");
+      }
+      FormikActions.resetForm();
+      FormikActions.setSubmitting(false);
+    } catch (err) {
+      // console.log(err.response.data.error);
+      toast.error(err.response.data.error);
+      //  navigate("/InfluencerHome");
     }
-    await sleep(1000);
-    toast.success("Login User successful");
-    // await sleep(1500)
-    navigate("/InfluencerHome");
-    FormikActions.resetForm();
-    FormikActions.setSubmitting(false);
-  };
+  }
   return (
     <div className="">
       <div>
