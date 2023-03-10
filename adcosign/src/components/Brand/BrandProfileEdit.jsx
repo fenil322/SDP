@@ -129,8 +129,8 @@ const BrandProfileEdit = () => {
         toast.success(data.message);
         await sleep(1500)
         setDUrl("")
-        window.location.reload();
         navigate("/BrandProfile")
+        window.location.reload();
       }
     } catch (err) {
       console.log(err)

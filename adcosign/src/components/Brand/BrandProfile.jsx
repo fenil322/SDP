@@ -37,9 +37,13 @@ const BrandProfile = () => {
     }
   };
 
+
   useEffect(() => {
     getBrandData();
   }, []);
+  const editprofile = () => {
+    navigate('/BrandProfileEdit', { state: brandData  })
+  }
 
   const images = brandData.images;
   const divStyle = {
@@ -102,13 +106,14 @@ const BrandProfile = () => {
               <p class="text-sm text-gray-500">
                 {brandData.city + " , " + brandData.country}
               </p>
-              <NavLink to='/BrandProfileEdit' state={brandData}>
-
-                <button class="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+              
+                <button
+                  onClick={editprofile}
+                  class="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                   <FaUserEdit size={17} />
                   <span>Edit Profile</span>
                 </button>
-              </NavLink>
+          
             </div>
           </div>
 
