@@ -80,7 +80,7 @@ const BrandHistory = () => {
                   Payment Status:{paymentstatus[index] == 1 ? <b>Done</b> : <b>Not Done</b>}
                 </p>
                 <div>
-                  <button
+                  {/* <button
                     onClick={async (e) => {
                       e.preventDefault();
                       try {
@@ -96,7 +96,7 @@ const BrandHistory = () => {
                     }}
                     className="flex m-1 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-800 rounded-md drop-shadow-md">
                     <span class="text-white">Make Payment</span>
-                  </button>
+                  </button> */}
                   <button
                     type="button"
                     class="flex m-1 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-800 rounded-md drop-shadow-md"

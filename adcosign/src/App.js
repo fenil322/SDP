@@ -16,6 +16,7 @@ import BrandHistory from "./components/Brand/BrandHistory";
 import BrandLogin from "./components/Brand/BrandLogin";
 import BrandDetails from "./components/Influencer/BrandDetails";
 import BrandProfile from "./components/Brand/BrandProfile.jsx";
+import BrandProfileEdit from "./components/Brand/BrandProfileEdit.jsx";
 
 import InfluencerDetails from "./components/Brand/InfluencerDetails";
 import InfluencerHome from "./components/Influencer/InfluencerHome";
@@ -55,6 +56,7 @@ const App = () => {
         <Route path="/BrandConsignments" element={<BrandConsignments />} />
         <Route path="/BrandDetails" element={<BrandDetails />} />
         <Route path="/BrandProfile" element={<BrandProfile/>}/>
+        <Route path="/BrandProfileEdit" element={<BrandProfileEdit/>}/>
         <Route
           path="/BrandCurrentConsignment"
           element={<BrandCurrentConsignment />}

@@ -42,28 +42,14 @@ let settings = {
 };
 
 const BrandDetails = () => {
-  const [brandData, setbrandData] = useState({
-    _id: "",
-    uname: "",
-    shopName: "",
-    brandType: "",
-    phone: "",
-    email: "",
-    city: "",
-    state: "",
-    country: "",
-    address: "",
-    location: "",
-    password: "",
-    photo1: "",
-    photo2: "",
-  });
+  const [brandData, setbrandData] = useState({});
   const createConsignment = async (e) => {
     e.preventDefault();
-    const brandId = brandData._id;
-    const email = brandData.email;
-    console.log(brandId);
+    const brandId = brandData?._id;
+    const email = brandData?.email;
+    // console.log(brandId);
     try {
+
       const res = await axios.post("consignment/sendrequesttobrand", { brandId: brandData._id, email: email })
       const data = res.data;
       console.log(data);
@@ -71,8 +57,6 @@ const BrandDetails = () => {
       if (res.status == 200) {
         toast.success(data.message)
       }
-
-
     } catch (err) {
       // console.log(err.response)
       // console.log(err.data.error);
@@ -88,36 +72,14 @@ const BrandDetails = () => {
   }
 
   const location = useLocation();
-  const consollog = () => {
-    console.log(location);
-    setbrandData(location.state);
-    // console.log(brandData);
-  };
+
   useEffect(() => {
-    consollog();
+    console.log(location.state);
+    setbrandData(location.state);
+
   }, []);
-  const slideImages = [
-    {
-      url: "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-      caption: "Slide 1",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-      caption: "Slide 2",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-      caption: "Slide 3",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-      caption: "Slide 4",
-    },
-    {
-      url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-      caption: "Slide 5",
-    },
-  ];
+
+  const slideImages = brandData?.images;
 
   return (
     <div className="flex">
@@ -138,7 +100,8 @@ const BrandDetails = () => {
 
             <div class="w-full h-[250px]">
               <img
-                src="https://images.unsplash.com/photo-1572196459043-5c39f99a7555?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80 "
+                // src={brandData?.images[0].url!==undefined ? brandData.images[0].url:brandData.photo1  } 
+                src={brandData.photo2}
                 class="w-full h-full rounded-tl-lg rounded-tr-lg"
                 alt="not available"
               />
@@ -147,7 +110,7 @@ const BrandDetails = () => {
               <div className="flex ml-20">
                 <div class=" flex flex-col items-center -mt-24">
                   <img
-                    src={brandData.photo1}
+                    src={brandData?.logo}
                     class="border-4 w-40 border-white bg-gray-200 rounded-full"
                     alt="pic"
                   />
@@ -155,8 +118,8 @@ const BrandDetails = () => {
                 <div className="name -mt-8 ml-8">
                   <div class=" flex items-center space-x-2 ">
                     <div className="flex-row">
-                      <p class="text-2xl">{brandData.shopName}</p>
-                      <p class="text-sm text-gray-500">{brandData.brandType}</p>
+                      <p class="text-2xl">{brandData?.shopName}</p>
+                      <p class="text-sm text-gray-500">{brandData?.brandType}</p>
                     </div>
                   </div>
                 </div>
@@ -208,29 +171,31 @@ const BrandDetails = () => {
             <div className=" w-5/6 mx-auto">
               <div className="">
                 <div className="py-3 mt-5 border-t border-gray-400 ">
-                  <Carousel {...settings}>
-                    {slideImages.map((slideImage, index) => (
-                      <Wrap>
-                        <div key={index}>
-                          <div
-                            style={{
-                              ...divStyle,
-                              backgroundImage: `url(${slideImage.url})`,
-                            }}
-                          ></div>
-                        </div>
-                      </Wrap>
-                    ))}
-                  </Carousel>
+                  {/* <Carousel {...settings}>
+                    {
+                      slideImages.map !== undefined &&
+                      slideImages?.map((slideImage, index) => (
+                        <Wrap>
+                          <div key={index}>
+                            <div
+                              style={{
+                                ...divStyle,
+                                backgroundImage: `url(${slideImage.url})`,
+                              }}
+                            ></div>
+                          </div>
+                        </Wrap>
+                      ))}
+                  </Carousel> */}
                 </div>
               </div>
             </div>
             <div className="flex w-5/6  m-auto my-10 pb-10">
-              {brandData.description != null ?
+              {brandData?.description != null ?
                 <div>
                   <h2 className="font-bold font-mono text-2xl">About Brand</h2>
                   <div className="w-1/2">
-                    {brandData.description}
+                    {brandData?.description}
                   </div>
                 </div> :
                 <div></div>
@@ -244,7 +209,7 @@ const BrandDetails = () => {
                   <div>
                     <FiPhoneCall size={18} />
                   </div>
-                  <div>{brandData.phone}</div>
+                  <div>{brandData?.phone}</div>
                 </div>
 
                 <br></br>
@@ -254,7 +219,7 @@ const BrandDetails = () => {
                   <div>
                     <MdOutlineLocationCity size={20} />
                   </div>
-                  <div className="">{brandData.address}</div>
+                  <div className="">{brandData?.address}</div>
                 </div>
 
                 <br></br>

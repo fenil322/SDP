@@ -73,15 +73,37 @@ exports.editProfiledisplay = (req, res) => {
 
 exports.updateProfile = async (req, res) => {
     const id = req.userId
-    // console.log(req.file)
+    // const profle = req.file
+    console.log(req.body);
+    // console.log(req)
     // const data=req.body;  
-    const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true }).select("-tokens")
     if (!influencer) {
         return res.status(422).json({ message: "Data not updated!", success: false, data: influencer });
     } else {
         return res.status(200).json({ message: "Data updated successfully!", success: true, data: influencer });
     }
 
+}
+
+exports.uploadImage = async (req, res) => {
+    const id = req.userId
+    console.log(req.body);
+    var influencer = "";
+    if (req.body.type == 1) {
+
+        const profile = req.body.profile
+        influencer = await Influencer.findByIdAndUpdate(id, { profile: profile }, { new: true }).select("-tokens")
+    } else {
+        const photo = req.body.photo
+        influencer = await Influencer.findByIdAndUpdate(id, { photo: photo }, { new: true }).select("-tokens")
+    }
+    console.log(influencer);
+    if (!influencer) {
+        return res.status(422).json({ message: "Image not updated!", success: false, data: influencer });
+    } else {
+        return res.status(200).json({ message: "Image updated successfully!", success: true, data: influencer });
+    }
 }
 
 exports.influencerlogin = async (req, res) => {
@@ -101,7 +123,7 @@ exports.influencerlogin = async (req, res) => {
                 .json({ error: "Verification under process, You can't proceed.", success: false });
         }
         else {
-            
+
             //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
             var token = await userLogin.generateAuthToken()
             const { fname } = userLogin;
@@ -153,6 +175,7 @@ exports.adrequired = async (req, res) => {
 
     }
 }
+
 
 exports.adrequiredRemove = async (req, res) => {
     const email = req.body.email;

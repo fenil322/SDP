@@ -24,11 +24,9 @@ const Navbar = () => {
         { name: "Agreement", link: "/BrandConsignments", icon: FaHandshake },
         { name: "History", link: "/BrandHistory", icon: BiHistory },
         { name: "Profile", link: "/BrandProfile", icon: FaUserCircle },
-    // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
-    // { name: "About", link: "/", icon: BsInfoCircle },
-    
+        // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
+        // { name: "About", link: "/", icon: BsInfoCircle },
     ];
-
     const logout = async () => {
         try {
 

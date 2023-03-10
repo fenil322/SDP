@@ -1,35 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiMenuAlt1 } from 'react-icons/hi';
 import { FaUserCircle, FaHome } from 'react-icons/fa';
 import { CgImport } from 'react-icons/cg';
 import { MdPendingActions } from 'react-icons/md';
 import { BiLogOut, BiHistory } from 'react-icons/bi';
 import { FaHandshake } from 'react-icons/fa';
-import { BsFilePost } from 'react-icons/bs';
-import { BsInfoCircle } from 'react-icons/bs';
-import { GiWorld } from 'react-icons/gi';
-import { GiWallet } from 'react-icons/gi';
-import { RiArticleLine } from 'react-icons/ri';
-import { BsQuestionCircleFill } from 'react-icons/bs';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from "axios";  
+import { Link, Navigate, NavLink, useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [open, setOpen] = useState(true);
+    const [userdata, setuserdata] = useState({});
     const menus = [
-        { name: "Home", link: "/InfluencerHome", icon: FaHome },
-        { name: "Pending Request", link: "/InfluencerPendingRequest", icon: MdPendingActions },
-        { name: "Arrival Request", link: "/InfluencerArrivalRequest", icon: CgImport },
-        { name: "Agreement", link: "/InfluencerConsignments", icon: FaHandshake },
-        { name: "History", link: "/InfluencerHistory", icon: BiHistory },
-        { name: "Profile", link: "/InfluencerProfile", icon: FaUserCircle },
+        { name: "Home", link: "/InfluencerHome", icon: FaHome, data: "hello" },
+        { name: "Pending Request", link: "/InfluencerPendingRequest", icon: MdPendingActions, data: "hello" },
+        { name: "Arrival Request", link: "/InfluencerArrivalRequest", icon: CgImport, data: "hello" },
+        { name: "Agreement", link: "/InfluencerConsignments", icon: FaHandshake, data: "hello" },
+        { name: "History", link: "/InfluencerHistory", icon: BiHistory, data: "hello" },
+        { name: "Profile", link: "/InfluencerProfile", icon: FaUserCircle, data: userdata },
         // { name: "Subscription", link: "/", icon: GiWallet },
         // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
         // { name: "About", link: "/", icon: BsInfoCircle },
         // { name: "LogOut", icon: BiLogOut },
     ];
 
-    const [open, setOpen] = useState(true);
+    const getInfluencerData = async () => {
+
+        const res = await axios.get("influencer/getInfluencer");
+        const data = res.data;
+        //   console.log("Logged in user is:- ");
+        setuserdata(data.data)
+        //   console.log(data.data);
+    }
+
+    useEffect(() => {
+        getInfluencerData()
+    }, [])
+
     const logout = async () => {
         try {
 
@@ -45,6 +53,9 @@ const Navbar = () => {
         }
 
     }
+
+
+
     return (
         <>
             <div className="flex fixed w-screen h-14">
@@ -63,13 +74,14 @@ const Navbar = () => {
                 >
                     <div className="mt-4 flex flex-col gap-4 relative">
                         {menus?.map((menu, i) => (
-                            <Link
-                                to={menu?.link}
-                                key={i}
+                            <NavLink
+                                to={{ pathname: `${menu?.link}` }}
+                                state={menu.data}
                                 className={`${menu?.margin && "mt-5"} group flex items-center
-                                 text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}
-                            >
-                                <div >{React.createElement(menu?.icon, { size: "25" })}</div>
+                    cursor-pointer           text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}
+                                key={i} >
+                                {/* onClick={nav(menu.link)} */}
+                                <div  >{React.createElement(menu?.icon, { size: "25" })}</div>
                                 <h2
                                     style={{
                                         transitionDelay: `${i + 3}00ms`,
@@ -82,10 +94,11 @@ const Navbar = () => {
                                 >
                                     {menu?.name}
                                 </h2>
-                            </Link>
+                            </NavLink>
+
                         ))}
                     </div>
-                    <div className="group">
+                    {/* <div className="group">
 
                         <spam title="LogOut">
                             <BiLogOut size={25} className="my-10 mx-auto  hover:text-blue-500 cursor-pointer " onClick={logout} />
@@ -102,6 +115,25 @@ const Navbar = () => {
                         >
                             LogOut
                         </h2>
+                    </div> */}
+                    <div
+                        className={`group flex items-center
+                    cursor-pointer text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}
+                    >
+                        <div  ><BiLogOut size={25} className="my-10 mx-auto  hover:text-blue-500 cursor-pointer          " onClick={logout} /></div>
+                        <h2
+                            style={{
+                                transitionDelay: `${13}00ms`,
+                            }}
+                            className={`whitespace-pre duration-500 `}
+                        >
+                        </h2>
+                        <h2
+                            className={`absolute left-48 bg-white font-semibold whitespace-pre text-blue-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
+                        >
+                            Logout
+                        </h2>
+
                     </div>
                 </div>
             </section>

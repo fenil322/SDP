@@ -4,12 +4,13 @@ import axios from 'axios'
 import ReqArrivalCard from './ReqArrivalCard'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
 const InfluencerArrivalRequest = () => {
 
   const navigate = useNavigate();
+  const location=useLocation();
   const [profilecard, setprofilecard] = useState([])
   const getBrandRequest = async () => {
     try {
@@ -28,15 +29,15 @@ const InfluencerArrivalRequest = () => {
 
   }
   useEffect(() => {
-
     getBrandRequest()
+    console.log(location);
   }, [])
 
   return (
     <div className='flex h-screen'>
       <Navbar />
     <div className=' ml-14 w-screen'>
-      <InfluencerHeader page="InfluencerArrivalRequest" />
+      <InfluencerHeader page="Arrival Requests" />
       <div className='flex grid  md:grid-cols-3'>
         {
           profilecard.length == 0 ?

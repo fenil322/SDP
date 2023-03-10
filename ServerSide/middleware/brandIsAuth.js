@@ -6,7 +6,7 @@ exports.isAuth = async (req, res, next) => {
     const token = req.cookies.jwtoken;
     const verifytoken = jwt.verify(token, "mynameisFenilsavaniandthisisoursdpproject");
 
-    const rootUser = await Brand.findOne({ _id: verifytoken._id, "tokens.token": token });
+    const rootUser = await Brand.findOne({ _id: verifytoken._id, "tokens.token": token }).select("-tokens").select("-__v").select("-tokens");
     // console.log(rootUser);
     if (!rootUser) { throw new Error("Unauthorized"); }
 

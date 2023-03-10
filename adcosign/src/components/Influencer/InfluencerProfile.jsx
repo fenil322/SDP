@@ -10,30 +10,23 @@ import { FaUserEdit } from "react-icons/fa";
 import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 
 import axios from "axios";
-import { NavLink ,useLocation} from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 
 const InfluencerProfile = () => {
-const location = useLocation();
+  const location = useLocation();
 
-  const [userdata, setuserdata] = useState({ Adsrequired: "" });
-
-  const getInfluencerData = async () => {
-    const res = await axios.get("influencer/getInfluencer");
-    const data = res.data;
-    setuserdata(data.data)
-    console.log("Logged in user is:- ");
-    console.log(userdata);
-  }
+  const [userdata, setuserdata] = useState({});
   useEffect(() => {
-    getInfluencerData()
+    setuserdata(location.state)
+    // console.log(userdata);
   }, [])
 
   return (
-     <div className='flex h-[screen]'>
-    <Navbar />
-  <div className=' ml-14 w-screen'>
-<InfluencerHeader page="Profile"/>
+    <div className='flex h-[screen]'>
+      <Navbar />
+      <div className=' ml-14 w-screen'>
+        <InfluencerHeader page="Profile" />
         <div class="h-full py-8 w-5/6 m-auto">
           <div class="bg-white w-5/6 m-auto rounded-lg shadow-xl pb-8">
             {/* <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
@@ -76,12 +69,12 @@ const location = useLocation();
                   </div>
                 </div> */}
             <div class="w-full h-[300px]">
-              <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg" />
+              <img src={userdata.photo} class="w-full h-full rounded-tl-lg rounded-tr-lg" />
             </div>
             <div class="flex flex-col items-center -mt-20">
               <img
                 // src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" 
-                src={userdata.photo}
+                src={userdata.profile}
                 class="w-40 border-4 border-white bg-gray-50 rounded-full" />
               <div class="flex items-center space-x-2 mt-2">
                 <p class="text-2xl">{userdata.fname + " " + userdata.lname}</p>
@@ -96,7 +89,7 @@ const location = useLocation();
             </div>
             <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
               <div class="flex items-center space-x-4 mt-2">
-                <NavLink to='/InfluencerProfileEdit'>
+                <NavLink to='/InfluencerProfileEdit' state={userdata}>
 
                   <button class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
                     <FaUserEdit size={17} />

@@ -23,9 +23,9 @@ const managerRoutes = require('./routes/manager');
 //  const Influencer=require('./models/influencers')
 
 //parser for parsing data in body...
-app.use(multer().single('profile'))
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json())
+app.use(multer({ dest: '/images' }).single('profile'))
 
 app.get('/', (req, res, next) => {
     res.send("hello from root")

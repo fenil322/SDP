@@ -38,6 +38,7 @@ const InfluencerHome = () => {
         <div className="">
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
             {brandCard.length > 0 &&
+            brandCard.map!==undefined&&
               brandCard.map((item, index) => (
                 <Card item={item} key={index} />
               ))

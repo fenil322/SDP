@@ -20,14 +20,7 @@ const InfluencerDetails = (props) => {
 
 
 
-  const [persondata, setpersonData] = useState({
-    _id: "",
-    fname: "", lname: "", phone: "", email: "", city: "", state: "", country: "", password: "",
-    age: "", instagram: "", instagramURL: "", instagramFollowers: "", instagramEngagementRate: "",
-    facebook: "", facebookURL: "", facebookFollowers: "", facebookEngagementRate: "",
-    twitter: "", twitterURL: "", twitterFollowers: "", twitterEngagementRate: "",
-    photo: "", cat1: "", cat2: "", cat3: "", discription: ""
-  });
+  const [persondata, setpersonData] = useState({});
 
   const location = useLocation();
   const consolelog = () => {
@@ -90,7 +83,7 @@ const InfluencerDetails = (props) => {
           ></div>
           <div class="w-full h-[250px]">
             <img
-              src="https://images.unsplash.com/photo-1572196459043-5c39f99a7555?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+              src={persondata.photo}
               class="w-full h-full rounded-tl-lg rounded-tr-lg"
               alt="not available"
             />
@@ -99,7 +92,7 @@ const InfluencerDetails = (props) => {
             <div className="flex ml-20">
               <div class=" flex flex-col items-center -mt-24">
                 <img
-                  src={persondata.photo}
+                  src={persondata.profile}
                   //  src={persondata.photo}
                   class="border-4 w-40 border-white rounded-full bg-gray-200"
                   alt="pic"

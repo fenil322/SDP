@@ -59,7 +59,7 @@ const influencerSchema = new mongoose.Schema({
     // required: true,
   },
   Adsrequired: {
-    type: Boolean, 
+    type: Boolean,
     default: true
   },
   instagramEngagementRate: {
@@ -118,6 +118,9 @@ const influencerSchema = new mongoose.Schema({
     type: String
   },
   discription: {
+    type: String
+  },
+  profile: {
     type: String
   },
   resetToken: String,

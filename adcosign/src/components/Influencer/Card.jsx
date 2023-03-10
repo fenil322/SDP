@@ -22,20 +22,20 @@ const divStyle = {
   borderRadius: "12px",
   margin: "10px",
 };
-const slideImages = [
-  {
-    url: "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    caption: "Slide 1",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
-    caption: "Slide 2",
-  },
-  {
-    url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
-    caption: "Slide 3",
-  },
-];
+// const slideImages = [
+//   {
+//     url: "https://images.unsplash.com/photo-1509721434272-b79147e0e708?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+//     caption: "Slide 1",
+//   },
+//   {
+//     url: "https://images.unsplash.com/photo-1506710507565-203b9f24669b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1536&q=80",
+//     caption: "Slide 2",
+//   },
+//   {
+//     url: "https://images.unsplash.com/photo-1536987333706-fc9adfb10d91?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
+//     caption: "Slide 3",
+//   },
+// ];
 
 const Card = ({ item }) => {
   const {
@@ -52,6 +52,8 @@ const Card = ({ item }) => {
     password,
     photo1,
     photo2,
+    images,
+    logo
   } = item;
 
   const navigate = useNavigate();
@@ -81,7 +83,7 @@ const Card = ({ item }) => {
                 <div className="flex px-4 my-5">
                   <div className="w-20 h-20 rounded-full">
                     <img
-                      src={photo1}
+                      src={logo}
                       alt="myPic"
                       className="shadow-xl w-full h-full rounded-full  "
                     />
@@ -101,10 +103,12 @@ const Card = ({ item }) => {
               </div>
               <div className=" py-3 border-t border-slate-200 ">
                 <Carousel {...settings}>
-                  {slideImages.map((slideImage, index) => (
+                  {
+                  
+                  images.map((slideImage, index) => (
                     <Wrap>
                       <div key={index}>
-                        <div
+                        <div  
                           style={{
                             ...divStyle,
                             backgroundImage: `url(${slideImage.url})`,

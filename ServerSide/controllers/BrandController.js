@@ -16,33 +16,33 @@ exports.brandSignUpData = async (req, res) => {
     password,
   } = req.body;
 
-    if (
-        !email ||
-        !password ||
-        !uname ||
-        !brandType ||
-        !phone ||
-        !shopName ||
-        !address || !city || !state || !country ||
-        !location
-    ) {
-        return res.status(422).json({ error: "Please fill all the fields" });
+  if (
+    !email ||
+    !password ||
+    !uname ||
+    !brandType ||
+    !phone ||
+    !shopName ||
+    !address || !city || !state || !country ||
+    !location
+  ) {
+    return res.status(422).json({ error: "Please fill all the fields" });
+  }
+  try {
+
+    const data = await Brand.findOne({ email: email });
+    if (data) {
+      return res.status(422).json({ error: "Email already exists", success: false });
     }
-    try{
+    const brand = new Brand(req.body);
+    brand.save()
+    // console.log(brand)
+    return res.status(200).json({ success: true, message: "Your data is under verification" });
 
-        const data= await Brand.findOne({ email: email });
-        if(data){
-            return res.status(422).json({ error: "Email already exists", success: false });
-        }
-        const brand = new Brand(req.body);
-        brand.save()
-        // console.log(brand)
-        return res.status(200).json({ success: true, message: "Your data is under verification" });
+  } catch (err) {
+    return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
 
-    } catch(err ){
-        return res.status(422).json({ error: "Something went wronge!! try later!!", success: false });
-          
-    };
+  };
 };
 
 exports.brandhome = async (req, res) => {
@@ -59,7 +59,7 @@ exports.brandLogin = async (req, res) => {
   } else {
     const userLogin = await Brand.findOne({ email: email, password: password });
 
-  //   console.log(userLogin);
+    //   console.log(userLogin);
 
     if (!userLogin) {
       return res.status(422).json({ error: "User not found", success: false });
@@ -110,3 +110,49 @@ exports.getBrandData = async (req, res) => {
   const brand = req.rootUser;
   res.json({ data: brand });
 };
+
+exports.updateProfile = async (req, res) => {
+  const id = req.userId
+  // const profle = req.file
+  console.log(req.body);
+
+  const brand = await Brand.findByIdAndUpdate(id, { $set: req.body }, { new: true }).select("-tokens")
+  if (!brand) {
+    return res.status(422).json({ message: "Data not updated!", success: false, data: brand });
+  } else {
+    return res.status(200).json({ message: "Data updated successfully!", success: true, data: brand });
+  }
+
+}
+
+exports.logoUpload = async (req, res) => {
+  const id = req.userId
+  console.log(req.body);
+  var brand = "";
+  if (req.body.type == 1) {
+    const logo = req.body.logo
+    brand=await Brand.findByIdAndUpdate(id, { logo: logo }, { new: true }).select("-tokens")
+
+  } else {
+    const photo1 = req.body.photo1
+   brand= await Brand.findByIdAndUpdate(id, { photo1: photo1 }, { new: true }).select("-tokens")
+  }
+  console.log(brand);
+  if (!brand) {
+    return res.status(422).json({ message: "Logo not updated!", success: false, data: brand });
+  } else {
+    return res.status(200).json({ message: "Logo updated successfully!", success: true, data: brand });
+  }
+}
+exports.imageUpload = async (req, res) => {
+  const id = req.userId
+  console.log(req.body);
+  const image = req.body.image
+  const brand = await Brand.findByIdAndUpdate(id, { $push: { images: { url: image } } }, { new: true }).select("-tokens")
+  console.log(brand);
+  if (!brand) {
+    return res.status(422).json({ message: "Image not updated!", success: false, data: brand });
+  } else {
+    return res.status(200).json({ message: "Image updated successfully!", success: true, data: brand });
+  }
+}

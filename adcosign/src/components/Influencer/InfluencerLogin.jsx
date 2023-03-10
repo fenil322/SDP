@@ -107,7 +107,7 @@ const InfluencerLogin = () => {
   return (
     <div className=''>
       <div>
-        <div class="bg-white dark:bg-gray-900">
+        <div class="bg-white ">
           <div class="flex justify-center h-screen">
             {/* <img className='hidden bg-cover lg:block lg:w-2/3'
              src="https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" /> */}
@@ -178,22 +178,22 @@ const InfluencerLogin = () => {
                           return <>
                             <form method='POST'>
                               <div>
-                                <label for="email" class="block mb-2 text-lg text-white dark:text-gray-200">Email Address</label>
+                                <label for="email" class="block mb-2 text-lg text-white ">Email Address</label>
                                 <input type="email" name="email" id="email" placeholder="example@example.com"
-                                  class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                  class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-700  dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                   value={email}
                                   onChange={handleChange('email')}
                                   onBlur={handleBlur('email')}
                                 />
                                 {
                                   errors.email && touched.email ?
-                                    (<p className='text-red-500'>{errors.email}</p>) : null
+                                    (<p className='text-red-600'>{errors.email}</p>) : null
                                 }
                               </div>
 
                               <div class="mt-6">
                                 <div class="flex justify-between">
-                                  <label for="password" class="text-lg text-white dark:text-gray-200">Password</label>
+                                  <label for="password" class="text-lg text-white ">Password</label>
                                   <a href="#" class="text-sm text-white focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
                                 </div>
                                 {/* <div className="input-group my-4 mx-4">
@@ -207,7 +207,7 @@ const InfluencerLogin = () => {
                                 <div className='flex flex-row'>
 
                                   <input type={passwordType} name="password" id="password" placeholder="Your Password"
-                                    class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-700 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                                     value={password}
                                     onChange={handleChange('password')}
                                     onBlur={handleBlur('password')}
@@ -221,7 +221,7 @@ const InfluencerLogin = () => {
                                 </div>
                                 {
                                   errors.password && touched.password ?
-                                    (<p className='text-red-500'>{errors.password}</p>) : null
+                                    (<p className='text-red-600'>{errors.password}</p>) : null
                                 }
                               </div>
 

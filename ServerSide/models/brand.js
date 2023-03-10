@@ -59,12 +59,19 @@ const shopSchema = new mongoose.Schema({
     type: String,
     default: "https://bootdey.com/img/Content/avatar/avatar7.png"
   },
+  logo: {
+    type: String
+  },
+  images: [{
+    url:{
+      type: String
+    }
+    
+  }],
   tokens: [{
-
     token: {
       type: String,
       // required: true
-
     }
   }
   ],
@@ -73,17 +80,17 @@ const shopSchema = new mongoose.Schema({
   },
   resetToken: String,
   expireToken: Date,
-  instagramUrl:{
-    type:String
+  instagramUrl: {
+    type: String
   },
-  facebookUrl:{
-    type:String
+  facebookUrl: {
+    type: String
   },
-  twitterUrl:{
-    type:String
+  twitterUrl: {
+    type: String
   },
   description: {
-  type:String
+    type: String
   }
 });
 
