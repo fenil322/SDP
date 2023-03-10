@@ -15,13 +15,25 @@ import Navbar from "./Navbar";
 
 const InfluencerProfile = () => {
   const location = useLocation();
-
   const [userdata, setuserdata] = useState({});
-  useEffect(() => {
-    setuserdata(location.state)
-    // console.log(userdata);
-  }, [])
+  const [adrequired, setAdrequired] = useState(userdata.Adsrequired);
+  // useEffect(() => {
+  //   setuserdata(location.state)
+  //   // console.log(userdata);
+  // }, [])
 
+  const getInfluencerData = async () => {
+
+    const res = await axios.get("influencer/getInfluencer");
+    const data = res.data;
+    //   console.log("Logged in user is:- ");
+    setuserdata(data.data)
+    //   console.log(data.data);
+  }
+
+  useEffect(() => {
+    getInfluencerData()
+  }, [])
   return (
     <div className='flex h-[screen]'>
       <Navbar />
@@ -97,7 +109,7 @@ const InfluencerProfile = () => {
                   </button>
                 </NavLink>
                 {
-                  userdata.Adsrequired == false ?
+                  adrequired == false ?
                     <button
                       onClick={async (e) => {
                         e.preventDefault();
@@ -108,20 +120,22 @@ const InfluencerProfile = () => {
                           if (data.success === true) {
                             toast.success(data.message);
                           }
-                          setuserdata({ ...userdata, Adsrequired: false })
+                          // setuserdata({ ...userdata, Adsrequired: false })
                           // location.reload();
+                          setAdrequired(true)
 
                         } catch (err) {
                           console.log(err);
                         }
                       }}
                       class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                      {/* <FaUserEdit size={17} /> */}
+                      
                       <span>Request Ads</span>
                     </button> :
                     <button
                       onClick={async (e) => {
                         e.preventDefault();
+                        console.log(adrequired);
                         try {
                           const res = await axios.put('influencer/adsrequiredremove', userdata.email)
                           console.log(res);
@@ -129,8 +143,9 @@ const InfluencerProfile = () => {
                           if (data.success === true) {
                             toast.success(data.message);
                           }
-                          setuserdata({ ...userdata, Adsrequired: true })
+                          // setuserdata({ ...userdata, Adsrequired: true })
                           // location.reload();
+                          setAdrequired(false)
                         } catch (err) {
                           console.log(err);
                         }

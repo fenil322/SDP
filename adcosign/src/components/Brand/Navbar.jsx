@@ -83,14 +83,14 @@ const Navbar = () => {
                             </Link>
                         ))}
                     </div>
-                    <div className="group">
-
-                        <spam title="LogOut">
-                            <BiLogOut size={25} className="my-10 mx-auto  hover:text-blue-500 cursor-pointer " onClick={logout} />
-                        </spam>
+                    <div
+                        className={`group flex items-center
+                    cursor-pointer text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}
+                    >
+                        <div  ><BiLogOut size={25} className="my-10 mx-auto  hover:text-blue-500 cursor-pointer          " onClick={logout} /></div>
                         <h2
                             style={{
-                                transitionDelay: `300ms`,
+                                transitionDelay: `${13}00ms`,
                             }}
                             className={`whitespace-pre duration-500 `}
                         >
@@ -98,8 +98,9 @@ const Navbar = () => {
                         <h2
                             className={`absolute left-48 bg-white font-semibold whitespace-pre text-blue-900 rounded-md drop-shadow-lg px-0 py-0 w-0 overflow-hidden group-hover:px-2 group-hover:py-1 group-hover:left-14 group-hover:duration-300 group-hover:w-fit  `}
                         >
-                            LogOut
+                            Logout
                         </h2>
+
                     </div>
                 </div>
             </section>
