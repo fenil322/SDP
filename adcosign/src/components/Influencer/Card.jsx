@@ -105,7 +105,7 @@ const Card = ({ item }) => {
                 <Carousel {...settings}>
                   {
                   
-                  images.map((slideImage, index) => (
+                  images?.map((slideImage, index) => (
                     <Wrap>
                       <div key={index}>
                         <div  

@@ -173,7 +173,7 @@ const BrandDetails = () => {
                 <div className="py-3 mt-5 border-t border-gray-400 ">
                   <Carousel {...settings}>
                     {
-                      slideImages.map !== undefined &&
+                      slideImages?.map !== undefined &&
                       slideImages?.map((slideImage, index) => (
                         <Wrap>
                           <div key={index}>
