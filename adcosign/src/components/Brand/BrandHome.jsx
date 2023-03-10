@@ -72,19 +72,13 @@ const cardProfile = [
 const BrandHome = () => {
 
   const [profilecard, setprofilecard] = useState([])
+  const [age,setAge]=useState("");
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   const callgetInfluencerPage = async () => {
     try {
-      // const res = await fetch("influencer/getAllInfluencer", {
-      //   method: "GET",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   }
-      //   , credentials: "include"
-      // });
+     
       const res = await axios.get("influencer/getAllInfluencer");
 
       const data = res.data;
@@ -116,7 +110,7 @@ const BrandHome = () => {
         <BrandHeader page="BrandHome" />
 
         <div className="flex ">
-          {/* <div className="">
+          <div className="">
             <aside class="w-64" aria-label="Sidebar">
               <div class="px-3 py-4 overflow-y-auto rounded-tr-3xl rounded-r-3xl bg-blue-900 text-gray-100">
                 <ul class="space-y-2">
@@ -173,7 +167,6 @@ const BrandHome = () => {
                     <div class="flex justify-left mt-2 mb-2">
                       <div>
                         <h1 className="font-semibold py-1 font-mono text-xl">
-                          {" "}
                           Gender
                         </h1>
                         <div class="flex items-center">
@@ -189,7 +182,6 @@ const BrandHome = () => {
                             class="ml-2 text-sm font-medium dark:text-gray-300 "
                           >
                             <h3 className="text-gray-300 font-mono text-lg">
-                              {" "}
                               Male
                             </h3>
                           </label>
@@ -246,6 +238,7 @@ const BrandHome = () => {
                           name="cars"
                           id="cars"
                           className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
+                          // onChange={}
                         >
                           <option value="18-20">18-20</option>
                           <option value="21-32">21-32</option>
@@ -290,10 +283,10 @@ const BrandHome = () => {
                           id="cars"
                           className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
                         >
-                          <option value="">UK,Londen</option>
-                          <option value="">California,USA</option>
-                          <option value="">Montrial,Canada</option>
-                          <option value="">Bavaria,Germany</option>
+                          <option value="">Surat</option>
+                          <option value="">Nadiad</option>
+                          <option value="">Rajkot</option>
+                          <option value="">Vadodra</option>
                         </select>
                       </div>
                     </div>
@@ -331,10 +324,10 @@ const BrandHome = () => {
                         id=""
                         className="text-gray-100 bg-slate-500 rounded-full w-full border-none"
                       >
-                        <option value="">Drama</option>
+                        <option value="">Songs</option>
+                        <option value="">Fashion</option>
+                        <option value="">Games</option>
                         <option value="">Dance</option>
-                        <option value="">Singing</option>
-                        <option value="">Speaking</option>
                       </select>
                     </div>
                   </li>
@@ -342,12 +335,12 @@ const BrandHome = () => {
                 </ul>
               </div>
             </aside>
-          </div> */}
+          </div>
 
           <div className="">
-            <div className="mx-20 font-medium font-mono text-xl">
+            {/* <div className="mx-20 font-medium font-mono text-xl">
               <h1>Connect Your Interested Influencer...</h1>
-            </div>
+            </div> */}
             <div className="grid md:grid-cols-3 grid-cols-1 ">
               {profilecard.length > 0 &&
                 // profilecard.map((item) => (
