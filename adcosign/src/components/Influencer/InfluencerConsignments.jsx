@@ -50,7 +50,7 @@ const InfluencerConsignments = () => {
                 <div class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700" >
                   <img
                     class="object-cover w-full rounded-none h-96 max-sm:h-48 md:h-auto md:w-48 md:rounded-none md:rounded-none-lg m-1 p-1"
-                    src={data.photo1}
+                    src={data.logo}
                     alt=""
                   />
                   <div class="flex flex-col justify-between p-6 leading-normal">

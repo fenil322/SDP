@@ -101,7 +101,7 @@ const BrandDetails = () => {
             <div class="w-full h-[250px]">
               <img
                 // src={brandData?.images[0].url!==undefined ? brandData.images[0].url:brandData.photo1  } 
-                src={brandData.photo2}
+                src={brandData.photo1}
                 class="w-full h-full rounded-tl-lg rounded-tr-lg"
                 alt="not available"
               />
@@ -171,7 +171,7 @@ const BrandDetails = () => {
             <div className=" w-5/6 mx-auto">
               <div className="">
                 <div className="py-3 mt-5 border-t border-gray-400 ">
-                  {/* <Carousel {...settings}>
+                  <Carousel {...settings}>
                     {
                       slideImages.map !== undefined &&
                       slideImages?.map((slideImage, index) => (
@@ -186,7 +186,7 @@ const BrandDetails = () => {
                           </div>
                         </Wrap>
                       ))}
-                  </Carousel> */}
+                  </Carousel>
                 </div>
               </div>
             </div>

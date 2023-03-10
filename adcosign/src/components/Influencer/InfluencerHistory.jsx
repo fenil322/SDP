@@ -46,7 +46,7 @@ const InfluencerHistory = () => {
                 >
                   <img
                     class="object-cover w-full rounded-none h-96 md:h-auto md:w-48 md:rounded-none md:rounded-none-lg m-1 p-1"
-                    src={item.photo1}
+                    src={item.logo}
                     alt="Brand image"
                   />
                   <div class="flex flex-col   justify-between p-6 leading-normal">

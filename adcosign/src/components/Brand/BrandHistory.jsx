@@ -54,7 +54,7 @@ const BrandHistory = () => {
             >
               <img
                 class="object-cover w-full rounded-full h-96 md:h-auto md:w-48 md:rounded-full md:rounded-full-lg m-2 p-2"
-                src={item.photo}
+                src={item.profile}
                 alt=""
               />
               <div class="flex flex-col   justify-between p-4 leading-normal">

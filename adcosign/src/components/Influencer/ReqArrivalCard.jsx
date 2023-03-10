@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 function ReqArrivalCard({ item }) {
   const navigate = useNavigate();
-  const { _id, uname, shopName, brandType, phone, email, city, state, country,
-    address, location, photo } = item
+  const { _id,logo, uname, shopName, brandType, phone, email, city, state, country,
+    address, location, photo1 } = item
   return (
     <>
       <div className="">
@@ -17,7 +17,7 @@ function ReqArrivalCard({ item }) {
           <div class="mx-auto max-w-md overflow-hidden rounded-lg bg-white shadow ">
             <img
               //src={photo}
-              src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80"
+              src={logo}
               class="h-5/6 w-5/6 m-auto mt-5  object-cover transition-transform duration-500 group-hover:rotate-3 group-hover:scale-125"
               alt="image"
             />
