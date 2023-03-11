@@ -56,7 +56,7 @@ const AddNewInfluencer = () => {
       });
 
       const data = await res.json();
-      // console.log(data.data)
+      console.log(data.data)
       setprofilecard(data.data);
       console.log(profilecard)
     } catch (err) {

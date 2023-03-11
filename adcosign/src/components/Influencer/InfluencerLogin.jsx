@@ -94,7 +94,7 @@ const InfluencerLogin = () => {
       if (res.status == 200) {
         toast.success(data.message);
         await sleep(1000)
-        navigate("/InfluencerHome");
+        navigate("/InfluencerHome?page=1");
       }
       FormikActions.resetForm();
       FormikActions.setSubmitting(false);

@@ -46,7 +46,11 @@ exports.brandSignUpData = async (req, res) => {
 };
 
 exports.brandhome = async (req, res) => {
-  const brand = await Brand.find({ valid: 1 });
+  const page = req.query.page 
+  console.log(req.query.page);
+  const brand = await Brand.find({ valid: 1 })
+  .skip((page-1)*3).limit(3)
+
   if (brand) {
     res.status(200).json({ success: true, data: brand });
   }

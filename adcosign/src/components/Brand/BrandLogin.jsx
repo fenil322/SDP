@@ -59,7 +59,7 @@ const BrandLogin = () => {
     if (res.status == 200) {
       toast.success(data.message);
       await sleep(1000)
-      navigate("/BrandHome");
+      navigate("/BrandHome?page=1");
     } else {
       toast.error(data.error);
     }

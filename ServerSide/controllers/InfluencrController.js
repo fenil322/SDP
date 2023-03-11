@@ -49,7 +49,12 @@ exports.influencerSignupdata = async (req, res) => {
 
 
 exports.getAllInfluencer = async (req, res) => {
-    const influencers = await Influencer.find({ valid: 1, Adsrequired: true })
+    const page=req.query.page;
+    console.log(req.query);
+    const influencers = await Influencer
+                        .find({ valid: 1, Adsrequired: true })
+                        .skip((page-1)*6).limit(6)
+
     if (influencers) {
         res.status(200).json({ success: true, data: influencers })
     }

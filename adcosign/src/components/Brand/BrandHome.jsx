@@ -4,7 +4,7 @@ import InfluencerDetails from "./InfluencerDetails";
 import { ReactDOM } from "react";
 import Card from "./Cards";
 import { useEffect, useState } from "react";
-import { NavLink, redirect, useNavigate } from 'react-router-dom'
+import { NavLink, redirect, useNavigate, useSearchParams } from 'react-router-dom'
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -75,11 +75,11 @@ const BrandHome = () => {
   const [age,setAge]=useState("");
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const callgetInfluencerPage = async () => {
     try {
      
-      const res = await axios.get("influencer/getAllInfluencer");
+      const res = await axios.get(`influencer/getAllInfluencer${window.location.search}`);
 
       const data = res.data;
       // console.log(data)
@@ -110,7 +110,7 @@ const BrandHome = () => {
         <BrandHeader page="BrandHome" />
 
         <div className="flex ">
-          <div className="">
+          {/* <div className="">
             <aside class="w-64" aria-label="Sidebar">
               <div class="px-3 py-4 overflow-y-auto rounded-tr-3xl rounded-r-3xl bg-blue-900 text-gray-100">
                 <ul class="space-y-2">
@@ -335,7 +335,7 @@ const BrandHome = () => {
                 </ul>
               </div>
             </aside>
-          </div>
+          </div> */}
 
           <div className="">
             {/* <div className="mx-20 font-medium font-mono text-xl">
@@ -357,42 +357,44 @@ const BrandHome = () => {
               <ul class="flex list-style-none">
                 <li class="page-item disabled">
                   <a
-                    class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-500 pointer-events-none focus:shadow-none"
-                    href="#"
-                    tabindex="-1"
-                    aria-disabled="true"
+                   class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
+                   href={`?page=${(parseInt(searchParams.get("page"))-1)<1?1:parseInt(searchParams.get("page"))-1}`}
+                   
                   >
                     Previous
                   </a>
                 </li>
                 <li class="page-item">
                   <a
-                    class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    href="#"
+                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page")==1?`bg-blue-600 text-white`:`bg-transparent text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
+                    href="?page=1"
                   >
                     1
                   </a>
                 </li>
                 <li class="page-item active">
                   <a
-                    class="page-link relative block py-1.5 px-3  border-0 bg-blue-600 outline-none transition-all duration-300 rounded text-white hover:text-white hover:bg-blue-600 shadow-md focus:shadow-md"
-                    href="#"
+                     class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page")==2?`bg-blue-600 text-white`:`bg-transparent  text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
+                     href="?page=2"
                   >
-                    2 <span class="visually-hidden"></span>
+                    2
                   </a>
                 </li>
                 <li class="page-item">
                   <a
-                    class="page-link relative block py-1.5 px-3  border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    href="#"
+                     class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page")>2  ?`bg-blue-600 text-white`:`bg-transparent  text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
+                  //  href="?page=3"
                   >
-                    3
+                    {searchParams.get("page")<=2?"...":searchParams.get("page")}
                   </a>
                 </li>
                 <li class="page-item">
                   <a
                     class="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-                    href="#"
+                    href={`?page=${(parseInt(searchParams.get("page"))+1)}`}
+                    // onClick={()=>{
+                    //   setSearchParams({page:window.location.search+1})
+                    // }}
                   >
                     Next
                   </a>
