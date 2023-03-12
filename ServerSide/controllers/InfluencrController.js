@@ -28,7 +28,7 @@ exports.influencerSignupdata = async (req, res) => {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
 
-    try {try{
+    try{
         const data = await Influencer.findOne({ email: email });
         if (data) {
 
@@ -45,7 +45,7 @@ exports.influencerSignupdata = async (req, res) => {
 
     };
 
-};
+}
 
 
 exports.getAllInfluencer = async (req, res) => {
