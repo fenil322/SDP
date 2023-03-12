@@ -3,15 +3,15 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { TiPlus } from "react-icons/ti";
 
-const InfCard = (item) => {
+const InfCard = ({ item }) => {
     const navigate = useNavigate();
     return (
-        <div className="flex ml-60 mt-10 max-w-lg bg-white  ">
+        <div className="flex ml-60 mt-10 w-full bg-white shadow-2xl ">
 
             <img
                 class="object-cover w-full rounded-full h-60 md:h-auto md:w-48 md:rounded-full md:rounded-full-lg m-2 p-2"
                 src={item.photo}
-                alt=""
+                alt="not image"
             />
             <div class="flex flex-col justify-between p-4 leading-normal">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">

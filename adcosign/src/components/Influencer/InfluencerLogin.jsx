@@ -43,43 +43,43 @@ const InfluencerLogin = () => {
     setUserdata({ ...userdata, [name]: value });
   }
 
-  const postdata = async (e) => {
-    e.preventDefault();
+  // const postdata = async (e) => {
+  //   e.preventDefault();
 
-    const { email, password } = userdata;
-    if (
-      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        email
-      )
-    ) {
-      toast.error("Invalid Email");
-      return;
-    }
-    const res = await fetch("/influencer/influencerlogin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password,
-        email,
-      }),
-    })
+  //   const { email, password } = userdata;
+  //   if (
+  //     !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+  //       email
+  //     )
+  //   ) {
+  //     toast.error("Invalid Email");
+  //     return;
+  //   }
+  //   const res = await fetch("/influencer/influencerlogin", {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({
+  //       password,
+  //       email,
+  //     }),
+  //   })
 
-    const data = await res.json();
-    console.log(data)
-    if (res.status == 200) {
-      toast.success(data.message);
-      await sleep(1000)
-      navigate("/InfluencerHome");
-    } else {
-      toast.error(data.error);
-    } 
+  //   const data = await res.json();
+  //   console.log(data)
+  //   if (res.status == 200) {
+  //     toast.success(data.message);
+  //     await sleep(1000)
+  //     navigate("/InfluencerHome");
+  //   } else {
+  //     toast.error(data.error);
+  //   } 
 
-    // localStorage.setItem("jwt", data.token);
-    // localStorage.setItem("user", JSON.stringify(data.user));
-    // localStorage.setItem("type", JSON.stringify(data.type));
-  }
+  //   // localStorage.setItem("jwt", data.token);
+  //   // localStorage.setItem("user", JSON.stringify(data.user));
+  //   // localStorage.setItem("type", JSON.stringify(data.type));
+  // }
 
   const signUp = async (values, FormikActions) => {
     // e.preventDefault()
@@ -109,8 +109,7 @@ const InfluencerLogin = () => {
       <div>
         <div class="bg-white ">
           <div class="flex justify-center h-screen">
-            {/* <img className='hidden bg-cover lg:block lg:w-2/3'
-             src="https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" /> */}
+            
             <div class=" bg-cover block h-full w-full bg-[url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)]">
 
               <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
