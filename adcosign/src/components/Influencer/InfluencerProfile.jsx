@@ -87,7 +87,7 @@ const InfluencerProfile = () => {
               <img
                 // src="https://vojislavd.com/ta-template-demo/assets/img/profile.jpg" 
                 src={userdata.profile}
-                class="w-40 border-4 border-white bg-gray-50 rounded-full" />
+                class="w-40 h-40 border-4 border-white bg-gray-50 rounded-full" />
               <div class="flex items-center space-x-2 mt-2">
                 <p class="text-2xl">{userdata.fname + " " + userdata.lname}</p>
                 <span class="bg-blue-500 rounded-full p-1" title="Verified">

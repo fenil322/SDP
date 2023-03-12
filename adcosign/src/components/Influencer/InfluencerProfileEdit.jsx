@@ -6,53 +6,52 @@ import { useState, useEffect } from "react";
 import { IoCall } from "react-icons/io5";
 import { CgDetailsMore } from "react-icons/cg";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './Navbar'
-
-
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./Navbar";
 
 const InfluencerProfileEdit = () => {
-  const location=useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
-  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const [image, setImage] = useState("");
   const [url, setUrl] = useState("");
   const [dimage, setDImage] = useState("");
   const [durl, setDUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const Baseurl = 'https://api.cloudinary.com/v1_1/djhql8xzq/image/upload/';
+  const Baseurl = "https://api.cloudinary.com/v1_1/djhql8xzq/image/upload/";
   const preset = "adcosign_img";
 
   const [userdata, setuserdata] = useState({});
-
 
   let name, value;
   const handleInput = (e) => {
     name = e.target.name;
     value = e.target.value;
     setuserdata({ ...userdata, [name]: value });
-  }
+  };
 
   const imageupload = async (e) => {
+
     const data = new FormData();
     data.append("file", image);
     data.append("upload_preset", preset);
     data.append("cloud_name", "djhql8xzq");
+    console.log(image)
+    console.log(data);
     try {
       // setLoading(true);
-      await axios.post(Baseurl, data)
-        .then(res => {
-          setUrl(res.data.secure_url)
-        });
-      } catch (err) {
-        toast.error("image not uploaded");
-        console.error(err);
-        return;
-      }
-  }
+      await axios.post(Baseurl, data).then((res) => {
+        console.log(res.data.secure_url);
+        setUrl(res.data.secure_url);
+      });
+    } catch (err) {
+      toast.error("image not uploaded");
+      console.error(err);
+      return;
+    }
+  };
   const dimageupload = async (e) => {
     const data = new FormData();
     data.append("file", dimage);
@@ -60,64 +59,69 @@ const InfluencerProfileEdit = () => {
     data.append("cloud_name", "djhql8xzq");
     try {
       // setLoading(true);
-      await axios.post(Baseurl, data)
-        .then(res => {
-          setDUrl(res.data.secure_url)
-        });
-      } catch (err) {
+      await axios.post(Baseurl, data).then((res) => {
+        setDUrl(res.data.secure_url);
+      });
+    } catch (err) {
       toast.error("image not uploaded");
       console.error(err);
       return;
     }
     console.log(durl);
-  }
+  };
   const imagestore = async () => {
     try {
-      setuserdata({ ...userdata, profile: url })
-      const res = await axios.put("/influencer/imageupload", { profile: url, type: 1 })
+      setuserdata({ ...userdata, profile: url });
+      const res = await axios.put("/influencer/imageupload", {
+        profile: url,
+        type: 1,
+      });
       console.log(res.data);
       const data = res.data;
       // console.log(data);
       if (data.success == true) {
         toast.success(data.message);
-        await sleep(1500)
-        setUrl("")
+        await sleep(1500);
+        setUrl("");
         // window.location.reload();
         // navigate("/InfluencerProfile")
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
   const dimagestore = async () => {
     try {
-      setuserdata({ ...userdata, photo: durl })
-      const res = await axios.put("/influencer/imageupload", { photo: durl, type: 2 })
+      setuserdata({ ...userdata, photo: durl });
+      const res = await axios.put("/influencer/imageupload", {
+        photo: durl,
+        type: 2,
+      });
       console.log(res.data);
       const data = res.data;
       // console.log(data);
       if (data.success == true) {
         toast.success(data.message);
-        await sleep(1500)
-        setDUrl("")
+        await sleep(1500);
+        setDUrl("");
         // window.location.reload();
         // navigate("/InfluencerProfile")
       }
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
   useEffect(() => {
     // e.preventDefault();
 
     if (url) {
-      imagestore()
+      console.log(url);
+      imagestore();
     }
     if (durl) {
-      dimagestore()
+      dimagestore();
     }
-
-  }, [url || durl])
+  }, [url || durl]);
 
   const updateProfile = async (e) => {
     e.preventDefault();
@@ -130,32 +134,32 @@ const InfluencerProfileEdit = () => {
       // console.log(data);
       if (data.success == true) {
         toast.success(data.message);
-        await sleep(1500)
+        await sleep(1500);
+
+        navigate("/InfluencerProfile");
         window.location.reload();
-        // navigate("/InfluencerProfile")
       }
     } catch (error) {
       console.log(error);
     }
 
     // console.log(userdata);
-  }
+  };
 
   useEffect(() => {
-    setuserdata(location.state)
+    setuserdata(location.state);
     // console.log(location.state);
-  }, [])
+  }, []);
 
   return (
-    <div className='flex h-[screen]'>
+    <div className="flex h-[screen]">
       <Navbar />
-      <div className='max-sm:ml-0  ml-14 w-screen'>
+      <div className="max-sm:ml-0  ml-14 w-screen">
         <InfluencerHeader page="Edit Profile" />
 
         <div>
           <div className=" px-3  items-center">
             <div className="bg-white w-full max-w-4xl p-8 mx-auto lg:px-12 lg:w-3/5">
-
               <div>
                 <div className="flex items-center justify-center">
                   <div className="bg-gray-200 max-sm:w-5/6 w-1/2 mt-10 rounded-lg">
@@ -169,19 +173,18 @@ const InfluencerProfileEdit = () => {
 
                       <h1 className="text-gray-900 font-semibold text-xl mt-5 p-3">
                         {userdata.fname + " " + userdata.lname}
-
                       </h1>
                       <h3 className="text-gray-400 text-sm"> Influencer</h3>
                       <h3 className="text-gray-500 text-sm">
-                        {userdata.city + ", " + userdata.state + ", " + userdata.country}
-
+                        {userdata.city +
+                          ", " +
+                          userdata.state +
+                          ", " +
+                          userdata.country}
                       </h3>
                       <h3 className="text-gray-500 text-sm pb-10">
                         {userdata.email}
-
                       </h3>
-
-
                     </div>
                   </div>
                 </div>
@@ -192,7 +195,7 @@ const InfluencerProfileEdit = () => {
                         Upload image
                       </h1>
 
-                      <form className="flex items-center max-sm:flex-col space-x-6" >
+                      <form className="flex items-center max-sm:flex-col space-x-6">
                         <div className="shrink-0">
                           <img
                             className="h-16 w-16 object-cover rounded-full"
@@ -215,17 +218,17 @@ const InfluencerProfileEdit = () => {
                             name="profile"
                             onChange={(e) => {
                               // console.log(e.target.files[0]);
-                              setImage(e.target.files[0])
+                              setImage(e.target.files[0]);
                               // console.log(image);
                             }}
-
                           />
                         </label>
                       </form>
                       <div className="flex-justify-between p-3 px-14">
                         <button
                           onClick={imageupload}
-                          className="px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                          className="px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                        >
                           Upload
                         </button>
                       </div>
@@ -237,7 +240,7 @@ const InfluencerProfileEdit = () => {
                         Upload display image
                       </h1>
 
-                      <form className="flex  max-sm:flex-col items-center space-x-6" >
+                      <form className="flex  max-sm:flex-col items-center space-x-6">
                         <div className="shrink-0">
                           <img
                             className="h-16 w-16 object-cover rounded-full"
@@ -260,17 +263,17 @@ const InfluencerProfileEdit = () => {
                             name="photo"
                             onChange={(e) => {
                               // console.log(e.target.files[0]);
-                              setDImage(e.target.files[0])
+                              setDImage(e.target.files[0]);
                               // console.log(image);
                             }}
-
                           />
                         </label>
                       </form>
                       <div className="flex-justify-between p-3 px-14">
                         <button
                           onClick={dimageupload}
-                          className="px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                          className="px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                        >
                           Upload
                         </button>
                       </div>
@@ -343,7 +346,6 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="state"
-
                         defaultValue={userdata.state}
                         // value={userdata.state}
                         onChange={handleInput}
@@ -358,11 +360,9 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="country"
-
                         defaultValue={userdata.country}
                         // value={userdata.country}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -376,7 +376,6 @@ const InfluencerProfileEdit = () => {
                         defaultValue={userdata.age}
                         // value={userdata.age}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -385,7 +384,8 @@ const InfluencerProfileEdit = () => {
                   <div className="justify-center item-center">
                     <button
                       onClick={updateProfile}
-                      className="w-1/5 max-sm:w-1/2 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                      className="w-1/5 max-sm:w-1/2 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                    >
                       Update Details
                     </button>
                   </div>
@@ -413,7 +413,6 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="instagram"
-
                         defaultValue={userdata.instagram}
                         // value={userdata.instagram}
                         onChange={handleInput}
@@ -427,11 +426,9 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="instagramURL"
-
                         defaultValue={userdata.instagramURL}
                         // value={userdata.instagramURL}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -445,7 +442,6 @@ const InfluencerProfileEdit = () => {
                         defaultValue={userdata.facebook}
                         // value={userdata.facebook}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -456,11 +452,9 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="facebookURL"
-
                         defaultValue={userdata.facebookURL}
                         // value={userdata.facebookURL}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -471,11 +465,9 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="twitter"
-
                         defaultValue={userdata.twitter}
                         // value={userdata.twitter}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -486,11 +478,9 @@ const InfluencerProfileEdit = () => {
                       <input
                         type="text"
                         name="twitterURL"
-
                         defaultValue={userdata.twitterURL}
                         // value={userdata.twitterURL}
                         onChange={handleInput}
-
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
@@ -528,7 +518,7 @@ const InfluencerProfileEdit = () => {
                         type="text"
                         name="cat3"
                         defaultValue={userdata.cat3}
-                        // value={userdata.cat3}  
+                        // value={userdata.cat3}
                         onChange={handleInput}
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
@@ -540,7 +530,8 @@ const InfluencerProfileEdit = () => {
                 <div className="flex-justify-between">
                   <button
                     onClick={updateProfile}
-                    className="w-1/5 max-sm:w-1/2 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                    className="w-1/5 max-sm:w-1/2 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                  >
                     Update Details
                   </button>
                 </div>
@@ -573,7 +564,8 @@ const InfluencerProfileEdit = () => {
               <div className="flex-justify-between">
                 <button
                   onClick={updateProfile}
-                  className="w-1/5 max-sm:w-1/2 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                  className="w-1/5 max-sm:w-1/2 px-5 py-3 text-md justify-center item-center text-center tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                >
                   Update Details
                 </button>
               </div>

@@ -19,7 +19,6 @@ const InfluencerArrivalRequest = () => {
       console.log(data.data);
       setprofilecard(data.data)
       console.log(profilecard)
-      
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message)
