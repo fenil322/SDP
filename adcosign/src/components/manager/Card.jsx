@@ -115,8 +115,6 @@ function Card({ item }) {
                       navigate("/AddNewBrand");
                       console.log(err);
                     }
-
-
                   }}
                   class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md">
                   <svg

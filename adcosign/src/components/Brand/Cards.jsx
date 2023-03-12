@@ -13,7 +13,7 @@ function Card({ item }) {
     age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
     facebook, facebookURL, facebookFollowers, facebookEngagementRate,
     twitter, twitterURL, twitterFollowers, twitterEngagementRate,
-    photo, cat1 = "fation", cat2 = "study", cat3 = "dance", discription = "hello i am there"
+    profile, cat1 = "fation", cat2 = "study", cat3 = "dance", discription = "hello i am there"
 
   } = item;
 
@@ -24,7 +24,7 @@ function Card({ item }) {
 
   return (
     <>
-      <div className="relative max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-white  shadow-lg rounded-xl my-10">
+      <div className=" max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-xl my-10">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
@@ -32,13 +32,12 @@ function Card({ item }) {
         <div className="cursor-pointer"
           onClick={influencerdetailpage}>
           <div className="cursor-pointer">
-
             <div className="px-6">
               <div className="flex flex-wrap ">
                 <div className="flex px-4 my-5">
                   <div className="w-20 h-20 rounded-full">
                     <img
-                      src={photo}
+                      src={profile}
                       alt="myPic"
                       className="shadow-xl w-full h-full rounded-full  "
                     />
@@ -81,13 +80,13 @@ function Card({ item }) {
                   </div>
                   <div className="flex  items-center">
                     <AiOutlineFacebook size={20} className="text-[#3b5998] " />
-                    <div className="text-[#3b5998] mr-3 ml-1">{instagramFollowers}</div>
+                    <div className="text-[#3b5998] mr-3 ml-1"> 4K</div>
 
                     <AiOutlineInstagram size={20} className="text-[#E4405F]" />
-                    <div className="text-[#E4405F] mr-3 ml-1">{facebookFollowers}</div>
+                    <div className="text-[#E4405F] mr-3 ml-1"> 5.5M</div>
 
                     <CiTwitter size={20} className="text-[#1DA1F2]" />
-                    <div className="text-[#1DA1F2] mr-3 ml-1">{twitterFollowers}</div>
+                    <div className="text-[#1DA1F2] mr-3 ml-1"> 66K</div>
                   </div>
                 </div>
               </div>

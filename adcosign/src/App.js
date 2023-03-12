@@ -15,7 +15,8 @@ import BrandCurrentConsignment from "./components/Brand/BrandCurrentConsignment"
 import BrandHistory from "./components/Brand/BrandHistory";
 import BrandLogin from "./components/Brand/BrandLogin";
 import BrandDetails from "./components/Influencer/BrandDetails";
-
+import BrandProfile from "./components/Brand/BrandProfile.jsx";
+import BrandProfileEdit from "./components/Brand/BrandProfileEdit.jsx";
 
 import InfluencerDetails from "./components/Brand/InfluencerDetails";
 import InfluencerHome from "./components/Influencer/InfluencerHome";
@@ -25,13 +26,15 @@ import InfluencerConsignments from "./components/Influencer/InfluencerConsignmen
 import InfluencerCurrentConsignments from "./components/Influencer/InfluencerCurrentConsignments";
 import InfluencerHistory from "./components/Influencer/InfluencerHistory";
 import InfluencerLogin from "./components/Influencer/InfluencerLogin";
-
+import InfluencerArrivalRequest from "./components/Influencer/InfluencerArrivalRequest";
+import InfluencerPendingRequest from "./components/Influencer/InfluencerPendingRequest";
 
 import ManagerHome from './components/manager/ManagerHome';
 import ManagerLogin from './components/manager/ManagerLogin';
 import ManagerHeader from './components/manager/ManagerHeader';
 import AddNewInfluencer from './components/manager/AddNewInfluencer';
 import AddNewBrand from './components/manager/AddNewBrand';
+import ManagerProfile from './components/manager/ManagerProfile';
 
 
 const App = () => {
@@ -52,6 +55,8 @@ const App = () => {
         <Route path="/BrandArrivalRequest" element={<BrandArrivalRequest />} />
         <Route path="/BrandConsignments" element={<BrandConsignments />} />
         <Route path="/BrandDetails" element={<BrandDetails />} />
+        <Route path="/BrandProfile" element={<BrandProfile/>}/>
+        <Route path="/BrandProfileEdit" element={<BrandProfileEdit/>}/>
         <Route
           path="/BrandCurrentConsignment"
           element={<BrandCurrentConsignment />}
@@ -60,6 +65,7 @@ const App = () => {
         <Route path="/InfluencerDetails" element={<InfluencerDetails />} />
 
         <Route path="/InfluencerHome" element={<InfluencerHome />} />
+        <Route path="/InfluencerArrivalRequest" element={<InfluencerArrivalRequest />} />
         <Route path="/InfluencerProfile" element={<InfluencerProfile />} />
         <Route
           path="/InfluencerProfileEdit"
@@ -74,13 +80,15 @@ const App = () => {
           element={<InfluencerCurrentConsignments />}
         />
         <Route path="/InfluencerHistory" element={<InfluencerHistory />} />
+        <Route path="/InfluencerPendingRequest" element={<InfluencerPendingRequest />} />
 
         <Route path="/ManagerHome" element={<ManagerHome />} />
         <Route path="/ManagerLogin" element={<ManagerLogin />} />
         <Route path="/ManagerHeader" element={<ManagerHeader />} />
-        <Route path="/AddNewInfluencer" element={<AddNewInfluencer/>}/>
-        <Route path="/AddNewBrand" element={<AddNewBrand/>}/>
-
+        <Route path="/AddNewInfluencer" element={<AddNewInfluencer />} />
+        <Route path="/AddNewBrand" element={<AddNewBrand />} />
+      <Route path="/ManagerProfile" element={<ManagerProfile />} />
+      
       </Routes>
     </BrowserRouter>
   );

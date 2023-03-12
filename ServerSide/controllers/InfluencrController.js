@@ -9,7 +9,7 @@ const { response } = require('express');
 exports.influencerSignupdata = async (req, res) => {
 
     const {
-        fname, lname, phone, email, city, state, country, password,
+        fname, lname, phone, email, city, state, country, password, gender,
         age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
         facebook, facebookURL, facebookFollowers, facebookEngagementRate,
         twitter, twitterURL, twitterFollowers, twitterEngagementRate
@@ -21,14 +21,14 @@ exports.influencerSignupdata = async (req, res) => {
         !fname ||
         !lname ||
         !phone ||
-        !age ||
+        !age || !gender ||
         !city || !state || !country ||
-        !instagram || !instagramURL || !instagramFollowers || !instagramEngagementRate
+        !instagram || !instagramURL || !password
     ) {
         return res.status(422).json({ error: "Please fill all the fields" });
     }
 
-try{
+    try {try{
         const data = await Influencer.findOne({ email: email });
         if (data) {
 
@@ -49,7 +49,12 @@ try{
 
 
 exports.getAllInfluencer = async (req, res) => {
-    const influencers = await Influencer.find({ valid: 1 })
+    const page=req.query.page;
+    console.log(req.query);
+    const influencers = await Influencer
+                        .find({ valid: 1, Adsrequired: true })
+                        .skip((page-1)*6).limit(6)
+
     if (influencers) {
         res.status(200).json({ success: true, data: influencers })
     }
@@ -72,16 +77,38 @@ exports.editProfiledisplay = (req, res) => {
 }
 
 exports.updateProfile = async (req, res) => {
-    const id=req.userId
-    // console.log(req.body)
-    // // const data=req.body;  
-    const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true })
+    const id = req.userId
+    // const profle = req.file
+    console.log(req.body);
+    // console.log(req)
+    // const data=req.body;  
+    const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true }).select("-tokens")
     if (!influencer) {
         return res.status(422).json({ message: "Data not updated!", success: false, data: influencer });
     } else {
         return res.status(200).json({ message: "Data updated successfully!", success: true, data: influencer });
     }
 
+}
+
+exports.uploadImage = async (req, res) => {
+    const id = req.userId
+    console.log(req.body);
+    var influencer = "";
+    if (req.body.type == 1) {
+
+        const profile = req.body.profile
+        influencer = await Influencer.findByIdAndUpdate(id, { profile: profile }, { new: true }).select("-tokens")
+    } else {
+        const photo = req.body.photo
+        influencer = await Influencer.findByIdAndUpdate(id, { photo: photo }, { new: true }).select("-tokens")
+    }
+    console.log(influencer);
+    if (!influencer) {
+        return res.status(422).json({ message: "Image not updated!", success: false, data: influencer });
+    } else {
+        return res.status(200).json({ message: "Image updated successfully!", success: true, data: influencer });
+    }
 }
 
 exports.influencerlogin = async (req, res) => {
@@ -133,4 +160,43 @@ exports.influencerlogin = async (req, res) => {
 }
 exports.influencerhome = (req, res) => {
 
+}
+
+exports.adrequired = async (req, res) => {
+    const email = req.body.email;
+
+    // const Adsrequired = req.body.Adsrequired;
+    const id = req.userId;
+    try {
+        const data = await Influencer.findByIdAndUpdate(id, { $set: { Adsrequired: true } })
+        // console.log(data);
+        if (!data) {
+            return res.status(400).json({ success: false, error: "Something went wronge!! try later!!" });
+        }
+        return res.status(200).json({ success: true, message: "Profile is now public to brand for Ads...!!!", data: data });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
+
+    }
+}
+
+
+exports.adrequiredRemove = async (req, res) => {
+    const email = req.body.email;
+
+    // const Adsrequired = req.body.Adsrequired;
+    const id = req.userId;
+    try {
+        const data = await Influencer.findByIdAndUpdate(id, { $set: { Adsrequired: false } })
+        // console.log(data);
+        if (!data) {
+            return res.status(400).json({ success: false, error: "Something went wronge!! try later!!" });
+        }
+        return res.status(200).json({ success: true, message: "Ads request Removed...!!", data: data });
+    } catch (err) {
+        console.log(err);
+        return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
+
+    }
 }

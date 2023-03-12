@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ManagerHeader from "./ManagerHeader";
 import Card from "./Card";
 import { Link, NavLink } from "react-router-dom";
+import Navbar from "./Navbar";
 const cardProfile = [
   {
     imgsrc:
@@ -50,10 +51,7 @@ const cardProfile = [
 
 const AddNewBrand = () => {
 
-  const [profilecard, setprofilecard] = useState([{
-    uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
-    address: "", location: "", password: "", photo: ""
-  }])
+  const [profilecard, setprofilecard] = useState([])
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -85,12 +83,13 @@ const AddNewBrand = () => {
   }, [])
 
   return (
-    <div>
-      <ManagerHeader />
-      <div>
-        {" "}
+    <div className="h-[screen] flex">
+      <Navbar />
+      <div className="ml-14 w-screen">
+        <ManagerHeader page="Add Brand" />
+       
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {profilecard.length > 0 &&
+          {profilecard.length ==0 ?<h1 className="text-center text-3xl font-bold mt-10">No New Request </h1>:
             profilecard.map((item) => (
 
               <Card item={item} />

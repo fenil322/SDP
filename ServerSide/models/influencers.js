@@ -3,11 +3,11 @@ const jwt = require("jsonwebtoken");
 const influencerSchema = new mongoose.Schema({
   fname: {
     type: String,
-    required: true,
+    // required: true,
   },
   lname: {
     type: String,
-    required: true,
+    // required: true,
   },
   gender: {
     type: String,
@@ -28,15 +28,15 @@ const influencerSchema = new mongoose.Schema({
   },
   age: {
     type: String,
-    required: true,
+    // required: true,
   },
   city: {
     type: String,
-    required: true,
+    // required: true,
   },
   state: {
     type: String,
-    required: true,
+    // required: true,
   },
   country: {
     type: String,
@@ -48,19 +48,23 @@ const influencerSchema = new mongoose.Schema({
   },
   instagram: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramURL: {
     type: String,
-    required: true,
+    // required: true,
   },
   instagramFollowers: {
     type: String,
-    required: true,
+    // required: true,
+  },
+  Adsrequired: {
+    type: Boolean,
+    default: true
   },
   instagramEngagementRate: {
     type: String,
-    required: true,
+    // required: true,
   },
   facebook: {
     type: String,
@@ -98,22 +102,25 @@ const influencerSchema = new mongoose.Schema({
 
     token: {
       type: String,
-      // required: true
+      required: true
     }
   }
   ],
-  cat1:{
+  cat1: {
     type: String
   }
   ,
-  cat2:{
+  cat2: {
     type: String
   }
   ,
-  cat3:{
+  cat3: {
     type: String
   },
-  discription:{
+  discription: {
+    type: String
+  },
+  profile: {
     type: String
   },
   resetToken: String,
@@ -124,7 +131,7 @@ influencerSchema.methods.generateAuthToken = async function () {
   try {
     const newtoken = jwt.sign({ _id: this._id }, "mynameisFenilsavaniandthisisoursdpproject");
     // console.log(newtoken);
-    this.tokens=this.tokens.concat({ token: newtoken });
+    this.tokens = this.tokens.concat({ token: newtoken });
     await this.save();
     return newtoken;
   } catch (err) {

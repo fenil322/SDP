@@ -7,7 +7,7 @@ import homegif from './Images/homegif.gif'
 const Home = () => {
 
   let commonClass = "w-30 mx-20 bg-white my-20 p-5 rounded-sm";
-// from ss
+  // from ss
   return (
 
     <div className=' bg-white'>
@@ -15,9 +15,9 @@ const Home = () => {
 
 
       {/*                                             Hero section banner                                    */}
-      <div className='Hero-Section w-5/6 m-auto mt-10 '>
+      <div className='Hero-Section w-5/6 m-auto  mt-24'>
 
-        <div className=' flex  mx-auto items-center'>
+        <div className=' flex  items-center  '>
           <div className='text-left'>
             <div className='text-6xl font-medium'>
               Adcosign generates sales to brands via micro-influencers
@@ -30,16 +30,16 @@ const Home = () => {
             <div className='flex pt-8 text-lg'>
 
               <NavLink to='/BrandIntro'>
-              <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '  >I'm a Brand</div>
+                <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '  >I'm a Brand</div>
               </NavLink>
               <NavLink to='/InfluencerIntro'>
 
-              <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>I'm a Creater </div>
+                <div className='mr-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>I'm a Creater </div>
               </NavLink>
 
             </div>
           </div>
-          <img src={homegif} className='w-1/2   ml-auto ' />
+          <img src={homegif} className='w-1/3 ml-auto  ' />
 
         </div>
 
@@ -80,7 +80,7 @@ const Home = () => {
           </div>
           <div className='flex'>
             <NavLink to='/BrandSignUp'>
-            <div className='my-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>Get Started-it's free   </div>
+              <div className='my-5 bg-gray-300 px-7 py-3 hover:bg-gray-400 ease-in duration-200  rounded '>Get Started-it's free   </div>
             </NavLink>
           </div>
 

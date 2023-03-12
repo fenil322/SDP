@@ -85,14 +85,17 @@ exports.getunverifiedbrand = (req, res) => {
 }
 
 exports.getunverifiendInfluencer = (req, res) => {
-    Influencer.find({ valid: 0 })
-        .then(result => res.status(200).json({ data: result }))
+    Influencer.find({ valid: 0 }).select('-password')
+        .then(result => {
+            console.log(result);
+            res.status(200).json({ data: result })
+        })
         .catch(err => console.log(err))
 
 }
 
-exports.validateinfluencer = async(req, res) => {
-   
+exports.validateinfluencer = async (req, res) => {
+
     const { email } = req.body;
     const data = await Influencer.findOneAndUpdate(
         { email: email },
@@ -100,7 +103,7 @@ exports.validateinfluencer = async(req, res) => {
         { new: true });
 
     if (!data) {
-        return res.status(422).json({ message: "Data not updated!", success: false,data:data });
+        return res.status(422).json({ message: "Data not updated!", success: false, data: data });
     } else {
         return res.status(200).json({ message: "Data updated successfully!", success: true, data: data });
     }
@@ -114,7 +117,7 @@ exports.validatebrand = async (req, res) => {
         { new: true });
 
     if (!data) {
-        return res.status(422).json({ message: "Data not updated!", success: false,data:data });
+        return res.status(422).json({ message: "Data not updated!", success: false, data: data });
     } else {
         return res.status(200).json({ message: "Data updated successfully!", success: true, data: data });
     }
@@ -123,12 +126,12 @@ exports.validatebrand = async (req, res) => {
     // .catch((err) => console.log(err))
 }
 
-exports.deleteinfluencer =async (req, res) => {
+exports.deleteinfluencer = async (req, res) => {
     const { email } = req.body;
     const data = await Influencer.findOneAndDelete({ email: email })
-        
+
     if (!data) {
-        return res.status(422).json({ message: "Data not deleted!", success: false,data:data });
+        return res.status(422).json({ message: "Data not deleted!", success: false, data: data });
     } else {
         return res.status(200).json({ message: "Data deleted successfully!", success: true, data: data });
     }
@@ -137,11 +140,11 @@ exports.deleteinfluencer =async (req, res) => {
 exports.deletebrand = async (req, res) => {
     const { email } = req.body;
     // console.log(email);
-    const data = await Brand.findOneAndDelete({email:email})
+    const data = await Brand.findOneAndDelete({ email: email })
     // console.log(data);
     if (!data) {
-        return res.status(422).json({ message: "Data not deleted!", success: false,data:data });
+        return res.status(422).json({ message: "Data not deleted!", success: false, data: data });
     } else {
-        return res.status(200).json({ message: "Data deleted successfully!", success: true,data:data });
+        return res.status(200).json({ message: "Data deleted successfully!", success: true, data: data });
     }
 }
