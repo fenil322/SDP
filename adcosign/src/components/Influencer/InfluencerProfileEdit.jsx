@@ -134,9 +134,8 @@ const InfluencerProfileEdit = () => {
       // console.log(data);
       if (data.success == true) {
         toast.success(data.message);
-        await sleep(1500);
-
-        navigate("/InfluencerProfile");
+        await sleep(1500)
+        navigate("/InfluencerProfile")
         window.location.reload();
       }
     } catch (error) {

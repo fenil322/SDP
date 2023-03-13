@@ -72,14 +72,9 @@ const Card = ({ item }) => {
   return (
     <div className="">
       <div className="bg-gray-100 mx-10 max-sm:mx-0 max-md:mx-10  my-10 shadow-lg rounded-xl ">
-        {/* <Link to={{
-          pathname: '/InfluencerDetails',
-          state: { data:data}
-        }} > */}
-        <div className="cursor-pointer" onClick={branddetailpage}>
-          <div className="cursor-pointer">
+      
             <div className="px-3 py-3">
-              <div className="flex flex-wrap ">
+              <div className="flex flex-wrap cursor-pointer  " onClick={branddetailpage}>
                 <div className="flex px-4 my-5">
                   <div className="w-20 h-20 rounded-full">
                     <img
@@ -151,10 +146,9 @@ const Card = ({ item }) => {
                 </div>
               </div> */}
             </div>
-          </div>
-        </div>
+         
 
-        {/* </Link > */}
+        
       </div>
     </div>
   );

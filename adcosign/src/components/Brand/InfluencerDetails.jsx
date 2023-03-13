@@ -94,7 +94,7 @@ const InfluencerDetails = (props) => {
                 <img
                   src={persondata.profile}
                   //  src={persondata.photo}
-                  class="border-4 w-40 border-white rounded-full bg-gray-200"
+                  class="border-4 h-40 w-40 border-white rounded-full bg-gray-200"
                   alt="pic"
                 />
               </div>

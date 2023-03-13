@@ -120,8 +120,8 @@ const BrandProfileEdit = () => {
         toast.success(data.message);
         await sleep(1500);
         setLogourl("");
+        navigate("/BrandProfile")
         window.location.reload();
-        navigate("/BrandProfile");
       }
     } catch (err) {
       console.log(err);

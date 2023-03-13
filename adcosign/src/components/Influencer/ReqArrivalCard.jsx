@@ -58,9 +58,9 @@ function ReqArrivalCard({ item }) {
                   <BiCurrentLocation size={20} />
                 </div>
                 <div>
-                  <a href="#" className="" >
+                  
                     <p class="mb-1 text-lg hover:text-blue-500 ">{location}</p>
-                  </a>
+                  
                 </div>
               </div>
               {/* <p class="mb-1 ml-8 text-lg ">

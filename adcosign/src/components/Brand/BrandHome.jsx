@@ -106,7 +106,7 @@ const BrandHome = () => {
   return (
     <div className="flex flex-row h-[screen]">
       <Navbar />
-      <div className="ml-14 w-screen">
+      <div className="ml-14 w-screen h-screen">
         <BrandHeader page="BrandHome" />
 
         <div className="flex ">
@@ -351,7 +351,7 @@ const BrandHome = () => {
             </div>
           </div>
         </div>
-        <div className="mb-15">
+        <div className="mb-15 ">  
           <div class="flex justify-center">
             <nav aria-label="Page navigation example">
               <ul class="flex list-style-none">
