@@ -4,10 +4,18 @@ import BrandHome from './BrandHome'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Formik } from 'formik'
+import * as Yup from 'yup';
+import axios from 'axios';
 
 const BrandLogin = () => {
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+  const validationSchema = Yup.object({
+    email: Yup.string().email('Invalid email!').required('Email is required!'),
+    password: Yup.string().min(8, 'password is too short!').required('password is required!'),
+  })
 
   const activebtn = 'flex justify-center w-full px-6 py-3 mt-4 text-blue-500 border border-white rounded-md md:mt-0 md:w-auto md:mx-2 dark:border-blue-400 dark:text-blue-400 focus:outline-none'
   const deactivebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
@@ -67,6 +75,31 @@ const BrandLogin = () => {
 
 
   }
+
+  const signUp = async (values, FormikActions) => {
+    // e.preventDefault()
+
+    // console.log("Hello");
+    try {
+      const res = await axios.post('/brand/brandlogin', {
+        ...values
+      });
+      const data = res.data;
+      console.log(data)
+      if (res.status == 200) {
+        toast.success(data.message);
+        await sleep(1000)
+        navigate("/BrandHome?page=1");
+      }
+      FormikActions.resetForm();
+      FormikActions.setSubmitting(false);
+    } catch (err) {
+      // console.log(err.response.data.error);
+      toast.error(err.response.data.error);
+      //  navigate("/InfluencerHome");
+    }
+  }
+
   return (
     <div className=''>
       <div>
@@ -127,49 +160,81 @@ const BrandLogin = () => {
                     </div>
 
                     <div class="mt-8">
-                      <form>
-                        <div>
-                          <label for="email" class="block mb-2 text-lg text-white dark:text-gray-200">Email Address</label>
-                          <input type="email" name="email" id="email" placeholder="example@example.com"
-                            onChange={handleInput}
-                            value={userdata.email}
-                            class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                        </div>
+                      <Formik
+                        initialValues={userdata}
+                        validationSchema={validationSchema}
+                        onSubmit={signUp}
+                      >
+                        {({ values, errors, touched, handleChange, handleBlur, handleSubmit }) => {
 
-                        <div class="mt-6">
-                          <div class="flex justify-between">
-                            <label for="password" class="text-lg text-white dark:text-gray-200">Password</label>
-                            <a href="#" class="text-sm text-white focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
-                          </div>
-                          <div className='flex flex-row'>
+                          const { email, password } = values;
+                          return <>
+                            <form method='POST'>
+                              <div>
+                                <label for="email" class="block mb-2 text-lg text-white ">Email Address</label>
+                                <input type="email" name="email" id="email" placeholder="example@example.com"
+                                  class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-700  dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                  value={email}
+                                  onChange={handleChange('email')}
+                                  onBlur={handleBlur('email')}
+                                />
+                                {
+                                  errors.email && touched.email ?
+                                    (<p className='text-red-600'>{errors.email}</p>) : null
+                                }
+                              </div>
 
-                            <input type={passwordType} name="password" id="password" placeholder="Your Password"
-                              class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                              value={userdata.password}
-                              onChange={handleInput}
-                            />
+                              <div class="mt-6">
+                                <div class="flex justify-between">
+                                  <label for="password" class="text-lg text-white ">Password</label>
+                                  <a href="#" class="text-sm text-white focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
+                                </div>
+                                {/* <div className="input-group my-4 mx-4">
+                    <input type={passwordType} onChange={handlePasswordChange} value={passwordInput} name="password" class="form-control" placeholder="Password" />
+                    <div className="input-group-btn">
+                     <button className="btn btn-outline-primary" onClick={togglePassword}>
+                     { passwordType==="password"? <i className="bi bi-eye-slash"></i> :<i className="bi bi-eye"></i> }
+                     </button>
+                    </div>
+                </div> */}
+                                <div className='flex flex-row'>
 
-                            <div className='cursor-pointer my-auto  mx-1' onClick={togglePassword}>
+                                  <input type={passwordType} name="password" id="password" placeholder="Your Password"
+                                    class="block w-full px-4 py-2 mt-2 text-gray-900 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-700 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                                    value={password}
+                                    onChange={handleChange('password')}
+                                    onBlur={handleBlur('password')}
+                                  />
 
-                              {passwordType === "password" ? <AiFillEye className='dark:text-white text-white' size={25} /> : <AiFillEyeInvisible size={25} className='dark:text-white text-white' />}
-                            </div>
+                                  <div className='cursor-pointer my-auto mx-1' onClick={togglePassword}>
 
-                          </div>
-                        </div>
+                                    {passwordType === "password" ? <AiFillEye className='dark:text-white text-white ' size={25} /> : <AiFillEyeInvisible size={25} className='dark:text-white text-white' />}
+                                  </div>
 
-                        <div class="mt-10 text-center">
+                                </div>
+                                {
+                                  errors.password && touched.password ?
+                                    (<p className='text-red-600'>{errors.password}</p>) : null
+                                }
+                              </div>
 
+                              <div class="mt-10 mx-auto text-center">
+                                {/* <NavLink to='/InfluencerHome'> */}
 
-                          <button
-                            class="w-1/2 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
-                            onClick={postdata}
-                          >
-                            Sign in
-                          </button>
+                                <button
+                                  class="w-1/2 mx-auto px-4 py-2  text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
+                                  onClick={(errors) ? handleSubmit : null}
+                                >
 
-                        </div>
+                                  Sign in
+                                </button>
+                                {/* </NavLink> */}
+                              </div>
 
-                      </form>
+                            </form>
+                          </>
+                        }}
+                      </Formik>
 
                       <p class="mt-6 text-lg text-center text-white">Don&#x27;t have an account yet? <a href="BrandSignUp" class=" font-bold text-blue-300 focus:outline-none focus:underline hover:underline">Sign up</a>.</p>
                     </div>
