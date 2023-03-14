@@ -53,7 +53,7 @@ const Card = ({ item }) => {
     photo1,
     photo2,
     images,
-    logo
+    logo,
   } = item;
 
   const navigate = useNavigate();
@@ -71,66 +71,66 @@ const Card = ({ item }) => {
   };
   return (
     <div className="">
-      <div className="bg-gray-100 mx-10 max-sm:mx-0 max-md:mx-10  my-10 shadow-lg rounded-xl ">
-      
-            <div className="px-3 py-3">
-              <div className="flex flex-wrap cursor-pointer  " onClick={branddetailpage}>
-                <div className="flex px-4 my-5">
-                  <div className="w-20 h-20 rounded-full">
-                    <img
-                      src={logo}
-                      alt="myPic"
-                      className="shadow-xl w-full h-full rounded-full  "
-                    />
+      <div className="mx-10 max-sm:mx-0 max-md:mx-10  my-10  ">
+        <div className="px-3 py-3 bg-gray-100 rounded-2xl  shadow-lg">
+          <div
+            className="flex flex-wrap cursor-pointer  "
+            onClick={branddetailpage}
+          >
+            <div className="flex px-4 my-5">
+              <div className="w-20 h-20 rounded-full">
+                <img
+                  src={logo}
+                  alt="myPic"
+                  className="shadow-xl w-full h-full rounded-full  "
+                />
+              </div>
+              <div className=" mt-2 ml-10">
+                <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
+                  {shopName}
+                </h3>
+
+                <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
+                  <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
+                  {brandType}
+                </div>
+              </div>
+            </div>
+            <div className="w-full flex justify-center"></div>
+          </div>
+          <div className=" py-3 border-t border-slate-200 ">
+            <Carousel {...settings}>
+              {images?.map((slideImage, index) => (
+                <Wrap>
+                  <div key={index}>
+                    <div
+                      style={{
+                        ...divStyle,
+                        backgroundImage: `url(${slideImage.url})`,
+                      }}
+                    ></div>
                   </div>
-                  <div className=" mt-2 ml-10">
-                    <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
-                      {shopName}
-                    </h3>
+                </Wrap>
+              ))}
+            </Carousel>
+          </div>
 
-                    <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
-                      <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
-                      {brandType}
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full flex justify-center"></div>
-              </div>
-              <div className=" py-3 border-t border-slate-200 ">
-                <Carousel {...settings}>
-                  {
-                  
-                  images?.map((slideImage, index) => (
-                    <Wrap>
-                      <div key={index}>
-                        <div  
-                          style={{
-                            ...divStyle,
-                            backgroundImage: `url(${slideImage.url})`,
-                          }}
-                        ></div>
-                      </div>
-                    </Wrap>
-                  ))}
-                </Carousel>
-              </div>
+          <div className="m-3">
+            <div className="flex space-x-2 p-1">
+              <TiLocation size={20} />
+              <div>{item.country + ", " + item.city}</div>
+            </div>
+            <div className="flex space-x-2 p-1">
+              <FiPhoneCall size={20} />
+              <div>{item.phone}</div>
+            </div>
+            <div className="flex space-x-2 p-1">
+              <MdEmail size={20} />
+              <div>{item.email}</div>
+            </div>
+          </div>
 
-              <div className="m-3">
-                <div className="flex space-x-2 p-1">
-                  <TiLocation size={20} />
-                  <div>{item.country + ", " + item.city}</div>
-                </div>
-                <div className="flex space-x-2 p-1">
-                  <FiPhoneCall size={20} />
-                  <div>{item.phone}</div>
-                </div>
-                <div className="flex space-x-2 p-1">
-                  <MdEmail size={20} />
-                  <div>{item.email}</div>
-                </div>
-              </div>
-
-              {/* <div className=" py-5 border-t border-slate-200 ">
+          {/* <div className=" py-5 border-t border-slate-200 ">
                 <div className="flex flex-wrap justify-center">
 
                   <div className="flex  items-center">
@@ -145,10 +145,7 @@ const Card = ({ item }) => {
                   </div>
                 </div>
               </div> */}
-            </div>
-         
-
-        
+        </div>
       </div>
     </div>
   );

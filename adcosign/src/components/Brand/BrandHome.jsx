@@ -110,7 +110,7 @@ const BrandHome = () => {
         <BrandHeader page="BrandHome" />
 
         <div className="flex ">
-          {/* <div className="">
+           {/* <div className="">
             <aside class="w-64" aria-label="Sidebar">
               <div class="px-3 py-4 overflow-y-auto rounded-tr-3xl rounded-r-3xl bg-blue-900 text-gray-100">
                 <ul class="space-y-2">
@@ -335,7 +335,7 @@ const BrandHome = () => {
                 </ul>
               </div>
             </aside>
-          </div> */}
+          </div>  */}
 
           <div className="">
             {/* <div className="mx-20 font-medium font-mono text-xl">

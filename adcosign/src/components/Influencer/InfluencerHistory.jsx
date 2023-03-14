@@ -1,76 +1,101 @@
 import React, { useEffect, useState } from "react";
 import InfluencerHeader from "./InfluencerHeader";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Navbar from "./Navbar";
+import { BiCurrentLocation } from "react-icons/bi";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { RiContactsFill } from "react-icons/ri";
 
 const InfluencerHistory = () => {
-
   const navigate = useNavigate();
 
-  const [profilecard, setprofilecard] = useState([])
+  const [profilecard, setprofilecard] = useState([]);
   const getcurrentconsignmets = async () => {
     try {
-      const res = await axios.get('consignment/getinfluencercurrentconsignments');
+      const res = await axios.get(
+        "consignment/getinfluencercurrentconsignments"
+      );
       const data = res.data;
       console.log(data);
-      setprofilecard(data.data)
-      
-
+      setprofilecard(data.data);
     } catch (err) {
       if (err.response.status == 422) {
-        toast.error(err.response.data.message)
-        navigate('/InfluencerLogin')
+        toast.error(err.response.data.message);
+        navigate("/InfluencerLogin");
       }
     }
-  }
+  };
   useEffect(() => {
-
-    getcurrentconsignmets()
-  }, [])
+    getcurrentconsignmets();
+  }, []);
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Navbar />
-      <div className="h-screen ml-14 w-screen">
+      <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="History" />
-        <div className="mx-20 my-10 grid grid-cols-2">
-          {
-            profilecard.length == 0 ? <h1 className="text-3xl font-bold ">No Agreements Found</h1> :
-              profilecard.map((item, index) => (
-
-                <a
-                  href="#"
-                  class="flex flex-col w-4/6 items-center bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-                >
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
+          {profilecard.length == 0 ? (
+            <h1 className="text-3xl font-bold ">No Agreements Found</h1>
+          ) : (
+            profilecard.map((data, index) => (
+              <div className="mt-20 items-center justify-center mx-10 shadow-2xl bg-gray-100  rounded-lg ">
+                <div class="mx-auto max-w-md overflow-hidden">
                   <img
-                    class="object-cover w-full rounded-none h-96 md:h-auto md:w-48 md:rounded-none md:rounded-none-lg m-1 p-1"
-                    src={item.logo}
-                    alt="Brand image"
+                    //src={photo}
+                    src={data.logo}
+                    class="h-1/2 w-1/2 m-auto mt-5  "
+                    alt="image"
                   />
-                  <div class="flex flex-col   justify-between p-6 leading-normal">
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Owner Name : {item.uname}
-                    </p>
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Shop Name : {item.shopName}
-                    </p>
 
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Address : {item.address}
-                    </p>
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Contact No. :{item.phone}
-                    </p>
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Ratings : {item.rating}
-                    </p>
-                   
+                  <div class="p-4 ">
+                    <div className="text-center">
+                      <h3 class="text-3xl font-bold font-dmserif text-neutral-700">
+                        {data.shopName}
+                      </h3>
+
+                      <p class=" text-xl text-gray-700 font-dmserif">
+                        {data.brandType}
+                      </p>
+                    </div>
+
+                    <br></br>
+                    <hr></hr>
+                    <br></br>
+                    <div className="flex space-x-2.5 items-center">
+                      <div>
+                        <RiContactsFill size={20} />
+                      </div>
+                      <div>
+                        <p class="mb-1 text-lg ">{data.phone}</p>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2.5 items-center">
+                      <div>
+                        <MdMarkEmailUnread size={20} />
+                      </div>
+                      <div>
+                        <p class="mb-1 text-lg">{data.email}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex space-x-2.5 items-center">
+                      <div>
+                        <BiCurrentLocation size={20} />
+                      </div>
+                      <div>
+                        <p class="mb-1 text-lg hover:text-blue-500 ">
+                          {data.location}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </a>
-              ))
-          }
+                </div>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

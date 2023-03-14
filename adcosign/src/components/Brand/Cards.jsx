@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { AiOutlineInstagram } from "react-icons/ai";
-import { AiOutlineFacebook } from "react-icons/ai";
-import { CiTwitter } from "react-icons/ci";
+  import { AiOutlineInstagram } from "react-icons/ai";
+  import { AiOutlineFacebook } from "react-icons/ai";
+  import { CiTwitter } from "react-icons/ci";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import InfluencerDetails from "./InfluencerDetails";
 
@@ -12,7 +12,7 @@ function Card({ item }) {
   const { fname, lname, phone, email, city, state, country, password,
     age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
     facebook, facebookURL, facebookFollowers, facebookEngagementRate,
-    twitter, twitterURL, twitterFollowers, twitterEngagementRate,
+    twitter, twitterURL, twitterFollowers, twitterEngagementRate,gender,
     profile, cat1 = "fation", cat2 = "study", cat3 = "dance", discription = "hello i am there"
 
   } = item;
@@ -47,6 +47,10 @@ function Card({ item }) {
                       {fname + " " + lname}
                     </h3>
 
+                    <div className="text-xs mt-0  text-slate-400 font-bold uppercase">
+                      <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
+                      {gender}
+                    </div>
                     <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
                       <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
                       {city + ", " + country}

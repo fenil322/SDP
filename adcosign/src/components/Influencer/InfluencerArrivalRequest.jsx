@@ -27,15 +27,15 @@ const InfluencerArrivalRequest = () => {
   };
   useEffect(() => {
     getBrandRequest();
-    console.log(location);
+    // console.log(location);
   }, []);
 
   return (
-    <div className="flex h-screen">
+    <div className="flex">
       <Navbar />
-      <div className=" ml-14 w-screen">
+      <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="Arrival Requests" />
-        <div className="flex grid md:grid-cols-3">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
           {profilecard.length == 0 ? (
             <h1 className="text-3xl font-bold text-center">No Request Found</h1>
           ) : (

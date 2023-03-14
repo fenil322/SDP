@@ -1,148 +1,129 @@
 import React, { useEffect, useState } from "react";
 import BrandHeader from "./BrandHeader";
-import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import { AiOutlineInstagram } from "react-icons/ai";
+import { AiOutlineFacebook } from "react-icons/ai";
+import { CiTwitter } from "react-icons/ci";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdEmail } from "react-icons/md";
 // import {Rating} from "@mui/lab"
 // import Rating from '@mui/material/Rating';
 // import Box from '@mui/material/Box';
 // import StarIcon from '@mui/icons-material/StarIcon';
-import Rating from '@mui/material/Rating';
+// import Rating from "@mui/material/Rating";
 const BrandHistory = () => {
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([])
+  const [profilecard, setprofilecard] = useState([]);
   const [value, setValue] = React.useState(2);
   const [hover, setHover] = React.useState(-1);
   const getbrandcurrentconsignments = async () => {
     try {
-      const res = await axios.get('consignment/getbrandcurrentconsignments');
+      const res = await axios.get("consignment/getbrandcurrentconsignments");
       const data = res.data;
       console.log(data);
-      setprofilecard(data.data)
-
+      setprofilecard(data.data);
 
       // console.log(profilecard)
-
     } catch (err) {
       if (err.response.status == 422) {
-        toast.error(err.response.data.message)
-        navigate('/BradConsignments')
+        toast.error(err.response.data.message);
+        navigate("/BradConsignments");
       }
     }
-  }
+  };
   useEffect(() => {
-    getbrandcurrentconsignments()
-  }, [])
+    getbrandcurrentconsignments();
+  }, []);
 
   const labels = {
-    0.5: 'Useless',
-    1: 'Useless+',
-    1.5: 'Poor',
-    2: 'Poor+',
-    2.5: 'Ok',
-    3: 'Ok+',
-    3.5: 'Good',
-    4: 'Good+',
-    4.5: 'Excellent',
-    5: 'Excellent+',
+    0.5: "Useless",
+    1: "Useless+",
+    1.5: "Poor",
+    2: "Poor+",
+    2.5: "Ok",
+    3: "Ok+",
+    3.5: "Good",
+    4: "Good+",
+    4.5: "Excellent",
+    5: "Excellent+",
   };
 
   function getLabelText(value) {
-    return `${value} Star${value !== 1 ? 's' : ''}, ${labels[value]}`;
+    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
   }
-
 
   return (
     <div className="flex flex-row h-screen">
       <Navbar />
 
-      <div className=" ml-14 w-screen">
+      <div className=" ml-14 w-screen max-sm:ml-0">
         <BrandHeader page="History" />
-        <div className="my-10 mx-10  grid grid-cols-2 max-sm:grid-cols-1">
-          {
-            profilecard.length == 0 ? <h1 className="text-3xl font-bold text-center">No Consignments Found</h1> :
-              profilecard.map((item, index) => (
-                <a
-                  href="#"
-                  class="flex flex-col  w-5/6 items-center bg-white border rounded-lg shadow-md md:flex-row hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-                >
-                  <img
-                    class="object-cover overflow-auto w-full rounded-full h-96 md:h-48 max-sm:h-52 md:w-48 md:rounded-full md:rounded-full-lg m-2 p-2"
-                    src={item.profile}
-                    alt=""
-                  />
-                  <div class="flex flex-col   justify-between p-4 leading-normal">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.fname} {item.lname}
-                    </h5>
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      {item.email}
-                    </p>
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      {item.phone}
-                    </p>
+        <div className="mx-20 my-10  max-sm:mx-0 grid md:grid-cols-3 grid-cols-1 ">
+          {profilecard.length == 0 ? (
+            <h1 className="text-3xl font-bold text-center">
+              No Consignments Found
+            </h1>
+          ) : (
+            profilecard.map((item, index) => (
+              <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-xl my-10">
+                {/* <Link to={{
+          pathname: '/InfluencerDetails',
+          state: { data:data}
+        }} > */}
 
-                    <div>
-                      {/* <button
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      try {
-                        const res = await axios.put('consignment/payment', { id: item._id })
-                        const resdata = res.data;
-                        console.log(resdata)
-                        if (resdata.success == true) {
-                          window.location.reload();
-                        }
-                      } catch (err) {
-                        console.log(err);
-                      }
-                    }}
-                    className="flex m-1 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-800 rounded-md drop-shadow-md">
-                    <span class="text-white">Make Payment</span>
-                  </button> */}
-                      <button
-                        type="button"
-                        class="flex m-1 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-800 rounded-md drop-shadow-md"
-                      >
-                        <span className="text-white">Give a Feedback</span>
-                      </button>
-                      {/* <Box
-                        sx={{
-                          width: 200,
-                          display: 'flex',
-                          alignItems: 'center',
-                        }}
-                      >
-                        <Rating
-                          name="hover-feedback"
-                          value={value}
-                          precision={0.5}
-                          getLabelText={getLabelText}
-                          onChange={(event, newValue) => {
-                            setValue(newValue);
-                          }}
-                          onChangeActive={(event, newHover) => {
-                            setHover(newHover);
-                          }}
-                          //emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-                        />
-                        {value !== null && (
-                          <Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-                        )}
-                      </Box> */}
-                      {/* <Rating
-                        name="simple-controlled"
-                        value={value}
-                        onChange={(event, newValue) => {
-                          setValue(newValue);
-                        }}
-                      /> */}
+                <div className="flex ">
+                  <div className="flex px-3 my-5">
+                    <img
+                      src={item.profile}
+                      alt="myPic"
+                      className="shadow-xl w-32 h-32 rounded-full  "
+                    />
+
+                    <div className=" mt-2 ml-5">
+                      <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
+                        {item.fname + " " + item.lname}
+                      </h3>
+
+                      <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                        {item.gender}
+                      </div>
+                      <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                        {item.city + ", " + item.country}
+                      </div>
                     </div>
                   </div>
-                </a>
-              ))}
+                </div>
+                <div className="border-t">
+                  <div className="mt-3 ml-5">
+                    <div className="flex space-x-2.5 items-center mt-3">
+                      <FiPhoneCall size={20} />
+                      <div>{item.phone}</div>
+                    </div>
+                    <div className="flex space-x-2.5 items-center mt-3">
+                      <MdEmail size={20} />
+                      <div>{item.email}</div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="flex m-1  mx-auto my-4 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-800 rounded-md drop-shadow-md"
+                >
+                  <span className="text-white">Give a Feedback</span>
+                </button>
+
+               
+
+                {/* </Link > */}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>

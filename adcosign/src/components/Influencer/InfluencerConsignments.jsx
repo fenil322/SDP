@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./Navbar";
-
+import { BiCurrentLocation } from "react-icons/bi";
+import { MdMarkEmailUnread } from "react-icons/md";
+import { RiContactsFill } from "react-icons/ri";
+import { TiPlus } from "react-icons/ti";
 const InfluencerConsignments = () => {
   const navigate = useNavigate();
   const [amount, setAmount] = useState([]);
@@ -31,101 +34,114 @@ const InfluencerConsignments = () => {
   }, []);
 
   return (
-    <div className="">
+    <div className="flex">
       <Navbar />
-      <div className="h-screen ml-14 max-sm:ml-0 ">
+      <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="Agreements" />
-        <div className="  grid grid-cols-2 max-sm:grid-cols-1 gap-4 ">
-          {profilecard.length == 0 ?
-            <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1> :
-            profilecard.map((data,index) => (
-              <div key={index} className=" bg-teal-300 max-sm:mx-10 mx-20 my-8 p-10 rounded-xl shadow-xl w-5/6">
-                <div className="h-full flex items-center">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
+          {profilecard.length == 0 ? (
+            <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1>
+          ) : (
+            profilecard.map((data, index) => (
+              <div className="mt-10 items-center justify-center  ">
+                <div class="mx-auto max-w-md overflow-hidden shadow-2xl bg-gray-100  rounded-2xl">
                   <img
-                    class="object-cover w-full rounded-none h-96 max-sm:h-48 md:h-auto md:w-48 md:rounded-none md:rounded-none-lg m-1 p-1"
+                    //src={photo}
                     src={data.logo}
-                    alt=""
+                    class="h-1/2 w-1/2 m-auto mt-5  "
+                    alt="image"
                   />
-                  <div class="flex flex-col justify-between p-6 leading-normal">
-                    <div className="flex justify-between">
-                      <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                        Brand Name : {data.shopName}
-                      </p>
 
-                      {/* <button className="flex space-x-2 items-center px-3 py-2 bg-sky-500 hover:bg-sky-800 rounded-md drop-shadow-md">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          class="h-5 w-5   fill-white"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                            clip-rule="evenodd"
-                          ></path>
-                        </svg>
-                      </button> */}
+                  <div class="p-4 ">
+                    <div className="text-center">
+                      <h3 class="text-3xl font-bold font-dmserif text-neutral-700">
+                        {data.shopName}
+                      </h3>
+
+                      <p class=" text-xl text-gray-700 font-dmserif">
+                        {data.brandType}
+                      </p>
                     </div>
 
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Address : {data.address}
-                    </p>
+                    <br></br>
+                    <hr></hr>
+                    <br></br>
+                    <div className="flex space-x-2.5 items-center">
+                      <div>
+                        <RiContactsFill size={20} />
+                      </div>
+                      <div>
+                        <p class="mb-1 text-lg ">{data.phone}</p>
+                      </div>
+                    </div>
+                    <div className="flex space-x-2.5 items-center">
+                      <div>
+                        <MdMarkEmailUnread size={20} />
+                      </div>
+                      <div>
+                        <p class="mb-1 text-lg">{data.email}</p>
+                      </div>
+                    </div>
 
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Email : {data.email}
-                    </p>
+                    <div className="flex space-x-2.5 items-center">
+                      <div>
+                        <BiCurrentLocation size={20} />
+                      </div>
+                      <div>
+                        <p class="mb-1 text-lg hover:text-blue-500 ">
+                          {data.location}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex justify-center space-x-6 mb-5">
 
-                    <p class="mb-2 font-semibold text-gray-700 dark:text-gray-400">
-                      Contact No. : {data.phone}
-                    </p>
-                    <div className=" mr-10">
-                      <button
-                        onClick={async (e) => {
-                          e.preventDefault()
-                          if (window.confirm("Are you sure you want to delete this consignment?")) {
-                            try {
-                              const res = await axios.delete("consignment/deletetbrandreq", { data: { _id: data._id } });
-                              const resdata = res.data;
-                              console.log(resdata)
-                              if (resdata.success == true) {
-                                window.location.reload();
-                              }
-                            } catch (err) {
-                              navigate("/InfluencerConsignments");
-                              console.log(err);
+                    <button
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        if (
+                          window.confirm(
+                            "Are you sure you want to delete this consignment?"
+                          )
+                        ) {
+                          try {
+                            const res = await axios.delete(
+                              "consignment/deletetbrandreq",
+                              { data: { _id: data._id } }
+                            );
+                            const resdata = res.data;
+                            console.log(resdata);
+                            if (resdata.success == true) {
+                              window.location.reload();
                             }
-                          } else {
+                          } catch (err) {
                             navigate("/InfluencerConsignments");
+                            console.log(err);
                           }
-                        }}
-                        class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md">
-                        <svg
-                          class="fill-white"
-                          xmlns="http://www.w3.org/2000/svg"
-                          x="0px"
-                          y="0px"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
-                        </svg>
-                        <span class="text-white">Remove</span>
-                      </button>
+                        } else {
+                          navigate("/InfluencerConsignments");
+                        }
+                      }}
+                      class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md"
+                    >
+                      <svg
+                        class="fill-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
+                      </svg>
+                      <span class="text-white">Remove</span>
+                    </button>
                     </div>
                   </div>
-
                 </div>
-                
-
-               
-
               </div>
-
             ))
-
-          }
+          )}
         </div>
       </div>
     </div>

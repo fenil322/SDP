@@ -1,134 +1,188 @@
 import React, { useEffect, useState } from "react";
 import BrandHeader from "./BrandHeader";
-import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 import { TiPlus } from "react-icons/ti";
 import Navbar from "./Navbar";
-
+import { AiOutlineInstagram } from "react-icons/ai";
+import { AiOutlineFacebook } from "react-icons/ai";
+import { CiTwitter } from "react-icons/ci";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdEmail } from "react-icons/md";
 const BrandArrivalRequest = () => {
   const navigate = useNavigate();
-  const [profilecard, setprofilecard] = useState([])
+  const [profilecard, setprofilecard] = useState([]);
   const getBrandRequest = async () => {
     try {
-
-      const res = await axios.get('consignment/getinfluencerreq');
+      const res = await axios.get("consignment/getinfluencerreq");
       const data = res.data;
       console.log(data.data);
-      setprofilecard(data.data)
-      console.log(profilecard)
+      setprofilecard(data.data);
+      console.log(profilecard);
     } catch (err) {
       if (err.response.status == 422) {
-        toast.error(err.response.data.message)
-        navigate('/BrandLogin')
+        toast.error(err.response.data.message);
+        navigate("/BrandLogin");
       }
     }
-
-  }
+  };
   useEffect(() => {
-    getBrandRequest()
-  }, [])
+    getBrandRequest();
+  }, []);
 
   return (
     <div className="flex flex-row h-[screen]">
       <Navbar />
-      <div className="h-screen ml-14 w-screen">
+      <div className="h-screen ml-14 w-screen max-sm:ml-0">
         <BrandHeader page="Arrival Request" />
-        <div className="mx-20 my-10 grid grid-cols-2">
-          {
-            profilecard.length == 0 ? <h1 className="text-3xl font-bold text-center">No Arrival Request</h1> :
-              profilecard.map((item, index) => (
-                <a
-                  href="#"
-                  class="flex flex-col items-center bg-white border rounded-lg shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-                >
-                  <img
-                    class="object-cover w-full rounded-full h-96 md:h-auto md:w-48 md:rounded-full md:rounded-full-lg m-2 p-2"
-                    src={item.profile}
-                    alt=""
-                  />
-                  <div class="flex flex-col justify-between p-4 leading-normal">
-                    <h5 class=" text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                      {item.fname} {item.lname}
+        <div className="mx-20 my-10 max-sm:mx-0  grid md:grid-cols-3 grid-cols-1 ">
+          {profilecard.length == 0 ? (
+            <h1 className="text-3xl font-bold text-center">
+              No Arrival Request
+            </h1>
+          ) : (
+            profilecard.map((item, index) => (
+              <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-xl my-10">
+                {/* <Link to={{
+          pathname: '/InfluencerDetails',
+          state: { data:data}
+        }} > */}
 
-                    </h5>
-                    <p class="mb-3 font-normal text-gray-800 dark:text-gray-400">
-                      {item.gender}
-                    </p>
-                    <p class="font-normal text-gray-800 dark:text-gray-400">
-                      {item.phone}
-                    </p>
-                    <p class="mb-3 font-normal text-gray-900 dark:text-gray-400">
-                      {item.email}
-                    </p>
-                    <div>
-                      <div>
-                        <button
+                <div className="flex ">
+                  <div className="flex px-3 my-5">
+                    
+                      <img
+                        src={item.profile}
+                        alt="myPic"
+                        className="shadow-xl w-32 h-32 rounded-full  "
+                      />
+                    
+                    <div className=" mt-2 ml-5">
+                      <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
+                        {item.fname + " " + item.lname}
+                      </h3>
 
-                          onClick={async (e) => {
-                            e.preventDefault()
-                            console.log("hello")
-                            try {
-                              const res = await axios.put("consignment/acceptinfluencerreq", { _id: item._id })
-                              const data = res.data;
-                              console.log(data)
-                              if (data.success == true) {
-                                window.location.reload();
-                              }
-                            } catch (err) {
-                              console.log(err)
-                              navigate("/BrandArrivalRequest");
-                            }
-                          }}
-
-                          class="flex space-x-2 items-center px-3 py-2 bg-green-700 hover:bg-green-800 rounded-md drop-shadow-md">
-                          <TiPlus size={24} className="fill-white" />
-                          <span class="text-white">Accept</span>
-                        </button>
+                      <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                        {item.gender}
                       </div>
-                      <div>
-                        <button
-                          onClick={async (e) => {
-                            e.preventDefault()
-                            console.log("hello2")
-                            if (window.confirm("Are you sure you want to reject this request?")) {
-                              try {
-
-                                const res = await axios.delete("consignment/deletetinfluencerreq", { data: { _id: item._id } });
-                                const data = res.data;
-                                console.log(data)
-                                if (data.success == true) {
-                                  window.location.reload();
-                                }
-                              } catch (err) {
-                                navigate("/BrandArrivalRequest");
-                                console.log(err);
-                              }
-                            } else {
-                              navigate("/InfluencerArrivalRequest");
-                            }
-                          }}
-                          class="flex space-x-2 items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md">
-                          <svg
-                            class="fill-white"
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                          >
-                            <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
-                          </svg>
-                          <span class="text-white">Reject</span>
-                        </button>
+                      <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
+                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                        {item.city + ", " + item.country}
                       </div>
                     </div>
                   </div>
-                </a>
-              ))
-          }
+
+                </div>
+                <div className="border-t">
+                  <div className="mt-3 ml-5">
+                    <div className="flex space-x-2.5 items-center mt-3">
+                      <FiPhoneCall size={20} />
+                      <div>{item.phone}</div>
+                    </div>
+                    <div className="flex space-x-2.5 items-center mt-3">
+                      <MdEmail size={20} />
+                      <div>{item.email}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex mt-3 items-center mx-10">
+                  <button
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      console.log("hello");
+                      try {
+                        const res = await axios.put(
+                          "consignment/acceptinfluencerreq",
+                          { _id: item._id }
+                        );
+                        const data = res.data;
+                        console.log(data);
+                        if (data.success == true) {
+                          window.location.reload();
+                        }
+                      } catch (err) {
+                        console.log(err);
+                        navigate("/BrandArrivalRequest");
+                      }
+                    }}
+                    class="flex mx-auto space-x-2 items-center px-3 py-2 bg-green-700 hover:bg-green-800 rounded-md drop-shadow-md"
+                  >
+                    <TiPlus size={24} className="fill-white" />
+                    <span class="text-white">Accept</span>
+                  </button>
+
+                  <button
+                    onClick={async (e) => {
+                      e.preventDefault();
+                      console.log("hello2");
+                      if (
+                        window.confirm(
+                          "Are you sure you want to reject this request?"
+                        )
+                      ) {
+                        try {
+                          const res = await axios.delete(
+                            "consignment/deletetinfluencerreq",
+                            { data: { _id: item._id } }
+                          );
+                          const data = res.data;
+                          console.log(data);
+                          if (data.success == true) {
+                            window.location.reload();
+                          }
+                        } catch (err) {
+                          navigate("/BrandArrivalRequest");
+                          console.log(err);
+                        }
+                      } else {
+                        navigate("/InfluencerArrivalRequest");
+                      }
+                    }}
+                    class="flex space-x-2 mx-auto items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md"
+                  >
+                    <svg
+                      class="fill-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      x="0px"
+                      y="0px"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
+                    </svg>
+                    <span class="text-white">Reject</span>
+                  </button>
+                </div>
+
+                <div className="mt-6 py-5 border-t border-slate-200 ">
+                  <div className="flex flex-wrap justify-center">
+                    <div className="flex  items-center">
+                      <AiOutlineFacebook
+                        size={20}
+                        className="text-[#3b5998] "
+                      />
+                      <div className="text-[#3b5998] mr-3 ml-1"> 4K</div>
+
+                      <AiOutlineInstagram
+                        size={20}
+                        className="text-[#E4405F]"
+                      />
+                      <div className="text-[#E4405F] mr-3 ml-1"> 5.5M</div>
+
+                      <CiTwitter size={20} className="text-[#1DA1F2]" />
+                      <div className="text-[#1DA1F2] mr-3 ml-1"> 66K</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* </Link > */}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
