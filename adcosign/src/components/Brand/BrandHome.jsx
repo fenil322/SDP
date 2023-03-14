@@ -14,60 +14,8 @@ import axios from "axios";
 
 import Navbar from './Navbar'
 
-const cardProfile = [
-  {
-    photo:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7XJfS6pt30XMVTuDoHk4IviKg7N4-Lmlh64SJ7KJrnES0pNRv1vb_JMu8noHPJ49wjV0&usqp=CAU",
-    followers: "2,452",
-    following: "232",
-    fname: "Alia Bhatt",
-    country: "Surat , Gujarat",
-    cat1: "Fashion",
-    cat2: "Dance",
-    cat3: "Drama",
-    discription:
-      "Alia Bhatt was born on 15 March 1993 into the Bhatt family to Indian film director.",
-  },
-  {
-    photo:
-      "https://i.pinimg.com/originals/a3/fb/5d/a3fb5def518705c9cc739299234c2779.jpg",
-    followers: "4,467",
-    following: "455",
-    fname: "Virat Kohli",
-    country: "Banglore , Tamilnadu",
-    cat1: "Mimic",
-    cat2: "Dance",
-    cat3: "Singing",
-    discription:
-      "Kohli holds the record for scoring most runs in both T20 internationals and in IPL.",
-  },
-  {
-    photo:
-      "https://i.pinimg.com/originals/35/26/c9/3526c95d80aa84f945af8b9c001c9774.jpg",
-    followers: "3,424",
-    following: "243",
-    fname: "Deepika Padukon",
-    country: "kochi , kerala",
-    cat1: "Beauty",
-    cat2: "Dance",
-    cat3: "drama",
-    discription:
-      "Inspired by her badminton legend father,  she started playing badminton at a young age.",
-  },
-  {
-    photo:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLIElUGQn7n_thMKAqmEMTqAgzgHMLkJZfzA&usqp=CAU",
-    followers: "3,232",
-    following: "532",
-    fname: "Varun Dhawan",
-    country: "Mumbai , Maharashtra",
-    cat1: "Fashion",
-    cat2: "Dance",
-    cat3: "Catholic",
-    discription:
-      "Dhawan was born on 24 April to David Dhawan, a film director.His family is Punjabi Hindu. ",
-  },
-];
+
+import loader from "../../Images/loader.gif"
 
 const BrandHome = () => {
 
@@ -76,9 +24,10 @@ const BrandHome = () => {
   const navigate = useNavigate();
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading, setloading] = useState(true);
   const callgetInfluencerPage = async () => {
     try {
-     
+     setloading(true)
       const res = await axios.get(`influencer/getAllInfluencer${window.location.search}`);
 
       const data = res.data;
@@ -90,6 +39,7 @@ const BrandHome = () => {
 
       setprofilecard(data.data);
       // console.log(profilecard)
+      setloading(false) 
 
     } catch (err) {
       console.log(err);
@@ -106,10 +56,14 @@ const BrandHome = () => {
   return (
     <div className="flex flex-row h-[screen]">
       <Navbar />
-      <div className="ml-14 w-screen h-screen">
+      <div className="ml-14 w-screen h-[screen]">
         <BrandHeader page="BrandHome" />
-
-        <div className="flex ">
+        {loading === true ?
+          <img src={loader} alt="laoding" className="h-52 mx-auto"
+          />
+          : <div>
+        <div className="flex">
+        
            {/* <div className="">
             <aside class="w-64" aria-label="Sidebar">
               <div class="px-3 py-4 overflow-y-auto rounded-tr-3xl rounded-r-3xl bg-blue-900 text-gray-100">
@@ -351,7 +305,7 @@ const BrandHome = () => {
             </div>
           </div>
         </div>
-        <div className="mb-15 ">  
+        <div className="mb-10">  
           <div class="flex justify-center">
             <nav aria-label="Page navigation example">
               <ul class="flex list-style-none">
@@ -403,8 +357,10 @@ const BrandHome = () => {
             </nav>
           </div>
         </div>
+        </div>}
         <ToastContainer />
       </div>
+
     </div>
   );
 };

@@ -8,19 +8,22 @@ import Navbar from "./Navbar";
 import { BiCurrentLocation } from "react-icons/bi";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
-
+import loader from "../../Images/loader.gif"
 const InfluencerHistory = () => {
   const navigate = useNavigate();
 
   const [profilecard, setprofilecard] = useState([]);
+  const [loading, setLoading] = useState(true);
   const getcurrentconsignmets = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(
         "consignment/getinfluencercurrentconsignments"
       );
       const data = res.data;
       console.log(data);
       setprofilecard(data.data);
+      setLoading(false)
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message);
@@ -36,13 +39,17 @@ const InfluencerHistory = () => {
       <Navbar />
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="History" />
+        {loading === true ?
+          <img src={loader} alt="laoding" className="h-52 mx-auto"
+          />
+          : 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
           {profilecard.length == 0 ? (
             <h1 className="text-3xl font-bold ">No Agreements Found</h1>
           ) : (
             profilecard.map((data, index) => (
-              <div className="mt-20 items-center justify-center mx-10 shadow-2xl bg-gray-100  rounded-lg ">
-                <div class="mx-auto max-w-md overflow-hidden">
+              <div className="mt-20 items-center justify-center mx-10 shadow-xl bg-gray-100  rounded-2xl ">
+                <div class="mx-auto max-w-md overflow-hidden flex flex-col justify-between">
                   <img
                     //src={photo}
                     src={data.logo}
@@ -97,6 +104,7 @@ const InfluencerHistory = () => {
             ))
           )}
         </div>
+}
       </div>
     </div>
   );

@@ -91,25 +91,39 @@ exports.getBrandRequest = async (req, res, next) => {
   setTimeout(() => {
     // console.log(array);
     return res.status(200).json({ success: true, data: array });
-  }, 1000);
+  }, 100);
 };
 exports.getInfluenerPendingRequest = async (req, res, next) => {
   const influencerId = req.userId;
   console.log(influencerId);
-  const data = await Consignment.find({ influencerId, influencerrequest: 0 });
-  // array.push({ data: "hello world" })
+  // const data = await Consignment.find({ influencerId, influencerrequest: 0 });
+  // // array.push({ data: "hello world" })
   let array = new Array();
-  data.map(async (element) => {
-    const id = element.brandId.toString();
-    var data2 = await Brand.findById(id).select("-tokens");
-    // console.log(data2);
-    array.push(data2);
-  });
-  // console.log("array data");
-  setTimeout(() => {
-    // console.log(array);
-    return res.status(200).json({ success: true, data: array });
-  }, 1000);
+  // data.map(async (element) => {
+  //   const id = element.brandId.toString();
+  //   var data2 = await Brand.findById(id).select("-tokens");
+  //   // console.log(data2);
+  //   array.push(data2);
+  // });
+  // // console.log("array data");
+  // setTimeout(() => {
+  //   // console.log(array);
+  //   return res.status(200).json({ success: true, data: array });
+  // }, 100);
+  const cons = await Consignment.find({ influencerId, influencerrequest: 0 }).select("-tokens");
+
+  const promises = cons.map(async (element) => {
+    const id = element.brandId.toString()
+    const data = await Brand.findById(id).select("-tokens");
+    array.push(data);
+  })
+  Promise.all(promises).then(() => {
+
+    console.log(array);
+    return res
+      .status(200)
+      .json({ success: true, message: "data sent...", data: array });
+  })
 };
 
 exports.acceptBrandReq = async (req, res) => {
@@ -233,13 +247,34 @@ exports.getInfConsignment = async (req, res) => {
         .json({ success: false, message: "Something went wrong", error: err });
     });
 
+  // Promise.all(promises).then(() => {
+  // })
   setTimeout(() => {
     console.log(array);
     return res
       .status(200)
       .json({ success: true, message: "data sent...", data: array });
-  }, 1000);
+  }, 100);
 
+  // const cons=await  Consignment.find({
+  //   influencerId,
+  //   shoprequest: 1,
+  //   influencerrequest: 1,
+  //   acceptstatus: false,
+  // }).select("-tokens");
+
+  // const promises =  cons.map(async (element)=>{
+  //   const id = element.brandId.toString()
+  //   const data = await Brand.findById(id).select("-tokens");
+  //   array.push(data);
+  // })
+  // Promise.all(promises).then(() => {
+
+  //   console.log(array);
+  //   return res
+  //     .status(200)
+  //     .json({ success: true, message: "data sent...", data: array });
+  // })
   // console.log(data);
   // data.map((element) => {
   //     // console.log(element);
@@ -323,7 +358,7 @@ exports.getBrandPendingRequest = async (req, res) => {
   setTimeout(() => {
     // console.log(array);
     return res.status(200).json({ success: true, data: array });
-  }, 1000);
+  }, 100);
 };
 
 exports.getInfluencerRequest = async (req, res) => {
@@ -344,7 +379,7 @@ exports.getInfluencerRequest = async (req, res) => {
   setTimeout(() => {
     // console.log(array);
     return res.status(200).json({ success: true, data: array });
-  }, 1000);
+  }, 100);
 };
 
 exports.deleteBrandPendingRequest = async (req, res) => {
@@ -414,7 +449,7 @@ exports.getBrandConsignment = async (req, res) => {
       data: array,
       data1: array2,
     });
-  }, 1000);
+  }, 100);
 };
 
 exports.paymentupdate = async (req, res) => {
@@ -478,7 +513,7 @@ exports.getBrandCurrentConsignments = async (req, res) => {
       data3: array3,
       data4: array4,
     });
-  }, 1000);
+  }, 100);
 };
 
 exports.withoutPayment = async (req, res) => {
@@ -543,5 +578,5 @@ exports.getInfluencerCurrentConsignments = async (req, res) => {
       data3: array3,
       data4: array4,
     });
-  }, 1000);
+  }, 100);
 };

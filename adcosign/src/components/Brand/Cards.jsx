@@ -13,8 +13,7 @@ function Card({ item }) {
     age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
     facebook, facebookURL, facebookFollowers, facebookEngagementRate,
     twitter, twitterURL, twitterFollowers, twitterEngagementRate,gender,
-    profile, cat1 = "fation", cat2 = "study", cat3 = "dance", discription = "hello i am there"
-
+    profile, cat1 , cat2 , cat3 , discription 
   } = item;
 
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ function Card({ item }) {
 
   return (
     <>
-      <div className=" max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-xl my-10">
+      <div className=" max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-2xl my-10">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}

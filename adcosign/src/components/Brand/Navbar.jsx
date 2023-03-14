@@ -18,7 +18,7 @@ import axios from 'axios';
 const Navbar = () => {
     const navigate = useNavigate();
     const menus = [
-        { name: "Home", link: "/BrandHome", icon: FaHome },
+        { name: "Home", link: "/BrandHome?page=1", icon: FaHome },
         { name: "Pending Request", link: "/BrandPendingRequest", icon: MdPendingActions },
         { name: "Arrival Request", link: "/BrandArrivalRequest", icon: CgImport },
         { name: "Agreement", link: "/BrandConsignments", icon: FaHandshake },

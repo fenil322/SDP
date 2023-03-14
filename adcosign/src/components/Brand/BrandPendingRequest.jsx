@@ -10,16 +10,21 @@ import { AiOutlineFacebook } from "react-icons/ai";
 import { CiTwitter } from "react-icons/ci";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
+
+import loader from "../../Images/loader.gif"
 const BrandPendingRequest = () => {
   const navigate = useNavigate();
   const [profilecard, setprofilecard] = useState([]);
+  const [loading, setloading] = useState(true);
   const getBrandRequest = async () => {
     try {
+      setloading(true);
       const res = await axios.get("consignment/getbrandpendingreq");
       const data = res.data;
       // console.log(data.data);
       setprofilecard(data.data);
       console.log(profilecard);
+      setloading(false);
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message);
@@ -35,57 +40,61 @@ const BrandPendingRequest = () => {
       <Navbar />
       <div className="h-screen ml-14 w-screen">
         <BrandHeader page="Pending Request" />
-        <div className="grid md:grid-cols-3 grid-cols-1">
-          {profilecard.length == 0 ? (
-            <h1 className="text-3xl font-bold text-center">
-              No Pending Request
-            </h1>
-          ) : (
-            profilecard.map((item, index) => (
-              <div className=" max-w-md mx-10 md:max-w-2xl   break-words bg-gray-100  shadow-lg rounded-xl my-10">
-                {/* <Link to={{
+        {loading === true ?
+          <img src={loader} alt="laoding" className="h-52 mx-auto"
+          />
+          :
+          <div className="grid md:grid-cols-3 grid-cols-1">
+            {profilecard.length == 0 ? (
+              <h1 className="text-3xl font-bold text-center">
+                No Pending Request
+              </h1>
+            ) : (
+              profilecard.map((item, index) => (
+                <div className=" max-w-md mx-10 md:max-w-2xl   break-words bg-gray-100  shadow-lg rounded-2xl my-10">
+                  {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
         }} > */}
 
-                <div className="flex flex-wrap ">
-                  <div className="flex px-3 my-5">
-                   
+                  <div className="flex flex-wrap ">
+                    <div className="flex px-3 my-5">
+
                       <img
                         src={item.profile}
                         alt="myPic"
                         className="shadow-xl w-32 h-32 rounded-full  "
                       />
-                   
-                    <div className=" mt-2 ml-5">
-                      <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
-                        {item.fname + " " + item.lname}
-                      </h3>
 
-                      <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
-                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
-                        {item.gender}
+                      <div className=" mt-2 ml-5">
+                        <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
+                          {item.fname + " " + item.lname}
+                        </h3>
+
+                        <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
+                          <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                          {item.gender}
+                        </div>
+                        <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
+                          <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                          {item.city + ", " + item.country}
+                        </div>
                       </div>
-                      <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
-                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
-                        {item.city + ", " + item.country}
+                    </div>
+
+                  </div>
+                  <div className="border-t">
+                    <div className="mt-3 ml-5">
+                      <div className="flex space-x-2.5 items-center mt-3">
+                        <FiPhoneCall size={20} />
+                        <div>{item.phone}</div>
+                      </div>
+                      <div className="flex space-x-2.5 items-center mt-3">
+                        <MdEmail size={20} />
+                        <div>{item.email}</div>
                       </div>
                     </div>
-                  </div>
-                 
-                </div>
-                <div className="border-t">
-                  <div className="mt-3 ml-5">
-                    <div className="flex space-x-2.5 items-center mt-3">
-                      <FiPhoneCall size={20} />
-                      <div>{item.phone}</div>
-                    </div>
-                    <div className="flex space-x-2.5 items-center mt-3">
-                      <MdEmail size={20} />
-                      <div>{item.email}</div>
-                    </div>
-                  </div>
-                  
+
                     <div className="">
                       <button
                         onClick={async (e) => {
@@ -129,34 +138,35 @@ const BrandPendingRequest = () => {
                         <span class="text-white">Remove</span>
                       </button>
                     </div>
-                 
-                </div>
-                <div className="mt-6 py-5 border-t border-slate-200 ">
-                  <div className="flex flex-wrap justify-center">
-                    <div className="flex  items-center">
-                      <AiOutlineFacebook
-                        size={20}
-                        className="text-[#3b5998] "
-                      />
-                      <div className="text-[#3b5998] mr-3 ml-1"> 4K</div>
 
-                      <AiOutlineInstagram
-                        size={20}
-                        className="text-[#E4405F]"
-                      />
-                      <div className="text-[#E4405F] mr-3 ml-1"> 5.5M</div>
+                  </div>
+                  <div className="mt-6 py-5 border-t border-slate-200 ">
+                    <div className="flex flex-wrap justify-center">
+                      <div className="flex  items-center">
+                        <AiOutlineFacebook
+                          size={20}
+                          className="text-[#3b5998] "
+                        />
+                        <div className="text-[#3b5998] mr-3 ml-1"> 4K</div>
 
-                      <CiTwitter size={20} className="text-[#1DA1F2]" />
-                      <div className="text-[#1DA1F2] mr-3 ml-1"> 66K</div>
+                        <AiOutlineInstagram
+                          size={20}
+                          className="text-[#E4405F]"
+                        />
+                        <div className="text-[#E4405F] mr-3 ml-1"> 5.5M</div>
+
+                        <CiTwitter size={20} className="text-[#1DA1F2]" />
+                        <div className="text-[#1DA1F2] mr-3 ml-1"> 66K</div>
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* </Link > */}
-              </div>
-            ))
-          )}
-        </div>
+                  {/* </Link > */}
+                </div>
+              ))
+            )}
+          </div>
+        }
       </div>
     </div>
   );

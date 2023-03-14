@@ -25,9 +25,9 @@ const InfluencerHeader = (props) => {
         <p className="font-bold">Influencer  &gt; {props.page}</p>
       </nav>
       <div className="flex items-center">
-        <div className="flex mx-5">
+        {/* <div className="flex mx-5">
           <FiSettings />
-        </div>
+        </div> */}
         <div class="flex items-center space-x-4">
           <div className="">
 

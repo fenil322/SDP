@@ -7,28 +7,30 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 
+import loader from "../../Images/loader.gif"
 import { AiOutlineInstagram } from "react-icons/ai";
 import { AiOutlineFacebook } from "react-icons/ai";
 import { CiTwitter } from "react-icons/ci";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail, MdFileDownloadDone } from "react-icons/md";
+
 const BrandConsignments = () => {
   const navigate = useNavigate();
+  
+  const [loading, setloading] = useState(true);
   const [profilecard, setprofilecard] = useState([]);
-  const [amount, setamount] = useState(0);
   const handleendtime = (e) => {
     // setendtime((data)=>[...data,e.target.value])
   };
 
   const getbrandconsignments = async () => {
     try {
+      setloading(true);
       const res = await axios.get("consignment/getbrandconsignments");
       const data = res.data;
       console.log(data);
       setprofilecard(data.data);
-      setamount(data.data1);
-      // console.log(profilecard)
-      // console.log(amount);
+      setloading(false);
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message);
@@ -45,7 +47,10 @@ const BrandConsignments = () => {
 
       <div className=" ml-14 w-screen">
         <BrandHeader page="Agreement" />
-
+        {loading === true ?
+          <img src={loader} alt="laoding" className="h-52 mx-auto"
+          />
+          : 
         <div className="mx-20 grid-cols-2mx-20 my-10 grid md:grid-cols-3 grid-cols-1">
           {profilecard.length == 0 ? (
             <h1 className="text-3xl font-bold text-center">
@@ -207,6 +212,7 @@ const BrandConsignments = () => {
             ))
           )}
         </div>
+}
       </div>
     </div>
   );

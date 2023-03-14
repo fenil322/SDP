@@ -71,8 +71,8 @@ const Card = ({ item }) => {
   };
   return (
     <div className="">
-      <div className="mx-10 max-sm:mx-0 max-md:mx-10  my-10  ">
-        <div className="px-3 py-3 bg-gray-100 rounded-2xl  shadow-lg">
+      <div className="mx-5 max-sm:mx-0 max-md:mx-10  my-10  ">
+        <div className="px-3 py-3 bg-gray-100 rounded-2xl  shadow-xl">
           <div
             className="flex flex-wrap cursor-pointer  "
             onClick={branddetailpage}
@@ -118,7 +118,7 @@ const Card = ({ item }) => {
           <div className="m-3">
             <div className="flex space-x-2 p-1">
               <TiLocation size={20} />
-              <div>{item.country + ", " + item.city}</div>
+              <div>{item.city + ", " + item.country}</div>
             </div>
             <div className="flex space-x-2 p-1">
               <FiPhoneCall size={20} />

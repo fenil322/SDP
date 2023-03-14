@@ -27,7 +27,7 @@ function ReqArrivalCard({ item }) {
     <>
       <div className="flex">
         <div className="mt-10 items-center justify-center ">
-          <div class="mx-auto max-w-md overflow-hidden rounded-2xl bg-gray-100 shadow-2xl">
+          <div class="mx-auto max-w-md overflow-hidden rounded-2xl bg-gray-100 shadow-xl">
             <img
               //src={photo}
               src={logo}
@@ -69,7 +69,7 @@ function ReqArrivalCard({ item }) {
                   <BiCurrentLocation size={20} />
                 </div>
                 <div>
-                  <p class="mb-1 text-lg hover:text-blue-500 ">{location}</p>
+                  <p class="mb-1 text-lg hover:text-blue-500 ">{city+", "+state }</p>
                 </div>
               </div>
               <div className="flex justify-center space-x-6 mb-5">

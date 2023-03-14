@@ -11,7 +11,6 @@ import BrandHome from "./components/Brand/BrandHome";
 import BrandPendingRequest from "./components/Brand/BrandPendingRequest";
 import BrandArrivalRequest from "./components/Brand/BrandArrivalRequest";
 import BrandConsignments from "./components/Brand/BrandConsignments";
-import BrandCurrentConsignment from "./components/Brand/BrandCurrentConsignment";
 import BrandHistory from "./components/Brand/BrandHistory";
 import BrandLogin from "./components/Brand/BrandLogin";
 import BrandDetails from "./components/Influencer/BrandDetails";
@@ -23,7 +22,6 @@ import InfluencerHome from "./components/Influencer/InfluencerHome";
 import InfluencerProfile from "./components/Influencer/InfluencerProfile";
 import InfluencerProfileEdit from "./components/Influencer/InfluencerProfileEdit";
 import InfluencerConsignments from "./components/Influencer/InfluencerConsignments";
-import InfluencerCurrentConsignments from "./components/Influencer/InfluencerCurrentConsignments";
 import InfluencerHistory from "./components/Influencer/InfluencerHistory";
 import InfluencerLogin from "./components/Influencer/InfluencerLogin";
 import InfluencerArrivalRequest from "./components/Influencer/InfluencerArrivalRequest";
@@ -57,10 +55,7 @@ const App = () => {
         <Route path="/BrandDetails" element={<BrandDetails />} />
         <Route path="/BrandProfile" element={<BrandProfile/>}/>
         <Route path="/BrandProfileEdit" element={<BrandProfileEdit/>}/>
-        <Route
-          path="/BrandCurrentConsignment"
-          element={<BrandCurrentConsignment />}
-        />
+       
         <Route path="/BrandHistory" element={<BrandHistory />} />
         <Route path="/InfluencerDetails" element={<InfluencerDetails />} />
 
@@ -75,10 +70,7 @@ const App = () => {
           path="/InfluencerConsignments"
           element={<InfluencerConsignments />}
         />
-        <Route
-          path="/InfluencerCurrentConsignments"
-          element={<InfluencerCurrentConsignments />}
-        />
+       
         <Route path="/InfluencerHistory" element={<InfluencerHistory />} />
         <Route path="/InfluencerPendingRequest" element={<InfluencerPendingRequest />} />
 

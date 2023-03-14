@@ -11,16 +11,22 @@ import { AiOutlineFacebook } from "react-icons/ai";
 import { CiTwitter } from "react-icons/ci";
 import { FiPhoneCall } from "react-icons/fi";
 import { MdEmail } from "react-icons/md";
+
+import loader from "../../Images/loader.gif"
 const BrandArrivalRequest = () => {
   const navigate = useNavigate();
   const [profilecard, setprofilecard] = useState([]);
+  
+  const [loading, setloading] = useState(true);
   const getBrandRequest = async () => {
     try {
+      setloading(true);
       const res = await axios.get("consignment/getinfluencerreq");
       const data = res.data;
       console.log(data.data);
       setprofilecard(data.data);
       console.log(profilecard);
+      setloading(false);
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message);
@@ -37,6 +43,10 @@ const BrandArrivalRequest = () => {
       <Navbar />
       <div className="h-screen ml-14 w-screen max-sm:ml-0">
         <BrandHeader page="Arrival Request" />
+        {loading === true ?
+          <img src={loader} alt="laoding" className="h-52 mx-auto"
+          />
+          : 
         <div className="mx-20 my-10 max-sm:mx-0  grid md:grid-cols-3 grid-cols-1 ">
           {profilecard.length == 0 ? (
             <h1 className="text-3xl font-bold text-center">
@@ -44,7 +54,7 @@ const BrandArrivalRequest = () => {
             </h1>
           ) : (
             profilecard.map((item, index) => (
-              <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-xl my-10">
+              <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-2xl my-10">
                 {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
@@ -184,6 +194,7 @@ const BrandArrivalRequest = () => {
             ))
           )}
         </div>
+}
       </div>
     </div>
   );

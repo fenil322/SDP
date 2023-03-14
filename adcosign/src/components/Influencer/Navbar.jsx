@@ -13,12 +13,12 @@ const Navbar = () => {
     const [open, setOpen] = useState(true);
     const [userdata, setuserdata] = useState({});
     const menus = [
-        { name: "Home", link: "/InfluencerHome", icon: FaHome, data: "hello" },
-        { name: "Pending Request", link: "/InfluencerPendingRequest", icon: MdPendingActions, data: "hello" },
-        { name: "Arrival Request", link: "/InfluencerArrivalRequest", icon: CgImport, data: "hello" },
-        { name: "Agreement", link: "/InfluencerConsignments", icon: FaHandshake, data: "hello" },
-        { name: "History", link: "/InfluencerHistory", icon: BiHistory, data: "hello" },
-        { name: "Profile", link: "/InfluencerProfile", icon: FaUserCircle, data: userdata },
+        { name: "Home", link: "/InfluencerHome", search: "?page=1", icon: FaHome, data: "hello" },
+        { name: "Pending Request", link: "/InfluencerPendingRequest", search: "?page=1", icon: MdPendingActions, data: "hello" },
+        { name: "Arrival Request", link: "/InfluencerArrivalRequest", search: "?page=1", icon: CgImport, data: "hello" },
+        { name: "Agreement", link: "/InfluencerConsignments", search: "?page=1", icon: FaHandshake, data: "hello" },
+        { name: "History", link: "/InfluencerHistory", search: "?page=1", icon: BiHistory, data: "hello" },
+        { name: "Profile", link: "/InfluencerProfile", search: "?page=1", icon: FaUserCircle, data: userdata },
         // { name: "Subscription", link: "/", icon: GiWallet },
         // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
         // { name: "About", link: "/", icon: BsInfoCircle },
@@ -75,7 +75,8 @@ const Navbar = () => {
                     <div className="mt-4 flex flex-col gap-4 relative">
                         {menus?.map((menu, i) => (
                             <NavLink
-                                to={{ pathname: `${menu?.link}` }}
+                                to={{ pathname: `${menu?.link}`, search: `${menu?.search}` }}
+
                                 state={menu.data}
                                 className={`${menu?.margin && "mt-5"} group flex items-center
                     cursor-pointer           text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}

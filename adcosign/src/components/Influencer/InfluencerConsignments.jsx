@@ -9,19 +9,21 @@ import { BiCurrentLocation } from "react-icons/bi";
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 import { TiPlus } from "react-icons/ti";
+
+import loader from "../../Images/loader.gif"
 const InfluencerConsignments = () => {
   const navigate = useNavigate();
-  const [amount, setAmount] = useState([]);
-
+ 
+  const [loading, setloading] = useState(true);
   const [profilecard, setprofilecard] = useState([]);
   const getconsignmets = async () => {
     try {
+      setloading(true)
       const res = await axios.get("consignment/getinfluencerconsignments");
       const data = res.data;
-      // console.log(data.data);
-      setAmount(data.data1);
       setprofilecard(data.data);
       console.log(profilecard);
+      setloading(false)
     } catch (err) {
       if (err.response.status == 422) {
         toast.error(err.response.data.message);
@@ -38,6 +40,10 @@ const InfluencerConsignments = () => {
       <Navbar />
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="Agreements" />
+        {loading === true ?
+          <img src={loader} alt="laoding" className="h-52 mx-auto"
+          />
+          : 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
           {profilecard.length == 0 ? (
             <h1 className="text-3xl font-bold ml-40">No Any Agreements</h1>
@@ -143,6 +149,7 @@ const InfluencerConsignments = () => {
             ))
           )}
         </div>
+}
       </div>
     </div>
   );
