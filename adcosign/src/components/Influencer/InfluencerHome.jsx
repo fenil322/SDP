@@ -20,16 +20,17 @@ const InfluencerHome = () => {
       const res = await axios.get(`brand/getAllbrand${window.location.search}`);
       const data = res.data;
       // console.log(data)
-      if (data.success != true) {
-        // console.log(data);
-        navigate("/InfluencerLogin");
-      }
+      // if (data.success != true) {
+      //   // console.log(data);
+      //   navigate("/InfluencerLogin");
+      // }
+      console.log(data);
       setBrandCard(data.data);
       setloading(false);
       // console.log(brandCard);
     } catch (err) {
       console.log(err);
-      navigate("/InfluencerLogin");
+      // navigate("/InfluencerLogin")
     }
   }
   useEffect(() => {
@@ -58,7 +59,7 @@ const InfluencerHome = () => {
         </div>
 
 
-        <div className="absolute bottom-3 mx-auto left-0 right-0">
+        <div className="mb-3 bottom-3 mx-auto left-0 right-0">
           <div class="flex justify-center">
             <nav aria-label="Page navigation example">
               <ul class="flex list-style-none">

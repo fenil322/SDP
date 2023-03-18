@@ -12,11 +12,16 @@ import { AiFillTwitterCircle, AiFillInstagram } from "react-icons/ai";
 import axios from "axios";
 import { NavLink, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
+import loader from "../../Images/loader.gif";
 
 const InfluencerProfile = () => {
   const location = useLocation();
   const [userdata, setuserdata] = useState({});
   const [adrequired, setAdrequired] = useState(userdata.Adsrequired);
+  const [brandData, setbrandData] = useState([]);
+  const [date, setDate] = useState();
+  const [loading, setLoading] = useState(true);
+
   // useEffect(() => {
   //   setuserdata(location.state)
   //   // console.log(userdata);
@@ -28,12 +33,32 @@ const InfluencerProfile = () => {
     const data = res.data;
     //   console.log("Logged in user is:- ");
     setuserdata(data.data)
-    //   console.log(data.data);
+    
+
+      // console.log(data.data);
+  }
+  const getConnectedBrand = async () => {
+    // console.log(userdata._id);
+    try {
+      setLoading(true)
+      const res = await axios.post('brand/getconnectedbrand', { id: userdata._id });
+      const data = res.data;
+      console.log(data);
+      setbrandData(data.data);
+      setDate(data.date)
+      setLoading(false)
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {
     getInfluencerData()
+    
   }, [])
+  useEffect(()=>{
+    getConnectedBrand()
+  },[userdata._id])
   return (
     <div className='flex h-[screen]'>
       <Navbar />
@@ -129,7 +154,7 @@ const InfluencerProfile = () => {
                         }
                       }}
                       class="flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                      
+
                       <span>Request Ads</span>
                     </button> :
                     <button
@@ -223,35 +248,34 @@ const InfluencerProfile = () => {
               </div>
               {/*                 activity                      */}
               <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                <h4 class="text-xl text-gray-900 font-bold">My Logs</h4>
+                <h4 class="text-xl text-gray-900 font-bold">My Activity Logs</h4>
                 <div class="relative px-4">
                   <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
 
                   {/* <!-- start::Timeline item --> */}
-                  <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                      <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                      <p class="text-sm">Profile informations changed.</p>
-                      <p class="text-xs text-gray-500">3 min ago</p>
-                    </div>
-                  </div>
-                  {/* <!-- end::Timeline item --> */}
+                  {loading === true ?
+                    <img src={loader} alt="laoding" className="h-52 mx-auto"
+                    />
+                    :
+                    <div>
 
-                  {/* <!-- start::Timeline item --> */}
-                  <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                      <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                      {brandData.length == 0 ? <div>No Brands connected</div> :
+                        brandData?.map((data, index) => (
+                          <div class="flex items-center w-full my-1 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                              <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <img src={data.logo} className="w-8 h-8 rounded-full mx-5 " alt="profile" />
+                            <div class="w-11/12">
+                              <a href={data.instagramUrl} target="_blank" title="Instagram">
+                              <div class="text-sm font-semibold cursor-pointer">{data.shopName}</div>
+                              </a>
+                              <p class="text-xs text-gray-500">{date[index]}</p>
+                            </div>
+                          </div>
+                        ))}
                     </div>
-                    <div class="w-11/12">
-                      <p class="text-sm">
-                        Connected with <a href="#" class="text-blue-600 font-bold">Colby Covington</a>.</p>
-                      <p class="text-xs text-gray-500">15 min ago</p>
-                    </div>
-                  </div>
-                  {/* <!-- end::Timeline item --> */}
-
+                  }
 
                 </div>
 

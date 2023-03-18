@@ -63,10 +63,10 @@ const shopSchema = new mongoose.Schema({
     type: String
   },
   images: [{
-    url:{
+    url: {
       type: String
     }
-    
+
   }],
   tokens: [{
     token: {
@@ -80,10 +80,19 @@ const shopSchema = new mongoose.Schema({
   },
   resetToken: String,
   expireToken: Date,
+  instagram: {
+    type: String
+  },
   instagramUrl: {
     type: String
   },
+  facebook: {
+    type: String
+  },
   facebookUrl: {
+    type: String
+  },
+  twitter: {
     type: String
   },
   twitterUrl: {

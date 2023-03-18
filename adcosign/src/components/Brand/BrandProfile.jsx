@@ -16,10 +16,28 @@ import styled from "styled-components";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import loader from "../../Images/loader.gif";
 
 const BrandProfile = () => {
   const navigate = useNavigate();
   const [brandData, setbrandData] = useState({});
+  const [influencerData, setInfluencerData] = useState([]);
+  const [date,setDate]=useState();
+  const [loading, setLoading] = useState(true);
+  const getConnectedInf = async () => {
+    console.log();
+    try {
+      setLoading(true)
+      const res = await axios.post('influencer/getconnectedinf', {id:brandData._id });
+      const data = res.data;
+      console.log(data);
+      setInfluencerData(data.data);
+      setDate(data.date)
+      setLoading(false)
+    } catch (err) {
+      console.log(err);
+    }
+  }
   const getBrandData = async () => {
     try {
 
@@ -41,8 +59,12 @@ const BrandProfile = () => {
   useEffect(() => {
     getBrandData();
   }, []);
+  useEffect(()=>{
+    
+    getConnectedInf();
+  },[brandData._id])
   const editprofile = () => {
-    navigate('/BrandProfileEdit', { state: brandData  })
+    navigate('/BrandProfileEdit', { state: brandData })
   }
 
   const images = brandData.images;
@@ -64,10 +86,10 @@ const BrandProfile = () => {
     autoplay: true,
   };
   return (
-    <div className="flex h-[screen]">
+    <div className="flex ">
       <Navbar />
 
-      <div className=" ml-14 w-screen max-sm:ml-0">
+      <div className=" ml-14 w-screen max-sm:ml-0 h-screen">
         <BrandHeader page="Profile" />
         <div class="h-full py-8 w-5/6 m-auto">
           <div class="bg-white w-5/6 m-auto rounded-lg shadow-xl pb-8">
@@ -106,14 +128,14 @@ const BrandProfile = () => {
               <p class="text-sm text-gray-500">
                 {brandData.city + " , " + brandData.country}
               </p>
-              
-                <button
-                  onClick={editprofile}
-                  class="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
-                  <FaUserEdit size={17} />
-                  <span>Edit Profile</span>
-                </button>
-          
+
+              <button
+                onClick={editprofile}
+                class="mt-5 flex items-center bg-blue-600 hover:bg-blue-700 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
+                <FaUserEdit size={17} />
+                <span>Edit Profile</span>
+              </button>
+
             </div>
           </div>
 
@@ -196,36 +218,31 @@ const BrandProfile = () => {
               </div>
               {/*                 activity                      */}
               <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                <h4 class="text-xl text-gray-900 font-bold">My Logs</h4>
+                <h4 class="text-xl text-gray-900 font-bold">My Activity</h4>
                 <div class="relative px-4">
                   <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
 
-                  {/* <!-- start::Timeline item --> */}
-                  <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                      <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                      <p class="text-sm">Profile informations changed.</p>
-                      <p class="text-xs text-gray-500">3 min ago</p>
-                    </div>
-                  </div>
+                    {loading === true ?
+                  <img src={loader} alt="laoding" className="h-52 mx-auto"
+                  />
+                  :
+                  <div>
 
-                  <div class="flex items-center w-full my-6 -ml-1.5">
-                    <div class="w-1/12 z-10">
-                      <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
-                    </div>
-                    <div class="w-11/12">
-                      <p class="text-sm">
-                        Connected with{" "}
-                        <a href="#" class="text-blue-600 font-bold">
-                          Colby Covington
-                        </a>
-                        .
-                      </p>
-                      <p class="text-xs text-gray-500">15 min ago</p>
-                    </div>
+                    {influencerData.length == 0 ? <div>No Influencer connected</div> :
+                      influencerData?.map((data, index) => (
+                        <div class="flex items-center w-full my-1 -ml-1.5">
+                          <div class="w-1/12 z-10">
+                            <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                          </div>
+                          <img src={data.profile} className="w-8 h-8 rounded-full mx-5 " alt="profile"/>
+                          <div class="w-11/12">
+                            <p class="text-sm font-semibold">{data.fname + " " + data.lname}</p>
+                            <p class="text-xs text-gray-500">{date[index]}</p>
+                          </div>
+                        </div>
+                      ))}
                   </div>
+                }
                 </div>
               </div>
             </div>

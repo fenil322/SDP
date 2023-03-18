@@ -5,7 +5,7 @@ import { useState } from "react";
   import { CiTwitter } from "react-icons/ci";
 import { NavLink, Link, useNavigate, useParams } from "react-router-dom";
 import InfluencerDetails from "./InfluencerDetails";
-
+import Rating from '@mui/material/Rating';
 function Card({ item }) {
 
 
@@ -13,7 +13,7 @@ function Card({ item }) {
     age, instagram, instagramURL, instagramFollowers, instagramEngagementRate,
     facebook, facebookURL, facebookFollowers, facebookEngagementRate,
     twitter, twitterURL, twitterFollowers, twitterEngagementRate,gender,
-    profile, cat1 , cat2 , cat3 , discription 
+    profile, cat1 , cat2 , cat3 , discription ,rating,count
   } = item;
 
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Card({ item }) {
 
   return (
     <>
-      <div className=" max-w-md mx-10 md:max-w-2xl  min-w-0 break-words bg-gray-100  shadow-lg rounded-2xl my-10">
+      <div className=" max-w-md md:mx-5 md:max-w-2xl  break-words bg-gray-100  shadow-lg rounded-2xl my-10">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
@@ -34,25 +34,28 @@ function Card({ item }) {
             <div className="px-6">
               <div className="flex flex-wrap ">
                 <div className="flex px-4 my-5">
-                  <div className="w-20 h-20 rounded-full">
+                  <div className=" justify-center text-center">
                     <img
                       src={profile}
                       alt="myPic"
-                      className="shadow-xl w-full h-full rounded-full  "
+                      className="shadow-xl w-20 h-20 rounded-full "
                     />
+                    <div className="text-xs mt-2  text-slate-600 font-bold uppercase">
+                     
+                      {gender}
+                    </div>
                   </div>
                   <div className=" mt-2 ml-10">
                     <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
                       {fname + " " + lname}
                     </h3>
 
-                    <div className="text-xs mt-0  text-slate-400 font-bold uppercase">
-                      <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
-                      {gender}
-                    </div>
                     <div className="text-xs mt-0 mb-2 text-slate-400 font-bold uppercase">
-                      <i className="fas fa-map-marker-alt mr-2 text-slate-400 opacity-75"></i>
+                      
                       {city + ", " + country}
+                    </div>
+                    <div>
+                   <Rating name="read-only" value={rating/count} precision={0.01} readOnly />
                     </div>
                   </div>
                 </div>

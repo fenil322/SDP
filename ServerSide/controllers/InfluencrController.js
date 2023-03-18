@@ -3,6 +3,7 @@ var id = '63c5825341af87b8073eaf87';
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { response } = require('express');
+const Consignment = require('../models/consignment');
 
 
 
@@ -49,11 +50,11 @@ exports.influencerSignupdata = async (req, res) => {
 
 
 exports.getAllInfluencer = async (req, res) => {
-    const page=req.query.page;
+    const page = req.query.page;
     console.log(req.query);
     const influencers = await Influencer
-                        .find({ valid: 1, Adsrequired: true })
-                        .skip((page-1)*6).limit(6)
+        .find({ valid: 1, Adsrequired: true })
+        .skip((page - 1) * 6).limit(6)
 
     if (influencers) {
         res.status(200).json({ success: true, data: influencers })
@@ -199,4 +200,27 @@ exports.adrequiredRemove = async (req, res) => {
         return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
 
     }
+}
+
+exports.getConnectedinf = async (req, res) => {
+    console.log(req.body);
+    const id = req.body.id;
+    // console.log(id);
+    const data = await Consignment.find({
+        brandId: id,
+        shoprequest: 1,
+        influencerrequest: 1,
+    });
+    console.log(data.length);
+    let influencers = new Array()
+    let date = new Array()
+    const promises = data.map(async (item) => {
+        const id = item.influencerId
+        const data = await Influencer.findById(id).select("-tokens").select("-password")
+        influencers.push(data);
+        date.push(item.Date)
+    })
+    Promise.all(promises).then(async (result) => {
+        res.status(200).json({ success: true, data: influencers, date: date });
+    })
 }

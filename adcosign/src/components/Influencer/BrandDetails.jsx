@@ -18,6 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import InfluencerHeader from "./InfluencerHeader";
 import Navbar from "./Navbar";
 
+import loader from "../../Images/loader.gif";
+
 const divStyle = {
   display: "flex",
 
@@ -43,6 +45,10 @@ let settings = {
 
 const BrandDetails = () => {
   const [brandData, setbrandData] = useState({});
+  const location = useLocation();
+  const [influencerData, setInfluencerData] = useState([]);
+  const [date,setDate]=useState();
+  const [loading, setLoading] = useState(true);
   const createConsignment = async (e) => {
     e.preventDefault();
     const brandId = brandData?._id;
@@ -71,20 +77,34 @@ const BrandDetails = () => {
     }
   }
 
-  const location = useLocation();
-
+  const getConnectedInf = async (id) => {
+    console.log(id);
+    try {
+      setLoading(true)
+      const res = await axios.post('influencer/getconnectedinf', { id });
+      const data = res.data;
+      console.log(data);
+      setInfluencerData(data.data);
+      setDate(data.date)
+      setLoading(false)
+    } catch (err) {
+      console.log(err);
+    }
+  }
   useEffect(() => {
     console.log(location.state);
     setbrandData(location.state);
-
+    getConnectedInf(location.state._id)
   }, []);
+  // useEffect(() => {
+  // }, [brandData])
 
   const slideImages = brandData?.images;
 
   return (
     <div className="flex">
       <Navbar />
-      <div className="h-screen ml-14 w-screen">
+      <div className="h-screen ml-14 max-sm:ml-0 w-screen">
         <InfluencerHeader page="Brand Detail" />
         <div className="w-9/12 m-auto  mt-5 pb-10 ">
           <link
@@ -190,7 +210,7 @@ const BrandDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="flex w-5/6  m-auto my-10 pb-10">
+            <div className="flex w-5/6 justify-between m-auto mt-10 border-b pb-10">
               {brandData?.description != null ?
                 <div>
                   <h2 className="font-bold font-mono text-2xl">About Brand</h2>
@@ -227,21 +247,53 @@ const BrandDetails = () => {
                 <div className="">
                   <div className="my-3">Contact Us On</div>
                   <div className="flex space-x-5">
-                    <div className="flex ">
 
+                    <a href={brandData?.instagramUrl} target="_blank" className="flex cursor-pointer">
                       <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
-                    </div>
+                    </a>
 
-                    <div className="flex ">
+                    <a href={brandData?.facebookUrl} target="_blank" className="flex cursor-pointer ">
                       <FaInstagram size={20} className="text-[#d62976]" />
-                    </div>
+                    </a>
 
-                    <div className="flex ">
+                    <a href={brandData?.twitterUrl} target="_blank" className="flex cursor-pointer ">
                       <FiTwitter size={20} className="text-[#00acee]" />
-                    </div>
+                    </a>
+
                   </div>
                 </div>
                 <div></div>
+              </div>
+            </div>
+
+            <div class="flex-1 w-5/6 mx-auto mt-4 p-8">
+              <h4 class="text-xl text-gray-900 font-bold">Connected Peoples</h4>
+              <div class="relative px-4">
+                <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
+
+                {/* <!-- start::Timeline item --> */}
+                {loading === true ?
+                  <img src={loader} alt="laoding" className="h-52 mx-auto"
+                  />
+                  :
+                  <div>
+
+                    {influencerData.length == 0 ? <div>No Influencer connected</div> :
+                      influencerData?.map((data, index) => (
+                        <div class="flex items-center w-full my-1 -ml-1.5">
+                          <div class="w-1/12 z-10">
+                            <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                          </div>
+                          <img src={data.profile} className="w-8 h-8 rounded-full mx-5 " alt="profile"/>
+                          <div class="w-11/12">
+                            <p class="text-sm font-semibold">{data.fname + " " + data.lname}</p>
+                            <p class="text-xs text-gray-500">{date[index]}</p>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                }
+
               </div>
             </div>
             {/* <div className="flex space-x-56">

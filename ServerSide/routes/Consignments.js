@@ -6,7 +6,7 @@ const influencerIsAuth = require('../middleware/influencerIsAuth');
 const { createConsignment, getBrandRequest, acceptBrandReq, deleteBrandReq,getInfConsignment,getBrandPendingRequest,
     deleteBrandPendingRequest,getBrandConsignment ,paymentupdate,getBrandCurrentConsignments,
     withoutPayment,getInfluencerCurrentConsignments,createConsignmentInf,getInfluenerPendingRequest
-,getInfluencerRequest,acceptInfluencerReq,deleteInfluencerReq} = require('../controllers/consignmentController');
+,getInfluencerRequest,acceptInfluencerReq,deleteInfluencerReq,feedBack} = require('../controllers/consignmentController');
 
 //==> Creating consignment in brand POST
 router.post('/sendrequest', brandIsAuth.isAuth, createConsignment)
@@ -58,4 +58,8 @@ router.get('/getbrandcurrentconsignments', brandIsAuth.isAuth, getBrandCurrentCo
 
 //==> current consignments of influencer GET
 router.get('/getinfluencercurrentconsignments', influencerIsAuth.isAuth, getInfluencerCurrentConsignments)
+
+//==>brand feedback PUT
+router.put('/feedback',brandIsAuth.isAuth,feedBack)
+
 module.exports = router;

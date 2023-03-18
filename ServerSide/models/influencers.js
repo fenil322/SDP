@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const { ObjectId } = mongoose.Schema.Types;
 const influencerSchema = new mongoose.Schema({
   fname: {
     type: String,
@@ -98,6 +99,19 @@ const influencerSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  feedbacks: [{
+    brandId: {
+      type: ObjectId,
+      ref: "Shop",
+    },
+    review: {
+      type: String
+    }, rating: {
+      type: Number,
+      default: 0,
+    }
+  }
+  ],
   tokens: [{
 
     token: {

@@ -295,7 +295,7 @@ const BrandHome = () => {
             {/* <div className="mx-20 font-medium font-mono text-xl">
               <h1>Connect Your Interested Influencer...</h1>
             </div> */}
-            <div className="grid md:grid-cols-3 grid-cols-1 ">
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10 ">
               {profilecard.length > 0 &&
                 // profilecard.map((item) => (
                 profilecard.map((item) => (

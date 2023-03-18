@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router();
 
 const { influencerSignupdata, influencerlogin, getAllInfluencer, editProfiledisplay, updateProfile, influencerhome, getInfluencer
-    , adrequired, adrequiredRemove, uploadImage
+    , adrequired, adrequiredRemove, uploadImage,getConnectedinf
 } = require('../controllers/influencrController');
 const influencerIsAuth = require('../middleware/influencerIsAuth');
 const brandIsAuth = require('../middleware/brandIsAuth');
@@ -38,6 +38,8 @@ router.put("/adsrequired", influencerIsAuth.isAuth, adrequired);
 //==>ads required influencer PUT
 router.put("/adsrequiredremove", influencerIsAuth.isAuth, adrequiredRemove);
 
+//==>get connected Influecers in brandDetail GET
+router.post("/getconnectedinf",getConnectedinf)
 
 module.exports = router;
 

@@ -38,6 +38,7 @@ exports.createConsignment = async (req, res, next) => {
     });
   }
 };
+
 exports.createConsignmentInf = async (req, res, next) => {
   const influencerId = req.userId;
   const brandId = req.body.brandId;
@@ -81,35 +82,25 @@ exports.getBrandRequest = async (req, res, next) => {
   // array.push({ data: "hello world" })
 
   let array = new Array();
-  data.map(async (element) => {
+  const promises = data.map(async (element) => {
     const id = element.brandId.toString();
     var data2 = await Brand.findById(id).select("-tokens");
     // console.log(data2);
     array.push(data2);
   });
   // console.log("array data");
-  setTimeout(() => {
-    // console.log(array);
+  Promise.all(promises).then(() => {
     return res.status(200).json({ success: true, data: array });
-  }, 100);
+  })
 };
+
 exports.getInfluenerPendingRequest = async (req, res, next) => {
   const influencerId = req.userId;
   console.log(influencerId);
   // const data = await Consignment.find({ influencerId, influencerrequest: 0 });
   // // array.push({ data: "hello world" })
   let array = new Array();
-  // data.map(async (element) => {
-  //   const id = element.brandId.toString();
-  //   var data2 = await Brand.findById(id).select("-tokens");
-  //   // console.log(data2);
-  //   array.push(data2);
-  // });
-  // // console.log("array data");
-  // setTimeout(() => {
-  //   // console.log(array);
-  //   return res.status(200).json({ success: true, data: array });
-  // }, 100);
+
   const cons = await Consignment.find({ influencerId, influencerrequest: 0 }).select("-tokens");
 
   const promises = cons.map(async (element) => {
@@ -199,144 +190,40 @@ exports.deleteInfluencerReq = async (req, res) => {
 
   return res.status(200).json({ success: true, message: "Deleted request" });
 };
+
+
 exports.getInfConsignment = async (req, res) => {
   const influencerId = req.userId;
-  // console.log("get");
-  // console.log(req.body);
-  let array = new Array();
+  try{
 
-  Consignment.find({
+    let array = new Array();
+    const data = await Consignment.find({
     influencerId,
     shoprequest: 1,
     influencerrequest: 1,
     acceptstatus: false,
   })
-    .then(async (data) => {
-      //         console.log(Object.keys(data).length);
-      //         // Object.data.map((element,index) => {
-      //         //     console.log(element);
-      //         //     // const id = element.brandId.toString();
-      //         //     // Brand.findById(id).select("-tokens").the((data1) => {
-      //         //     //     array.push(data1);
-      //         //     // })
-      //         //     // console.log(data2);
-      //         // })
-      for (i = 0, len = Object.keys(data).length; i < len; i++) {
-        const id = data[i].brandId.toString();
-        // console.log(id);
-        Brand.findById(id)
-          .select("-tokens")
-          .then((data1) => {
-            console.log(data1);
-            array.push(data1);
-          })
-          .catch((err) => {
-            console.log(err);
-            return res.status(400).json({
-              success: false,
-              message: "Something went wrong",
-              error: err,
-            });
-          });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      return res
-        .status(400)
-        .json({ success: false, message: "Something went wrong", error: err });
-    });
-
-  // Promise.all(promises).then(() => {
-  // })
-  setTimeout(() => {
-    console.log(array);
+// console.log("getInfConsignmentdata",data);
+  const promises = data.map(async (element) => {
+    const id = element.brandId;
+    const data1 = await Brand.findById(id).select("-tokens");
+    // console.log(data1);
+    array.push(data1)
+  })
+  Promise.all(promises).then(()=>{
     return res
-      .status(200)
-      .json({ success: true, message: "data sent...", data: array });
-  }, 100);
+    .status(200)
+    .json({ success: true, message: "data sent...", data: array });
+  })
+  
+}catch(err){
+  return res.status(400).json({
+    success: false,
+    message: "Something went wrong",
+    error: err,
+  });
+}
 
-  // const cons=await  Consignment.find({
-  //   influencerId,
-  //   shoprequest: 1,
-  //   influencerrequest: 1,
-  //   acceptstatus: false,
-  // }).select("-tokens");
-
-  // const promises =  cons.map(async (element)=>{
-  //   const id = element.brandId.toString()
-  //   const data = await Brand.findById(id).select("-tokens");
-  //   array.push(data);
-  // })
-  // Promise.all(promises).then(() => {
-
-  //   console.log(array);
-  //   return res
-  //     .status(200)
-  //     .json({ success: true, message: "data sent...", data: array });
-  // })
-  // console.log(data);
-  // data.map((element) => {
-  //     // console.log(element);
-  //     const id = element.brandId.toString();
-  //     console.log(id);
-  //     var data2 = Brand.findById(id).select("-tokens").then(data1 => {
-  //         console.log(data1);
-  //         array.push(data1)
-  //     })
-  //     // console.log(data2);
-  //     // array.push(data2);
-  // })
-  // // console.log("array data");
-
-  // return res.status(200).json({ success: true, message: "data sent...", data: array })
-  // const data = await Consignment.find({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false })
-  // // console.log(data);
-  // if (!data) {
-  //     return res.status(400).json({ success: false, error: "Something went wrong" })
-  // }
-  // let array = new Array();
-  //     // console.log(data);
-  // data.map((element) => {
-  //     // console.log(element);
-  //     const id = element.brandId.toString();
-  //     console.log(id);
-  //     var data2 = Brand.findById(id).select("-tokens").then(data1 =>{
-  //         console.log(data1);
-  //         array.push(data1)
-  //     })
-  //     // console.log(data2);
-  //     // array.push(data2);
-  // })
-  // // console.log("array data");
-
-  // return res.status(200).json({ success: true, message: "data sent...", data: array })
-
-  // Consignment.findOne({ influencerId, shoprequest: 1, influencerrequest: 1, acceptstatus: false })
-  //     .then(async (data) => {
-  //         console.log(Object.keys(data).length);
-  //         // Object.data.map((element,index) => {
-  //         //     console.log(element);
-  //         //     // const id = element.brandId.toString();
-  //         //     // Brand.findById(id).select("-tokens").the((data1) => {
-  //         //     //     array.push(data1);
-  //         //     // })
-  //         //     // console.log(data2);
-  //         // })
-  //         for (i = 0, len = Object.keys(data).length; i < len; i++) {
-  //             const id = data[i].brandId.toString();
-  //             Brand.findById(id).select("-tokens").the((data1) => {
-  //                 array.push(data1);
-  //             }).catch((err) => {
-  //                 console.log(err);
-  //                 return res.status(400).json({ success: false, message: "Something went wrong", error: err })
-  //             })
-  //         }
-  //         return res.status(200).json({ success: true, message: "data sent...", data: array })
-  //     }).catch((err) => {
-  //         console.log(err);
-  //         return res.status(400).json({ success: false, message: "Something went wrong", error: err })
-  //     })
 };
 
 exports.getBrandPendingRequest = async (req, res) => {
@@ -348,17 +235,20 @@ exports.getBrandPendingRequest = async (req, res) => {
   // array.push({ data: "hello world" })
 
   let array = new Array();
-  data.map(async (element) => {
+  const promises = data.map(async (element) => {
     const id = element.influencerId.toString();
     var data2 = await Influencer.findById(id).select("-tokens");
     // console.log(data2);
     array.push(data2);
   });
   // console.log("array data");
-  setTimeout(() => {
-    // console.log(array);
+  Promise.all(promises).then(() => {
+
+    console.log(array);
     return res.status(200).json({ success: true, data: array });
-  }, 100);
+  })
+  // setTimeout(() => {
+  // }, 1000);
 };
 
 exports.getInfluencerRequest = async (req, res) => {
@@ -369,17 +259,19 @@ exports.getInfluencerRequest = async (req, res) => {
   // console.log(data);
 
   let array = new Array();
-  data.map(async (element) => {
+  const promises = data.map(async (element) => {
     const id = element.influencerId.toString();
     var data2 = await Influencer.findById(id).select("-tokens");
     // console.log(data2);
     array.push(data2);
   });
   // console.log("array data");
-  setTimeout(() => {
-    // console.log(array);
+  Promise.all(promises).then(() => {
+    console.log(array);
     return res.status(200).json({ success: true, data: array });
-  }, 100);
+  })
+  // setTimeout(() => {
+  // }, 1000);
 };
 
 exports.deleteBrandPendingRequest = async (req, res) => {
@@ -400,17 +292,17 @@ exports.deleteBrandPendingRequest = async (req, res) => {
   return res.status(200).json({ success: true, message: "Deleted request" });
 };
 
-const handleData = async (data, array, array2) => {
-  data.map(async (element) => {
-    const id = element.influencerId.toString();
-    var data2 = await Influencer.findById(id).select("-tokens");
-    array2.push(element.Amount);
-    array.push(data2);
-  });
+// const handleData = async (data, array, array2) => {
+//   data.map(async (element) => {
+//     const id = element.influencerId.toString();
+//     var data2 = await Influencer.findById(id).select("-tokens");
+//     array2.push(element.Amount);
+//     array.push(data2);
+//   });
 
-  let result = { array, array2 };
-  return result;
-};
+//   let result = { array, array2 };
+//   return result;
+// };
 
 exports.getBrandConsignment = async (req, res) => {
   const brandId = req.userId;
@@ -432,7 +324,7 @@ exports.getBrandConsignment = async (req, res) => {
   let array = new Array();
   let array2 = new Array();
 
-  data.map(async (element) => {
+  const promises = data.map(async (element) => {
     const id = element.influencerId.toString();
     var data2 = await Influencer.findById(id).select("-tokens");
     // console.log(data2);
@@ -442,14 +334,18 @@ exports.getBrandConsignment = async (req, res) => {
 
   // let result =await handleData(data, array, array2);
   // console.log("array data");
-  setTimeout(() => {
+  // setTimeout(() => {
+  Promise.all(promises).then(() => {
+
+
     return res.status(200).json({
       success: true,
       message: "data sent...",
       data: array,
       data1: array2,
     });
-  }, 100);
+  })
+  // }, 1000);
 };
 
 exports.paymentupdate = async (req, res) => {
@@ -487,33 +383,23 @@ exports.getBrandCurrentConsignments = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
   let array = new Array();
-  let array1 = new Array();
-  let array2 = new Array();
-  let array3 = new Array();
-  let array4 = new Array();
 
-  data.map(async (element) => {
+  const promises = data.map(async (element) => {
     const id = element.influencerId.toString();
     var data2 = await Influencer.findById(id).select("-tokens");
     // console.log(data2);
-    array1.push(element.Amount, element.paymentstatus);
-    array2.push(element.startDate);
-    array3.push(element.endDate);
-    array4.push(element.paymentstatus);
     array.push(data2);
   });
   // console.log("array data");
-  setTimeout(() => {
+  Promise.all(promises).then(() => {
     return res.status(200).json({
       success: true,
       message: "data sent...",
       data: array,
-      data1: array1,
-      data2: array2,
-      data3: array3,
-      data4: array4,
+      brandId: brandId
     });
-  }, 100);
+
+  })
 };
 
 exports.withoutPayment = async (req, res) => {
@@ -552,31 +438,52 @@ exports.getInfluencerCurrentConsignments = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
   let array = new Array();
-  let array1 = new Array();
-  let array2 = new Array();
-  let array3 = new Array();
-  let array4 = new Array();
 
-  data.map(async (element) => {
+  const promises = data.map(async (element) => {
     const id = element.brandId.toString();
     var data2 = await Brand.findById(id).select("-tokens");
     // console.log(data2);
-    array1.push(element.Amount, element.paymentstatus);
-    array2.push(element.startDate);
-    array3.push(element.endDate);
-    array4.push(element.paymentstatus);
     array.push(data2);
   });
   // console.log("array data");
-  setTimeout(() => {
+
+  Promise.all(promises).then(() => {
+
     return res.status(200).json({
       success: true,
-      message: "data sent...",
+      message: "data sent",
       data: array,
-      data1: array1,
-      data2: array2,
-      data3: array3,
-      data4: array4,
     });
-  }, 100);
+  })
+
 };
+
+exports.feedBack = async (req, res) => {
+
+  const { influencerId, review, rating } = req.body;
+  const brandId = req.userId
+  console.log(req.body);
+  try {
+
+    const cons = await Consignment
+      .findOneAndUpdate({ brandId, influencerId },
+        { $set: { review: review, rating: rating } },
+        { new: true }
+      )
+    await Influencer.findById(influencerId).select("-tokens").then(async (doc1) => {
+      doc1.rating = doc1.rating + rating;
+      doc1.count = doc1.count + 1;
+      doc1.feedbacks.push({ brandId: brandId, review: review, rating: rating })
+      await doc1.save();
+      console.log(doc1);
+    });
+
+    return res.status(200).json({ success: true, message: "feedback saved successfully", data: cons })
+  } catch (err) {
+    return res.status(422).json({ success: false, error: "somthing went wronge while giving feedback" })
+  }
+  // Promise.all(promises).then(()=>{
+  // })
+  // console.log(cons);
+
+}
