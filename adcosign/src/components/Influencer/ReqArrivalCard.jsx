@@ -25,6 +25,11 @@ function ReqArrivalCard({ item, onData }) {
     location,
     photo1,
   } = item;
+ 
+  const branddetailpage = () => {
+    navigate("/BrandDetails", { state: item });
+  };
+
   return (
     <>
 
@@ -33,8 +38,9 @@ function ReqArrivalCard({ item, onData }) {
         <img
           //src={photo}
           src={logo}
-          class="h-1/3 w-1/3 m-auto mt-5  "
+          class="h-1/3 w-1/3 m-auto mt-5 cursor-pointer "
           alt="image"
+          onClick={()=>branddetailpage()}
         />
 
         <div class="px-5 ">

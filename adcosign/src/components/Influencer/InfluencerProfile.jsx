@@ -33,9 +33,9 @@ const InfluencerProfile = () => {
     const data = res.data;
     //   console.log("Logged in user is:- ");
     setuserdata(data.data)
-    
 
-      // console.log(data.data);
+
+    // console.log(data.data);
   }
   const getConnectedBrand = async () => {
     // console.log(userdata._id);
@@ -54,11 +54,11 @@ const InfluencerProfile = () => {
 
   useEffect(() => {
     getInfluencerData()
-    
+
   }, [])
-  useEffect(()=>{
+  useEffect(() => {
     getConnectedBrand()
-  },[userdata._id])
+  }, [userdata._id])
   return (
     <div className='flex h-[screen]'>
       <Navbar />
@@ -234,9 +234,9 @@ const InfluencerProfile = () => {
                       <AiFillTwitterCircle size={24} color='#1da1f2' />
 
                     </a>
-                    <a href="#" title="LinkedIn">
+                    {/* <a href="#" title="LinkedIn">
                       <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"><path d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z" fill="#0077b5"></path></svg>
-                    </a>
+                    </a> */}
                     <a
                       target="_blank"
                       href={userdata.instagramURL}
@@ -268,7 +268,7 @@ const InfluencerProfile = () => {
                             <img src={data.logo} className="w-8 h-8 rounded-full mx-5 " alt="profile" />
                             <div class="w-11/12">
                               <a href={data.instagramUrl} target="_blank" title="Instagram">
-                              <div class="text-sm font-semibold cursor-pointer">{data.shopName}</div>
+                                <div class="text-sm font-semibold cursor-pointer">{data.shopName}</div>
                               </a>
                               <p class="text-xs text-gray-500">{date[index]}</p>
                             </div>
@@ -291,128 +291,80 @@ const InfluencerProfile = () => {
               <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
                 <h4 class="text-xl text-gray-900 font-bold">Social Media</h4>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-4 flex ">
-                  {/* <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
-                          <div class="flex items-center justify-between">
-                            <span class="font-bold text-sm text-indigo-600">Total Revenue</span>
-                            <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">7 days</span>
-                          </div>
-                          <div class="flex items-center justify-between mt-6">
-                            <div>
-                              <svg class="w-12 h-12 p-2.5 bg-indigo-400 bg-opacity-20 rounded-full text-indigo-600 border border-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            </div>
-                            <div class="flex flex-col">
-                              <div class="flex items-end">
-                                <span class="text-2xl 2xl:text-3xl font-bold">$8,141</span>
-                                <div class="flex items-center ml-2 mb-1">
-                                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                                  <span class="font-bold text-sm text-gray-500 ml-0.5">3%</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
-                          <div class="flex items-center justify-between">
-                            <span class="font-bold text-sm text-green-600">New Orders</span>
-                            <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">7 days</span>
-                          </div>
-                          <div class="flex items-center justify-between mt-6">
-                            <div>
-                              <svg class="w-12 h-12 p-2.5 bg-green-400 bg-opacity-20 rounded-full text-green-600 border border-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-                            </div>
-                            <div class="flex flex-col">
-                              <div class="flex items-end">
-                                <span class="text-2xl 2xl:text-3xl font-bold">217</span>
-                                <div class="flex items-center ml-2 mb-1">
-                                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                                  <span class="font-bold text-sm text-gray-500 ml-0.5">5%</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="px-6 py-6 bg-gray-100 border border-gray-300 rounded-lg shadow-xl">
-                          <div class="flex items-center justify-between">
-                            <span class="font-bold text-sm text-blue-600">New Connections</span>
-                            <span class="text-xs bg-gray-200 hover:bg-gray-500 text-gray-500 hover:text-gray-200 px-2 py-1 rounded-lg transition duration-200 cursor-default">7 days</span>
-                          </div>
-                          <div class="flex items-center justify-between mt-6">
-                            <div>
-                              <svg class="w-12 h-12 p-2.5 bg-blue-400 bg-opacity-20 rounded-full text-blue-600 border border-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                            </div>
-                            <div class="flex flex-col">
-                              <div class="flex items-end">
-                                <span class="text-2xl 2xl:text-3xl font-bold">54</span>
-                                <div class="flex items-center ml-2 mb-1">
-                                  <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                                  <span class="font-bold text-sm text-gray-500 ml-0.5">7%</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
-
-
-                  <div className="items-center">
-                    <a
-                      target="_blank"
-                      href={userdata.facebookURL}
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-4  ">
+                  <div className="items-center mt-10 ">
+                    <div
                       class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
-                      <div className="flex justify-between">
-                        <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
-                        <div className="text-[#244489] font-bold">1K Views</div>
+                      <div className=" flex justify-between items-center">
+                        <RiFacebookBoxLine size={25} className="text-[#3b5998] " />
+                        <a href={userdata.facebookURL}
+                          target="_blank"
+                          className="hover:text-blue-600" >Click here...</a>
                       </div>
 
                       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
                       <div className="flex justify-between font-bold">
-                        <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
-                        <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
-                        <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
+                        {userdata?.facebookFollowers ?
+                          <div className="justify-center align-middle text-center">{userdata.facebookFollowers}<div className="text-xs font-normal">Followers</div></div>
+                          : ""}
+                        {userdata?.facebookComments ?
+                          <div className="justify-center align-middle text-center">{userdata.facebookComments}<div className="text-xs font-normal">Comments</div></div>
+                          : ""}
+                        {userdata?.facebookEngagementRate ?
+                          <div className="justify-center align-middle text-center">{userdata.facebookEngagementRate}<div className="text-xs font-normal">EngagementRate</div></div>
+                          : ""}
                       </div>
-                    </a>
+                    </div>
                   </div>
-                  <div className="items-center">
-                    <a
-                      target="_blank"
-                      href={userdata.instagramURL}
+                  <div className="items-center mt-10">
+                    <div
                       class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
-                      <div className="flex justify-between">
-                        <FaInstagram size={20} className="text-[#d62976]" />
-                        <div className="text-[#d62976] font-bold">1.3K Views</div>
+                      <div className="flex justify-between items-center">
+                        <FaInstagram size={25} className="text-[#d62976] " />
+                        <a href={userdata.instagramURL}
+                          target="_blank"
+                          className="hover:text-blue-600" >Click here...</a>
                       </div>
 
                       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
                       <div className="flex justify-between font-bold">
-                        <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
-                        <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
-                        <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
-                      </div>
-                    </a>
+                        {userdata?.instagramFollowers ?
+                          <div className="justify-center align-middle text-center">{userdata.instagramFollowers}<div className="text-xs font-normal">Followers</div></div>
+                          : ""}
+                        {userdata?.instagramComments ?
+                          <div className="justify-center align-middle text-center">{userdata.instagramComments}<div className="text-xs font-normal">Comments</div></div>
+                          : ""}
+                        {userdata?.instagramEngagementRate ?
+                          <div className="justify-center align-middle text-center">{userdata.instagramEngagementRate}<div className="text-xs font-normal">EngagementRate</div></div>
+                          : ""} </div>
+                    </div>
                   </div>
-                  <div className="items-center">
-                    <a
-                      target="_blank"
-                      href={userdata.twitterURL}
+                  <div className="items-center mt-10">
+                    <div
                       class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                     >
-                      <div className="flex justify-between">
-                        <FiTwitter size={20} className="text-[#00acee]" />
-                        <div className="text-[#00acee] font-bold">2K Views</div>
+                      <div className="flex justify-between items-center">
+                        <FiTwitter size={25} className="text-[#00acee] " />
+                        <a href={userdata.twitterURL}
+                          target="_blank"
+                          className="hover:text-blue-600" >Click here...</a>
                       </div>
 
                       <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
                       <div className="flex justify-between font-bold">
-                        <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
-                        <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
-                        <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
-                      </div>
-                    </a>
+                        {userdata?.twitterFollowers ?
+                          <div className="justify-center align-middle text-center">{userdata.twitterFollowers}<div className="text-xs font-normal">Followers</div></div>
+                          : ""}
+                        {userdata?.twitterComments ?
+                          <div className="justify-center align-middle text-center">{userdata.twitterComments}<div className="text-xs font-normal">Comments</div></div>
+                          : ""}
+                        {userdata?.twitterEngagementRate ?
+                          <div className="justify-center align-middle text-center">{userdata.twitterEngagementRate}<div className="text-xs font-normal">EngagementRate</div></div>
+                          : ""} </div>
+                    </div>
                   </div>
-
-
                 </div>
 
               </div>

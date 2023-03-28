@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiMenuAlt1 } from 'react-icons/hi';
 import { FaUserCircle, FaHome } from 'react-icons/fa';
 import { CgImport } from 'react-icons/cg';
@@ -17,13 +17,29 @@ import axios from 'axios';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [brandData, setbrandData] = useState({});
+    const getBrandData = async () => {
+        try {
+    
+          const { data } = await axios.get("/brand/getBrandData");
+          setbrandData(data.data);
+        } catch (err) {
+          console.log(err.response.status);
+          if (err.response.status == 422) {
+            navigate('/')
+          }
+        }
+      };
+    useEffect(() => {
+        getBrandData();
+      }, []);
     const menus = [
-        { name: "Home", link: "/BrandHome?page=1", icon: FaHome },
-        { name: "Pending Request", link: "/BrandPendingRequest", icon: MdPendingActions },
-        { name: "Arrival Request", link: "/BrandArrivalRequest", icon: CgImport },
-        { name: "Agreement", link: "/BrandConsignments", icon: FaHandshake },
-        { name: "History", link: "/BrandHistory", icon: BiHistory },
-        { name: "Profile", link: "/BrandProfile", icon: FaUserCircle },
+        { name: "Home", link: "/BrandHome?page=1", icon: FaHome,data:brandData },
+        { name: "Pending Request", link: "/BrandPendingRequest", icon: MdPendingActions,data:brandData },
+        { name: "Arrival Request", link: "/BrandArrivalRequest", icon: CgImport,data:brandData },
+        { name: "Agreement", link: "/BrandConsignments", icon: FaHandshake,data:brandData },
+        { name: "History", link: "/BrandHistory", icon: BiHistory,data:brandData },
+        { name: "Profile", link: "/BrandProfile", icon: FaUserCircle,data:brandData },
         // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
         // { name: "About", link: "/", icon: BsInfoCircle },
     ];
@@ -63,6 +79,7 @@ const Navbar = () => {
                         {menus?.map((menu, i) => (
                             <Link
                                 to={menu?.link}
+                                state={menu?.data}
                                 key={i}
                                 className={`${menu?.margin && "mt-5"} group flex items-center
                                  text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}

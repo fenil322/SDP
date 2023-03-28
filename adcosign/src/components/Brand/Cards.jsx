@@ -23,7 +23,7 @@ function Card({ item }) {
 
   return (
     <>
-      <div className=" max-w-md md:mx-5 md:max-w-2xl  break-words bg-gray-100  shadow-lg rounded-2xl my-10">
+      <div className=" max-w-md md:mx-5 md:max-w-2xl  break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}
@@ -86,13 +86,13 @@ function Card({ item }) {
                   </div>
                   <div className="flex  items-center">
                     <AiOutlineFacebook size={20} className="text-[#3b5998] " />
-                    <div className="text-[#3b5998] mr-3 ml-1"> 4K</div>
+                    <div className="text-[#3b5998] mr-3 ml-1"> {facebookFollowers}</div>
 
                     <AiOutlineInstagram size={20} className="text-[#E4405F]" />
-                    <div className="text-[#E4405F] mr-3 ml-1"> 5.5M</div>
+                    <div className="text-[#E4405F] mr-3 ml-1">{instagramFollowers}</div>
 
                     <CiTwitter size={20} className="text-[#1DA1F2]" />
-                    <div className="text-[#1DA1F2] mr-3 ml-1"> 66K</div>
+                    <div className="text-[#1DA1F2] mr-3 ml-1"> {twitterFollowers}</div>
                   </div>
                 </div>
               </div>

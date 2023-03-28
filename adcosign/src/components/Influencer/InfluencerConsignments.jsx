@@ -161,24 +161,24 @@ const InfluencerConsignments = () => {
                     <div className="border-y-2 py-3">
 
                       <div className="flex space-x-2.5 items-center">
-                      
-              <FiPhoneCall size={20} />
-             
-                          <p class="mb-1 text-lg ">{data.phone}</p>
-                        </div>
-                     
-                      <div className="flex space-x-2.5 items-center">
-                      <MdEmail size={20} />
-                          <p class="mb-1 text-lg">{data.email}</p>
-                        
+
+                        <FiPhoneCall size={20} />
+
+                        <p class="mb-1 text-lg ">{data.phone}</p>
                       </div>
 
                       <div className="flex space-x-2.5 items-center">
-                      <TiLocation size={20} />
-                          <p class="mb-1 text-lg hover:text-blue-500 ">
-                            {data.city+", "+data.country}
-                          </p>
-                       
+                        <MdEmail size={20} />
+                        <p class="mb-1 text-lg">{data.email}</p>
+
+                      </div>
+
+                      <div className="flex space-x-2.5 items-center">
+                        <TiLocation size={20} />
+                        <p class="mb-1 text-lg hover:text-blue-500 ">
+                          {data.city + ", " + data.country}
+                        </p>
+
                       </div>
                     </div>
                     <div className="flex mt-3  items-center mx-10">
@@ -216,7 +216,7 @@ const InfluencerConsignments = () => {
                                 const updatedItems = [...profilecard];
                                 updatedItems.splice(index, 1);
                                 setprofilecard(updatedItems)
-                                toast.error("Agreement Removed Successfully")
+                                toast.success("Agreement Removed Successfully")
                               }
                             } catch (err) {
                               navigate("/InfluencerConsignments");

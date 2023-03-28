@@ -293,7 +293,7 @@ exports.deleteBrandPendingRequest = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
 
-  return res.status(200).json({ success: true, message: "Request Removed successfully!!"  });
+  return res.status(200).json({ success: true, message: "Request Removed successfully!!" });
 };
 
 // const handleData = async (data, array, array2) => {
@@ -408,13 +408,13 @@ exports.getBrandCurrentConsignments = async (req, res) => {
 
 exports.acceptAgreement = async (req, res) => {
   const brandId = req.userId;
-  const influencerId = req.body.id;
+  const influencerId = req.body.inflencerId;
   console.log(brandId);
   console.log(influencerId);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
-    { $set: { acceptstatus: true } },
+    { $set: { acceptstatus: true, detailRequest: 1, detailSend: 1 } },
     { new: true }
   );
   // console.log(data);
@@ -425,18 +425,18 @@ exports.acceptAgreement = async (req, res) => {
   }
   return res
     .status(200)
-    .json({ success: true, message: "Proceed Without Payment" });
+    .json({ success: true, message: "Agreement Accepted!!!" });
 };
 
 exports.AskAgreementDetails = async (req, res) => {
   const brandId = req.userId;
-  const influencerId = req.body.id;
-  console.log(brandId);
-  console.log(influencerId);
+  const influencerId = req.body.inflencerId;
+  // console.log(req.body\);
+  // console.log(influencerId);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
-    { $set: { detailRequest: 1 } },
+    { $set: { AgreementDetail: req.body.formData, detailRequest: 1, } },
     { new: true }
   );
 
@@ -453,12 +453,12 @@ exports.AskAgreementDetails = async (req, res) => {
 exports.AgreementDetails = async (req, res) => {
   const influencerId = req.userId;
   const brandId = req.body.brandId;
-  console.log(brandId);
-  console.log(influencerId);
+  // console.log(brandId);
+  // console.log(influencerId);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
-    { $set: { AgreementDetail: req.body.formData, detailRequest: 1, detailSend: 1 } },
+    { $set: { AgreementDetail: req.body.formData, detailSend: 1 } },
     { new: true }
   );
 

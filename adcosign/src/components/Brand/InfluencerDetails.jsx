@@ -238,7 +238,7 @@ const InfluencerDetails = (props) => {
                     type="button"
                     class="py-1 px-2 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-blue-200 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   >
-                    Makeup
+                    {persondata.cat1}
                   </button>
                 </div>
 
@@ -247,7 +247,7 @@ const InfluencerDetails = (props) => {
                     type="button"
                     class="py-1 px-2 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-blue-200 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   >
-                    Beauty
+                    {persondata.cat2}
                   </button>
                 </div>
                 <div>
@@ -255,7 +255,7 @@ const InfluencerDetails = (props) => {
                     type="button"
                     class="py-1 px-2 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-blue-200 rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                   >
-                    Model
+                    {persondata.cat3}
                   </button>
                 </div>
               </div>
@@ -264,65 +264,82 @@ const InfluencerDetails = (props) => {
             <div className="mx-20 border-y-2">
               <div className="  grid lg:grid-cols-3  grid-cols-2 sm:grid-cols-1  pb-10">
                 <div className="items-center mt-10 ">
-                  <a
-                    target="_blank"
-                    href={persondata.facebookURL}
+                  <div
                     class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                   >
-                    <div className="flex justify-between">
-                      <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
-                      <div className="text-[#244489] font-bold">1K Views</div>
+                    <div className=" flex justify-between items-center">
+                      <RiFacebookBoxLine size={25} className="text-[#3b5998] " />
+                      <a href={persondata.facebookURL}
+                        target="_blank"
+                        className="hover:text-blue-600" >Click here...</a>
                     </div>
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
                     <div className="flex justify-between font-bold">
-                      <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
-                      <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
-                      <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
+                      {persondata?.facebookFollowers ?
+                        <div className="justify-center align-middle text-center">{persondata.facebookFollowers}<div className="text-xs font-normal">Followers</div></div>
+                        : ""}
+                      {persondata?.facebookComments ?
+                        <div className="justify-center align-middle text-center">{persondata.facebookComments}<div className="text-xs font-normal">Comments</div></div>
+                        : ""}
+                      {persondata?.facebookEngagementRate ?
+                        <div className="justify-center align-middle text-center">{persondata.facebookEngagementRate}<div className="text-xs font-normal">EngagementRate</div></div>
+                        : ""}
                     </div>
-                  </a>
+                  </div>
                 </div>
                 <div className="items-center mt-10">
-                  <a
-                    target="_blank"
-                    href={persondata.instagramURL}
+                  <div
                     class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                   >
-                    <div className="flex justify-between">
-                      <FaInstagram size={20} className="text-[#d62976]" />
-                      <div className="text-[#d62976] font-bold">1.3K Views</div>
+                    <div className="flex justify-between items-center">
+                      <FaInstagram size={25} className="text-[#d62976] " />
+                      <a href={persondata.instagramURL}
+                        target="_blank"
+                        className="hover:text-blue-600" >Click here...</a>
                     </div>
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
                     <div className="flex justify-between font-bold">
-                      <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
-                      <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
-                      <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
-                    </div>
-                  </a>
+                      {persondata?.instagramFollowers ?
+                        <div className="justify-center align-middle text-center">{persondata.instagramFollowers}<div className="text-xs font-normal">Followers</div></div>
+                        : ""}
+                      {persondata?.instagramComments ?
+                        <div className="justify-center align-middle text-center">{persondata.instagramComments}<div className="text-xs font-normal">Comments</div></div>
+                        : ""}
+                      {persondata?.instagramEngagementRate ?
+                        <div className="justify-center align-middle text-center">{persondata.instagramEngagementRate}<div className="text-xs font-normal">EngagementRate</div></div>
+                        : ""} </div>
+                  </div>
                 </div>
                 <div className="items-center mt-10">
-                  <a
-                    target="_blank"
-                    href={persondata.twitterURL}
+                  <div
                     class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                   >
-                    <div className="flex justify-between">
-                      <FiTwitter size={20} className="text-[#00acee]" />
-                      <div className="text-[#00acee] font-bold">2K Views</div>
+                    <div className="flex justify-between items-center">
+                      <FiTwitter size={25} className="text-[#00acee] " />
+                      <a href={persondata.twitterURL}
+                        target="_blank"
+                        className="hover:text-blue-600" >Click here...</a>
                     </div>
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
                     <div className="flex justify-between font-bold">
-                      <div className="justify-center align-middle text-center">4.42M<div className="text-xs font-normal">Followers</div></div>
-                      <div className="justify-center align-middle text-center">90<div className="text-xs font-normal">Reactions</div></div>
-                      <div className="justify-center align-middle text-center">342<div className="text-xs font-normal">Comments</div></div>
-                    </div>
-                  </a>
+                      {persondata?.twitterFollowers ?
+                        <div className="justify-center align-middle text-center">{persondata.twitterFollowers}<div className="text-xs font-normal">Followers</div></div>
+                        : ""}
+                      {persondata?.twitterComments ?
+                        <div className="justify-center align-middle text-center">{persondata.twitterComments}<div className="text-xs font-normal">Comments</div></div>
+                        : ""}
+                      {persondata?.twitterEngagementRate ?
+                        <div className="justify-center align-middle text-center">{persondata.twitterEngagementRate}<div className="text-xs font-normal">EngagementRate</div></div>
+                        : ""} </div>
+                  </div>
                 </div>
-
               </div>
+
             </div>
+
             {/* <div className="flex w-5/6  m-auto my-10 pb-10">
             <div className="mt-8">
               <div>
@@ -357,16 +374,16 @@ const InfluencerDetails = (props) => {
               </div>
             </div>
           </div> */}
-            <div className="flex border-b-2 m-auto my-10 pb-10 mx-20">
-              <div>
+            <div className="flex justify-between border-b-2 m-auto my-10 pb-10 mx-20">
+            {persondata.discription?
+            
+            <div>
                 <h2 className="font-bold font-mono text-2xl">About Influencer</h2>
                 <div className="w-1/2">
-                  Contrary to popular belief, Lorem Ipsum is not simply random
-                  text. It has roots in a piece of classical Latin literature from
-                  45 BC, making it over 2000 years old. Richard McClintock, a
-                  Latin professor at Hampden-Sydney College in Virginia
+                  {persondata.discription}
                 </div>
               </div>
+              :""}
               <div className="w-80">
                 <h2 className="font-bold font-mono text-2xl w-80">
                   Influencer Details
@@ -386,7 +403,7 @@ const InfluencerDetails = (props) => {
                   <div>
                     <MdOutlineLocationCity size={20} />
                   </div>
-                  <div className="">{persondata.address}</div>
+                  <div className="">{persondata.city+", "+persondata.state+", "+persondata.country}</div>
                 </div>
                 <br></br>
                 <hr></hr>

@@ -83,7 +83,7 @@ const BrandDetails = () => {
       setLoading(true)
       const res = await axios.post('influencer/getconnectedinf', { id });
       const data = res.data;
-      console.log(data);
+      // console.log(data);
       setInfluencerData(data.data);
       setDate(data.date)
       setLoading(false)
@@ -211,14 +211,14 @@ const BrandDetails = () => {
               </div>
             </div>
             <div className="flex w-5/6 justify-between m-auto mt-10 border-b pb-10">
-              {brandData?.description != null ?
+              {brandData?.description ?
                 <div>
                   <h2 className="font-bold font-mono text-2xl">About Brand</h2>
                   <div className="w-1/2">
                     {brandData?.description}
                   </div>
                 </div> :
-                <div></div>
+                ""
               }
               <div className="w-80">
                 <h2 className="font-bold font-mono text-2xl w-80">

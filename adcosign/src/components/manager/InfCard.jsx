@@ -2,44 +2,90 @@ import axios from 'axios'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { TiPlus } from "react-icons/ti";
+import { AiOutlineInstagram } from "react-icons/ai";
+import { AiOutlineFacebook } from "react-icons/ai";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdEmail } from "react-icons/md";
 
-const InfCard = ({ item }) => {
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const InfCard = ({ item,onData }) => {
     const navigate = useNavigate();
     return (
-        <div className="flex ml-60 mt-10 w-full bg-white shadow-2xl ">
+        <div className=" max-sm:mx-5 px-5    break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
 
-            <img
-                class="object-cover w-full rounded-full h-60 md:h-auto md:w-48 md:rounded-full md:rounded-full-lg m-2 p-2"
-                src={item.photo}
-                alt="not image"
-            />
-            <div class="flex flex-col justify-between p-4 leading-normal">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {item.fname + " " + item.lname}
+                  <div className="flex ">
+                    <div className="flex px-3 my-5  " >
 
-                </h5>
-                <p class="mb-3 font-normal text-gray-800 dark:text-gray-400">
-                    {item.city + ", " + item.state + ", " + item.country}
+                      <img
+                        src={item.photo}
+                        alt="myPic"
+                        className="shadow-xl w-32 h-32 rounded-full  "
+                      />
 
-                </p>
-                <p class="mb-3 font-normal text-gray-900 dark:text-gray-400">
-                    {item.email}
+                      <div className=" mt-2 ml-5">
+                        <h3 className="text-2xl text-slate-700 font-bold leading-normal mb-1">
+                          {item.fname + " " + item.lname}
+                        </h3>
 
-                </p>
-                <div>
-                    <div className="flex justify-center space-x-6 mb-5">
+                        <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
+                          <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                          {item.gender} ({item.age})
+                        </div>
+                        <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
+                          <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                          {item.city + ", " + item.country}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div className="border-b">
+                    <div className="mt-3 ml-5">
+                      <div className="flex space-x-2.5 items-center mt-3">
+                        <FiPhoneCall size={20} />
+                        <div>{item.phone}</div>
+                      </div>
+                      <div className="flex space-x-2.5 items-center mt-3">
+                        <MdEmail size={20} />
+                        <div>{item.email}</div>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 py-2  border-y-2">
+
+                      <div className="flex mx-20 justify-between">
+                        <a href={item.instagramUrl} target="_blank"className="flex">
+                          <AiOutlineFacebook
+                            size={30}
+                            className="text-[#3b5998] "
+                          />
+                          </a>
+                        <a href={item.facebookUrl} target="_blank" className="flex">
+                          <AiOutlineInstagram
+                            size={30}
+                            className="text-[#E4405F]"
+                          />
+                         </a>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  <div >
+                    <div className="flex justify-center space-x-6 my-5">
                         <div>
                             <button
 
                                 onClick={async (e) => {
                                     e.preventDefault()
-                                    console.log("hello")
                                     try {
                                         const res = await axios.put("manager/validateinfluencer", { email: item.email })
                                         const data = res.data;
                                         console.log(data)
                                         if (data.success == true) {
-                                            window.location.reload();
+                                            onData(item._id)
+                                            // window.location.reload();
+                                            toast.success("Influencer Validation Success")
                                         }
                                     } catch (err) {
                                         navigate("/AddNewInfluencer");
@@ -56,7 +102,6 @@ const InfCard = ({ item }) => {
                             <button
                                 onClick={async (e) => {
                                     e.preventDefault()
-                                    console.log("hello2")
                                     try {
 
                                         const res = await axios.delete("manager/deleteinfluencer", { data: { email: item.email } })
@@ -65,7 +110,9 @@ const InfCard = ({ item }) => {
                                         const data = res.data;
                                         console.log(data)
                                         if (data.success == true) {
-                                            window.location.reload();
+                                            onData(item._id)
+                                            // window.location.reload();
+                                            toast.success("Influencer Removed Successfully")
                                         }
                                     } catch (err) {
                                         navigate("/AddNewInfluencer");
@@ -90,11 +137,12 @@ const InfCard = ({ item }) => {
                             </button>
                         </div>
                     </div>
+                </div> 
+                  {/* </Link > */}
+                  <ToastContainer autoClose={1000}/>
                 </div>
-            </div>
-
-        </div>
     )
 }
 
 export default InfCard
+

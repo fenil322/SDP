@@ -420,6 +420,19 @@ const InfluencerProfileEdit = () => {
                     </div>
                     <div className="col-span-6 relative">
                       <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Instagram Followers
+                      </span>
+                      <input
+                        type="text"
+                        name="instagramFollowers"
+                        defaultValue={userdata.instagramFollowers}
+                        // value={userdata.instagramURL}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
                         Your Instagram URL
                       </span>
                       <input
@@ -433,12 +446,52 @@ const InfluencerProfileEdit = () => {
                     </div>
                     <div className="col-span-6 relative">
                       <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Instagram EngagementRate
+                      </span>
+                      <input
+                        type="text"
+                        name="instagramEngagementRate"
+                        defaultValue={userdata.instagramEngagementRate}
+                        // value={userdata.instagramURL}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Instagram Total Comments
+                      </span>
+                      <input
+                        type="text"
+                        name="instagramComments"
+                        defaultValue={userdata.instagramComments}
+                        // value={userdata.instagramURL}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div></div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
                         Your Facebook Handle
                       </span>
                       <input
                         type="text"
                         name="facebook"
                         defaultValue={userdata.facebook}
+                        // value={userdata.facebook}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Facebook Followers
+                      </span>
+                      <input
+                        type="text"
+                        name="facebookFollowers"
+                        defaultValue={userdata.facebookFollowers}
                         // value={userdata.facebook}
                         onChange={handleInput}
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
@@ -459,6 +512,34 @@ const InfluencerProfileEdit = () => {
                     </div>
                     <div className="col-span-6 relative">
                       <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Facebook EngagementRate
+                      </span>
+                      <input
+                        type="text"
+                        name="facebookEngagementRate"
+                        defaultValue={userdata.facebookEngagementRate}
+                        // value={userdata.facebook}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                   
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Facebook Total Comments
+                      </span>
+                      <input
+                        type="text"
+                        name="facebookComments"
+                        defaultValue={userdata.facebookComments}
+                        // value={userdata.facebook}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                   <div></div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
                         Your Twitter Handle
                       </span>
                       <input
@@ -466,6 +547,19 @@ const InfluencerProfileEdit = () => {
                         name="twitter"
                         defaultValue={userdata.twitter}
                         // value={userdata.twitter}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Twitter Followers
+                      </span>
+                      <input
+                        type="text"
+                        name="twitterFollowers"
+                        defaultValue={userdata.twitterFollowers}
+                        // value={userdata.twitterURL}
                         onChange={handleInput}
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
@@ -483,6 +577,33 @@ const InfluencerProfileEdit = () => {
                         className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
                       />
                     </div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Twitter twitterEngagementRate
+                      </span>
+                      <input
+                        type="text"
+                        name="twitterEngagementRate"
+                        defaultValue={userdata.twitterEngagementRate}
+                        // value={userdata.twitterURL}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div className="col-span-6 relative">
+                      <span className="absolute bg-white left-3 -top-[12px] px-2">
+                        Your Twitter Comments
+                      </span>
+                      <input
+                        type="text"
+                        name="twitterComments"
+                        defaultValue={userdata.twitterComments}
+                        // value={userdata.twitterURL}
+                        onChange={handleInput}
+                        className="text-[13px] h-12 text-gray-900 w-full border-2 px-2 rounded-sm"
+                      />
+                    </div>
+                    <div></div>
                     <div className="col-span-6 relative">
                       <span className="absolute bg-white left-3 -top-[12px] px-2">
                         Your Catogary 1

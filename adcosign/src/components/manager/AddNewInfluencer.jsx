@@ -68,17 +68,21 @@ const AddNewInfluencer = () => {
   useEffect(() => {
     callgetInfluencerPage();
   }, [])
+  const removeinf = (id) => {
+    const updatedItems = profilecard.filter(item => item._id !== id);
+    setprofilecard(updatedItems)
+  }
 
   return (
     <div className="h-[screen] flex">
       <Navbar />
-      <div className="ml-14 w-screen">
+      <div className="ml-14 w-screen max-sm:ml-0">
         <ManagerHeader page="Add Influencer" />
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid mt-10 px-20 max-sm:px-0 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {profilecard.length == 0 ? <h1 className="text-center text-3xl font-bold mt-10">No New Request </h1> :
             profilecard.map((item, indes) => (
-              <InfCard item={item} />
+              <InfCard item={item} onData={removeinf} />
             ))
           }
         </div>

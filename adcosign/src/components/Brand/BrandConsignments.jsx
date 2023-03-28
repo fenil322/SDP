@@ -61,8 +61,12 @@ const BrandConsignments = () => {
     setInfluencerId(id)
     setIsOpen(true);
   };
-  const openModal2 = (data, index) => {
+  const openModal2 = (data, index, id) => {
+
     // console.log(data.AgreementDetail);
+    // console.log(id);
+    setIndex(index)
+    setInfluencerId(id)
     setFormData(data.AgreementDetail)
     setIsOpen2(true);
   };
@@ -81,6 +85,7 @@ const BrandConsignments = () => {
     });
     setIsOpen(false);
     setIsOpen2(false);
+    setInfluencerId("");
   };
 
   const handleChange = e => {
@@ -92,7 +97,7 @@ const BrandConsignments = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // console.log(formData); 
     if (
       window.confirm(
@@ -101,20 +106,46 @@ const BrandConsignments = () => {
     ) {
       try {
         const res = await axios.put(
-          "consignment/agreementdetails",
+          "consignment/askagrementdetails",
           { inflencerId, formData }
         );
         const resdata = res.data;
         console.log(resdata);
         if (resdata.success == true) {
-          closeModal();
           const updatedItem = { ...cons[index], detailRequest: 1, AgreementDetail: formData };
           const updatedItems = [...cons];
           updatedItems[index] = updatedItem;
-          console.log("update");
-          console.log(updatedItems);
-          // Update the state with the new array
           setCons(updatedItems);
+          closeModal();
+          toast.success(resdata.message);
+        }
+      } catch (err) {
+        toast.error("Something went wrong");
+        console.log(err);
+      }
+    }
+  };
+  const handleSubmit2 = async (e) => {
+    e.preventDefault();
+
+    // console.log(formData); 
+    if (
+      window.confirm(
+        "Are you sure you want to Confirm this agreement?"
+      )
+    ) {
+      try {
+        const res = await axios.put(
+          "consignment/acceptAgreement",
+          { inflencerId }
+        );
+        const resdata = res.data;
+        console.log(resdata);
+        if (resdata.success == true) {
+          const updatedItems = [...profilecard];
+          updatedItems.splice(index, 1);
+          setprofilecard(updatedItems)
+          closeModal();
           toast.success(resdata.message);
         }
       } catch (err) {
@@ -141,7 +172,7 @@ const BrandConsignments = () => {
               </h1>
             ) : (
               profilecard.map((item, index) => (
-                <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-xl my-10">
+                <div className="mx-10    break-words bg-gray-100  shadow-2xl border-2 rounded-xl my-10">
 
                   <div className="flex ">
                     <div className="flex px-3 my-5">
@@ -185,45 +216,15 @@ const BrandConsignments = () => {
                       cons[index].detailRequest === 0 ?
                         <button
                           onClick={() => openModal(cons[index], item._id, index)}
-                          // onClick={async (e) => {
-                          //   e.preventDefault();
-                          //   try {
-                          //     const res = await axios.put(
-                          //       "consignment/askagrementdetails",
-                          //       { id: item._id }
-                          //     );
-                          //     const resdata = res.data;
-                          //     console.log(resdata);
-                          //     if (resdata.success == true) {
-                          //       toast.success(resdata.message);
-                          //       // window.location.reload();
-                          //     }
-                          //   } catch (err) {
-                          //     console.log(err);
-                          //   }
-                          // }}
+
+
                           className="flex m-1 mx-auto space-x-2  items-center px-3 py-2 bg-green-600 hover:bg-green-900 rounded-md drop-shadow-md"
                         >
-                          {/* <MdFileDownloadDone className="text-white" size={23} /> */}
+
                           <span class="text-white">Ask for Agreement details</span>
                         </button>
                         : <button
-                          onClick={async (e) => {
-                            e.preventDefault();
-                            // try {
-                            //   const res = await axios.put(
-                            //     "consignment/consignmentwithoutpayment",
-                            //     { id: item._id }
-                            //   );
-                            //   const resdata = res.data;
-                            //   console.log(resdata);
-                            //   if (resdata.success == true) {
-                            //     window.location.reload();
-                            //   }
-                            // } catch (err) {
-                            //   console.log(err);
-                            // }
-                          }}
+                          onClick={(e) => { openModal2(cons[index], index, item._id) }}
                           className="flex m-1 mx-auto space-x-2  items-center px-3 py-2 bg-green-600 hover:bg-green-900 rounded-md drop-shadow-md"
                         >
                           {/* <MdFileDownloadDone className="text-white" size={23} /> */}
@@ -403,7 +404,114 @@ const BrandConsignments = () => {
                   className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
-                 Send Form
+                  Send Form
+                </button>
+              </div>
+            </form>
+          </div>
+        </Modal>
+        <Modal isOpen={isOpen2}
+          className="Modal"
+          overlayClassName="Overlay"
+          ariaHideApp={false}
+          style={{
+            content: {
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              backgroundColor: 'white',
+              borderRadius: '0.375rem',
+              padding: '2rem',
+              minWidth: '50%',
+              maxHeight: 'calc(100vh - 4rem)',
+              overflowY: 'auto'
+            },
+            overlay: {
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              zIndex: 9999
+            }
+          }}
+        >
+
+          <div className="bg-gray-100  rounded-lg p-6 ">
+            <h2 className="text-lg font-bold mb-4 ">Agreement Detail</h2>
+            <form onSubmit={handleSubmit2}>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
+                  Name : {formData?.name}
+                </label>
+
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+                  Email : {formData?.email}
+                </label>
+
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="contact">
+                  Contact : {formData?.contact}
+                </label>
+
+              </div>
+              <div className=" gap-x-10 grid grid-cols-2 max-sm:grid-cols-1">
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="startDate">
+                    Start Date : {formData?.startDate?.substr(0, 10)}
+                  </label>
+
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="endDate">
+                    End Date : {formData?.endDate?.substr(0, 10)}
+                  </label>
+
+                </div>
+
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="adsType">
+                    Ads Type : {formData?.adsType}
+                  </label>
+
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="amount">
+                    Amount : {formData?.amount}
+                  </label>
+
+                </div>
+
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="Remarks">
+                  Remarks : {formData?.Remarks}
+                </label>
+
+              </div>
+              <div className={`cursor-pointer text-bold `} onClick={() => { setExpanded(!expanded) }}>Terms and Conditions...
+                <p className={`${expanded ? "" : "hidden"}`}>
+                  {formData?.termsAndConditions}
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                  type="button"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Confirm Agreement
                 </button>
               </div>
             </form>

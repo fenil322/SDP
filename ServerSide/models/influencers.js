@@ -67,6 +67,7 @@ const influencerSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  instagramComments:String,
   facebook: {
     type: String,
     // required: true,
@@ -83,10 +84,12 @@ const influencerSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
+  facebookComments:String,
   twitter: String,
   twitterURL: String,
   twitterFollowers: String,
   twitterEngagementRate: String,
+  twitterComments:String,
   valid: {
     type: Number,
     default: 0,

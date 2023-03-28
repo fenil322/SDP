@@ -22,13 +22,13 @@ const BrandProfile = () => {
   const navigate = useNavigate();
   const [brandData, setbrandData] = useState({});
   const [influencerData, setInfluencerData] = useState([]);
-  const [date,setDate]=useState();
+  const [date, setDate] = useState();
   const [loading, setLoading] = useState(true);
   const getConnectedInf = async () => {
     console.log();
     try {
       setLoading(true)
-      const res = await axios.post('influencer/getconnectedinf', {id:brandData._id });
+      const res = await axios.post('influencer/getconnectedinf', { id: brandData._id });
       const data = res.data;
       console.log(data);
       setInfluencerData(data.data);
@@ -59,10 +59,10 @@ const BrandProfile = () => {
   useEffect(() => {
     getBrandData();
   }, []);
-  useEffect(()=>{
-    
+  useEffect(() => {
+
     getConnectedInf();
-  },[brandData._id])
+  }, [brandData._id])
   const editprofile = () => {
     navigate('/BrandProfileEdit', { state: brandData })
   }
@@ -177,14 +177,14 @@ const BrandProfile = () => {
                     <span class="font-bold w-24">Elsewhere:</span>
                     <a
                       target="_blank"
-                      href={brandData.facebookURL}
+                      href={brandData.facebookUrl}
                       title="Facebook"
                     >
                       <BsFacebook size={20} color="#3b5998" />
                     </a>
                     <a
                       target="_blank"
-                      href={brandData.twitterURL}
+                      href={brandData.twitterUrl}
                       title="Twitter"
                     >
                       <AiFillTwitterCircle size={24} color="#1da1f2" />
@@ -208,7 +208,7 @@ const BrandProfile = () => {
                     </a>
                     <a
                       target="_blank"
-                      href={brandData.instagramURL}
+                      href={brandData.instagramUrl}
                       title="Instagram"
                     >
                       <BsInstagram size={20} color="#E1306C" />
@@ -222,27 +222,27 @@ const BrandProfile = () => {
                 <div class="relative px-4">
                   <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
 
-                    {loading === true ?
-                  <img src={loader} alt="laoding" className="h-52 mx-auto"
-                  />
-                  :
-                  <div>
+                  {loading === true ?
+                    <img src={loader} alt="laoding" className="h-52 mx-auto"
+                    />
+                    :
+                    <div>
 
-                    {influencerData.length == 0 ? <div>No Influencer connected</div> :
-                      influencerData?.map((data, index) => (
-                        <div class="flex items-center w-full my-1 -ml-1.5">
-                          <div class="w-1/12 z-10">
-                            <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                      {influencerData.length == 0 ? <div>No Influencer connected</div> :
+                        influencerData?.map((data, index) => (
+                          <div class="flex items-center w-full my-1 -ml-1.5">
+                            <div class="w-1/12 z-10">
+                              <div class="w-3.5 h-3.5 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <img src={data.profile} className="w-8 h-8 rounded-full mx-5 " alt="profile" />
+                            <div class="w-11/12">
+                              <p class="text-sm font-semibold">{data.fname + " " + data.lname}</p>
+                              <p class="text-xs text-gray-500">{date[index]}</p>
+                            </div>
                           </div>
-                          <img src={data.profile} className="w-8 h-8 rounded-full mx-5 " alt="profile"/>
-                          <div class="w-11/12">
-                            <p class="text-sm font-semibold">{data.fname + " " + data.lname}</p>
-                            <p class="text-xs text-gray-500">{date[index]}</p>
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                }
+                        ))}
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -251,7 +251,44 @@ const BrandProfile = () => {
               <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
                 <h4 class="text-xl text-gray-900 font-bold">About</h4>
                 <p class="mt-2 text-gray-700">{brandData.description}</p>
-                <h4 class="text-xl text-gray-900 font-bold">Images</h4>
+                <h4 class="text-xl text-gray-900 font-bold mt-5">Social Media</h4>
+
+                <div class="flex  justify-between mt-5 mx-10 max-sm:w-5/6 max-md:w-full max-sm:gap-y-5  max-sm:flex-col ">
+                  <div className="bg-gray-200 px-3 py-4 rounded-md items-center  ">
+                    
+                      <div className=" flex justify-between space-x-5  items-center">
+                        <RiFacebookBoxLine size={25} className="text-[#3b5998] " />
+                        <a href={brandData.facebookUrl}
+                          target="_blank"
+                          className="hover:text-blue-600" >Click here...</a>
+                      </div>
+                  </div>
+                  <div className="bg-gray-200 px-3 py-4 rounded-md items-center ">
+                    
+                      <div className="flex justify-between space-x-5  items-center">
+                        <FaInstagram size={25} className="text-[#d62976] " />
+                        <a href={brandData.instagramUrl}
+                          target="_blank"
+                          className="hover:text-blue-600" >Click here...</a>
+                      </div>
+
+                  </div>
+                  <div className="bg-gray-200 px-3 py-4 rounded-md items-center ">
+                    
+                      <div className="flex justify-between space-x-5  items-center">
+                        <FiTwitter size={25} className="text-[#00acee] " />
+                        <a href={brandData.twitterUrl}
+                          target="_blank"
+                          className="hover:text-blue-600" >Click here...</a>
+                      </div>
+                  </div>
+                
+              </div>
+               
+              </div>
+              {/*                 Social Information                     */}
+              <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+              <h4 class="text-xl text-gray-900 font-bold">Images</h4>
                 <div className="w-3/4 max-sm:w-full mx-auto">
                   <Carousel {...settings}>
                     {
@@ -270,97 +307,12 @@ const BrandProfile = () => {
                     }
                   </Carousel>
                 </div>
-              </div>
-              {/*                 Social Information                     */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
-                <h4 class="text-xl text-gray-900 font-bold">Social Media</h4>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-4  ">
-                  <div className="items-center">
-                    <a
-                      target="_blank"
-                      href={brandData.facebookURL}
-                      class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                    >
-                      <div className="flex justify-between">
-                        <RiFacebookBoxLine size={20} className="text-[#3b5998]" />
-                        <div className="text-[#244489] font-bold">1K Views</div>
-                      </div>
-
-                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
-                      <div className="flex justify-between font-bold">
-                        <div className="justify-center align-middle text-center">
-                          4.42M
-                          <div className="text-xs font-normal">Followers</div>
-                        </div>
-                        <div className="justify-center align-middle text-center">
-                          90<div className="text-xs font-normal">Reactions</div>
-                        </div>
-                        <div className="justify-center align-middle text-center">
-                          342<div className="text-xs font-normal">Comments</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="items-center">
-                    <a
-                      target="_blank"
-                      href={brandData.instagramURL}
-                      class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                    >
-                      <div className="flex justify-between">
-                        <FaInstagram size={20} className="text-[#d62976]" />
-                        <div className="text-[#d62976] font-bold">1.3K Views</div>
-                      </div>
-
-                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
-                      <div className="flex justify-between font-bold">
-                        <div className="justify-center align-middle text-center">
-                          4.42M
-                          <div className="text-xs font-normal">Followers</div>
-                        </div>
-                        <div className="justify-center align-middle text-center">
-                          90<div className="text-xs font-normal">Reactions</div>
-                        </div>
-                        <div className="justify-center align-middle text-center">
-                          342<div className="text-xs font-normal">Comments</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                  <div className="items-center">
-                    <a
-                      target="_blank"
-                      href={brandData.twitterURL}
-                      class="bg-gray-100 block max-w-sm p-6  border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
-                    >
-                      <div className="flex justify-between">
-                        <FiTwitter size={20} className="text-[#00acee]" />
-                        <div className="text-[#00acee] font-bold">2K Views</div>
-                      </div>
-
-                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
-                      <div className="flex justify-between font-bold">
-                        <div className="justify-center align-middle text-center">
-                          4.42M
-                          <div className="text-xs font-normal">Followers</div>
-                        </div>
-                        <div className="justify-center align-middle text-center">
-                          90<div className="text-xs font-normal">Reactions</div>
-                        </div>
-                        <div className="justify-center align-middle text-center">
-                          342<div className="text-xs font-normal">Comments</div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </div >
   );
 };
 

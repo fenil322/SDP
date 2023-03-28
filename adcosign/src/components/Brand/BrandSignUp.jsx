@@ -16,7 +16,7 @@ const BrandSignUp = () => {
   const activebtn = '  hover:bg-blue-400 flex justify-center w-full px-6 py-3 text-white bg-blue-500 rounded-md md:w-auto md:mx-2 focus:outline-none'
   const [userdata, setuserdata] = useState({
     uname: "", shopName: "", brandType: "", phone: "", email: "", city: "", state: "", country: "",
-    address: "", location: "", password: ""
+    address: "", location: "", password: "",instagramUrl:"",facebookUrl:""
   });
 
   const [passwordType, setPasswordType] = useState("password");
@@ -48,7 +48,7 @@ const BrandSignUp = () => {
   const postData = async (e) => {
     e.preventDefault();
     const { uname, shopName, brandType, phone, email, city, state, country,
-      address, location, password } = userdata;
+      address, location, password,facebookUrl,instagramUrl } = userdata;
     if (password == cpass) {
       const res = await fetch("/brand/signup", {
         method: 'POST',
@@ -57,7 +57,7 @@ const BrandSignUp = () => {
         },
         body: JSON.stringify({
           uname, shopName, brandType, phone, email, city, state, country,
-          address, location, password
+          address, location, password,facebookUrl,instagramUrl 
         }),
       })
       const data = await res.json();
@@ -99,7 +99,7 @@ const BrandSignUp = () => {
 
                     <div className="mt-3 md:flex md:items-center md:-mx-2">
                       <NavLink to='/BrandSignUp'>
-                        <button class={deactivebtn}>
+                        <button class={activebtn}>
                           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                           </svg>
@@ -111,7 +111,7 @@ const BrandSignUp = () => {
                         </button>
                       </NavLink>
                       <NavLink to='/InfluencerSignUp'>
-                        <button class={activebtn}>
+                        <button class={deactivebtn}>
                           <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                           </svg>
@@ -159,6 +159,18 @@ const BrandSignUp = () => {
                           <label className="block mb-2 text-sm text-white dark:text-gray-200">Email address</label>
                           <input type="email" placeholder="johnsnow@example.com" name="email"
                             value={userdata.email}
+                            onChange={handleInput} className="block w-full px-5 py-2 mt-2 text-gray-900 placeholder-gray-500 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                        </div>
+                        <div>
+                          <label className="block mb-2 text-sm text-white dark:text-gray-200">Instagram Url</label>
+                          <input type="text" placeholder="Instagram Url" name="instagramUrl"
+                            value={userdata.instagramUrl}
+                            onChange={handleInput} className="block w-full px-5 py-2 mt-2 text-gray-900 placeholder-gray-500 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                        </div>
+                        <div>
+                          <label className="block mb-2 text-sm text-white dark:text-gray-200">Facebook Url</label>
+                          <input type="text" placeholder="Facebook Url" name="facebookUrl"
+                            value={userdata.facebookUrl}
                             onChange={handleInput} className="block w-full px-5 py-2 mt-2 text-gray-900 placeholder-gray-500 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                         </div>
 

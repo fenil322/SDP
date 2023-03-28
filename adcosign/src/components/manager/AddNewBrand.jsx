@@ -4,50 +4,6 @@ import ManagerHeader from "./ManagerHeader";
 import Card from "./Card";
 import { Link, NavLink } from "react-router-dom";
 import Navbar from "./Navbar";
-const cardProfile = [
-  {
-    imgsrc:
-      "https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    name: "Adidas",
-    type: "shoes",
-    desc: "Contrary to popular belief. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.",
-    contact: " +91 82006575767",
-    email: "kfintech123@gmail.com",
-    city: "Surat",
-    state: "Gujarat",
-    country: "India",
-    address: "Mota Varachha",
-    location: "MahaDev Chowk",
-  },
-  {
-    imgsrc:
-      "https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    name: "Nyka",
-    type: "beauty",
-    desc: "The standard chunk of  is reproduced below for those interested.going through the cites of the word in classical literature",
-    contact: "+91 98636575767",
-    email: "nyka@gmail.com",
-    city: "Surat",
-    state: "Gujarat",
-    country: "India",
-    address: "Vaniyavad , Collage Road",
-    location: "Nadiad",
-  },
-  {
-    imgsrc:
-      "https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80",
-    name: "Apple Company",
-    type: "devices",
-    desc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form",
-    contact: "+91 35436575767",
-    email: "apple@gmail.com",
-    city: "Surat",
-    state: "Gujarat",
-    country: "India",
-    address: "Vip Road",
-    location: "Katargam ,surat",
-  },
-];
 
 const AddNewBrand = () => {
 
@@ -81,54 +37,27 @@ const AddNewBrand = () => {
   useEffect(() => {
     callgetInfluencerPage();
   }, [])
-
+const removebrand=(id)=>{
+const updatedItems = profilecard.filter(item => item._id !== id);
+setprofilecard(updatedItems)
+}
   return (
     <div className="h-[screen] flex">
       <Navbar />
-      <div className="ml-14 w-screen">
+      <div className="ml-14 w-screen max-sm:ml-0">
         <ManagerHeader page="Add Brand" />
        
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid mt-10 px-10 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {profilecard.length ==0 ?<h1 className="text-center text-3xl font-bold mt-10">No New Request </h1>:
             profilecard.map((item) => (
 
-              <Card item={item} />
+              <Card item={item} onData={removebrand} />
 
             ))}
         </div>
       </div>
 
-      {/* {profilecard.length > 0 &&
-        profilecard.map((item, index) => (
-          <div>
-            {item.uname}
-            <button onClick={async (e) => {
-              e.preventDefault()
-              console.log("hello")
-              try {
-                const res = await fetch("manager/validatebrand", {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: item.email,
-                  }),
-                });
-                const data = await res.json();
-                console.log(data)
-                if (data.success == true) {
-                  window.location.reload();
-                }
-              } catch (err) {
-                navigate("/AddNewBrand");
-                console.log(err)
-              }
-            }} className="text-3xl bg-white m-4">Add </button>
-
-
-          </div>
-        ))} */}
+     
     </div>
   );
 };

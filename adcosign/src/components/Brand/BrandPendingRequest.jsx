@@ -52,7 +52,7 @@ const BrandPendingRequest = () => {
               </h1>
             ) : (
               profilecard.map((item, index) => (
-                <div className=" max-w-md mx-10 md:max-w-2xl   break-words bg-gray-100  shadow-lg rounded-2xl my-10">
+                <div className=" max-w-md mx-10 md:max-w-2xl   break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
            
                   <div className="flex flex-wrap ">
                     <div className="flex px-3 my-5">

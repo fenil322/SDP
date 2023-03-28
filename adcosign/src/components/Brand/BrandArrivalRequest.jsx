@@ -38,6 +38,10 @@ const BrandArrivalRequest = () => {
     getBrandRequest();
   }, []);
 
+  
+  const influencerdetailpage = (item) => {
+    navigate("/InfluencerDetails", { state: item })
+  }
   return (
     <div className="flex flex-row h-[screen]">
       <Navbar />
@@ -54,10 +58,10 @@ const BrandArrivalRequest = () => {
               </h1>
             ) : (
               profilecard.map((item, index) => (
-                <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-2xl my-10">
+                <div className="mx-10    break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
 
                   <div className="flex ">
-                    <div className="flex px-3 my-5">
+                    <div className="flex px-3 my-5 cursor-pointer " onClick={()=>influencerdetailpage(item)}>
 
                       <img
                         src={item.profile}

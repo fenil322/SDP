@@ -13,11 +13,11 @@ const Navbar = () => {
     const [open, setOpen] = useState(true);
     const [userdata, setuserdata] = useState({});
     const menus = [
-        { name: "Home", link: "/InfluencerHome", search: "?page=1", icon: FaHome, data: "hello" },
-        { name: "Pending Request", link: "/InfluencerPendingRequest", search: "?page=1", icon: MdPendingActions, data: "hello" },
-        { name: "Arrival Request", link: "/InfluencerArrivalRequest", search: "?page=1", icon: CgImport, data: "hello" },
-        { name: "Agreement", link: "/InfluencerConsignments", search: "?page=1", icon: FaHandshake, data: "hello" },
-        { name: "History", link: "/InfluencerHistory", search: "?page=1", icon: BiHistory, data: "hello" },
+        { name: "Home", link: "/InfluencerHome", search: "?page=1", icon: FaHome, data: userdata },
+        { name: "Pending Request", link: "/InfluencerPendingRequest", search: "?page=1", icon: MdPendingActions, data: userdata },
+        { name: "Arrival Request", link: "/InfluencerArrivalRequest", search: "?page=1", icon: CgImport, data: userdata },
+        { name: "Agreement", link: "/InfluencerConsignments", search: "?page=1", icon: FaHandshake, data: userdata },
+        { name: "History", link: "/InfluencerHistory", search: "?page=1", icon: BiHistory, data: userdata },
         { name: "Profile", link: "/InfluencerProfile", search: "?page=1", icon: FaUserCircle, data: userdata },
         // { name: "Subscription", link: "/", icon: GiWallet },
         // { name: "Terms & Conditions", link: "/", icon: BsQuestionCircleFill },
