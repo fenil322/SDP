@@ -133,10 +133,11 @@ const BrandHistory = () => {
                     type="button"
                     class="flex m-1  mx-auto my-4 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-800 rounded-md drop-shadow-md"
                     onClick={() => {
+                      setInfluencerId(item._id)
                       setModalIsOpen(true)
                     }}
                   >
-                    <span className="text-white" onClick={() => { setInfluencerId(item._id) }}>Give a Feedback</span>
+                    <span className="text-white" >Give a Feedback</span>
                   </button>
 
 

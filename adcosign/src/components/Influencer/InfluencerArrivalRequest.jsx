@@ -12,7 +12,7 @@ import loader from "../../Images/loader.gif";
 const InfluencerArrivalRequest = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  
+
   const [loading, setloading] = useState(true);
   const [profilecard, setprofilecard] = useState([]);
   const getBrandRequest = async () => {
@@ -35,7 +35,11 @@ const InfluencerArrivalRequest = () => {
     getBrandRequest();
     // console.log(location);
   }, []);
-
+  const handleremove = (id) => {
+  
+    const updatedItems = profilecard.filter(item => item._id !== id);
+    setprofilecard(updatedItems)
+  }
   return (
     <div className="flex">
       <Navbar />
@@ -44,16 +48,16 @@ const InfluencerArrivalRequest = () => {
         {loading === true ?
           <img src={loader} alt="laoding" className="h-52 mx-auto"
           />
-          : 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
-          {profilecard.length == 0 ? (
-            <h1 className="text-3xl font-bold text-center">No Request Found</h1>
-          ) : (
-            profilecard.map((item) => <ReqArrivalCard item={item} />)
-          )}
-        </div>
-          }
-          <ToastContainer autoClose={500} />
+          :
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-10 gap-y-10 max-sm:px-5  max-md:px-10">
+            {profilecard.length == 0 ? (
+              <h1 className="text-3xl font-bold text-center">No Request Found</h1>
+            ) : (
+              profilecard.map((item) => <ReqArrivalCard item={item} onData={handleremove} />)
+            )}
+          </div>
+        }
+        <ToastContainer autoClose={500} />
       </div>
     </div>
   );

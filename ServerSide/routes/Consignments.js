@@ -5,8 +5,8 @@ const influencerIsAuth = require('../middleware/influencerIsAuth');
 
 const { createConsignment, getBrandRequest, acceptBrandReq, deleteBrandReq,getInfConsignment,getBrandPendingRequest,
     deleteBrandPendingRequest,getBrandConsignment ,paymentupdate,getBrandCurrentConsignments,
-    withoutPayment,getInfluencerCurrentConsignments,createConsignmentInf,getInfluenerPendingRequest
-,getInfluencerRequest,acceptInfluencerReq,deleteInfluencerReq,feedBack} = require('../controllers/consignmentController');
+    acceptAgreement,getInfluencerCurrentConsignments,createConsignmentInf,getInfluenerPendingRequest
+,getInfluencerRequest,acceptInfluencerReq,deleteInfluencerReq,feedBack,AskAgreementDetails,AgreementDetails} = require('../controllers/consignmentController');
 
 //==> Creating consignment in brand POST
 router.post('/sendrequest', brandIsAuth.isAuth, createConsignment)
@@ -51,7 +51,13 @@ router.delete('/deletetbrandpendingreq', brandIsAuth.isAuth,deleteBrandPendingRe
 router.put('/payment', brandIsAuth.isAuth,paymentupdate )
 
 //==>accept conssignment without payment PUT
-router.put('/consignmentwithoutpayment', brandIsAuth.isAuth,withoutPayment)
+router.put('/consignmentwithoutpayment', brandIsAuth.isAuth,acceptAgreement)
+
+//==>ask for agreemtn detail in brandside PUT
+router.put('/askagrementdetails', brandIsAuth.isAuth,AskAgreementDetails)
+
+//==>send  agreement details to brand in influnecnerconsignment page PUT
+router.put('/agreementdetails', influencerIsAuth.isAuth,AgreementDetails)
 
 //==> current consignments of brands GET
 router.get('/getbrandcurrentconsignments', brandIsAuth.isAuth, getBrandCurrentConsignments)

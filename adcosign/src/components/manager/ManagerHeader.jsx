@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import logo from '../../logo192.png'
+
+import logo from '../../Images/favicon.ico'
 import { FiSettings } from "react-icons/fi";
   
 
@@ -11,7 +12,6 @@ const ManagerHeader = (props) => {
 
   const logout = async () => {
     try {
-
       const res = await axios.get('/logout')
       console.log(res.data);
       if (res.data.success == true) {
@@ -19,9 +19,7 @@ const ManagerHeader = (props) => {
       }
     } catch (err) {
       console.log(err);
-
     }
-
   }
   return (
     <div className="h-20 flex items-center justify-between mx-20 w-[screen] border-b-2">

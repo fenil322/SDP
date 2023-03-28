@@ -151,7 +151,7 @@ exports.deleteBrandReq = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
 
-  return res.status(200).json({ success: true, message: "Deleted request" });
+  return res.status(200).json({ success: true, message: "Request  Removed successfully!!" });
 };
 
 exports.acceptInfluencerReq = async (req, res) => {
@@ -171,7 +171,7 @@ exports.acceptInfluencerReq = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
   // console.log(data);
-  return res.status(200).json({ success: true, message: "Request accepted" });
+  return res.status(200).json({ success: true, message: "Request accepted successfully!!" });
 };
 exports.deleteInfluencerReq = async (req, res) => {
   const brandId = req.userId;
@@ -188,41 +188,45 @@ exports.deleteInfluencerReq = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
 
-  return res.status(200).json({ success: true, message: "Deleted request" });
+  return res.status(200).json({ success: true, message: "Request Deleted successfully!!!" });
 };
 
 
 exports.getInfConsignment = async (req, res) => {
   const influencerId = req.userId;
-  try{
 
+  console.log(req.body);
+  try {
     let array = new Array();
+    let array2 = new Array();
     const data = await Consignment.find({
-    influencerId,
-    shoprequest: 1,
-    influencerrequest: 1,
-    acceptstatus: false,
-  })
-// console.log("getInfConsignmentdata",data);
-  const promises = data.map(async (element) => {
-    const id = element.brandId;
-    const data1 = await Brand.findById(id).select("-tokens");
-    // console.log(data1);
-    array.push(data1)
-  })
-  Promise.all(promises).then(()=>{
-    return res
-    .status(200)
-    .json({ success: true, message: "data sent...", data: array });
-  })
-  
-}catch(err){
-  return res.status(400).json({
-    success: false,
-    message: "Something went wrong",
-    error: err,
-  });
-}
+      influencerId,
+      shoprequest: 1,
+      influencerrequest: 1,
+      acceptstatus: false,
+    })
+    // console.log("getInfConsignmentdata",data);
+    const promises = data.map(async (element) => {
+      const id = element.brandId;
+      const data1 = await Brand.findById(id).select("-tokens");
+      // console.log(data1);
+      array2.push(element)
+      array.push(data1)
+    })
+    Promise.all(promises).then(() => {
+      // console.log(array2);
+      return res
+        .status(200)
+        .json({ success: true, message: "data sent...", data: array, cons: array2 });
+    })
+
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      message: "Something went wrong",
+      error: err,
+    });
+  }
 
 };
 
@@ -289,7 +293,7 @@ exports.deleteBrandPendingRequest = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
 
-  return res.status(200).json({ success: true, message: "Deleted request" });
+  return res.status(200).json({ success: true, message: "Request Removed successfully!!"  });
 };
 
 // const handleData = async (data, array, array2) => {
@@ -328,7 +332,7 @@ exports.getBrandConsignment = async (req, res) => {
     const id = element.influencerId.toString();
     var data2 = await Influencer.findById(id).select("-tokens");
     // console.log(data2);
-    array2.push(element.Amount);
+    array2.push(element);
     array.push(data2);
   });
 
@@ -340,9 +344,9 @@ exports.getBrandConsignment = async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      message: "data sent...",
+      message: "data sent",
       data: array,
-      data1: array2,
+      cons: array2,
     });
   })
   // }, 1000);
@@ -402,7 +406,7 @@ exports.getBrandCurrentConsignments = async (req, res) => {
   })
 };
 
-exports.withoutPayment = async (req, res) => {
+exports.acceptAgreement = async (req, res) => {
   const brandId = req.userId;
   const influencerId = req.body.id;
   console.log(brandId);
@@ -424,6 +428,50 @@ exports.withoutPayment = async (req, res) => {
     .json({ success: true, message: "Proceed Without Payment" });
 };
 
+exports.AskAgreementDetails = async (req, res) => {
+  const brandId = req.userId;
+  const influencerId = req.body.id;
+  console.log(brandId);
+  console.log(influencerId);
+
+  const data = await Consignment.findOneAndUpdate(
+    { influencerId, brandId },
+    { $set: { detailRequest: 1 } },
+    { new: true }
+  );
+
+  // console.log(data);
+  if (!data) {
+    return res
+      .status(400)
+      .json({ success: false, error: "Something went wrong" });
+  }
+  return res
+    .status(200)
+    .json({ success: true, message: "Requested for agreement details..." });
+};
+exports.AgreementDetails = async (req, res) => {
+  const influencerId = req.userId;
+  const brandId = req.body.brandId;
+  console.log(brandId);
+  console.log(influencerId);
+
+  const data = await Consignment.findOneAndUpdate(
+    { influencerId, brandId },
+    { $set: { AgreementDetail: req.body.formData, detailRequest: 1, detailSend: 1 } },
+    { new: true }
+  );
+
+  if (!data) {
+    return res
+      .status(400)
+      .json({ success: false, error: "Something went wrong" });
+  }
+  return res
+    .status(200)
+    .json({ success: true, message: "Agreement details sent..." });
+};
+
 exports.getInfluencerCurrentConsignments = async (req, res) => {
   const influencerId = req.userId;
 
@@ -438,11 +486,12 @@ exports.getInfluencerCurrentConsignments = async (req, res) => {
       .json({ success: false, error: "Something went wrong" });
   }
   let array = new Array();
-
+  let array2 = new Array();
   const promises = data.map(async (element) => {
     const id = element.brandId.toString();
     var data2 = await Brand.findById(id).select("-tokens");
     // console.log(data2);
+    array2.push(element)
     array.push(data2);
   });
   // console.log("array data");
@@ -453,6 +502,7 @@ exports.getInfluencerCurrentConsignments = async (req, res) => {
       success: true,
       message: "data sent",
       data: array,
+      cons: array2
     });
   })
 

@@ -89,7 +89,6 @@ const InfluencerDetails = (props) => {
     const item = feedback.find((item) => item.brandId === id)
     // console.log(item.rating);
     return item ? item.review : "";
-
   }
   return (
     <div className="flex flex-row h-screen">

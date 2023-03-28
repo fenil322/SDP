@@ -24,10 +24,7 @@ const consignmentSchema = new mongoose.Schema({
     default: false,
 
   },
-  Amount: {
-    type: Number,
-    default: 0,
-  },
+
   paymentstatus: {
     type: Number,
     default: 0,
@@ -40,13 +37,46 @@ const consignmentSchema = new mongoose.Schema({
     type: String,
     default: new Date().toLocaleDateString(),
   },
-  startDate: {
-    type: String,
-    default: "",
+  detailRequest: {
+    type: Number
+    , default: 0,
   },
-  endDate: {
-    type: String,
-    default: "",
+  detailSend:{
+    type: Number,
+    default: 0,
+  },
+  AgreementDetail: {
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    contact:{
+      type:Number
+    },
+    startDate: {
+      type: Date,
+    },
+    endDate: {
+      type: Date,
+    },
+    adsType: {
+      type: String,
+      default: "",
+    },
+    termsAndConditions: {
+      type: String,
+      default: "",
+    },
+    Remarks: {
+      type: String,
+      default: "",
+    },
+    amount: {
+      type: Number,
+      default: 0,
+    },
   },
   review: {
     type: String,
@@ -56,6 +86,7 @@ const consignmentSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+
 });
 
 const consignment = mongoose.model("consignment", consignmentSchema);

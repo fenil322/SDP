@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from "react";
 import BrandHeader from "./BrandHeader";
-
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
-
+import Modal from 'react-modal';
 import loader from "../../Images/loader.gif"
-import { AiOutlineInstagram } from "react-icons/ai";
-import { AiOutlineFacebook } from "react-icons/ai";
-import { CiTwitter } from "react-icons/ci";
 import { FiPhoneCall } from "react-icons/fi";
-import { MdEmail, MdFileDownloadDone } from "react-icons/md";
+import { MdEmail } from "react-icons/md";
 
 const BrandConsignments = () => {
   const navigate = useNavigate();
-  
+
   const [loading, setloading] = useState(true);
   const [profilecard, setprofilecard] = useState([]);
-  const handleendtime = (e) => {
-    // setendtime((data)=>[...data,e.target.value])
-  };
-
+  const [cons, setCons] = useState([])
   const getbrandconsignments = async () => {
     try {
       setloading(true);
@@ -30,6 +23,7 @@ const BrandConsignments = () => {
       const data = res.data;
       console.log(data);
       setprofilecard(data.data);
+      setCons(data.cons)
       setloading(false);
     } catch (err) {
       if (err.response.status == 422) {
@@ -41,180 +35,383 @@ const BrandConsignments = () => {
   useEffect(() => {
     getbrandconsignments();
   }, []);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    Remarks: '',
+    contact: "",
+    startDate: "",
+    endDate: "",
+    adsType: "",
+    termsAndConditions: "",
+    amount: ""
+  });
+
+  const [inflencerId, setInfluencerId] = useState("");
+  const [index, setIndex] = useState();
+  const openModal = (data, id, index) => {
+    // console.log(id); 
+    setIndex(index)
+    setFormData(data.AgreementDetail)
+    // console.log(data._id);
+    setInfluencerId(id)
+    setIsOpen(true);
+  };
+  const openModal2 = (data, index) => {
+    // console.log(data.AgreementDetail);
+    setFormData(data.AgreementDetail)
+    setIsOpen2(true);
+  };
+
+  const closeModal = () => {
+    setFormData({
+      name: '',
+      email: '',
+      Remarks: '',
+      contact: "",
+      startDate: "",
+      endDate: "",
+      adsType: "",
+      termsAndConditions: "",
+      amount: ""
+    });
+    setIsOpen(false);
+    setIsOpen2(false);
+  };
+
+  const handleChange = e => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // console.log(formData); 
+    if (
+      window.confirm(
+        "Are you sure you want to send agreement details?"
+      )
+    ) {
+      try {
+        const res = await axios.put(
+          "consignment/agreementdetails",
+          { inflencerId, formData }
+        );
+        const resdata = res.data;
+        console.log(resdata);
+        if (resdata.success == true) {
+          closeModal();
+          const updatedItem = { ...cons[index], detailRequest: 1, AgreementDetail: formData };
+          const updatedItems = [...cons];
+          updatedItems[index] = updatedItem;
+          console.log("update");
+          console.log(updatedItems);
+          // Update the state with the new array
+          setCons(updatedItems);
+          toast.success(resdata.message);
+        }
+      } catch (err) {
+        toast.error("Something went wrong");
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-row h-screen">
       <Navbar />
 
-      <div className=" ml-14 w-screen">
+      <div className="h-screen ml-14 w-screen max-sm:ml-0">
         <BrandHeader page="Agreement" />
         {loading === true ?
           <img src={loader} alt="laoding" className="h-52 mx-auto"
           />
-          : 
-        <div className="mx-20 grid-cols-2mx-20 my-10 grid md:grid-cols-3 grid-cols-1">
-          {profilecard.length == 0 ? (
-            <h1 className="text-3xl font-bold text-center">
-              No Consignments Found
-            </h1>
-          ) : (
-            profilecard.map((item, index) => (
-              <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-xl my-10">
-                {/* <Link to={{
-          pathname: '/InfluencerDetails',
-          state: { data:data}
-        }} > */}
+          :
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-y-10 px-10 grid-cols-1 ">
+            {profilecard.length == 0 ? (
+              <h1 className="text-3xl font-bold text-center">
+                No Consignments Found
+              </h1>
+            ) : (
+              profilecard.map((item, index) => (
+                <div className="mx-10    break-words bg-gray-100  shadow-lg rounded-xl my-10">
 
-                <div className="flex ">
-                  <div className="flex px-3 my-5">
-                    <img
-                      src={item.profile}
-                      alt="myPic"
-                      className="shadow-xl w-32 h-32 rounded-full"
-                    />
+                  <div className="flex ">
+                    <div className="flex px-3 my-5">
+                      <img
+                        src={item.profile}
+                        alt="myPic"
+                        className="shadow-xl w-32 h-32 rounded-full"
+                      />
 
-                    <div className=" mt-2 ml-5">
-                      <h3 className="text-2xl text-slate-700 font-bold  mb-1">
-                        {item.fname + " " + item.lname}
-                      </h3>
+                      <div className=" mt-2 ml-5">
+                        <h3 className="text-2xl text-slate-700 font-bold  mb-1">
+                          {item.fname + " " + item.lname}
+                        </h3>
 
-                      <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
-                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
-                        {item.gender}
+                        <div className="text-xs mb-1  text-slate-400 font-bold uppercase">
+                          <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                          {item.gender}
+                        </div>
+                        <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
+                          <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
+                          {item.city + ", " + item.country}
+                        </div>
                       </div>
-                      <div className="text-xs  mb-2 text-slate-400 font-bold uppercase">
-                        <i className="fas fa-map-marker-alt text-slate-400 opacity-75"></i>
-                        {item.city + ", " + item.country}
+                    </div>
+
+                  </div>
+                  <div className="border-y">
+                    <div className="my-3 ml-5">
+                      <div className="flex space-x-2.5 items-center mt-3">
+                        <FiPhoneCall size={20} />
+                        <div>{item.phone}</div>
+                      </div>
+                      <div className="flex space-x-2.5 items-center mt-3">
+                        <MdEmail size={20} />
+                        <div>{item.email}</div>
                       </div>
                     </div>
                   </div>
-                 
-                </div>
-                <div className="border-t">
-                  <div className="mt-3 ml-5">
-                    <div className="flex space-x-2.5 items-center mt-3">
-                      <FiPhoneCall size={20} />
-                      <div>{item.phone}</div>
-                    </div>
-                    <div className="flex space-x-2.5 items-center mt-3">
-                      <MdEmail size={20} />
-                      <div>{item.email}</div>
-                    </div>
-                  </div>
-                </div>
+                  <div className=" my-3 space-y-3 items-center mx-10">
+                    {
+                      cons[index].detailRequest === 0 ?
+                        <button
+                          onClick={() => openModal(cons[index], item._id, index)}
+                          // onClick={async (e) => {
+                          //   e.preventDefault();
+                          //   try {
+                          //     const res = await axios.put(
+                          //       "consignment/askagrementdetails",
+                          //       { id: item._id }
+                          //     );
+                          //     const resdata = res.data;
+                          //     console.log(resdata);
+                          //     if (resdata.success == true) {
+                          //       toast.success(resdata.message);
+                          //       // window.location.reload();
+                          //     }
+                          //   } catch (err) {
+                          //     console.log(err);
+                          //   }
+                          // }}
+                          className="flex m-1 mx-auto space-x-2  items-center px-3 py-2 bg-green-600 hover:bg-green-900 rounded-md drop-shadow-md"
+                        >
+                          {/* <MdFileDownloadDone className="text-white" size={23} /> */}
+                          <span class="text-white">Ask for Agreement details</span>
+                        </button>
+                        : <button
+                          onClick={async (e) => {
+                            e.preventDefault();
+                            // try {
+                            //   const res = await axios.put(
+                            //     "consignment/consignmentwithoutpayment",
+                            //     { id: item._id }
+                            //   );
+                            //   const resdata = res.data;
+                            //   console.log(resdata);
+                            //   if (resdata.success == true) {
+                            //     window.location.reload();
+                            //   }
+                            // } catch (err) {
+                            //   console.log(err);
+                            // }
+                          }}
+                          className="flex m-1 mx-auto space-x-2  items-center px-3 py-2 bg-green-600 hover:bg-green-900 rounded-md drop-shadow-md"
+                        >
+                          {/* <MdFileDownloadDone className="text-white" size={23} /> */}
+                          <span class="text-white">View Details</span>
+                        </button>
 
-                <div className=" flex mt-3 items-center mx-10">
-                  {/* <button
-                        onClick={async (e) => {
-                          e.preventDefault();
+                    }
+                    <button
+                      onClick={async (e) => {
+                        e.preventDefault();
+                        if (
+                          window.confirm(
+                            "Are you sure you want to delete this consignment?"
+                          )
+                        ) {
                           try {
-                            const res = await axios.put('consignment/payment',  { id: item._id  })
+                            const res = await axios.delete(
+                              "consignment/deletetbrandpendingreq",
+                              { data: { _id: item._id } }
+                            );
                             const resdata = res.data;
-                            console.log(resdata)
+                            console.log(resdata);
                             if (resdata.success == true) {
-                              window.location.reload();
+                              const updatedItems = [...profilecard];
+                              updatedItems.splice(index, 1);
+                              setprofilecard(updatedItems)
+                              toast.success(resdata.message)
                             }
                           } catch (err) {
+                            navigate("/InfluencerConsignments");
+                            console.log(err);
                           }
-                        }}
-                        className="flex m-1 space-x-2 items-center px-3 py-2 bg-green-600 hover:bg-green-900 rounded-md drop-shadow-md">
-
-
-                        <span class="text-white">Make Payment</span>
-                      </button> */}
-                  <button
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      try {
-                        const res = await axios.put(
-                          "consignment/consignmentwithoutpayment",
-                          { id: item._id }
-                        );
-                        const resdata = res.data;
-                        console.log(resdata);
-                        if (resdata.success == true) {
-                          window.location.reload();
-                        }
-                      } catch (err) {
-                        console.log(err);
-                      }
-                    }}
-                    className="flex m-1 mx-auto space-x-2  items-center px-3 py-2 bg-green-600 hover:bg-green-900 rounded-md drop-shadow-md"
-                  >
-                    <MdFileDownloadDone className="text-white" size={23} />
-                    <span class="text-white">Done</span>
-                  </button>
-                  <button
-                    onClick={async (e) => {
-                      e.preventDefault();
-                      if (
-                        window.confirm(
-                          "Are you sure you want to delete this consignment?"
-                        )
-                      ) {
-                        try {
-                          const res = await axios.delete(
-                            "consignment/deletetbrandpendingreq",
-                            { data: { _id: item._id } }
-                          );
-                          const resdata = res.data;
-                          console.log(resdata);
-                          if (resdata.success == true) {
-                            window.location.reload();
-                          }
-                        } catch (err) {
+                        } else {
                           navigate("/InfluencerConsignments");
-                          console.log(err);
                         }
-                      } else {
-                        navigate("/InfluencerConsignments");
-                      }
-                    }}
-                    class="flex space-x-2 m-1 mx-auto items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md"
-                  >
-                    <svg
-                      class="fill-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      x="0px"
-                      y="0px"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
+                      }}
+                      class="flex space-x-2 m-1 mx-auto items-center px-3 py-2 bg-rose-500 hover:bg-rose-800 rounded-md drop-shadow-md"
                     >
-                      <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
-                    </svg>
-                    <span class="text-white">Remove</span>
-                  </button>
-                </div>
-
-                <div className="mt-6 py-5 border-t border-slate-200 ">
-                  <div className="flex flex-wrap justify-center">
-                    <div className="flex  items-center">
-                      <AiOutlineFacebook
-                        size={20}
-                        className="text-[#3b5998] "
-                      />
-                      <div className="text-[#3b5998] mr-3 ml-1"> 4K</div>
-
-                      <AiOutlineInstagram
-                        size={20}
-                        className="text-[#E4405F]"
-                      />
-                      <div className="text-[#E4405F] mr-3 ml-1"> 5.5M</div>
-
-                      <CiTwitter size={20} className="text-[#1DA1F2]" />
-                      <div className="text-[#1DA1F2] mr-3 ml-1"> 66K</div>
-                    </div>
+                      <svg
+                        class="fill-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M 10 2 L 9 3 L 3 3 L 3 5 L 21 5 L 21 3 L 15 3 L 14 2 L 10 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
+                      </svg>
+                      <span class="text-white">Remove</span>
+                    </button>
                   </div>
+
+
+                  {/* </Link > */}
+                </div>
+              ))
+            )}
+          </div>
+        }
+        <Modal isOpen={isOpen}
+          className="Modal"
+          overlayClassName="Overlay"
+          ariaHideApp={false}
+          style={{
+            content: {
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              backgroundColor: 'white',
+              borderRadius: '0.375rem',
+              padding: '2rem',
+              minWidth: '50%',
+              maxHeight: 'calc(100vh - 4rem)',
+              overflowY: 'auto'
+            },
+            overlay: {
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
+              zIndex: 9999
+            }
+          }}
+        >
+
+          <div className="bg-gray-100  rounded-lg p-6 ">
+            <h2 className="text-lg font-bold mb-4 ">Agreement Form</h2>
+            <form onSubmit={handleSubmit}>
+
+
+
+              <div className=" gap-x-10 grid grid-cols-2 max-sm:grid-cols-1">
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="startDate">
+                    Start Date
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="startDate"
+                    type="date"
+                    placeholder="Enter your startDate "
+                    defaultValue={formData?.startDate?.substr(0, 10)}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="endDate">
+                    End Date
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="endDate"
+                    type="date"
+                    placeholder="Enter your endDate "
+                    defaultValue={formData?.endDate?.substr(0, 10)}
+                    onChange={handleChange}
+                  />
                 </div>
 
-                {/* </Link > */}
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="adsType">
+                    Ads Type
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="adsType"
+                    type="text"
+                    placeholder="Enter Type "
+                    defaultValue={formData?.adsType}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 font-bold mb-2" htmlFor="amount">
+                    Amount
+                  </label>
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="amount"
+                    type="number"
+                    placeholder="Enter  amount "
+                    defaultValue={formData?.amount}
+                    onChange={handleChange}
+                  />
+                </div>
+
               </div>
-            ))
-          )}
-        </div>
-}
-      </div>
-    </div>
+
+              <div className="mb-4">
+                <label className="block text-gray-700 font-bold mb-2" htmlFor="termsAndConditions">
+                  Terms and Conditions...
+                </label>
+                <textarea
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="termsAndConditions"
+                  placeholder="Write Terms and Conditions"
+                  defaultValue={formData?.termsAndConditions}
+                  onChange={handleChange}
+                ></textarea>
+              </div>
+
+
+
+              <div className="flex justify-end">
+                <button
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                  type="button"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                 Send Form
+                </button>
+              </div>
+            </form>
+          </div>
+        </Modal>
+      </div >
+      <ToastContainer autoClose={1000} />
+    </div >
   );
 };
 

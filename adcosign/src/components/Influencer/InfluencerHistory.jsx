@@ -5,14 +5,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { BiCurrentLocation } from "react-icons/bi";
-import { MdMarkEmailUnread } from "react-icons/md";
-import { RiContactsFill } from "react-icons/ri";
+import { TiLocation } from "react-icons/ti";
+import { FiPhoneCall } from "react-icons/fi";
+import { MdEmail } from "react-icons/md";
 import loader from "../../Images/loader.gif"
+
+import Rating from '@mui/material/Rating';
+
+
 const InfluencerHistory = () => {
   const navigate = useNavigate();
 
   const [profilecard, setprofilecard] = useState([]);
+  const [cons, setCons] = useState([])
   const [loading, setLoading] = useState(true);
   const getcurrentconsignmets = async () => {
     try {
@@ -23,6 +28,7 @@ const InfluencerHistory = () => {
       const data = res.data;
       console.log(data);
       setprofilecard(data.data);
+      setCons(data.cons)
       setLoading(false)
     } catch (err) {
       if (err.response.status == 422) {
@@ -34,6 +40,16 @@ const InfluencerHistory = () => {
   useEffect(() => {
     getcurrentconsignmets();
   }, []);
+
+  const rating = (index) => {
+    const item = cons[index]
+    return item ? item.rating : 0;
+  }
+  const review = (index) => {
+    const item = cons[index]
+    // console.log(item.rating);
+    return item ? item.review : "no review";
+  }
   return (
     <div className="flex h-screen">
       <Navbar />
@@ -42,22 +58,22 @@ const InfluencerHistory = () => {
         {loading === true ?
           <img src={loader} alt="laoding" className="h-52 mx-auto"
           />
-          : 
-        <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-20 max-sm:px-5  max-md:px-10">
-          {profilecard.length == 0 ? (
-            <h1 className="text-3xl font-bold ">No Agreements Found</h1>
-          ) : (
-            profilecard.map((data, index) => (
-              <div className="mt-20 items-center justify-center mx-10 shadow-xl bg-gray-100  rounded-2xl ">
-                <div class="mx-auto max-w-md overflow-hidden flex flex-col justify-between">
+          :
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 px-10 gap-y-10 max-sm:px-5  max-md:px-10">
+            {profilecard.length == 0 ? (
+              <h1 className="text-3xl font-bold ">No History Found</h1>
+            ) : (
+              profilecard.map((data, index) => (
+
+                <div class="mt-10 h-full items-center mx-10 justify-center border-2 shadow-2xl bg-gray-100  rounded-2xl">
                   <img
                     //src={photo}
                     src={data.logo}
-                    class="h-1/2 w-1/2 m-auto mt-5  "
+                    class="h-1/3 w-1/3 m-auto mt-5  "
                     alt="image"
                   />
 
-                  <div class="p-4 ">
+                  <div class="px-5 ">
                     <div className="text-center">
                       <h3 class="text-3xl font-bold font-dmserif text-neutral-700">
                         {data.shopName}
@@ -68,43 +84,35 @@ const InfluencerHistory = () => {
                       </p>
                     </div>
 
-                    <br></br>
-                    <hr></hr>
-                    <br></br>
-                    <div className="flex space-x-2.5 items-center">
-                      <div>
-                        <RiContactsFill size={20} />
-                      </div>
-                      <div>
+                    <div className="border-y-2 py-3">
+
+                      <div className="flex space-x-2.5 items-center">
+                        <FiPhoneCall size={20} />
                         <p class="mb-1 text-lg ">{data.phone}</p>
                       </div>
-                    </div>
-                    <div className="flex space-x-2.5 items-center">
-                      <div>
-                        <MdMarkEmailUnread size={20} />
-                      </div>
-                      <div>
+
+                      <div className="flex space-x-2.5 items-center">
+                        <MdEmail size={20} />
                         <p class="mb-1 text-lg">{data.email}</p>
                       </div>
-                    </div>
 
-                    <div className="flex space-x-2.5 items-center">
-                      <div>
-                        <BiCurrentLocation size={20} />
-                      </div>
-                      <div>
+                      <div className="flex space-x-2.5 items-center">
+                        <TiLocation size={20} />
                         <p class="mb-1 text-lg hover:text-blue-500 ">
-                          {data.location}
+                          {data.city+", "+data.country}
                         </p>
                       </div>
+                    </div>  
+                    <div className="mt-3 text-center">
+                      <Rating className="" name="read-only" value={rating(index)} precision={0.01} readOnly />
+                      <div className="text-lg"> {review(index)}</div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))
-          )}
-        </div>
-}
+              ))
+            )}
+          </div>
+        }
       </div>
     </div>
   );
