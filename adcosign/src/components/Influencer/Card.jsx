@@ -72,7 +72,7 @@ const Card = ({ item }) => {
   return (
     <div className="">
       <div className="mx-5 max-sm:mx-0 max-md:mx-10  my-10  ">
-        <div className="px-3 py-3 bg-gray-100 rounded-2xl border-2 shadow-2xl">
+        <div className="px-3 py-3 bg-gray-100 rounded-2xl border-2 border-gray-300 shadow-2xl">
           <div
             className="flex flex-wrap cursor-pointer  "
             onClick={branddetailpage}

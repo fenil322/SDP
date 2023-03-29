@@ -65,7 +65,7 @@ const InfluencerHistory = () => {
             ) : (
               profilecard.map((data, index) => (
 
-                <div class="mt-10 h-full items-center mx-10 justify-center border-2 shadow-2xl bg-gray-100  rounded-2xl">
+                <div class="mt-10 h-full items-center mx-10 justify-center border-2 border-gray-300 shadow-2xl bg-gray-100  rounded-2xl">
                   <img
                     //src={photo}
                     src={data.logo}

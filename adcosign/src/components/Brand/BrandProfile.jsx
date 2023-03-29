@@ -167,7 +167,7 @@ const BrandProfile = () => {
                   </li>
                   <li class="flex border-b py-2">
                     <span class="font-bold w-24">Location:</span>
-                    <span class="text-gray-700">{brandData.location}</span>
+                    <a href={brandData.location} className="text-gray-700">Click here...</a>
                   </li>
                   <li class="flex border-b py-2">
                     <span class="font-bold w-24">Languages:</span>
@@ -254,34 +254,37 @@ const BrandProfile = () => {
                 <h4 class="text-xl text-gray-900 font-bold mt-5">Social Media</h4>
 
                 <div class="flex  justify-between mt-5 mx-10 max-sm:w-5/6 max-md:w-full max-sm:gap-y-5  max-sm:flex-col ">
-                  <div className="bg-gray-200 px-3 py-4 rounded-md items-center  ">
+                  {brandData.facebook?<div className="bg-gray-200 px-3 py-4 rounded-md items-center  ">
                     
                       <div className=" flex justify-between space-x-5  items-center">
                         <RiFacebookBoxLine size={25} className="text-[#3b5998] " />
                         <a href={brandData.facebookUrl}
                           target="_blank"
-                          className="hover:text-blue-600" >Click here...</a>
+                          className="hover:text-blue-600" >{brandData.facebook}</a>
                       </div>
-                  </div>
-                  <div className="bg-gray-200 px-3 py-4 rounded-md items-center ">
+                  </div>:""}
+                  {brandData.instagram?<div className="bg-gray-200 px-3 py-4 rounded-md items-center ">
                     
                       <div className="flex justify-between space-x-5  items-center">
                         <FaInstagram size={25} className="text-[#d62976] " />
                         <a href={brandData.instagramUrl}
                           target="_blank"
-                          className="hover:text-blue-600" >Click here...</a>
+                          className="hover:text-blue-600" >{brandData.instagram}</a>
                       </div>
 
-                  </div>
+                  </div>:""}
+                  {
+                    brandData.twitter?
                   <div className="bg-gray-200 px-3 py-4 rounded-md items-center ">
                     
                       <div className="flex justify-between space-x-5  items-center">
                         <FiTwitter size={25} className="text-[#00acee] " />
                         <a href={brandData.twitterUrl}
                           target="_blank"
-                          className="hover:text-blue-600" >Click here...</a>
+                          className="hover:text-blue-600" >{brandData.twitter}</a>
                       </div>
-                  </div>
+                  </div>:""
+                  }
                 
               </div>
                

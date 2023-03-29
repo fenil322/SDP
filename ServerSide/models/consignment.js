@@ -35,7 +35,7 @@ const consignmentSchema = new mongoose.Schema({
   },
   Date: {
     type: String,
-    default: new Date().toLocaleDateString(),
+   
   },
   detailRequest: {
     type: Number

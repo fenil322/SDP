@@ -73,7 +73,7 @@ const Navbar = () => {
             </div>
             <section className={`max-md:mt-16 max-md:fixed flex gap-6 fixed`}>
                 <div
-                    className={`bg-[#878990d2] flex flex-col justify-between max-md:h-full h-screen w-14 max-md:${open && "hidden"} duration-500 rounded-r-2xl text-gray-100 px-4`}
+                    className={`bg-gray-400 shadow-2xl flex flex-col justify-between max-md:h-full h-screen w-16 max-md:${open && "hidden"} duration-500 rounded-r-2xl text-gray-100 px-4`}
                 >
                     <div className="mt-4 flex flex-col gap-4 relative">
                         {menus?.map((menu, i) => (
@@ -82,7 +82,7 @@ const Navbar = () => {
                                 state={menu?.data}
                                 key={i}
                                 className={`${menu?.margin && "mt-5"} group flex items-center
-                                 text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}
+                                cursor-pointer     text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-700`}
                             >
                                 <div >{React.createElement(menu?.icon, { size: "25" })}</div>
                                 <h2
@@ -102,9 +102,9 @@ const Navbar = () => {
                     </div>
                     <div
                         className={`group flex items-center
-                    cursor-pointer text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-500`}
+                    cursor-pointer text-sm gap-3.5 font-medium p-0 my-2 rounded-md hover:text-blue-700`}
                     >
-                        <div  ><BiLogOut size={25} className="my-10 mx-auto  hover:text-blue-500 cursor-pointer          " onClick={logout} /></div>
+                        <div  ><BiLogOut size={25} className="my-10 mx-auto  hover:text-blue-700 cursor-pointer          " onClick={logout} /></div>
                         <h2
                             style={{
                                 transitionDelay: `${13}00ms`,

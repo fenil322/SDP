@@ -51,7 +51,7 @@ exports.influencerSignupdata = async (req, res) => {
 
 exports.getAllInfluencer = async (req, res) => {
     const page = req.query.page;
-    console.log(req.query);
+    // console.log(req.query);
     const influencers = await Influencer
         .find({ valid: 1, Adsrequired: true })
         .skip((page - 1) * 6).limit(6)
@@ -80,7 +80,7 @@ exports.editProfiledisplay = (req, res) => {
 exports.updateProfile = async (req, res) => {
     const id = req.userId
     // const profle = req.file
-    console.log(req.body);
+    // console.log(req.body);
     // console.log(req)
     // const data=req.body;  
     const influencer = await Influencer.findByIdAndUpdate(id, { $set: req.body }, { new: true }).select("-tokens")
@@ -94,7 +94,7 @@ exports.updateProfile = async (req, res) => {
 
 exports.uploadImage = async (req, res) => {
     const id = req.userId
-    console.log(req.body);
+    // console.log(req.body);
     var influencer = "";
     if (req.body.type == 1) {
 
@@ -104,7 +104,7 @@ exports.uploadImage = async (req, res) => {
         const photo = req.body.photo
         influencer = await Influencer.findByIdAndUpdate(id, { photo: photo }, { new: true }).select("-tokens")
     }
-    console.log(influencer);
+    // console.log(influencer);
     if (!influencer) {
         return res.status(422).json({ message: "Image not updated!", success: false, data: influencer });
     } else {
@@ -176,7 +176,7 @@ exports.adrequired = async (req, res) => {
         }
         return res.status(200).json({ success: true, message: "Profile is now public to brand for Ads...!!!", data: data });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
 
     }
@@ -196,14 +196,14 @@ exports.adrequiredRemove = async (req, res) => {
         }
         return res.status(200).json({ success: true, message: "Ads request Removed...!!", data: data });
     } catch (err) {
-        console.log(err);
+        // console.log(err);
         return res.status(422).json({ success: false, message: "Something went wronge!! try later!!" });
 
     }
 }
 
 exports.getConnectedinf = async (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const id = req.body.id;
     // console.log(id);
     const data = await Consignment.find({
@@ -211,7 +211,7 @@ exports.getConnectedinf = async (req, res) => {
         shoprequest: 1,
         influencerrequest: 1,
     });
-    console.log(data.length);
+    // console.log(data.length);
     let influencers = new Array()
     let date = new Array()
     const promises = data.map(async (item) => {

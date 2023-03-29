@@ -18,14 +18,14 @@ exports.managersignup = (req, res) => {
                 return res.status(422).json({ error: "Email already exists", success: false });
             }
             const manager = new Manager(req.body);
-            console.log(manager)
+            // console.log(manager)
             manager.save()
 
             return res.status(200).json({ success: true, message: "Your data is under verification" });
 
         })
         .catch((err) => {
-            console.log(err);
+            // console.log(err);
         });
 
 }
@@ -38,7 +38,7 @@ exports.managerlogin = async (req, res) => {
     else {
         const userLogin = await Manager.findOne({ email: email, password: password })
 
-        console.log(userLogin);
+        // console.log(userLogin);
 
         if (!userLogin) {
             return res.status(422).json({ error: "User not found", success: false });
@@ -52,7 +52,7 @@ exports.managerlogin = async (req, res) => {
             //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
             const token = await userLogin.generateAuthToken()
             const { fname } = userLogin;
-            console.log(token)
+            // console.log(token)
             if (token) {
                 res.cookie('jwtoken', token, {
                     expires: new Date(Date.now() + 2589200000),
@@ -87,7 +87,7 @@ exports.getunverifiedbrand = (req, res) => {
 exports.getunverifiendInfluencer = (req, res) => {
     Influencer.find({ valid: 0 }).select('-password')
         .then(result => {
-            console.log(result);
+            // console.log(result);
             res.status(200).json({ data: result })
         })
         .catch(err => console.log(err))

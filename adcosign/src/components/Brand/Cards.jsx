@@ -23,7 +23,7 @@ function Card({ item }) {
 
   return (
     <>
-      <div className=" max-w-md md:mx-5 md:max-w-2xl  break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
+      <div className=" max-w-md md:mx-5 md:max-w-2xl  break-words bg-gray-100  shadow-2xl border-2 border-gray-300 rounded-2xl my-10">
         {/* <Link to={{
           pathname: '/InfluencerDetails',
           state: { data:data}

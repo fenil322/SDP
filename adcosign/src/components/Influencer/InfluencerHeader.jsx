@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
-  
+
 const InfluencerHeader = (props) => {
   const navigate = useNavigate();
   const [userdata, setuserdata] = useState([]);
@@ -18,7 +18,7 @@ const InfluencerHeader = (props) => {
   }, [])
 
 
- 
+
   return (
     <div className="h-20 flex items-center justify-between mx-20 max-sm:mx-2 w-[screen] border-b-2 ">
       <nav className="">
@@ -28,18 +28,19 @@ const InfluencerHeader = (props) => {
         {/* <div className="flex mx-5">
           <FiSettings />
         </div> */}
-        <div class="flex items-center space-x-4">
-          <div className="">
+        <NavLink to='/InfluencerProfile'>
+          <div class="flex items-center space-x-4">
+            <div className="">
 
-          <img class="w-10 h-10 rounded-full group" src={userdata.profile} alt="" />
-          <div className="absolute hidden group-hover:block">hello</div>
-        </div>
-          <div class="font-medium ">
-            <div>Hi,{userdata.fname}</div>
+              <img class="w-10 h-10 rounded-full group" src={userdata.profile} alt="" />
+            </div>
+            <div className="font-medium hover:text-blue-700 cursor-pointer ">
+              <div>Hi,{userdata.fname}</div>
+            </div>
           </div>
-        </div>
+        </NavLink>
       </div>
-    </div>
+    </div >
   );
 };
 

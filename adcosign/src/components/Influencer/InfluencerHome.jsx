@@ -74,7 +74,7 @@ const InfluencerHome = () => {
                 </li>
                 <li class="page-item">
                   <a
-                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page") == 1 ? `bg-blue-600 text-white` : `bg-transparent text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
+                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page") == 1 ? `bg-sky-600 text-white` : `bg-transparent text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
                     href="?page=1"
                   >
                     1
@@ -82,7 +82,7 @@ const InfluencerHome = () => {
                 </li>
                 <li class="page-item active">
                   <a
-                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page") == 2 ? `bg-blue-600 text-white` : `bg-transparent  text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
+                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page") == 2 ? `bg-sky-600 text-white` : `bg-transparent  text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
                     href="?page=2"
                   >
                     2
@@ -90,7 +90,7 @@ const InfluencerHome = () => {
                 </li>
                 <li class="page-item">
                   <a
-                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page") > 2 ? `bg-blue-600 text-white` : `bg-transparent  text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
+                    class={`page-link relative block py-1.5 px-3 border-0 ${searchParams.get("page") > 2 ? `bg-sky-600 text-white` : `bg-transparent  text-gray-800`}  outline-none transition-all duration-300 rounded hover:text-gray-800 hover:bg-gray-200 focus:shadow-none`}
                   //  href="?page=3"
                   >
                     {searchParams.get("page") <= 2 ? "..." : searchParams.get("page")}

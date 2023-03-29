@@ -10,8 +10,8 @@ const Newtosite = () => {
 
       <div className="text-5xl mx-56 my-10 text-blue-600">Are you Influencer?</div>
       <section className="text-gray-600 body-font">
-        <div className="container px-5 pb-20  mx-auto flex flex-wrap">
-          <div className="flex relative pt-10 pb-20 sm:items-center md:w-2/3 mx-auto">
+        <div className="container px-5 pb-10  mx-auto flex flex-wrap">
+          <div className="flex relative pt-5 pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -19,7 +19,7 @@ const Newtosite = () => {
               1
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   id="_x31_"
                   enable-background="new 0 0 24 24"
@@ -27,7 +27,7 @@ const Newtosite = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                 >
                   <path d="m11.894 24c-.131 0-.259-.052-.354-.146-.118-.118-.17-.288-.137-.451l.707-3.535c.02-.098.066-.187.137-.256l7.778-7.778c.584-.584 1.537-.584 2.121 0l1.414 1.414c.585.585.585 1.536 0 2.121l-7.778 7.778c-.069.07-.158.117-.256.137l-3.535.707c-.032.006-.065.009-.097.009zm1.168-3.789-.53 2.651 2.651-.53 7.671-7.671c.195-.195.195-.512 0-.707l-1.414-1.414c-.195-.195-.512-.195-.707 0zm2.367 2.582h.01z" />
@@ -49,7 +49,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -57,7 +57,7 @@ const Newtosite = () => {
               2
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   id="_x31_"
                   enable-background="new 0 0 24 24"
@@ -65,7 +65,7 @@ const Newtosite = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                 >
                   <path d="m17.5 24c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.468-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.468 5.5-5.5-2.467-5.5-5.5-5.5z" />
@@ -89,7 +89,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -97,14 +97,14 @@ const Newtosite = () => {
               3
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   id="capa_1"
                   enable-background="new 0 0 24 24"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
@@ -133,7 +133,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -141,8 +141,8 @@ const Newtosite = () => {
               4
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
-                {/* <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-12 h-12" viewBox="0 0 24 24">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+                {/* <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-8 h-8" viewBox="0 0 24 24">
             <circle cx="12" cy="5" r="3"></circle>
             <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
           </svg> */}
@@ -154,7 +154,7 @@ const Newtosite = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 512 512"
                 >
                   <g>
@@ -180,7 +180,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -189,12 +189,12 @@ const Newtosite = () => {
               5
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                   id="Capa_1"
                   enable-background="new 0 0 510.843 510.843"
@@ -227,7 +227,7 @@ const Newtosite = () => {
             </div>
             <hr />
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -235,13 +235,13 @@ const Newtosite = () => {
               6
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 511 511.99978"
                 >
@@ -262,7 +262,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-5 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -270,12 +270,12 @@ const Newtosite = () => {
               7
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   height="511.99994pt"
                   viewBox="1 1 511.99994 511.99994"
                   width="511.99994pt"
@@ -308,10 +308,10 @@ const Newtosite = () => {
       </section>
 
       <div className="text-5xl mx-56 my-10 text-blue-600">Want to Advertise something?</div>
-    
+
       <section className="text-gray-600 body-font">
-        <div className="container px-5 pb-20  mx-auto flex flex-wrap">
-          <div className="flex relative pt-10 pb-20 sm:items-center md:w-2/3 mx-auto">
+        <div className="container px-5 pb-10  mx-auto flex flex-wrap">
+          <div className="flex relative pt-5 pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -319,7 +319,7 @@ const Newtosite = () => {
               1
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   id="_x31_"
                   enable-background="new 0 0 24 24"
@@ -327,7 +327,7 @@ const Newtosite = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                 >
                   <path d="m11.894 24c-.131 0-.259-.052-.354-.146-.118-.118-.17-.288-.137-.451l.707-3.535c.02-.098.066-.187.137-.256l7.778-7.778c.584-.584 1.537-.584 2.121 0l1.414 1.414c.585.585.585 1.536 0 2.121l-7.778 7.778c-.069.07-.158.117-.256.137l-3.535.707c-.032.006-.065.009-.097.009zm1.168-3.789-.53 2.651 2.651-.53 7.671-7.671c.195-.195.195-.512 0-.707l-1.414-1.414c-.195-.195-.512-.195-.707 0zm2.367 2.582h.01z" />
@@ -349,7 +349,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -357,7 +357,7 @@ const Newtosite = () => {
               2
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   id="_x31_"
                   enable-background="new 0 0 24 24"
@@ -365,7 +365,7 @@ const Newtosite = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                 >
                   <path d="m17.5 24c-3.584 0-6.5-2.916-6.5-6.5s2.916-6.5 6.5-6.5 6.5 2.916 6.5 6.5-2.916 6.5-6.5 6.5zm0-12c-3.033 0-5.5 2.468-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.468 5.5-5.5-2.467-5.5-5.5-5.5z" />
@@ -389,7 +389,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -397,14 +397,14 @@ const Newtosite = () => {
               3
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   id="capa_1"
                   enable-background="new 0 0 24 24"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="1"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   x="0px"
                   y="0px"
@@ -433,7 +433,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -441,8 +441,8 @@ const Newtosite = () => {
               4
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
-                {/* <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-12 h-12" viewBox="0 0 24 24">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+                {/* <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-8 h-8" viewBox="0 0 24 24">
             <circle cx="12" cy="5" r="3"></circle>
             <path d="M12 22V8M5 12H2a10 10 0 0020 0h-3"></path>
           </svg> */}
@@ -454,7 +454,7 @@ const Newtosite = () => {
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 512 512"
                 >
                   <g>
@@ -480,7 +480,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -489,12 +489,12 @@ const Newtosite = () => {
               5
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   viewBox="0 0 24 24"
                   id="Capa_1"
                   enable-background="new 0 0 510.843 510.843"
@@ -527,7 +527,7 @@ const Newtosite = () => {
             </div>
             <hr />
           </div>
-          <div className="flex relative pb-20 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -535,13 +535,13 @@ const Newtosite = () => {
               6
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   stroke="currentColor"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 511 511.99978"
                 >
@@ -562,7 +562,7 @@ const Newtosite = () => {
               </div>
             </div>
           </div>
-          <div className="flex relative pb-10 sm:items-center md:w-2/3 mx-auto">
+          <div className="flex relative pb-5 sm:items-center md:w-2/3 mx-auto">
             <div className="h-full w-6 absolute inset-0 flex items-center justify-center">
               <div className="h-full w-1 bg-gray-200 pointer-events-none"></div>
             </div>
@@ -570,12 +570,12 @@ const Newtosite = () => {
               7
             </div>
             <div className="flex-grow md:pl-8 pl-6 flex sm:items-center items-start flex-col sm:flex-row">
-              <div className="flex-shrink-0 w-24 h-24 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
+              <div className="flex-shrink-0 w-16 h-16 bg-indigo-100 text-indigo-500 rounded-full inline-flex items-center justify-center">
                 <svg
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  className="w-12 h-12"
+                  className="w-8 h-8"
                   height="511.99994pt"
                   viewBox="1 1 511.99994 511.99994"
                   width="511.99994pt"

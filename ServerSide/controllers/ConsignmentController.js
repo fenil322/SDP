@@ -23,6 +23,7 @@ exports.createConsignment = async (req, res, next) => {
     brandId,
     influencerId,
     influencerrequest: 1,
+    Date: new Date().toLocaleDateString(),
   });
   try {
     newconsignment.save();
@@ -57,6 +58,7 @@ exports.createConsignmentInf = async (req, res, next) => {
     brandId,
     influencerId,
     shoprequest: 1,
+    Date: new Date().toLocaleDateString(),
   });
   try {
     newconsignment.save();
@@ -96,7 +98,7 @@ exports.getBrandRequest = async (req, res, next) => {
 
 exports.getInfluenerPendingRequest = async (req, res, next) => {
   const influencerId = req.userId;
-  console.log(influencerId);
+  // console.log(influencerId);
   // const data = await Consignment.find({ influencerId, influencerrequest: 0 });
   // // array.push({ data: "hello world" })
   let array = new Array();
@@ -110,7 +112,7 @@ exports.getInfluenerPendingRequest = async (req, res, next) => {
   })
   Promise.all(promises).then(() => {
 
-    console.log(array);
+    // console.log(array);
     return res
       .status(200)
       .json({ success: true, message: "data sent...", data: array });
@@ -120,8 +122,8 @@ exports.getInfluenerPendingRequest = async (req, res, next) => {
 exports.acceptBrandReq = async (req, res) => {
   const influencerId = req.userId;
   const brandId = req.body._id;
-  console.log(req.body.email);
-  console.log(req.body._id);
+  // console.log(req.body.email);
+  // console.log(req.body._id);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
@@ -157,8 +159,8 @@ exports.deleteBrandReq = async (req, res) => {
 exports.acceptInfluencerReq = async (req, res) => {
   const brandId = req.userId;
   const influencerId = req.body._id;
-  console.log(req.body.email);
-  console.log(req.body._id);
+  // console.log(req.body.email);
+  // console.log(req.body._id);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
@@ -195,7 +197,7 @@ exports.deleteInfluencerReq = async (req, res) => {
 exports.getInfConsignment = async (req, res) => {
   const influencerId = req.userId;
 
-  console.log(req.body);
+  // console.log(req.body);
   try {
     let array = new Array();
     let array2 = new Array();
@@ -232,10 +234,10 @@ exports.getInfConsignment = async (req, res) => {
 
 exports.getBrandPendingRequest = async (req, res) => {
   const brandId = req.userId;
-  console.log(brandId);
+  // console.log(brandId);
 
   const data = await Consignment.find({ brandId, shoprequest: 0 });
-  console.log(data);
+  // console.log(data);
   // array.push({ data: "hello world" })
 
   let array = new Array();
@@ -248,7 +250,7 @@ exports.getBrandPendingRequest = async (req, res) => {
   // console.log("array data");
   Promise.all(promises).then(() => {
 
-    console.log(array);
+    // console.log(array);
     return res.status(200).json({ success: true, data: array });
   })
   // setTimeout(() => {
@@ -271,7 +273,7 @@ exports.getInfluencerRequest = async (req, res) => {
   });
   // console.log("array data");
   Promise.all(promises).then(() => {
-    console.log(array);
+    // console.log(array);
     return res.status(200).json({ success: true, data: array });
   })
   // setTimeout(() => {
@@ -286,7 +288,7 @@ exports.deleteBrandPendingRequest = async (req, res) => {
   // console.log(req.body);
 
   const data = await Consignment.findOneAndDelete({ influencerId, brandId });
-  console.log(data);
+  // console.log(data);
   if (!data) {
     return res
       .status(400)
@@ -355,8 +357,8 @@ exports.getBrandConsignment = async (req, res) => {
 exports.paymentupdate = async (req, res) => {
   const brandId = req.userId;
   const influencerId = req.body.id;
-  console.log(brandId);
-  console.log(influencerId);
+  // console.log(brandId);
+  // console.log(influencerId);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
@@ -409,8 +411,8 @@ exports.getBrandCurrentConsignments = async (req, res) => {
 exports.acceptAgreement = async (req, res) => {
   const brandId = req.userId;
   const influencerId = req.body.inflencerId;
-  console.log(brandId);
-  console.log(influencerId);
+  // console.log(brandId);
+  // console.log(influencerId);
 
   const data = await Consignment.findOneAndUpdate(
     { influencerId, brandId },
@@ -512,7 +514,7 @@ exports.feedBack = async (req, res) => {
 
   const { influencerId, review, rating } = req.body;
   const brandId = req.userId
-  console.log(req.body);
+  // console.log(req.body);
   try {
 
     const cons = await Consignment
@@ -525,7 +527,7 @@ exports.feedBack = async (req, res) => {
       doc1.count = doc1.count + 1;
       doc1.feedbacks.push({ brandId: brandId, review: review, rating: rating })
       await doc1.save();
-      console.log(doc1);
+      // console.log(doc1);
     });
 
     return res.status(200).json({ success: true, message: "feedback saved successfully", data: cons })

@@ -65,7 +65,7 @@ const InfluencerProfile = () => {
       <div className=' ml-14 w-screen'>
         <InfluencerHeader page="Profile" />
         <div class="h-full py-8 w-5/6 m-auto">
-          <div class="bg-white w-5/6 m-auto rounded-lg shadow-xl pb-8">
+          <div class="bg-white w-5/6 m-auto rounded-lg border-2  shadow-xl pb-8">
             {/* <div x-data="{ openSettings: false }" class="absolute right-12 mt-4 rounded">
                   <button class="border border-gray-400 p-2 rounded text-gray-300 hover:text-gray-300 bg-gray-100 bg-opacity-10 hover:bg-opacity-20" title="Settings">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
@@ -188,7 +188,7 @@ const InfluencerProfile = () => {
           <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
             <div class="w-full flex flex-col 2xl:w-1/3">
               {/*                 Personal Info                      */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+              <div class="flex-1 bg-white border-2 rounded-lg shadow-xl p-8">
                 <h4 class="text-xl text-gray-900 font-bold">Personal Information</h4>
                 <ul class="mt-2 text-gray-700">
                   <li class="flex border-y py-2">
@@ -247,7 +247,7 @@ const InfluencerProfile = () => {
                 </ul>
               </div>
               {/*                 activity                      */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+              <div class="flex-1 bg-white border-2 rounded-lg shadow-xl mt-4 p-8">
                 <h4 class="text-xl text-gray-900 font-bold">My Activity Logs</h4>
                 <div class="relative px-4">
                   <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
@@ -283,12 +283,12 @@ const InfluencerProfile = () => {
             </div>
             {/*                 Avout                        */}
             <div class="flex flex-col w-full 2xl:w-2/3">
-              <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+              <div class="flex-1 bg-white border-2 rounded-lg shadow-xl p-8">
                 <h4 class="text-xl text-gray-900 font-bold">About</h4>
                 <p class="mt-2 text-gray-700">{userdata.discription}</p>
               </div>
               {/*                 Social Information                     */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+              <div class="flex-1 bg-white border-2 rounded-lg shadow-xl mt-4 p-8">
                 <h4 class="text-xl text-gray-900 font-bold">Social Media</h4>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mt-4  ">

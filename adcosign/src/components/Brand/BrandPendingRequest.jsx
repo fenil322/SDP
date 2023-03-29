@@ -98,18 +98,18 @@ const BrandPendingRequest = () => {
                               size={20}
                               className="text-[#3b5998] "
                             />
-                            <div className="text-[#3b5998] mr-3 ml-1">{item.facebookFollowers}</div>
+                            <div className="text-[#3b5998] mr-3 ml-1">4k{item.facebookFollowers}</div>
                           </div>
                           <div className="flex">
                             <AiOutlineInstagram
                               size={20}
                               className="text-[#E4405F]"
                             />
-                            <div className="text-[#E4405F] mr-3 ml-1">  {item.instagramFollowers}</div>
+                            <div className="text-[#E4405F] mr-3 ml-1"> 3.3k {item.instagramFollowers}</div>
                           </div>
                           <div className="flex">
                             <CiTwitter size={20} className="text-[#1DA1F2]" />
-                            <div className="text-[#1DA1F2] mr-3 ml-1"> {item.twitterFollowers}</div>
+                            <div className="text-[#1DA1F2] mr-3 ml-1">1067 {item.twitterFollowers}</div>
                           </div>
                         </div>
                     </div>

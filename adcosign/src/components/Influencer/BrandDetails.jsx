@@ -116,12 +116,12 @@ const BrandDetails = () => {
             href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"
           ></link>
 
-          <div class="bg-gray-100 rounded-lg shadow-xl pb-8">
+          <div class="bg-gray-100 rounded-lg shadow-2xl border-gray-300 border-2 pb-8">
 
             <div class="w-full h-[250px]">
               <img
                 // src={brandData?.images[0].url!==undefined ? brandData.images[0].url:brandData.photo1  } 
-                src={brandData.photo1}
+                src={brandData?.photo1}
                 class="w-full h-full rounded-tl-lg rounded-tr-lg"
                 alt="not available"
               />
@@ -214,7 +214,7 @@ const BrandDetails = () => {
               {brandData?.description ?
                 <div>
                   <h2 className="font-bold font-mono text-2xl">About Brand</h2>
-                  <div className="w-1/2">
+                  <div className="">
                     {brandData?.description}
                   </div>
                 </div> :

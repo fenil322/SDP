@@ -63,10 +63,10 @@ exports.brandhome = async (req, res) => {
   //       const promises1 = cons.map(async (element1) => {
 
   //         // console.log(cons);
-  //         console.log(element1.influencerId);
+          // console.log(element1.influencerId);
   //         const _id = element1.influencerId;
   //         const influencer = await Influencer.findById(_id).select("-password").select("-tokens")
-  //         console.log(influencer);
+          // console.log(influencer);
   //         influencerArray.push(influencer);
   //       })
 
@@ -92,7 +92,7 @@ exports.brandLogin = async (req, res) => {
   } else {
     const userLogin = await Brand.findOne({ email: email, password: password });
 
-    //   console.log(userLogin);
+      // console.log(userLogin);
 
     if (!userLogin) {
       return res.status(422).json({ error: "User not found", success: false });
@@ -107,7 +107,7 @@ exports.brandLogin = async (req, res) => {
       //  const token = jwt.sign({ _id: userLogin._id }, "mynameisFenilsavaniandthisisoursdpproject");
       const token = await userLogin.generateAuthToken();
       const { fname } = userLogin;
-      console.log(token);
+      // console.log(token);
       if (token) {
         res.cookie("jwtoken", token, {
           expires: new Date(Date.now() + 2589200000),
@@ -147,7 +147,7 @@ exports.getBrandData = async (req, res) => {
 exports.updateProfile = async (req, res) => {
   const id = req.userId
   // const profle = req.file
-  console.log(req.body);
+  // console.log(req.body);
 
   const brand = await Brand.findByIdAndUpdate(id, { $set: req.body }, { new: true }).select("-tokens")
   if (!brand) {
@@ -160,7 +160,7 @@ exports.updateProfile = async (req, res) => {
 
 exports.logoUpload = async (req, res) => {
   const id = req.userId
-  console.log(req.body);
+  // console.log(req.body);
   var brand = "";
   if (req.body.type == 1) {
     const logo = req.body.logo
@@ -170,7 +170,7 @@ exports.logoUpload = async (req, res) => {
     const photo1 = req.body.photo1
     brand = await Brand.findByIdAndUpdate(id, { photo1: photo1 }, { new: true }).select("-tokens")
   }
-  console.log(brand);
+  // console.log(brand);
   if (!brand) {
     return res.status(422).json({ message: "Logo not updated!", success: false, data: brand });
   } else {
@@ -179,10 +179,11 @@ exports.logoUpload = async (req, res) => {
 }
 exports.imageUpload = async (req, res) => {
   const id = req.userId
-  console.log(req.body);
+  // console.log(req.body);
   const image = req.body.image
   const brand = await Brand.findByIdAndUpdate(id, { $push: { images: { url: image } } }, { new: true }).select("-tokens")
-  console.log(brand);
+  // console.log("hello");
+  // console.log(brand);
   if (!brand) {
     return res.status(422).json({ message: "Image not updated!", success: false, data: brand });
   } else {
@@ -191,7 +192,7 @@ exports.imageUpload = async (req, res) => {
 }
 
 exports.getConnectedbrand=async(req,res)=>{
-  console.log(req.body);
+  // console.log(req.body);
     const id = req.body.id;
     // console.log(id);
     const data = await Consignment.find({
@@ -199,7 +200,7 @@ exports.getConnectedbrand=async(req,res)=>{
         shoprequest: 1,
         influencerrequest: 1,
     });
-    console.log(data.length)
+    // console.log(data.length)
     let brand = new Array()
     let date = new Array()
     const promises = data.map(async (item) => {
