@@ -6,7 +6,8 @@ import InfluencerIntro from "./components/Influencer/InfluencerIntro";
 import BrandSignUp from "./components/Brand/BrandSignUp";
 import InfluencerSignUp from "./components/Influencer/InfluencerSignUp";
 import ManagerSignUp from "./components/manager/ManagerSignUp";
-
+import AboutUs from "./components/About";
+import NewToSite from "./components/Newtosite";
 import BrandHome from "./components/Brand/BrandHome";
 import BrandPendingRequest from "./components/Brand/BrandPendingRequest";
 import BrandArrivalRequest from "./components/Brand/BrandArrivalRequest";
@@ -47,15 +48,17 @@ const App = () => {
         <Route path="/ManagerSignUp" element={<ManagerSignUp />} />
         <Route path="/BrandLogin" element={<BrandLogin />} />
         <Route path="/InfluencerLogin" element={<InfluencerLogin />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="NewToSite" element={<NewToSite />} />
 
         <Route path="/BrandHome" element={<BrandHome />} />
         <Route path="/BrandPendingRequest" element={<BrandPendingRequest />} />
         <Route path="/BrandArrivalRequest" element={<BrandArrivalRequest />} />
         <Route path="/BrandConsignments" element={<BrandConsignments />} />
         <Route path="/BrandDetails" element={<BrandDetails />} />
-        <Route path="/BrandProfile" element={<BrandProfile/>}/>
-        <Route path="/BrandProfileEdit" element={<BrandProfileEdit/>}/>
-       
+        <Route path="/BrandProfile" element={<BrandProfile />} />
+        <Route path="/BrandProfileEdit" element={<BrandProfileEdit />} />
+
         <Route path="/BrandHistory" element={<BrandHistory />} />
         <Route path="/InfluencerDetails" element={<InfluencerDetails />} />
 
@@ -70,7 +73,7 @@ const App = () => {
           path="/InfluencerConsignments"
           element={<InfluencerConsignments />}
         />
-       
+
         <Route path="/InfluencerHistory" element={<InfluencerHistory />} />
         <Route path="/InfluencerPendingRequest" element={<InfluencerPendingRequest />} />
 
@@ -79,8 +82,8 @@ const App = () => {
         <Route path="/ManagerHeader" element={<ManagerHeader />} />
         <Route path="/AddNewInfluencer" element={<AddNewInfluencer />} />
         <Route path="/AddNewBrand" element={<AddNewBrand />} />
-      <Route path="/ManagerProfile" element={<ManagerProfile />} />
-      
+        <Route path="/ManagerProfile" element={<ManagerProfile />} />
+
       </Routes>
     </BrowserRouter>
   );

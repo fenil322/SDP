@@ -20,7 +20,7 @@ const Header = () => {
 
                 </div>
                 <nav className='menubar my-auto '>
-                    <ul className='menu flex items-center text-lg '>
+                    <ul className='menu flex max-sm:flex-col max-md:flex-col items-center text-lg '>
                         <li className='menu-item py-3 px-4 hover:text-blue-500 ease-in duration-300 ' >
 
                             <NavLink to="/BrandIntro">For Brand</NavLink>
@@ -56,8 +56,14 @@ const Header = () => {
 
                                             <li class={menuitemCommoncss}>Work as manager</li>
                                         </NavLink>
-                                        <li class={menuitemCommoncss}>Contact</li>
+                                        <NavLink to="/NewToSite">
+                                        <li class={menuitemCommoncss}>New To Site</li>
+                                            
+                                        </NavLink>
+                                        <NavLink to="/AboutUs">
                                         <li class={menuitemCommoncss}>About Us</li>
+
+                                        </NavLink>
                                     </ul>
                                 </div>
                             </div>
@@ -66,12 +72,7 @@ const Header = () => {
                     </ul>
                 </nav>
                 <div className='login-buttons flex ml-auto my-auto'>
-                    <select className='ml-5 py-3 -pr-1 cursor-pointer'>
-                        {langages.map((option, index) => {
-                            return <option key={index}>{option}</option>
-                        })}
-                    </select>
-
+                    
                     <div>
                         <div class="group inline-block">
                             <NavLink to='/InfluencerLogin'>
@@ -98,7 +99,7 @@ const Header = () => {
                                     class="outline-none focus:outline-none  px-3 py-1 bg-white rounded-sm flex items-center min-w-32"
                                 >
                                     <span class="pr-1 font-semibold flex-1 cursor-pointer">
-                                        <div className='ml-1 my-1 bg-sky-400 px-7 py-3 hover:bg-sky-500 ease-in duration-200 rounded cursor-pointer'>Sign Up</div>
+                                        <div className='ml-1 my-1 text-white bg-sky-400 px-7 py-3 hover:bg-sky-500 ease-in duration-200 rounded cursor-pointer'>Sign Up</div>
                                     </span>
 
                                 </button>

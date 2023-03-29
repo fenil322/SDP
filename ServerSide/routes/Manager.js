@@ -5,7 +5,7 @@ const router=express.Router();
 const ManagerController=require('../controllers/managerController');
 const managerIsAuth=require('../middleware/managerIsAuth');
 
-
+router.post('/signup',ManagerController.managersignup)
 //get unvalide brand and influencer GET
 router.get('/getunverifiedbrand',managerIsAuth.isAuth,ManagerController.getunverifiedbrand);
 router.get('/getunverifiendInfluencer',managerIsAuth.isAuth,ManagerController.getunverifiendInfluencer);
