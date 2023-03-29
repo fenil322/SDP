@@ -139,6 +139,7 @@ const influencerSchema = new mongoose.Schema({
   },
   profile: {
     type: String
+    ,default: "https://bootdey.com/img/Content/avatar/avatar7.png",
   },
   resetToken: String,
   expireToken: Date,
