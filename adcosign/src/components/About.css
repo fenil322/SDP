@@ -129,7 +129,7 @@ blockquote {
   -ms-flex: 0 0 70px;
   flex: 0 0 70px;
   margin-right: 20px;
-  width: 70px !important;
+  width: 100px !important;
   border-radius: 50%;
 }
 

@@ -19,7 +19,7 @@ function Card({ item, onData }) {
   return (
     <>
       <div className="">
-        <div className="flex flex-col mx-auto max-w-md items-center justify-center  border-2 shadow-2xl rounded-2xl bg-gray-100 hover:shadow-xl hover:shadow-black/20">
+        <div className="flex flex-col mx-auto max-w-md items-center justify-center  border-2 border-gray-300 shadow-2xl rounded-2xl bg-gray-100 hover:shadow-xl hover:shadow-black/20">
 
 
           <div class="p-4">

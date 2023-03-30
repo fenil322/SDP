@@ -92,7 +92,7 @@ const BrandProfile = () => {
       <div className=" ml-14 w-screen max-sm:ml-0 h-screen">
         <BrandHeader page="Profile" />
         <div class="h-full py-8 w-5/6 m-auto">
-          <div class="bg-white w-5/6 m-auto rounded-lg shadow-xl pb-8">
+          <div class="bg-white border-2 w-5/6 m-auto rounded-lg shadow-xl pb-8">
             <div class="w-full h-[300px]">
               <img
                 src={brandData.photo1}
@@ -142,7 +142,7 @@ const BrandProfile = () => {
           <div class="my-4 flex flex-col 2xl:flex-row space-y-4 2xl:space-y-0 2xl:space-x-4">
             <div class="w-full flex flex-col 2xl:w-1/3">
               {/*                  Personal Info                      */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+              <div class="flex-1 border-2 bg-white rounded-lg shadow-xl p-8">
                 <h4 class="text-xl text-gray-900 font-bold">Brand Information</h4>
                 <ul class="mt-2 text-gray-700">
                   <li class="flex border-y py-2">
@@ -217,7 +217,7 @@ const BrandProfile = () => {
                 </ul>
               </div>
               {/*                 activity                      */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+              <div class="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
                 <h4 class="text-xl text-gray-900 font-bold">My Activity</h4>
                 <div class="relative px-4">
                   <div class="absolute h-full border border-dashed border-opacity-20 border-secondary"></div>
@@ -248,7 +248,7 @@ const BrandProfile = () => {
             </div>
             {/*                 About                        */}
             <div class="flex flex-col w-full 2xl:w-2/3">
-              <div class="flex-1 bg-white rounded-lg shadow-xl p-8">
+              <div class="flex-1 border-2 bg-white rounded-lg shadow-xl p-8">
                 <h4 class="text-xl text-gray-900 font-bold">About</h4>
                 <p class="mt-2 text-gray-700">{brandData.description}</p>
                 <h4 class="text-xl text-gray-900 font-bold mt-5">Social Media</h4>
@@ -290,7 +290,7 @@ const BrandProfile = () => {
                
               </div>
               {/*                 Social Information                     */}
-              <div class="flex-1 bg-white rounded-lg shadow-xl mt-4 p-8">
+              <div class="flex-1 border-2 bg-white rounded-lg shadow-xl mt-4 p-8">
               <h4 class="text-xl text-gray-900 font-bold">Images</h4>
                 <div className="w-3/4 max-sm:w-full mx-auto">
                   <Carousel {...settings}>

@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const InfCard = ({ item,onData }) => {
     const navigate = useNavigate();
     return (
-        <div className=" max-sm:mx-5 px-5    break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
+        <div className=" max-sm:mx-5 px-5 border-gray-300 border-2   break-words bg-gray-100  shadow-2xl border-2 rounded-2xl my-10">
 
                   <div className="flex ">
                     <div className="flex px-3 my-5  " >

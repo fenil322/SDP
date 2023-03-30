@@ -105,7 +105,7 @@ const BrandDetails = () => {
     <div className="flex">
       <Navbar />
       <div className="h-screen ml-14 max-sm:ml-0 w-screen">
-        <InfluencerHeader page="Brand Detail" />
+      <InfluencerHeader page={`Home > ${brandData.shopName}`} />
         <div className="w-9/12 m-auto  mt-5 pb-10 ">
           <link
             rel="stylesheet"

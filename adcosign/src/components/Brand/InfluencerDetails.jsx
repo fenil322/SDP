@@ -95,7 +95,7 @@ const InfluencerDetails = (props) => {
       <Navbar />
 
       <div className=" ml-14 w-screen">
-        <BrandHeader page="Influencer Detail" />
+        <BrandHeader page={`Home > ${persondata.fname}`} />
         <div className="w-5/6  m-auto my-10 pb-10">
           <link
             rel="stylesheet"
@@ -229,7 +229,7 @@ const InfluencerDetails = (props) => {
                   type="button"
                   class="py-1 px-2 mr-2 mb-2 text-sm font-semibold text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                 >
-                  TAGS ?
+                  Categories
                 </button>
               </div>
               <div className="flex my-2">
@@ -271,7 +271,7 @@ const InfluencerDetails = (props) => {
                       <RiFacebookBoxLine size={25} className="text-[#3b5998] " />
                       <a href={persondata.facebookURL}
                         target="_blank"
-                        className="hover:text-blue-600" >Click here...</a>
+                        className="hover:text-blue-600" >{persondata.facebook}</a>
                     </div>
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
@@ -296,7 +296,7 @@ const InfluencerDetails = (props) => {
                       <FaInstagram size={25} className="text-[#d62976] " />
                       <a href={persondata.instagramURL}
                         target="_blank"
-                        className="hover:text-blue-600" >Click here...</a>
+                        className="hover:text-blue-600" >{persondata.instagram}</a>
                     </div>
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>
@@ -320,7 +320,7 @@ const InfluencerDetails = (props) => {
                       <FiTwitter size={25} className="text-[#00acee] " />
                       <a href={persondata.twitterURL}
                         target="_blank"
-                        className="hover:text-blue-600" >Click here...</a>
+                        className="hover:text-blue-600" >{persondata.twitter}</a>
                     </div>
 
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"></h5>

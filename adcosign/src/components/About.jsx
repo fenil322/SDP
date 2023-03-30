@@ -97,24 +97,24 @@ const About = () => {
 
                 <div className="person-image mt-3 d-flex align-items-center">
                   <img
-                    src="https://images.unsplash.com/photo-1590769620285-6926a01c2a58?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    src="https://res.cloudinary.com/djhql8xzq/image/upload/v1680167039/fenil1_edwhqd.jpg"
                     alt="CEO"
                     className="img-fluid"
                   />
                   <div>
                     <span className="name">Fenil Savani</span>
-                    <span className="position">Founder</span>
+                    {/* <span className="position">Founder</span> */}
                   </div>
                 </div>
                 <div className="person-image mt-3 d-flex align-items-center">
                   <img
-                    src="https://images.unsplash.com/photo-1561828970-daff2303fe58?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80"
+                    src="https://res.cloudinary.com/djhql8xzq/image/upload/v1680166879/shwet_ckllt1.jpg"
                     alt="CEO"
                     className="img-fluid"
                   />
                   <div>
                     <span className="name">Swetangi Satasiya</span>
-                    <span className="position">Founder</span>
+                    {/* <span className="position">Founder</span> */}
                   </div>
                 </div>
               </div>

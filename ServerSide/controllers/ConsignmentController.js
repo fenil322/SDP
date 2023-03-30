@@ -51,7 +51,7 @@ exports.createConsignmentInf = async (req, res, next) => {
   if (consignment) {
     return res.status(400).json({
       success: false,
-      error: "Consignment already exists with this influencer...",
+      error: "Consignment already exists with this Brand...",
     });
   }
   const newconsignment = new Consignment({
@@ -65,7 +65,7 @@ exports.createConsignmentInf = async (req, res, next) => {
     return res.status(200).json({
       success: true,
       data: { brandId, influencerId },
-      message: "Request sent to influencer",
+      message: "Request sent to Brand",
     });
   } catch (e) {
     return res.status(422).json({

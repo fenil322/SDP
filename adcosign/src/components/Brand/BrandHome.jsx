@@ -57,7 +57,7 @@ const BrandHome = () => {
     <div className="flex flex-row h-[screen]">
       <Navbar />
       <div className="ml-14 w-screen h-[screen]">
-        <BrandHeader page="BrandHome" />
+        <BrandHeader page="Home" />
         {loading === true ?
           <img src={loader} alt="laoding" className="h-52 mx-auto"
           />

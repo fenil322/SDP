@@ -390,7 +390,8 @@ const InfluencerConsignments = () => {
               </div>
               <div className={`cursor-pointer text-bold `} onClick={() => { setExpanded(!expanded) }}>Terms and Conditions...
                 <p className={`${expanded ? "" : "hidden"}`}>
-
+                  {formData?.termsAndConditions
+                  }
                 </p>
               </div>
               <div className="flex justify-end">
