@@ -10,3 +10,7 @@ Role of manager:
 Influencer should not have fake follower so if any brand advertise their product from him/her they do not get cheated. 
 Registered brands are also should be verified brands so influencers can work without any hesitation.
 So new registered brands and influencers are verified by the manager.
+
+Power Point Presentation Link:- https://docs.google.com/presentation/d/1cjualLvIU2ZVWjm-KUC8sB9k-aWt52aJ/edit?usp=share_link&ouid=112546121938104453155&rtpof=true&sd=true
+
+Youtube video Link :- https://youtu.be/H1Kew2KfsMA
